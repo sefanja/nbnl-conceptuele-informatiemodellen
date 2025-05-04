@@ -53,7 +53,7 @@ for model_dir in sorted(os.listdir(BASE_MODELLEN)):
     index_lines.append(f"\n## {model_name}")
     for version, is_draft in model_versions:
         label = " 🚧" if is_draft else ""
-        url = f"modellen/{model_dir}/{version}/"
+        url = f"pages/modellen/{model_dir}/{version}/"
         index_lines.append(f"- [v{version}]({url}){label}")
 
 # Centrale homepage-index schrijven
