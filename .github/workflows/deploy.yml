@@ -52,8 +52,12 @@ jobs:
       - name: Create central index.md
         run: python scripts/generate_index.py
 
-      - name: Create empty Jekyll config
-        run: touch docs/_config.yml
+      - name: Create Jekyll config
+        run: |
+          cat <<EOF > docs/_config.yml
+            include:
+              - **/*.svg
+            EOF
 
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
@@ -64,14 +68,6 @@ jobs:
           source: ./docs
           destination: ./_site
 
-      - name: Copy SVGs to _site
-        run: |
-          find docs -name '*.svg' | while read svg; do
-            target="_site/${svg#docs/}"
-            mkdir -p "$(dirname "$target")"
-            cp "$svg" "$target"
-          done
-        
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
