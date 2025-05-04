@@ -5,10 +5,10 @@ BASE_DOCS = "docs"
 BASE_MODELLEN = "modellen"
 
 index_lines = ["---\n"]
-index_lines = ["title: Conceptuele informatiemodellen\n"]
-index_lines = ["---\n"]
-index_lines = ["\n"]
-index_lines = ["# Conceptuele informatiemodellen\n"]
+index_lines.append("title: Conceptuele informatiemodellen\n")
+index_lines.append("---\n")
+index_lines.append("\n")
+index_lines.append("# Conceptuele informatiemodellen\n")
 
 def get_model_metadata(yaml_path):
     with open(yaml_path, "r", encoding="utf-8") as f:
