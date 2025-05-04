@@ -66,12 +66,12 @@ jobs:
 
       - name: Copy SVGs to _site
         run: |
-          for svg in docs/**/*.svg; do
+          find docs -name '*.svg' | while read svg; do
             target="_site/${svg#docs/}"
             mkdir -p "$(dirname "$target")"
             cp "$svg" "$target"
           done
-
+        
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
