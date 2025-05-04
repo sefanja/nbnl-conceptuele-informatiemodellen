@@ -61,9 +61,9 @@ jobs:
       - name: Create central index.md
         run: python scripts/generate_index.py
 
-      - name: Copy Jekyll config
-        run: cp siteconfig/_config.yml docs/_config.yml
-
+      - name: Generate Jekyll config with navigation
+        run: python scripts/generate_nav_config.py
+      
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
 
