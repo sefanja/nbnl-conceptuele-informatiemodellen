@@ -26,19 +26,6 @@ def get_model_metadata(yaml_path):
     version = data.get("version", os.path.basename(os.path.dirname(yaml_path)))
     return name, version
 
-# Voeg navigatiecontainer "Modellen" toe
-modellen_index_path = os.path.join(PAGES_DIR, "index.md")
-with open(modellen_index_path, "w", encoding="utf-8") as f:
-    f.write("""---
-title: Modellen
-has_children: true
-nav_order: 2
-layout: none
----
-
-<!-- Overzicht van alle informatiemodellen -->
-""")
-
 for model_dir in sorted(os.listdir(BASE_MODELLEN)):
     model_path = os.path.join(BASE_MODELLEN, model_dir)
     if not os.path.isdir(model_path):
@@ -61,21 +48,6 @@ for model_dir in sorted(os.listdir(BASE_MODELLEN)):
 
     if not model_versions:
         continue
-
-    # Tussenpagina per model
-    model_outdir = os.path.join(PAGES_DIR, model_dir)
-    os.makedirs(model_outdir, exist_ok=True)
-    with open(os.path.join(model_outdir, "index.md"), "w", encoding="utf-8") as f:
-        f.write(f"""---
-title: {model_name}
-parent: Modellen
-has_children: true
-nav_order: 1
-layout: none
----
-
-<!-- Navigatiecontainer voor {model_name} -->
-""")
 
     # Centrale index-linkjes
     index_lines.append(f"\n## {model_name}")
