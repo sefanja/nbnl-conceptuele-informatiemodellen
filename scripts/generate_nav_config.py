@@ -47,7 +47,7 @@ config_data = {
     "collections": {
         "pages": {
             "output": True,
-            "permalink": "/:dir/"
+            "permalink": "/:path.html"
         },
     },
     "include": ["**/*.svg"],
