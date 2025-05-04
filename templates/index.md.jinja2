@@ -1,4 +1,4 @@
-{% macro id_safe(v) -%}
+{%- macro id_safe(v) -%}
 {%- set allowed = 'abcdefghijklmnopqrstuvwxyz0123456789-' -%}
 {%- for c in v|lower -%}
   {%- if c in allowed -%}
@@ -7,17 +7,17 @@
     -
   {%- endif -%}
 {%- endfor -%}
-{%- endmacro %}
+{%- endmacro -%}
 
-{% macro link(name) -%}
+{%- macro link(name) -%}
 [{{ name }}](#{{ id_safe(name) }})
-{%- endmacro %}
+{%- endmacro -%}
 
-{% macro anchor(name) -%}
+{%- macro anchor(name) -%}
 <span id="{{ id_safe(name) }}">{{name}}</span>
-{%- endmacro %}
+{%- endmacro -%}
 
-{% macro compute_range(slot) -%}
+{%- macro compute_range(slot) -%}
     {%- if slot.any_of or slot.exactly_one_of -%}
         {%- for subslot_range in schemaview.slot_range_as_union(slot) -%}
             {{ link(subslot_range) }}
@@ -28,9 +28,9 @@
     {%- else -%}
         {{ link(slot.range) }}
     {%- endif -%}
-{%- endmacro %}
+{%- endmacro -%}
 
-{% macro see_also(element) -%}
+{%- macro see_also(element) -%}
 {%- set link_labels = {
     "https://wetten.overheid.nl/jci1.3:c:BWBR0037934": "Informatiecode elektriciteit en gas",
     "https://wetten.overheid.nl/jci1.3:c:BWBR0037938": "Begrippencode elektriciteit",
@@ -47,7 +47,7 @@
     "https://wetten.overheid.nl/jci1.3:c:BWBR0037936": "Meetcode gas",
     "https://wetten.overheid.nl/jci1.3:c:BWBR0037937": "Beheercode elektriciteit",
     "https://wetten.overheid.nl/jci1.3:c:BWBR0037939": "Beheercode gas"
-} %}
+} -%}
 
 {%- if element.see_also -%}
     {%- for url in element.see_also -%}
@@ -60,7 +60,7 @@
         [{{ ns.label if ns.label else loop.index }}]({{ url }}){% if not loop.last %}, {% endif -%}
     {%- endfor -%}
 {%- endif -%}
-{%- endmacro %}
+{%- endmacro -%}
 
 {% macro omschrijving(element) -%}
     {%- set parts = namespace(items=[]) -%}
@@ -88,7 +88,7 @@
     {%- endif -%}
 
     {{ parts.items | join('<br/><br/>') }}
-{%- endmacro %}
+{%- endmacro -%}
 
 ---
 title: {% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% endif %} {% if schema.version %}v{{ schema.version }}{% endif %}
