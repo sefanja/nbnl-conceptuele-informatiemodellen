@@ -64,6 +64,12 @@ jobs:
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
 
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1
+          bundler-cache: true
+
       - name: Install Ruby dependencies
         run: |
           bundle config set path 'vendor/bundle'
