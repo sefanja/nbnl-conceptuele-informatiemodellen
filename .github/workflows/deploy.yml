@@ -27,7 +27,7 @@ jobs:
             modelname=$(basename "$model")
             for version in "$model"/*; do
               versionid=$(basename "$version")
-              echo "📄 Process $modelname version $versionid"
+              echo "Processing $modelname version $versionid"
               gen-doc \
                 --template-directory templates \
                 -d docs/$modelname/$versionid \
@@ -38,9 +38,13 @@ jobs:
       - name: Create central index.md
         run: python scripts/generate_index.py
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v4
+      
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs
-          enable_jekyll: true
+          path: ./docs
+      
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v2
