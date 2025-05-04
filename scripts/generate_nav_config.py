@@ -46,7 +46,7 @@ config_data = {
     "baseurl": "/nbnl-conceptuele-informatiemodellen",
     "collections": {
         "pages": {
-            "output": True,
+            "output": true,
             "permalink": "/:path/"
         },
     },
