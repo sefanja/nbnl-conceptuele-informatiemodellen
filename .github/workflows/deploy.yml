@@ -63,6 +63,8 @@ jobs:
       - name: Create Jekyll config
         run: |
           echo 'title: NBNL Conceptuele Informatiemodellen' > docs/_config.yml
+          echo 'minima:' >> docs/_config.yml
+          echo '  repo: false' >> docs/_config.yml
           echo 'include:' >> docs/_config.yml
           echo '  - "**/*.svg"' >> docs/_config.yml
 
