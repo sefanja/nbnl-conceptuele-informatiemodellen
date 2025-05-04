@@ -92,13 +92,13 @@
 
 # {% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% endif %}
 
-{% if schema.version %}
-_Versie {{ schema.version }}_
-{% endif %}
+{% if schema.version %}_Versie {{ schema.version }}_<br/>{% endif %}
 
-{% if schema.description %}{{ schema.description }}{% endif %}
+{% if schema.description %}{{ schema.description }}<br/>{% endif %}
 
-[embed draw.io]
+![Diagram](model.drawio.svg)
+
+<br/>
 
 {% if gen.hierarchical_class_view -%}
 {% for u, v in gen.class_hierarchy_as_tuples() -%}
@@ -111,7 +111,7 @@ _Versie {{ schema.version }}_
 {% endif %}
 
 {% for class in gen.all_class_objects()|sort(attribute=sort_by) %}
-<br/><br/>
+<br/>
 
 ## {{class.name}}
 
