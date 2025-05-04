@@ -1,6 +1,11 @@
 title: NBNL Conceptuele Informatiemodellen
 theme: just-the-docs
 
+collections:
+  pages:
+    output: true
+    permalink: /:path/
+
 # Zet root van content op / voor correcte linkopbouw
 baseurl: "nbnl-conceptuele-informatiemodellen"
 
