@@ -43,6 +43,7 @@ for model_dir in sorted(os.listdir(BASE_MODELLEN)):
 config_data = {
     "title": "NBNL Conceptuele Informatiemodellen",
     "theme": "just-the-docs",
+    "baseurl": "nbnl-conceptuele-informatiemodellen",
     "collections": {
         "pages": {
             "output": True,
