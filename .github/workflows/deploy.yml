@@ -1,95 +1,62 @@
-name: Create and publish docs
+import os
+import yaml
 
-on:
-  workflow_dispatch:
+BASE_DOCS = "docs"
+BASE_MODELLEN = "modellen"
+PAGES_DIR = os.path.join(BASE_DOCS, "_pages")
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+os.makedirs(PAGES_DIR, exist_ok=True)
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+index_lines = [
+    "---",
+    "layout: default",
+    "title: Startpagina",
+    "nav_order: 1",
+    "---",
+    "",
+    "# Conceptuele informatiemodellen",
+    "",
+    "Een overzicht van alle beschikbare modellen:"
+]
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+def get_model_metadata(yaml_path):
+    with open(yaml_path, "r", encoding="utf-8") as f:
+        data = yaml.safe_load(f)
+    name = data.get("name", os.path.basename(os.path.dirname(os.path.dirname(yaml_path))))
+    version = data.get("version", os.path.basename(os.path.dirname(yaml_path)))
+    return name, version
 
-      - name: Install Python and dependencies
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
+for model_dir in sorted(os.listdir(BASE_MODELLEN)):
+    model_path = os.path.join(BASE_MODELLEN, model_dir)
+    if not os.path.isdir(model_path):
+        continue
 
-      - name: Cache pip dependencies
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
+    model_versions = []
+    model_name = model_dir  # fallback
 
-      - name: Install Python dependencies
-        run: pip install --cache-dir ~/.cache/pip -r requirements.txt
-                    
-      - name: Create docs per model version
-        run: |
-          for model in modellen/*; do
-            modelname=$(basename "$model")
-            for version in "$model"/*; do
-              versionid=$(basename "$version")
-              echo "Processing $modelname version $versionid"
+    for version in sorted(os.listdir(model_path), reverse=True):
+        version_path = os.path.join(model_path, version)
+        yaml_path = os.path.join(version_path, "model.yaml")
 
-              outdir=docs/_pages/$modelname/$versionid
-              mkdir -p "$outdir"
+        if not os.path.exists(yaml_path):
+            continue
 
-              gen-doc \
-                --template-directory templates \
-                -d "$outdir" \
-                "$version/model.yaml"
+        name, version_in_yaml = get_model_metadata(yaml_path)
+        model_name = name
+        is_draft = version != version_in_yaml
+        model_versions.append((version, is_draft))
 
-              # Kopieer bijbehorende SVG indien aanwezig
-              if [ -f "$version/model.drawio.svg" ]; then
-                cp "$version/model.drawio.svg" "$outdir/"
-              fi
-            done
-          done
+        # Pad voor versiepagina
+        output_dir = os.path.join(PAGES_DIR, model_dir, version)
+        os.makedirs(output_dir, exist_ok=True)
 
-      - name: Create central index.md
-        run: python scripts/generate_index.py
+    if model_versions:
+        index_lines.append(f"\n## {model_name}")
+        for version, is_draft in model_versions:
+            label = " 🚧" if is_draft else ""
+            url = f"{model_dir}/{version}/"
+            index_lines.append(f"- [v{version}]({url}){label}")
 
-      - name: Copy Jekyll config
-        run: cp siteconfig/_config.yml docs/_config.yml
-
-      - name: Setup GitHub Pages
-        uses: actions/configure-pages@v5
-
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 3.1
-          bundler-cache: true
-
-      - name: Install Ruby dependencies
-        run: |
-          bundle config set path 'vendor/bundle'
-          bundle install
-      
-      - name: Build with Jekyll
-        run: bundle exec jekyll build -s docs -d _site
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./_site
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+# Schrijf centrale index
+with open(os.path.join(BASE_DOCS, "index.md"), "w", encoding="utf-8") as f:
+    f.write("\n".join(index_lines))
