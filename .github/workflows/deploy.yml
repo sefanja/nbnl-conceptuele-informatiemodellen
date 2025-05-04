@@ -3,6 +3,11 @@ name: Create and publish docs
 on:
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -51,25 +56,35 @@ jobs:
         run: touch docs/_config.yml
 
       - name: Setup GitHub Pages
-        uses: actions/configure-pages@v4
-      
+        uses: actions/configure-pages@v5
+
+      - name: Build with Jekyll
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./docs
+          destination: ./_site
+
+      - name: Copy SVGs to _site
+        run: |
+          for svg in docs/**/*.svg; do
+            target="_site/${svg#docs/}"
+            mkdir -p "$(dirname "$target")"
+            cp "$svg" "$target"
+          done
+
       - name: Upload artifact
-        id: deployment
         uses: actions/upload-pages-artifact@v3
         with:
-          path: docs/
+          path: ./_site
 
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
     needs: build
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    
