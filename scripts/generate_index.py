@@ -47,8 +47,8 @@ for docs_path in sorted(os.listdir(BASE_DOCS)):
 
     index_lines.append(f"### {model_name}\n")
     for v, is_draft in model_versions:
-        label = "🚧" if is_draft else "✅"
-        index_lines.append(f"- {label} [{v}](./{docs_path}/{v}/)\n")
+        label = "🚧" if is_draft else ""
+        index_lines.append(f"- [v{v}](./{docs_path}/{v}/) {label}\n")
 
 # Write index.md
 index_path = os.path.join(BASE_DOCS, "index.md")
