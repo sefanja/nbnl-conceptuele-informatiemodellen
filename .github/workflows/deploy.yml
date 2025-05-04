@@ -28,10 +28,19 @@ jobs:
             for version in "$model"/*; do
               versionid=$(basename "$version")
               echo "Processing $modelname version $versionid"
+
+              outdir=docs/$modelname/$versionid
+              mkdir -p "$outdir"
+
               gen-doc \
                 --template-directory templates \
-                -d docs/$modelname/$versionid \
+                -d "$outdir" \
                 "$version/model.yaml"
+
+              # Kopieer bijbehorende SVG indien aanwezig
+              if [ -f "$version/model.drawio.svg" ]; then
+                cp "$version/model.drawio.svg" $outdir/"
+              fi
             done
           done
 
@@ -61,4 +70,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
