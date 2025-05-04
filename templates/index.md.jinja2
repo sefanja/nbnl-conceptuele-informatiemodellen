@@ -1,0 +1,197 @@
+{% macro id_safe(v) -%}
+{%- set allowed = 'abcdefghijklmnopqrstuvwxyz0123456789-' -%}
+{%- for c in v|lower -%}
+  {%- if c in allowed -%}
+    {{ c }}
+  {%- elif c == ' ' -%}
+    -
+  {%- endif -%}
+{%- endfor -%}
+{%- endmacro %}
+
+{% macro link(name) -%}
+[{{ name }}](#{{ id_safe(name) }})
+{%- endmacro %}
+
+{% macro anchor(name) -%}
+<span id="{{ id_safe(name) }}">{{name}}</span>
+{%- endmacro %}
+
+{% macro compute_range(slot) -%}
+    {%- if slot.any_of or slot.exactly_one_of -%}
+        {%- for subslot_range in schemaview.slot_range_as_union(slot) -%}
+            {{ link(subslot_range) }}
+            {%- if not loop.last -%}
+                &nbsp;or&nbsp;<br />
+            {%- endif -%}
+        {%- endfor -%}
+    {%- else -%}
+        {{ link(slot.range) }}
+    {%- endif -%}
+{%- endmacro %}
+
+{% macro see_also(element) -%}
+{%- set link_labels = {
+    "https://wetten.overheid.nl/jci1.3:c:BWBR0037934": "Informatiecode elektriciteit en gas",
+    "https://wetten.overheid.nl/jci1.3:c:BWBR0037938": "Begrippencode elektriciteit",
+    "https://wetten.overheid.nl/jci1.3:c:BWBR0009755": "Elektriciteitswet 1998",
+    "https://wetten.overheid.nl/jci1.3:c:BWBR0037946": "Meetcode elektriciteit",
+    "https://wetten.overheid.nl/jci1.3:c:BWBR0037923": "Begrippencode gas",
+    "https://wetten.overheid.nl/jci1.3:c:BWBR0037925": "Informatiecode gas",
+    "https://wetten.overheid.nl/jci1.3:c:BWBR0037929": "Allocatiecode elektriciteit",
+    "https://wetten.overheid.nl/jci1.3:c:BWBR0037930": "Allocatiecode gas",
+    "https://wetten.overheid.nl/jci1.3:c:BWBR0037931": "Reconciliatiecode elektriciteit",
+    "https://wetten.overheid.nl/jci1.3:c:BWBR0037932": "Reconciliatiecode gas",
+    "https://wetten.overheid.nl/jci1.3:c:BWBR0037933": "Transportcode elektriciteit",
+    "https://wetten.overheid.nl/jci1.3:c:BWBR0037935": "Transportcode gas",
+    "https://wetten.overheid.nl/jci1.3:c:BWBR0037936": "Meetcode gas",
+    "https://wetten.overheid.nl/jci1.3:c:BWBR0037937": "Beheercode elektriciteit",
+    "https://wetten.overheid.nl/jci1.3:c:BWBR0037939": "Beheercode gas"
+} %}
+
+{%- if element.see_also -%}
+    {%- for url in element.see_also -%}
+        {%- set ns = namespace(label=none) -%}
+        {%- for prefix, text in link_labels.items() -%}
+            {%- if url.startswith(prefix) -%}
+                {%- set ns.label = text -%}
+            {%- endif -%}
+        {%- endfor -%}
+        [{{ ns.label if ns.label else loop.index }}]({{ url }}){% if not loop.last %}, {% endif -%}
+    {%- endfor -%}
+{%- endif -%}
+{%- endmacro %}
+
+{% macro omschrijving(element) -%}
+    {%- set parts = namespace(items=[]) -%}
+
+    {%- set mappings = schemaview.get_mappings(element.name).get("exact", []) -%}
+    {%- if mappings -%}
+        {%- set linked = [] -%}
+        {%- for m in mappings -%}
+            {%- set _ = linked.append(gen.uri_link(m)) -%}
+        {%- endfor -%}
+        {%- set markdown_line = '_' ~ linked | join(', ') ~ '_' -%}
+        {%- set _ = parts.items.append(markdown_line) -%}
+    {%- endif -%}
+
+    {%- if element.description -%}
+        {%- set _ = parts.items.append('_' ~ element.description ~ '_') -%}
+    {%- endif -%}
+
+    {%- if element.see_also -%}
+        {%- set _ = parts.items.append('Zie ook ' ~ see_also(element) ~ '.') -%}
+    {%- endif -%}
+
+    {%- if element.comments -%}
+        {%- set _ = parts.items.append(element.comments | join('<br/><br/>')) -%}
+    {%- endif -%}
+
+    {{ parts.items | join('<br/><br/>') }}
+{%- endmacro %}
+
+# {% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% endif %}
+
+{% if schema.version %}
+_Versie {{ schema.version }}_
+{% endif %}
+
+{% if schema.description %}{{ schema.description }}{% endif %}
+
+[embed draw.io]
+
+{% if gen.hierarchical_class_view -%}
+{% for u, v in gen.class_hierarchy_as_tuples() -%}
+{{" "*u*4}}- {{link(v)}}
+{% endfor %}
+{% else -%}
+{% for c in gen.all_class_objects()|sort(attribute=sort_by) -%}
+- {{link(v)}}
+{% endfor %}
+{% endif %}
+
+{% for class in gen.all_class_objects()|sort(attribute=sort_by) %}
+<br/><br/>
+
+## {{class.name}}
+
+{{omschrijving(class)}}
+
+{% if class.abstract %}
+Dit is een abstracte entiteit zonder directe instanties.
+{% endif %}
+
+{% set slots = gen.get_direct_slots(class) + gen.get_indirect_slots(class) %}
+{% set properties = slots | rejectattr('range', 'in', schemaview.all_classes()) | list %}
+{% set relationships = slots | selectattr('range', 'in', schemaview.all_classes()) | list %}
+
+{% if properties %}
+### Eigenschappen
+
+| Eigenschap | Waardesoort | Omschrijving |
+| :---  | :--- | :--- |
+{% for slot in properties -%}
+| {{slot.name}} | {{compute_range(slot)}}<br/>_{{gen.cardinality(slot)}}_ | {{omschrijving(slot)}} |
+{% endfor %}
+{% endif %}
+
+{% if relationships %}
+### Relaties
+
+| Relatie | Naar | Omschrijving |
+| :---  | :--- | :--- |
+{% for slot in relationships -%}
+| {{slot.name}} | {{compute_range(slot)}}<br/>_{% if slot.annotations and 'inverse_cardinality' in slot.annotations %}{{slot.annotations['inverse_cardinality'].value }}{% endif %} → {{ gen.cardinality(slot) }}_ | {{omschrijving(slot)}} |
+{% endfor %}
+{% endif %}
+
+{% endfor %}
+
+<br/><br/>
+
+# Waardesoorten en keuzelijsten
+
+{% if gen.all_type_objects() %}
+### Waardesoorten
+
+| Waardesoort | Omschrijving | Gebaseerd op | Patroon |
+| :--- | :--- | :--- | :--- |
+{% for t in gen.all_type_objects() -%}
+| {{anchor(t.name)}} | {{omschrijving(t)}} | {% if t.typeof %}{{link(t.typeof)}}{% else %}{{t.base}}{% endif %} | {% if t.pattern %}`{{t.pattern}}`{% endif %} |
+{% endfor %}
+
+{% endif %}
+
+{% if gen.all_enum_objects() %}
+### Keuzelijsten
+
+| Keuzelijst | Omschrijving | Keuzes |
+| :--- | :--- | :--- |
+{% for e in gen.all_enum_objects()|sort(attribute=sort_by) -%}
+| {{anchor(e.name)}} | {{omschrijving(e)}} | {% if e.permissible_values -%}
+{%- for pv in e.permissible_values.values() -%}
+{{link(pv.text)}}{% if not loop.last %}, {% endif -%}
+{%- endfor -%}
+{%- else -%}
+_dynamische waarden_
+{%- endif -%}
+|
+{% endfor %}
+
+{% endif %}
+
+{% if gen.all_enum_objects() -%}
+### Keuze-items
+
+| Keuzelijst | Keuze | Betekenis | Omschrijving |
+| :--- | :--- | :--- | :--- |
+{% for e in gen.all_enum_objects()|sort(attribute=sort_by) -%}
+{% if e.permissible_values -%}
+{% for pv in e.permissible_values.values() -%}
+| {{e.name}} | {{anchor(pv.text)}} | {{gen.uri_link(pv.meaning)}} | {{omschrijving(pv)}} |
+{% endfor %}
+{% else %}
+| {{e.name}} | _dynamisch_ |  |  |
+{% endif %}
+{% endfor %}
+{% endif %}
