@@ -64,11 +64,13 @@ jobs:
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
 
+      - name: Install Ruby dependencies
+        run: |
+          bundle config set path 'vendor/bundle'
+          bundle install
+      
       - name: Build with Jekyll
-        uses: actions/jekyll-build-pages@v1
-        with:
-          source: ./docs
-          destination: ./_site
+        run: bundle exec jekyll build -s docs -d _site
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
