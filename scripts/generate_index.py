@@ -3,7 +3,7 @@ import yaml
 
 BASE_DOCS = "docs"
 BASE_MODELLEN = "modellen"
-PAGES_DIR = os.path.join(BASE_DOCS, "_pages")
+PAGES_DIR = os.path.join(BASE_DOCS, "_pages", "modellen")
 
 os.makedirs(PAGES_DIR, exist_ok=True)
 
@@ -26,6 +26,18 @@ def get_model_metadata(yaml_path):
     version = data.get("version", os.path.basename(os.path.dirname(yaml_path)))
     return name, version
 
+# Voeg navigatiecontainer "Modellen" toe
+modellen_index_path = os.path.join(PAGES_DIR, "index.md")
+with open(modellen_index_path, "w", encoding="utf-8") as f:
+    f.write("""---
+title: Modellen
+has_children: true
+nav_order: 2
+---
+
+<!-- Overzicht van alle informatiemodellen -->
+""")
+
 for model_dir in sorted(os.listdir(BASE_MODELLEN)):
     model_path = os.path.join(BASE_MODELLEN, model_dir)
     if not os.path.isdir(model_path):
@@ -46,14 +58,13 @@ for model_dir in sorted(os.listdir(BASE_MODELLEN)):
         is_draft = version != version_in_yaml
         model_versions.append((version, is_draft))
 
-    # Alleen doorgaan als er geldige versies zijn
     if not model_versions:
         continue
 
-    # Tussenpagina voor dit model (alleen navigatiecontainer)
-    model_page_dir = os.path.join(PAGES_DIR, model_dir)
-    os.makedirs(model_page_dir, exist_ok=True)
-    with open(os.path.join(model_page_dir, "index.md"), "w", encoding="utf-8") as f:
+    # Tussenpagina per model
+    model_outdir = os.path.join(PAGES_DIR, model_dir)
+    os.makedirs(model_outdir, exist_ok=True)
+    with open(os.path.join(model_outdir, "index.md"), "w", encoding="utf-8") as f:
         f.write(f"""---
 title: {model_name}
 parent: Modellen
@@ -64,13 +75,13 @@ nav_order: 1
 <!-- Navigatiecontainer voor {model_name} -->
 """)
 
-    # Linkjes in centrale index
+    # Centrale index-linkjes
     index_lines.append(f"\n## {model_name}")
     for version, is_draft in model_versions:
         label = " 🚧" if is_draft else ""
-        url = f"{model_dir}/{version}/"
+        url = f"modellen/{model_dir}/{version}/"
         index_lines.append(f"- [v{version}]({url}){label}")
 
-# Centrale indexpagina schrijven
+# Centrale homepage-index schrijven
 with open(os.path.join(BASE_DOCS, "index.md"), "w", encoding="utf-8") as f:
     f.write("\n".join(index_lines))
