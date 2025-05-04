@@ -58,12 +58,8 @@ jobs:
       - name: Create central index.md
         run: python scripts/generate_index.py
 
-      - name: Create Jekyll config
-        run: |
-          echo 'title: NBNL Conceptuele Informatiemodellen' > docs/_config.yml
-          echo 'theme: just-the-docs' >> docs/_config.yml
-          echo 'include:' >> docs/_config.yml
-          echo '  - "**/*.svg"' >> docs/_config.yml
+      - name: Copy Jekyll config
+        run: cp siteconfig/_config.yml docs/_config.yml
 
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
