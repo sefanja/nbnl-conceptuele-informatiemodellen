@@ -33,6 +33,7 @@ with open(modellen_index_path, "w", encoding="utf-8") as f:
 title: Modellen
 has_children: true
 nav_order: 2
+layout: none
 ---
 
 <!-- Overzicht van alle informatiemodellen -->
@@ -70,6 +71,7 @@ title: {model_name}
 parent: Modellen
 has_children: true
 nav_order: 1
+layout: none
 ---
 
 <!-- Navigatiecontainer voor {model_name} -->
