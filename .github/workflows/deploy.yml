@@ -34,15 +34,13 @@ jobs:
                     
       - name: Create docs per model version
         run: |
-          mkdir -p docs
-
           for model in modellen/*; do
             modelname=$(basename "$model")
             for version in "$model"/*; do
               versionid=$(basename "$version")
               echo "Processing $modelname version $versionid"
 
-              outdir=docs/$modelname/$versionid
+              outdir=docs/_pages/$modelname/$versionid
               mkdir -p "$outdir"
 
               gen-doc \
@@ -63,8 +61,7 @@ jobs:
       - name: Create Jekyll config
         run: |
           echo 'title: NBNL Conceptuele Informatiemodellen' > docs/_config.yml
-          echo 'minima:' >> docs/_config.yml
-          echo '  repo: false' >> docs/_config.yml
+          echo 'theme: just-the-docs' >> docs/_config.yml
           echo 'include:' >> docs/_config.yml
           echo '  - "**/*.svg"' >> docs/_config.yml
 
