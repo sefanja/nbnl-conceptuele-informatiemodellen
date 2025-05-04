@@ -62,7 +62,8 @@ jobs:
 
       - name: Create Jekyll config
         run: |
-          echo 'include:' > docs/_config.yml
+          echo 'title: NBNL Conceptuele Informatiemodellen' > docs/_config.yml
+          echo 'include:' >> docs/_config.yml
           echo '  - "**/*.svg"' >> docs/_config.yml
 
       - name: Setup GitHub Pages
