@@ -44,10 +44,11 @@ config_data = {
     "title": "NBNL Conceptuele Informatiemodellen",
     "theme": "just-the-docs",
     "collections": {
-    "pages": {
-        "output": True,
-        "permalink": "/:path/"
-    },
+        "pages": {
+            "output": True,
+            "permalink": "/:path/"
+        },
+    }
     "include": ["**/*.svg"],
     "nav": nav_structure
 }
