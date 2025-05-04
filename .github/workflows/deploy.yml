@@ -17,7 +17,7 @@ jobs:
           python-version: '3.10'
 
       - name: Install linkml
-        run: pip install linkml linkml-docgen pyyaml
+        run: pip install linkml pyyaml
 
       - name: Create docs per model version
         run: |
