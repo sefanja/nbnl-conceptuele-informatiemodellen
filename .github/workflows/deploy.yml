@@ -30,8 +30,8 @@ jobs:
               echo "📄 Process $modelname version $versionid"
               gen-doc \
                 --template-directory templates \
-                -d docs/$modelname/$versionid
-                "$version/model.yaml" \
+                -d docs/$modelname/$versionid \
+                "$version/model.yaml"
             done
           done
 
