@@ -48,7 +48,7 @@ config_data = {
             "output": True,
             "permalink": "/:path/"
         },
-    }
+    },
     "include": ["**/*.svg"],
     "nav": nav_structure
 }
