@@ -50,39 +50,12 @@ for model_dir in sorted(os.listdir(BASE_MODELLEN)):
         output_dir = os.path.join(PAGES_DIR, model_dir, version)
         os.makedirs(output_dir, exist_ok=True)
 
-        # Bestandspad
-        md_path = os.path.join(output_dir, "index.md")
-
-        # SVG pad relatief vanaf pagina
-        svg_path = "model.drawio.svg"
-        has_svg = os.path.exists(os.path.join(BASE_MODELLEN, model_dir, version, "model.drawio.svg"))
-
-        with open(md_path, "w", encoding="utf-8") as f:
-            f.write(f"""---
-title: {model_name} {version}
-parent: {model_name}
-grand_parent: Modellen
-nav_order: 1
----
-
-# {model_name} {version}
-
-| Eigenschap | Waarde |
-|------------|--------|
-| Naam       | {model_name} |
-| Versie     | {version} |
-| Status     | {"🚧 concept" if is_draft else "✅ stabiel"} |
-
-""")
-            if has_svg:
-                f.write(f"\n![Diagram]({svg_path})\n")
-
     if model_versions:
         index_lines.append(f"\n## {model_name}")
         for version, is_draft in model_versions:
-            label = "🚧" if is_draft else "✅"
-            url = f"/{model_dir}/{version}/"
-            index_lines.append(f"- {label} [Versie {version}]({url})")
+            label = " 🚧" if is_draft else ""
+            url = f"{model_dir}/{version}/"
+            index_lines.append(f"- [v{version}]({url}){label}")
 
 # Schrijf centrale index
 with open(os.path.join(BASE_DOCS, "index.md"), "w", encoding="utf-8") as f:
