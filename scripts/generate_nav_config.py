@@ -51,6 +51,17 @@ config_data = {
         },
     },
     "include": ["**/*.svg"],
+    "defaults": [
+        {
+            "scope": {
+                "path": "",
+                "type": "pages"
+            },
+            "values": {
+                "layout": "default"
+            }
+        }
+    ],
     "nav": nav_structure
 }
 
