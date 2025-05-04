@@ -56,7 +56,7 @@ jobs:
         run: |
           cat <<EOF > docs/_config.yml
             include:
-              - **/*.svg
+              - "**/*.svg"
             EOF
 
       - name: Setup GitHub Pages
