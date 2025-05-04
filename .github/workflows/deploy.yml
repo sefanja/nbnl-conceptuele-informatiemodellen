@@ -28,10 +28,10 @@ jobs:
             for version in "$model"/*; do
               versionid=$(basename "$version")
               echo "📄 Process $modelname version $versionid"
-              linkml generate markdown \
-                --template templates/index.md.jinja2 \
+              gen-doc \
+                --template-directory templates \
+                -d docs/$modelname/$versionid
                 "$version/model.yaml" \
-                --output "docs/$modelname/$versionid/index.md"
             done
           done
 
