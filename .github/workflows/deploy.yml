@@ -54,10 +54,8 @@ jobs:
 
       - name: Create Jekyll config
         run: |
-          cat <<EOF > docs/_config.yml
-            include:
-              - "**/*.svg"
-            EOF
+          echo 'include:' > docs/_config.yml
+          echo '  - "**/*.svg"' >> docs/_config.yml
 
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
