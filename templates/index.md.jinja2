@@ -90,6 +90,12 @@
     {{ parts.items | join('<br/><br/>') }}
 {%- endmacro %}
 
+---
+title: {% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% endif %} {% if schema.version %}v{{ schema.version }}{% endif %}
+parent: {% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% endif %}
+grand_parent: Modellen
+---
+
 # {% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% endif %}
 
 {% if schema.version %}_Versie {{ schema.version }}_<br/>{% endif %}
