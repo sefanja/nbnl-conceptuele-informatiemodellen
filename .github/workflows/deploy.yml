@@ -47,6 +47,9 @@ jobs:
       - name: Create central index.md
         run: python scripts/generate_index.py
 
+      - name: Create empty Jekyll config
+        run: touch docs/_config.yml
+
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v4
       
