@@ -41,7 +41,9 @@ jobs:
               echo "Processing $modelname version $versionid"
 
               outdir=docs/_pages/modellen/$modelname/$versionid
-              mkdir -p "$outdir"
+              assetdir=docs/assets/modellen/$modelname/$versionid
+
+              mkdir -p "$outdir" "$assetdir"
 
               gen-doc \
                 --template-directory templates \
@@ -53,7 +55,7 @@ jobs:
               
               # Kopieer bijbehorende SVG indien aanwezig
               if [ -f "$version/model.drawio.svg" ]; then
-                cp "$version/model.drawio.svg" "$outdir/"
+                cp "$version/model.drawio.svg" "$assetdir/"
               fi
             done
           done
