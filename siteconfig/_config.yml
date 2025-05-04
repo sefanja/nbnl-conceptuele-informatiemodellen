@@ -2,7 +2,7 @@ title: NBNL Conceptuele Informatiemodellen
 theme: just-the-docs
 
 # Zet root van content op / voor correcte linkopbouw
-baseurl: ""
+baseurl: "nbnl-conceptuele-informatiemodellen"
 
 # Toon de juiste navigatie
 just_the_docs:
