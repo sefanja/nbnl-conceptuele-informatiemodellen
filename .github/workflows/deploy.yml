@@ -40,7 +40,7 @@ jobs:
               versionid=$(basename "$version")
               echo "Processing $modelname version $versionid"
 
-              outdir=docs/_pages/$modelname/$versionid
+              outdir=docs/_pages/modellen/$modelname/$versionid
               mkdir -p "$outdir"
 
               gen-doc \
@@ -48,6 +48,9 @@ jobs:
                 -d "$outdir" \
                 "$version/model.yaml"
 
+              # Remove all .md files except index.md
+              find "$outdir" -type f -name "*.md" ! -name "index.md" -delete
+              
               # Kopieer bijbehorende SVG indien aanwezig
               if [ -f "$version/model.drawio.svg" ]; then
                 cp "$version/model.drawio.svg" "$outdir/"
