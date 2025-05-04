@@ -39,7 +39,7 @@ jobs:
 
               # Kopieer bijbehorende SVG indien aanwezig
               if [ -f "$version/model.drawio.svg" ]; then
-                cp "$version/model.drawio.svg" $outdir/"
+                cp "$version/model.drawio.svg" "$outdir/"
               fi
             done
           done
