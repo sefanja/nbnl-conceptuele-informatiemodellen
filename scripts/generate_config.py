@@ -60,8 +60,8 @@ config_data = {
                 "layout": "default"
             }
         }
-    ],
-    "nav": nav_structure
+    ]
+    # "nav": nav_structure
 }
 
 with open(CONFIG_PATH, "w", encoding="utf-8") as f:
