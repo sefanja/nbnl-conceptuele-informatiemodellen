@@ -60,14 +60,14 @@ for input_model_dir in sorted(os.listdir(BASE_INPUT_MODELS)):
         index_lines.append(f"- [v{version}]({url}){label}")
 
     # Genereer docs/_modellen/<modelnaam>/index.md
-        model_dir_path = os.path.join(BASE_OUTPUT_MODELS, input_model_dir)
-        os.makedirs(model_dir_path, exist_ok=True)
+    model_dir_path = os.path.join(BASE_OUTPUT_MODELS, input_model_dir)
+    os.makedirs(model_dir_path, exist_ok=True)
 
-        model_index_path = os.path.join(model_dir_path, "index.md")
-        with open(model_index_path, "w", encoding="utf-8") as f:
-            f.write("---\n")
-            f.write(f'title: "{model_name}"\n')
-            f.write("---\n\n")
+    model_index_path = os.path.join(model_dir_path, "index.md")
+    with open(model_index_path, "w", encoding="utf-8") as f:
+        f.write("---\n")
+        f.write(f'title: "{model_name}"\n')
+        f.write("---\n\n")
 
 # Centrale homepage-index schrijven
 with open(os.path.join(BASE_DOCS, "index.md"), "w", encoding="utf-8") as f:
