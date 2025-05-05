@@ -19,11 +19,16 @@ index_lines = [
 def get_model_metadata(yaml_path):
     with open(yaml_path, "r", encoding="utf-8") as f:
         data = yaml.safe_load(f)
-    name = data.get("title", os.path.basename(os.path.dirname(os.path.dirname(yaml_path))))
-    if not name:
-        name = data.get("name", os.path.basename(os.path.dirname(os.path.dirname(yaml_path))))
+
+    if "title" in data:
+        name = data["title"]
+    else:
+        name = data["name"]
+
     version = data.get("version", os.path.basename(os.path.dirname(yaml_path)))
+
     return name, version
+
 
 for input_model_dir in sorted(os.listdir(BASE_INPUT_MODELS)):
     input_model_path = os.path.join(BASE_INPUT_MODELS, input_model_dir)
@@ -46,28 +51,16 @@ for input_model_dir in sorted(os.listdir(BASE_INPUT_MODELS)):
 
         name, version_in_yaml = get_model_metadata(yaml_path)
         model_name = name
-        is_draft = version != version_in_yaml
-        model_versions.append((version, is_draft))
 
-    if not model_versions:
-        continue
+        # Genereer docs/_modellen/<modelnaam>/index.md
+        model_dir_path = os.path.join(BASE_OUTPUT_MODELS, input_model_dir)
+        os.makedirs(model_dir_path, exist_ok=True)
 
-    # Centrale index-linkjes
-    index_lines.append(f"\n## {model_name}")
-    for version, is_draft in model_versions:
-        label = " 🚧" if is_draft else ""
-        url = f"modellen/{input_model_dir}/{version}/"
-        index_lines.append(f"- [v{version}]({url}){label}")
-
-    # Genereer docs/_modellen/<modelnaam>/index.md
-    model_dir_path = os.path.join(BASE_OUTPUT_MODELS, input_model_dir)
-    os.makedirs(model_dir_path, exist_ok=True)
-
-    model_index_path = os.path.join(model_dir_path, "index.md")
-    with open(model_index_path, "w", encoding="utf-8") as f:
-        f.write("---\n")
-        f.write(f'title: "{model_name}"\n')
-        f.write("---\n\n")
+        model_index_path = os.path.join(model_dir_path, "index.md")
+        with open(model_index_path, "w", encoding="utf-8") as f:
+            f.write("---\n")
+            f.write(f'title: "{model_name}"\n')
+            f.write("---\n\n")
 
 # Centrale homepage-index schrijven
 with open(os.path.join(BASE_DOCS, "index.md"), "w", encoding="utf-8") as f:
