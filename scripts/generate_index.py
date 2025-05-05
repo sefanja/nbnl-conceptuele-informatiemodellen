@@ -65,7 +65,7 @@ for input_model_dir in sorted(os.listdir(BASE_INPUT_MODELS)):
         with open(model_index_path, "w", encoding="utf-8") as f:
             f.write("---\n")
             f.write(f'title: "{model_name}"\n')
-            f.write('parent: "Modellen"\n')
+            # f.write('parent: "Modellen"\n')
             f.write("---\n\n")
 
 # Centrale homepage-index schrijven
