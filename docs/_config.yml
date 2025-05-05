@@ -21,3 +21,6 @@ defaults:
       path: ""
     values:
       layout: default
+
+mermaid:
+  version: "11.6.0"

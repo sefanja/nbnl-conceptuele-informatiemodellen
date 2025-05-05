@@ -14,4 +14,4 @@ Een conceptueel informatiemodel helpt mensen met verschillende achtergronden, va
 
 De modellen kunnen er technisch uitzien, maar zijn bedoeld voor een breed publiek: [Wegwijs in de modellen](wegwijs).
 
-De begrippen zijn ook afzonderlijk te bekijken op [begrippen.netbeheernederland.nl](begrippen.netbeheernederland.nl).
+De begrippen zijn ook afzonderlijk te bekijken op [begrippen.netbeheernederland.nl](https://begrippen.netbeheernederland.nl/).
