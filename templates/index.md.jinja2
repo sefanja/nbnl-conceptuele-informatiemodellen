@@ -96,6 +96,11 @@ parent: "{% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% en
 
 {{ omschrijving(schema) }}
 
+## Inhoud
+{{ '{: .no_toc .text-delta }' }}
+1. TOC
+{{ '{:toc}' }}
+
 ---
 
 {% if include_top_level_diagram %}
@@ -120,13 +125,6 @@ parent: "{% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% en
 ```
 
 </details>
-
----
-
-## Inhoud
-{{ '{: .no_toc .text-delta }' }}
-1. TOC
-{{ '{:toc}' }}
 
 {% for class in gen.all_class_objects()|sort(attribute=sort_by) %}
 
