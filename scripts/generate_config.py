@@ -2,10 +2,13 @@ import os
 import yaml
 
 BASE_MODELLEN = "modellen"
-DOC_PAGES = "docs/_modellen"
+DOC_MODELLEN = "docs/_modellen"
 CONFIG_PATH = "docs/_config.yml"
 
-nav_structure = {"Startpagina": "index.md"}, {"Modellen": []}
+nav_structure = [
+    {"Startpagina": "index.md"},
+    {"Modellen": []}
+]
 
 def get_model_metadata(yaml_path):
     with open(yaml_path, "r", encoding="utf-8") as f:
@@ -24,7 +27,7 @@ for model_dir in sorted(os.listdir(BASE_MODELLEN)):
 
     for version in sorted(os.listdir(model_path)):
         yaml_path = os.path.join(model_path, version, "model.yaml")
-        gen_doc_path = os.path.join(DOC_PAGES, model_dir, version, "index.md")
+        gen_doc_path = os.path.join(DOC_MODELLEN, model_dir, version, "index.md")
 
         if not os.path.exists(yaml_path) or not os.path.exists(gen_doc_path):
             continue
@@ -34,13 +37,13 @@ for model_dir in sorted(os.listdir(BASE_MODELLEN)):
         versions.append({f"v{version}": f"modellen/{model_dir}/{version}/index.md"})
 
     if versions:
-        nav_structure["Modellen"].append({model_name: versions})
+        nav_structure[1]["Modellen"].append({model_name: versions})
 
 # Bouw de volledige _config.yml met theme en nav
 config_data = {
     "title": "NBNL Conceptuele Informatiemodellen",
     "theme": "just-the-docs",
-    # "baseurl": "/nbnl-conceptuele-informatiemodellen",
+    "baseurl": "/nbnl-conceptuele-informatiemodellen",
     "collections": {
         "modellen": {
             "output": True
