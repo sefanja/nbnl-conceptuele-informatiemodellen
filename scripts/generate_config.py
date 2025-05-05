@@ -54,7 +54,7 @@ config_data = {
         {
             "scope": {
                 "path": "",
-                "type": "pages"
+                "type": "modellen"
             },
             "values": {
                 "layout": "default"
