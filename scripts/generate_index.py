@@ -72,13 +72,13 @@ for input_model_dir in sorted(os.listdir(BASE_INPUT_MODELS)):
 with open(os.path.join(BASE_DOCS, "index.md"), "w", encoding="utf-8") as f:
     f.write("\n".join(index_lines))
 
-# Genereer docs/_modellen/index.md
-with open(os.path.join(BASE_OUTPUT_MODELS, "index.md"), "w", encoding="utf-8") as f:
-    f.write("---\n")
-    f.write('title: "Modellen"\n')
-    f.write('layout: default\n')
-    f.write('has_children: true\n')
-    f.write('nav_order: 2\n')
-    f.write("---\n\n")
-    f.write("# Modellen\n\n")
-    f.write("Overzicht van alle informatiemodellen.\n")
+# # Genereer docs/_modellen/index.md
+# with open(os.path.join(BASE_OUTPUT_MODELS, "index.md"), "w", encoding="utf-8") as f:
+#     f.write("---\n")
+#     f.write('title: "Modellen"\n')
+#     f.write('layout: default\n')
+#     f.write('has_children: true\n')
+#     f.write('nav_order: 2\n')
+#     f.write("---\n\n")
+#     f.write("# Modellen\n\n")
+#     f.write("Overzicht van alle informatiemodellen.\n")
