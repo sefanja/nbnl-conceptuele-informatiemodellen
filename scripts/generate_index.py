@@ -9,7 +9,8 @@ os.makedirs(BASE_OUTPUT_MODELS, exist_ok=True)
 
 index_lines = [
     "---",
-    "title: Conceptuele informatiemodellen",
+    "layout: default",
+    "title: Startpagina",
     "---",
     "",
     "# Conceptuele informatiemodellen"
@@ -75,4 +76,5 @@ with open(os.path.join(BASE_DOCS, "index.md"), "w", encoding="utf-8") as f:
 with open(os.path.join(BASE_OUTPUT_MODELS, "index.md"), "w", encoding="utf-8") as f:
     f.write("---\n")
     f.write('title: "Modellen"\n')
+    f.write('parent: "Startpagina"\n')
     f.write("---\n\n")
