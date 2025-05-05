@@ -94,6 +94,8 @@ parent: "{% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% en
 # {% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% endif %}
 {{ '{: .no_toc }' }}
 
+{{ omschrijving(schema) }}
+
 {% if include_top_level_diagram %}
 {# Diagramgeneratoren werken niet goed, dus uitgezet #}
 {# ```{{ gen.mermaid_directive() }}
@@ -116,8 +118,6 @@ parent: "{% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% en
 ```
 
 </details>
-
-{% if schema.description %}{{ schema.description }}{% endif %}
 
 ## Inhoud
 {{ '{: .no_toc .text-delta }' }}
