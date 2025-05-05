@@ -25,6 +25,7 @@ classes:
       naam:
         comments:
           - Dit kan de naam van een organisatie zijn of de achternaam (zonder tussenvoegsel) van een natuurlijk persoon.
+        required: true
     attributes:
       geboortedatum:
         description: datum van de bevalling waarbij de aangeslotene is geboren
@@ -75,15 +76,16 @@ classes:
         comments:
           - "Validatie: als de gewenste aansluitcapaciteit van een van de overdrachtspunten 'groot' is of een geheel getal dan 'groot' anders 'klein'."
         range: Groot of klein
-      marktsegment:
-        range: Marktsegment
         required: true
+      marktsegment:
         description: aanduiding van de categorie waartoe de aansluiting behoort, te weten kleinverbruikaansluiting of grootverbruikaansluiting
         see_also:
           - https://wetten.overheid.nl/jci1.3:c:BWBR0037934&hoofdstuk=2&paragraaf=2.1&artikel=2.1.3&z=2022-05-18&g=2022-05-18
           - https://wetten.overheid.nl/jci1.3:c:BWBR0037938&hoofdstuk=1&artikel=1.1&z=2022-11-25&g=2022-11-25
         comments:
           - Een aansluiting met een kleine capaciteit kan onder voorwaarden worden beschouwd als grootverbruikaansluiting, bijvoorbeeld als het een aansluiting betreft op een gesloten distributiesysteem of een aansluiting zoals bedoeld in [artikel 1, lid 2 of 3 van de Elektriciteitswet 1998](https://wetten.overheid.nl/jci1.3:c:BWBR0009755&hoofdstuk=1&paragraaf=1&artikel=1&z=2022-10-01&g=2022-10-01).
+        range: Marktsegment
+        required: true
       uitsluitend elektriciteitsproductie-eenheden:
         description: indicatie of achter een aansluiting zich uitsluitend elektriciteitsproductie-eenheden bevinden en geen ander verbruik dan het eigen verbruik van de desbetreffende elektriciteitsproductie-eenheden
         see_also:
@@ -91,6 +93,7 @@ classes:
         comments:
           - Ook wel bekend als 'zuivere teruglevering'.
         range: Waar of onwaar
+        required: true
       weekmax:
         description: indicatie of de kWmax per week gemeten moet worden
         see_also:
@@ -174,13 +177,15 @@ slots:
     description: unieke cijfercombinatie volgens de Europese Artikelnummer-standaard
     range: EAN-18
     required: true
+  energiedrager:
+    exact_mappings:
+      - nbnl:energiedrager
+    range: Energiedrager
   naam:
     description: woord of combinatie van woorden waarmee iets wordt aangeduid
 
 enums:
   Energiedrager:
-    exact_mappings:
-      - nbnl:energiedrager
     permissible_values:
       elektriciteit:
       gas:
@@ -190,9 +195,6 @@ enums:
       groot:
       klein:
   Marktsegment:
-    description: aanduiding van de categorie waartoe de aansluiting behoort, te weten kleinverbruikaansluiting of grootverbruikaansluiting
-    comments:
-      - Een aansluiting met een kleine capaciteit kan onder voorwaarden worden beschouwd als grootverbruikaansluiting, bijvoorbeeld als het een aansluiting betreft op een gesloten distributiesysteem of een aansluiting zoals bedoeld in [artikel 1, lid 2 of 3 van de Elektriciteitswet 1998](https://wetten.overheid.nl/jci1.3:c:BWBR0009755&hoofdstuk=1&paragraaf=1&artikel=1&z=2022-10-01&g=2022-10-01).
     permissible_values:
       grootverbruikaansluiting:
         meaning: nbnl:grootverbruikaansluiting
