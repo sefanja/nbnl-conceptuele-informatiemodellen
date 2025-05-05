@@ -96,30 +96,20 @@ parent: "{% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% en
 ---
 
 # {% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% endif %}
+{{ '{: .no_toc }' }}
 
-{% if schema.version %}_Versie {{ schema.version }}_<br/>{% endif %}
-
-{% if schema.description %}{{ schema.description }}<br/>{% endif %}
+{% if schema.version %}_Versie {{ schema.version }}_{% endif %}
 
 ![Diagram](model.drawio.svg)
 
-<br/>
+{% if schema.description %}{{ schema.description }}{% endif %}
 
-{# {% if gen.hierarchical_class_view -%}
-{% for u, v in gen.class_hierarchy_as_tuples() -%}
-{{" "*u*4}}- {{link(v)}}
-{% endfor %}
-{% else -%}
-{% for c in gen.all_class_objects()|sort(attribute=sort_by) -%}
-- {{link(c)}}
-{% endfor %}
-{% endif %} #}
-
-- TOC
+## Inhoud
+{{ '{: .no_toc .text-delta }' }}
+1. TOC
 {{ '{:toc}' }}
 
 {% for class in gen.all_class_objects()|sort(attribute=sort_by) %}
-<br/>
 
 ## {{class.name}}
 
@@ -135,6 +125,7 @@ Dit is een abstracte entiteit zonder directe instanties.
 
 {% if properties %}
 ### Eigenschappen
+{{ '{: .no_toc }' }}
 
 | Eigenschap | Waardesoort | Omschrijving |
 | :---  | :--- | :--- |
@@ -145,6 +136,7 @@ Dit is een abstracte entiteit zonder directe instanties.
 
 {% if relationships %}
 ### Relaties
+{{ '{: .no_toc }' }}
 
 | Relatie | Naar | Omschrijving |
 | :---  | :--- | :--- |
@@ -155,12 +147,12 @@ Dit is een abstracte entiteit zonder directe instanties.
 
 {% endfor %}
 
-<br/>
-
 # Waardesoorten en keuzelijsten
+{{ '{: .no_toc }' }}
 
 {% if gen.all_type_objects() %}
 ### Waardesoorten
+{{ '{: .no_toc }' }}
 
 | Waardesoort | Omschrijving | Gebaseerd op | Patroon |
 | :--- | :--- | :--- | :--- |
@@ -172,6 +164,7 @@ Dit is een abstracte entiteit zonder directe instanties.
 
 {% if gen.all_enum_objects() %}
 ### Keuzelijsten
+{{ '{: .no_toc }' }}
 
 | Keuzelijst | Omschrijving | Keuzes |
 | :--- | :--- | :--- |
@@ -190,6 +183,7 @@ _dynamische waarden_
 
 {% if gen.all_enum_objects() -%}
 ### Keuze-items
+{{ '{: .no_toc }' }}
 
 | Keuzelijst | Keuze | Betekenis | Omschrijving |
 | :--- | :--- | :--- | :--- |
