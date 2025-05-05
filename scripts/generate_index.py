@@ -11,6 +11,7 @@ index_lines = [
     "---",
     "layout: default",
     "title: Startpagina",
+    "has_children: true",
     "---",
     "",
     "# Conceptuele informatiemodellen"
