@@ -91,12 +91,12 @@
 {%- endmacro -%}
 
 ---
-title: {% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% endif %} {% if schema.version %}v{{ schema.version }}{% endif %}
-parent: {% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% endif %}
-grand_parent: Modellen
+title: "{{ schema.title | default(schema.name) }}{% if schema.version %} v{{ schema.version }}{% endif %}"
+parent: "{{ schema.title | default(schema.name) }}"
+grand_parent: "Modellen"
 ---
 
-# {% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% endif %}
+# {{ schema.title | default(schema.name) }}
 
 {% if schema.version %}_Versie {{ schema.version }}_<br/>{% endif %}
 
