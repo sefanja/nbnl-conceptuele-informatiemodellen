@@ -124,6 +124,8 @@ parent: "{% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% en
 
 </details>
 
+---
+
 {% for class in gen.all_class_objects()|sort(attribute=sort_by) %}
 
 ## {{class.name}}
