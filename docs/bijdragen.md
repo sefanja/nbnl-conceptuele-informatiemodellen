@@ -1,5 +1,6 @@
 ---
 title: Bijdragen
+nav_order: 2
 ---
 
 # Bijdragen

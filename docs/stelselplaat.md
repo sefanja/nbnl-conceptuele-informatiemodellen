@@ -1,5 +1,6 @@
 ---
 title: Stelsel van registers
+nav_order: 3
 ---
 
 # Stelsel van registers

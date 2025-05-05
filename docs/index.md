@@ -1,5 +1,6 @@
 ---
 title: Startpagina
+nav_order: 1
 ---
 
 # Conceptuele informatiemodellen
