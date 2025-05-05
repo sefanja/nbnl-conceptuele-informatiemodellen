@@ -15,6 +15,7 @@ Welke registers gegevens bij elkaar opvragen, is niet afgebeeld. Zo vraagt bijvo
 Van sommige registers is een conceptueel informatiemodel beschikbaar via het navigatiemenu.
 
 ## Relatie naar NBility
+
 Onderstaande tabel toont de relatie met [NBility](https://nbility-model.github.io/).
 
 | Register | NBility v2.2 |
