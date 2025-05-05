@@ -35,30 +35,36 @@ jobs:
       - name: Create docs per model version
         run: |
           for category in modellen/*; do
-            for model in "$category"/*; do
-              modelname=$(basename "$model")
-              categoryname=$(basename "$category")
-              for version in "$model"/*; do
-                versionid=$(basename "$version")
-                echo "Processing $categoryname/$modelname version $versionid"
+            if [ -d "$category" ]; then
+              for model in "$category"/*; do
+                if [ -d "$model" ]; then
+                  modelname=$(basename "$model")
+                  categoryname=$(basename "$category")
+                  for version in "$model"/*; do
+                    if [ -d "$version" ]; then
+                      versionid=$(basename "$version")
+                      echo "Processing $categoryname/$modelname version $versionid"
 
-                outdir=docs/_modellen/$categoryname/$modelname/$versionid
-                mkdir -p "$outdir"
+                      outdir=docs/_modellen/$categoryname/$modelname/$versionid
+                      mkdir -p "$outdir"
 
-                gen-doc \
-                  --template-directory templates \
-                  -d "$outdir" \
-                  "$version/model.yaml"
+                      gen-doc \
+                        --template-directory templates \
+                        -d "$outdir" \
+                        "$version/model.yaml"
 
-                # Remove all .md files except index.md
-                find "$outdir" -type f -name "*.md" ! -name "index.md" -delete
+                      # Remove all .md files except index.md
+                      find "$outdir" -type f -name "*.md" ! -name "index.md" -delete
 
-                # Kopieer bijbehorende SVG indien aanwezig
-                if [ -f "$version/model.drawio.svg" ]; then
-                  cp "$version/model.drawio.svg" "$outdir/"
+                      # Kopieer bijbehorende SVG indien aanwezig
+                      if [ -f "$version/model.drawio.svg" ]; then
+                        cp "$version/model.drawio.svg" "$outdir/"
+                      fi
+                    fi
+                  done
                 fi
               done
-            done
+            fi
           done
 
       - name: Create model landing pages
