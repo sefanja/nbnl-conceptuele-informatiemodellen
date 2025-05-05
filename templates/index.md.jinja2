@@ -104,6 +104,11 @@ parent: "{% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% en
 
 {% if schema.description %}{{ schema.description }}{% endif %}
 
+<details markdown="block">
+<summary>LinkML-definitie</summary>
+<pre><code class="language-yaml">{{ gen.yaml(element) | escape }}</code></pre>
+</details>
+
 ## Inhoud
 {{ '{: .no_toc .text-delta }' }}
 1. TOC
