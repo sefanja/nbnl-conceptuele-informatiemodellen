@@ -31,7 +31,7 @@ jobs:
 
       - name: Install Python dependencies
         run: pip install --cache-dir ~/.cache/pip -r requirements.txt
-                    
+
       - name: Create docs per model version
         run: |
           for model in modellen/*; do

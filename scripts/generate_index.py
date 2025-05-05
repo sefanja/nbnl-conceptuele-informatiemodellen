@@ -2,9 +2,10 @@ import os
 import yaml
 
 BASE_DOCS = "docs"
-MODELLEN_DIR = os.path.join(BASE_DOCS, "_modellen")
+BASE_INPUT_MODELS = "modellen"
+BASE_OUTPUT_MODELS = os.path.join(BASE_DOCS, "_modellen")
 
-os.makedirs(MODELLEN_DIR, exist_ok=True)
+os.makedirs(BASE_OUTPUT_MODELS, exist_ok=True)
 
 index_lines = [
     "---",
@@ -23,19 +24,23 @@ def get_model_metadata(yaml_path):
     version = data.get("version", os.path.basename(os.path.dirname(yaml_path)))
     return name, version
 
-for model_dir in sorted(os.listdir(MODELLEN_DIR)):
-    model_path = os.path.join(MODELLEN_DIR, model_dir)
-    if not os.path.isdir(model_path):
+for input_model_dir in sorted(os.listdir(BASE_INPUT_MODELS)):
+    input_model_path = os.path.join(BASE_INPUT_MODELS, input_model_dir)
+    if not os.path.isdir(input_model_path):
         continue
 
     model_versions = []
-    model_name = model_dir  # fallback
+    model_name = input_model_dir  # fallback
 
-    for version in sorted(os.listdir(model_path), reverse=True):
-        yaml_path = os.path.join(model_path, version, "model.yaml")
-        gen_md_path = os.path.join(MODELLEN_DIR, model_dir, version, "index.md")
+    for version in sorted(os.listdir(input_model_path), reverse=True):
+        yaml_path = os.path.join(input_model_path, version, "model.yaml")
+        gen_md_path = os.path.join(BASE_OUTPUT_MODELS, input_model_dir, version, "index.md")
 
-        if not os.path.exists(yaml_path) or not os.path.exists(gen_md_path):
+        if not os.path.exists(yaml_path):
+            print(f"Missing YAML: {yaml_path}")
+            continue
+        if not os.path.exists(gen_md_path):
+            print(f"Missing index.md: {gen_md_path}")
             continue
 
         name, version_in_yaml = get_model_metadata(yaml_path)
@@ -50,7 +55,7 @@ for model_dir in sorted(os.listdir(MODELLEN_DIR)):
     index_lines.append(f"\n## {model_name}")
     for version, is_draft in model_versions:
         label = " 🚧" if is_draft else ""
-        url = f"modellen/{model_dir}/{version}/"
+        url = f"modellen/{input_model_dir}/{version}/"
         index_lines.append(f"- [v{version}]({url}){label}")
 
 # Centrale homepage-index schrijven
