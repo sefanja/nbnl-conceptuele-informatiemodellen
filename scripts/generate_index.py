@@ -11,7 +11,6 @@ index_lines = [
     "---",
     "layout: default",
     "title: Startpagina",
-    "has_children: true",
     "---",
     "",
     "# Conceptuele informatiemodellen"
@@ -78,7 +77,6 @@ with open(os.path.join(BASE_OUTPUT_MODELS, "index.md"), "w", encoding="utf-8") a
     f.write("---\n")
     f.write('title: "Modellen"\n')
     f.write('layout: default\n')
-    f.write('parent: "Startpagina"\n')
     f.write('has_children: true\n')
     f.write('nav_order: 2\n')
     f.write("---\n\n")

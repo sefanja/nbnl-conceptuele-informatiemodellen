@@ -49,6 +49,13 @@ config_data = {
             "output": True
         },
     },
+    "just_the_docs": {
+        "collections": {
+            "modellen": {
+                "name": "Modellen"
+            }
+        }
+    },
     "include": ["**/*.svg"],
     "defaults": [
         {
