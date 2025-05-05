@@ -105,7 +105,7 @@ parent: "{% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% en
 
 <br/>
 
-{% if gen.hierarchical_class_view -%}
+{# {% if gen.hierarchical_class_view -%}
 {% for u, v in gen.class_hierarchy_as_tuples() -%}
 {{" "*u*4}}- {{link(v)}}
 {% endfor %}
@@ -113,7 +113,10 @@ parent: "{% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% en
 {% for c in gen.all_class_objects()|sort(attribute=sort_by) -%}
 - {{link(c)}}
 {% endfor %}
-{% endif %}
+{% endif %} #}
+
+- TOC
+{{ '{:toc}' }}
 
 {% for class in gen.all_class_objects()|sort(attribute=sort_by) %}
 <br/>
