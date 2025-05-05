@@ -24,11 +24,12 @@ for category_dir in sorted(os.listdir(BASE_INPUT_MODELS)):
 
     # Genereer docs/_modellen/<categorie>/index.md
     category_index_path = os.path.join(category_output_dir, "index.md")
-    with open(category_index_path, "w", encoding="utf-8") as f:
-        f.write("---\n")
-        f.write(f'title: "{category_dir.capitalize()}"\n')
-        f.write("---\n\n")
-        f.write(f"# {category_dir.capitalize()}\n")
+    if not os.path.exists(category_index_path):
+        with open(category_index_path, "w", encoding="utf-8") as f:
+            f.write("---\n")
+            f.write(f'title: "{category_dir.capitalize()}"\n')
+            f.write("---\n\n")
+            f.write(f"# {category_dir.capitalize()}\n")
 
     # Itereer over modellen binnen de categorie
     for model_dir in sorted(os.listdir(category_path)):
