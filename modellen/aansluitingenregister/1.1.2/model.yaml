@@ -26,6 +26,22 @@ classes:
         comments:
           - Dit kan de naam van een organisatie zijn of de achternaam (zonder tussenvoegsel) van een natuurlijk persoon.
     attributes:
+      geboortedatum:
+        description: datum van de bevalling waarbij de aangeslotene is geboren
+        see_also:
+          - https://wetten.overheid.nl/jci1.3:c:BWBR0037934&hoofdstuk=3&paragraaf=3.3&sub-paragraaf=3.3.1&artikel=3.3.1.1&z=2023-06-28&g=2023-06-28
+      tussenvoegsel:
+        description: verzameling van een of meer voorzetsels en/of lidwoorden die aan de achternaam van een aangeslotene vooraf gaat en daarmee gezamenlijk de volledige achternaam vormt
+        see_also:
+          - https://wetten.overheid.nl/jci1.3:c:BWBR0037934&hoofdstuk=2&paragraaf=2.9&sub-paragraaf=2.9.2&artikel=2.9.2.1&z=2022-12-20&g=2022-12-20
+      voorletters:
+        description: verzameling letters die wordt gevormd door de eerste letter van alle in volgorde voorkomende voornamen van een aangeslotene
+        see_also:
+          - https://wetten.overheid.nl/jci1.3:c:BWBR0037934&hoofdstuk=2&paragraaf=2.9&sub-paragraaf=2.9.2&artikel=2.9.2.1&z=2022-12-20&g=2022-12-20
+      KVK-nummer:
+        description: identificatie van de maatschappelijke activiteit van de aangeslotene in het Handelsregister
+        see_also:
+          - https://wetten.overheid.nl/jci1.3:c:BWBR0037934&hoofdstuk=3&paragraaf=3.3&sub-paragraaf=3.3.1&artikel=3.3.1.1&z=2023-06-28&g=2023-06-28
       # conventie: Barker-stijl
       # conventie: target-class-naam in relatienaam (om ze uniek te maken)
       # conventie: relatie altijd als `attribute` onder eigenaar van relatie
@@ -45,15 +61,20 @@ classes:
   Aansluiting:
     exact_mappings:
       - nbnl:aansluiting
+    comments:
+      - Een koppeling met een gesloten distributiesysteem wordt in dit register beschouwd als aansluiting als de beheerder geen gebruik maakt van het elektronische berichtenverkeer ten behoeve van het faciliteren van derdentoegang ([artikel 2.4, vierde lid van de Netcode elektriciteit](https://wetten.overheid.nl/jci1.3:c:BWBR0037940&hoofdstuk=2&paragraaf=2.1&artikel=2.4&z=2023-04-01&g=2023-04-01)).
     slots:
       - EAN-code
+      - energiedrager
     attributes:
-      deel van (Netgebied):
-        range: Netgebied
-        required: false
-        multivalued: false
-        annotations:
-          inverse_cardinality: 0..*
+      gecontracteerde transportcapaciteit:
+        exact_mappings:
+          - nbnl:gecontracteerde-transportcapaciteit
+      grootte:
+        description: aanduiding van het formaat van de aansluiting op basis van de gewenste aansluitcapaciteiten van de overdrachtspunten
+        comments:
+          - "Validatie: als de gewenste aansluitcapaciteit van een van de overdrachtspunten 'groot' is of een geheel getal dan 'groot' anders 'klein'."
+        range: Groot of klein
       marktsegment:
         range: Marktsegment
         required: true
@@ -63,6 +84,24 @@ classes:
           - https://wetten.overheid.nl/jci1.3:c:BWBR0037938&hoofdstuk=1&artikel=1.1&z=2022-11-25&g=2022-11-25
         comments:
           - Een aansluiting met een kleine capaciteit kan onder voorwaarden worden beschouwd als grootverbruikaansluiting, bijvoorbeeld als het een aansluiting betreft op een gesloten distributiesysteem of een aansluiting zoals bedoeld in [artikel 1, lid 2 of 3 van de Elektriciteitswet 1998](https://wetten.overheid.nl/jci1.3:c:BWBR0009755&hoofdstuk=1&paragraaf=1&artikel=1&z=2022-10-01&g=2022-10-01).
+      uitsluitend elektriciteitsproductie-eenheden:
+        description: indicatie of achter een aansluiting zich uitsluitend elektriciteitsproductie-eenheden bevinden en geen ander verbruik dan het eigen verbruik van de desbetreffende elektriciteitsproductie-eenheden
+        see_also:
+          - https://wetten.overheid.nl/jci1.3:c:BWBR0037951&hoofdstuk=3&paragraaf=3.7&artikel=3.7.13.b&z=2022-05-18&g=2022-05-18
+        comments:
+          - Ook wel bekend als 'zuivere teruglevering'.
+        range: Waar of onwaar
+      weekmax:
+        description: indicatie of de kWmax per week gemeten moet worden
+        see_also:
+          - https://wetten.overheid.nl/jci1.3:c:BWBR0037951&hoofdstuk=3&paragraaf=3.7&artikel=3.7.5a&z=2022-05-18&g=2022-05-18
+        range: Waar of onwaar
+      deel van (Netgebied):
+        range: Netgebied
+        required: false
+        multivalued: false
+        annotations:
+          inverse_cardinality: 0..*
     unique_keys:
       identificatie:
         unique_key_slots:
@@ -139,7 +178,21 @@ slots:
     description: woord of combinatie van woorden waarmee iets wordt aangeduid
 
 enums:
+  Energiedrager:
+    exact_mappings:
+      - nbnl:energiedrager
+    permissible_values:
+      elektriciteit:
+      gas:
+      waterstof:
+  Groot of klein:
+    permissible_values:
+      groot:
+      klein:
   Marktsegment:
+    description: aanduiding van de categorie waartoe de aansluiting behoort, te weten kleinverbruikaansluiting of grootverbruikaansluiting
+    comments:
+      - Een aansluiting met een kleine capaciteit kan onder voorwaarden worden beschouwd als grootverbruikaansluiting, bijvoorbeeld als het een aansluiting betreft op een gesloten distributiesysteem of een aansluiting zoals bedoeld in [artikel 1, lid 2 of 3 van de Elektriciteitswet 1998](https://wetten.overheid.nl/jci1.3:c:BWBR0009755&hoofdstuk=1&paragraaf=1&artikel=1&z=2022-10-01&g=2022-10-01).
     permissible_values:
       grootverbruikaansluiting:
         meaning: nbnl:grootverbruikaansluiting
