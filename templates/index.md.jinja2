@@ -106,7 +106,7 @@ parent: "{% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% en
 
 <details markdown="block">
 <summary>LinkML-definitie</summary>
-<pre><code class="language-yaml">{{ gen.yaml(element) | escape }}</code></pre>
+<pre><code class="language-yaml">{{ gen.yaml(schema) | escape }}</code></pre>
 </details>
 
 ## Inhoud
