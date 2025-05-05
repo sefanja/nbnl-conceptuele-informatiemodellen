@@ -19,7 +19,9 @@ index_lines = [
 def get_model_metadata(yaml_path):
     with open(yaml_path, "r", encoding="utf-8") as f:
         data = yaml.safe_load(f)
-    name = data.get("name", os.path.basename(os.path.dirname(os.path.dirname(yaml_path))))
+    name = data.get("title", os.path.basename(os.path.dirname(os.path.dirname(yaml_path))))
+    if not name:
+        name = data.get("name", os.path.basename(os.path.dirname(os.path.dirname(yaml_path))))
     version = data.get("version", os.path.basename(os.path.dirname(yaml_path)))
     return name, version
 
@@ -65,20 +67,8 @@ for input_model_dir in sorted(os.listdir(BASE_INPUT_MODELS)):
         with open(model_index_path, "w", encoding="utf-8") as f:
             f.write("---\n")
             f.write(f'title: "{model_name}"\n')
-            # f.write('parent: "Modellen"\n')
             f.write("---\n\n")
 
 # Centrale homepage-index schrijven
 with open(os.path.join(BASE_DOCS, "index.md"), "w", encoding="utf-8") as f:
     f.write("\n".join(index_lines))
-
-# # Genereer docs/_modellen/index.md
-# with open(os.path.join(BASE_OUTPUT_MODELS, "index.md"), "w", encoding="utf-8") as f:
-#     f.write("---\n")
-#     f.write('title: "Modellen"\n')
-#     f.write('layout: default\n')
-#     f.write('has_children: true\n')
-#     f.write('nav_order: 2\n')
-#     f.write("---\n\n")
-#     f.write("# Modellen\n\n")
-#     f.write("Overzicht van alle informatiemodellen.\n")

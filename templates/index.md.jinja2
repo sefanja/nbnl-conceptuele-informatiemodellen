@@ -91,7 +91,7 @@
 {%- endmacro -%}
 
 ---
-title: "{% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% endif %}{% if schema.version %} v{{ schema.version }}{% endif %}"
+title: "v{{ schema.version }}"
 parent: "{% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% endif %}"
 ---
 
