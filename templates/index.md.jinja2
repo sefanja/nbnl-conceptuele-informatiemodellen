@@ -176,7 +176,7 @@ Dit is een abstracte entiteit zonder directe instanties.
 ### Keuzelijsten
 {{ '{: .no_toc }' }}
 
-{% for e in gen.all_enum_objects()|sort(attribute=sort_by) -%}
+{% for e in gen.all_enum_objects()|sort(attribute=sort_by) %}
 #### {{anchor(e.name)}}
 {{ '{: .no_toc }' }}
 
@@ -193,7 +193,4 @@ Dit is een abstracte entiteit zonder directe instanties.
 {% endif -%}
 
 {% endfor %}
-
 {% endif %}
-
-
