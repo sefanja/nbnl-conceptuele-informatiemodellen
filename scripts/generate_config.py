@@ -2,7 +2,7 @@ import os
 import yaml
 
 BASE_MODELLEN = "modellen"
-DOC_PAGES = "docs/_pages/modellen"
+DOC_PAGES = "docs/_modellen"
 CONFIG_PATH = "docs/_config.yml"
 
 nav_structure = [
@@ -45,9 +45,8 @@ config_data = {
     "theme": "just-the-docs",
     "baseurl": "/nbnl-conceptuele-informatiemodellen",
     "collections": {
-        "pages": {
+        "modellen": {
             "output": True
-            # "permalink": "/:path.html"
         },
     },
     "include": ["**/*.svg"],

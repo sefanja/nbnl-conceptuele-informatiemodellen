@@ -2,10 +2,9 @@ import os
 import yaml
 
 BASE_DOCS = "docs"
-BASE_MODELLEN = "modellen"
-PAGES_DIR = os.path.join(BASE_DOCS, "_pages", "modellen")
+MODELLEN_DIR = os.path.join(BASE_DOCS, "_modellen")
 
-os.makedirs(PAGES_DIR, exist_ok=True)
+os.makedirs(MODELLEN_DIR, exist_ok=True)
 
 index_lines = [
     "---",
@@ -14,9 +13,7 @@ index_lines = [
     "nav_order: 1",
     "---",
     "",
-    "# Conceptuele informatiemodellen",
-    "",
-    "Een overzicht van alle beschikbare modellen:"
+    "# Conceptuele informatiemodellen"
 ]
 
 def get_model_metadata(yaml_path):
@@ -26,8 +23,8 @@ def get_model_metadata(yaml_path):
     version = data.get("version", os.path.basename(os.path.dirname(yaml_path)))
     return name, version
 
-for model_dir in sorted(os.listdir(BASE_MODELLEN)):
-    model_path = os.path.join(BASE_MODELLEN, model_dir)
+for model_dir in sorted(os.listdir(MODELLEN_DIR)):
+    model_path = os.path.join(MODELLEN_DIR, model_dir)
     if not os.path.isdir(model_path):
         continue
 
@@ -36,7 +33,7 @@ for model_dir in sorted(os.listdir(BASE_MODELLEN)):
 
     for version in sorted(os.listdir(model_path), reverse=True):
         yaml_path = os.path.join(model_path, version, "model.yaml")
-        gen_md_path = os.path.join(PAGES_DIR, model_dir, version, "index.md")
+        gen_md_path = os.path.join(MODELLEN_DIR, model_dir, version, "index.md")
 
         if not os.path.exists(yaml_path) or not os.path.exists(gen_md_path):
             continue
@@ -53,7 +50,7 @@ for model_dir in sorted(os.listdir(BASE_MODELLEN)):
     index_lines.append(f"\n## {model_name}")
     for version, is_draft in model_versions:
         label = " 🚧" if is_draft else ""
-        url = f"pages/modellen/{model_dir}/{version}/"
+        url = f"modellen/{model_dir}/{version}/"
         index_lines.append(f"- [v{version}]({url}){label}")
 
 # Centrale homepage-index schrijven
