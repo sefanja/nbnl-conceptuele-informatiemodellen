@@ -111,7 +111,7 @@ parent: "{% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% en
 {% endfor %}
 {% else -%}
 {% for c in gen.all_class_objects()|sort(attribute=sort_by) -%}
-- {{link(v)}}
+- {{link(c)}}
 {% endfor %}
 {% endif %}
 
@@ -193,7 +193,7 @@ _dynamische waarden_
 {% for e in gen.all_enum_objects()|sort(attribute=sort_by) -%}
 {% if e.permissible_values -%}
 {% for pv in e.permissible_values.values() -%}
-| {{e.name}} | {{anchor(pv.text)}} | {{gen.uri_link(pv.meaning)}} | {{omschrijving(pv)}} |
+| {{e.name}} | {{anchor(pv.text)}} | {% if pv.meaning %}{{gen.uri_link(pv.meaning)}}{% endif %} | {{omschrijving(pv)}} |
 {% endfor %}
 {% else %}
 | {{e.name}} | _dynamisch_ |  |  |

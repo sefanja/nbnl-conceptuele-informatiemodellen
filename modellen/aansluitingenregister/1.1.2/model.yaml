@@ -19,18 +19,14 @@ classes:
       - nbnl:aangeslotene
     comments:
       - Aangeslotenen worden niet uniek geïdentificeerd. Daarom gaat het hier om een gegevensgroep bij een aansluiting, niet om een zelfstandige entiteit.
-    slots:
-      - naam
-    slot_usage:
-      naam:
-        comments:
-          - Dit kan de naam van een organisatie zijn of de achternaam (zonder tussenvoegsel) van een natuurlijk persoon.
-        required: true
     attributes:
       geboortedatum:
         description: datum van de bevalling waarbij de aangeslotene is geboren
         see_also:
           - https://wetten.overheid.nl/jci1.3:c:BWBR0037934&hoofdstuk=3&paragraaf=3.3&sub-paragraaf=3.3.1&artikel=3.3.1.1&z=2023-06-28&g=2023-06-28
+      naam:
+        description: naam van een organisatie of de achternaam (zonder tussenvoegsel) van een natuurlijk persoon
+        required: true
       tussenvoegsel:
         description: verzameling van een of meer voorzetsels en/of lidwoorden die aan de achternaam van een aangeslotene vooraf gaat en daarmee gezamenlijk de volledige achternaam vormt
         see_also:
@@ -181,8 +177,6 @@ slots:
     exact_mappings:
       - nbnl:energiedrager
     range: Energiedrager
-  naam:
-    description: woord of combinatie van woorden waarmee iets wordt aangeduid
 
 enums:
   Energiedrager:
@@ -218,5 +212,5 @@ types:
     description: aanduiding bedoeld voor mensen, zonder vaste structuur of betekenis
     base: str
   Waar of onwaar:
-    description: Binaire aanduiding die aangeeft of een propositie of kenmerk van toepassing is (waar) of niet van toepassing is (onwaar)
+    description: binaire aanduiding die aangeeft of een propositie of kenmerk van toepassing is (waar) of niet van toepassing is (onwaar)
     base: bool
