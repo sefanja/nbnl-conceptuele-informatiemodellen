@@ -1,14 +1,15 @@
 ---
-title: Leeswijzer
+title: Wegwijs in de modellen
 nav_order: 2
 ---
+
+# Wegwijs in de modellen
+{: .no_toc }
 
 ## Inhoud
 {: .no_toc .text-delta }
 1. TOC
 {:toc}
-
-# Leeswijzer
 
 De conceptuele informatiemodellen op deze website gebruiken eenvoudige diagrammen om te laten zien _welke begrippen er zijn_ en _hoe die met elkaar samenhangen_. Hieronder leggen we de belangrijkste elementen uit.
 
@@ -84,8 +85,17 @@ erDiagram
 ```
 
 ## TODO
+{: .no_toc }
 
-- accidentiële versus accidentiële eigenschappen
+- essentiële versus accidentiële eigenschappen (multipliciteit)
 - afleidbare elementen
 - verwijzingen naar andere modellen (grijs)
 - NBility-kleuren
+
+Meer voor modelleurs dan modellezers:
+
+- naamgevingsconventies
+- notatieconventies
+- Barker's naamgevingspatroon voor relaties
+- Juriconnect
+- LinkML-specifieke conventies
