@@ -59,12 +59,9 @@ jobs:
             done
           done
 
-      - name: Create central index.md
-        run: python scripts/generate_index.py
+      - name: Create an index.md per model name
+        run: python scripts/generate_model_index.py
 
-      - name: Generate Jekyll config with navigation
-        run: python scripts/generate_config.py
-      
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
 
