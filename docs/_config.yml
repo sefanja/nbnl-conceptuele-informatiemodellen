@@ -11,6 +11,8 @@ just_the_docs:
     modellen:
       name: Modellen
 
+enable_copy_code_button: true
+
 include:
   - "**/*.svg"
 
