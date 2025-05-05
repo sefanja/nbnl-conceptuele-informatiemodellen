@@ -1,0 +1,65 @@
+id: https://netbeheernederland.nl/conceptueelinformatiemodel/datadienst/energiegebiedsprofielen-kv
+# conventie/vraag: name gelijk aan laatste deel id en aan mapnaam?
+name: energiegebiedsprofielen-kv
+title: Energiegebiedsprofielen kleinverbruik
+version: 1.0.0
+prefixes:
+  linkml: https://w3id.org/linkml/
+  energiegebiedsprofielen-kv: https://netbeheernederland.nl/conceptueelinformatiemodel/datadienst/energiegebiedsprofielen-kv/
+  nbnl: https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/
+default_range: Tekst
+default_prefix: energiegebiedsprofielen-kv
+
+classes:
+  Energie-uitwisseling via kleinverbruikaansluitingen voor adresseerbare objecten:
+    description: afname dan wel invoeding van energie op een energienet via kleinverbruikaansluitingen met verblijfsobjecten, standplaatsen en ligplaatsen
+    attributes:
+      beginmoment:
+        description: ogenblik vanaf wanneer de energie is uitgewisseld
+      eindmoment:
+        description: ogenblik tot wanneer de energie is uitgewisseld
+      energiedrager:
+        exact_mappings:
+          - nbnl:energiedrager
+        range: Energiedrager
+      # vraag: waar de exact_mappings: bij attributes, enums of beide?
+      energierichting:
+        range: Energierichting
+      gebiedscode:
+        description: unieke aanduiding waarmee een geografisch gebied wordt geïdentificeerd
+      soort gebied:
+        description: categorie die een geografische eenheid beschrijft
+      waarde:
+        description: aantal kWh of m3
+        range: Geheel getal
+
+enums:
+  Energiedrager:
+    permissible_values:
+      elektriciteit:
+      gas:
+      waterstof:
+  Energierichting:
+    exact_mappings:
+      - nbnl:energierichting
+    permissible_values:
+      afname:
+        exact_mappings:
+          - nbnl:afname
+      invoeding:
+        exact_mappings:
+          - nbnl:invoeding
+
+types:
+  Getal:
+    description: voorstelling van een hoeveelheid
+    base: float
+  Geheel getal:
+    description: getal zonder decimalen
+    base: int
+  Tekst:
+    description: aanduiding bedoeld voor mensen, zonder vaste structuur of betekenis
+    base: str
+  Waar of onwaar:
+    description: binaire aanduiding die aangeeft of een propositie of kenmerk van toepassing is (waar) of niet van toepassing is (onwaar)
+    base: bool

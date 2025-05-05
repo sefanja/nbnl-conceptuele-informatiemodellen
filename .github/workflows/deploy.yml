@@ -48,18 +48,24 @@ jobs:
                       outdir=docs/_modellen/$categoryname/$modelname/$versionid
                       mkdir -p "$outdir"
 
-                      gen-doc \
-                        --template-directory templates \
-                        -d "$outdir" \
-                        "$version/model.yaml"
+                      if [ -f "$version/model.drawio.svg" ]; then
+                        # Gebruik bijbehorende SVG
+                        cp "$version/model.drawio.svg" "$outdir/"
+                        gen-doc \
+                          --template-directory templates \
+                          -d "$outdir" \
+                          "$version/model.yaml"
+                        else
+                        # Genereer diagram
+                        gen-doc \
+                          --template-directory templates \
+                          -d "$outdir" \
+                          --include-top-level-diagram \
+                          "$version/model.yaml"
+                      fi
 
                       # Remove all .md files except index.md
                       find "$outdir" -type f -name "*.md" ! -name "index.md" -delete
-
-                      # Kopieer bijbehorende SVG indien aanwezig
-                      if [ -f "$version/model.drawio.svg" ]; then
-                        cp "$version/model.drawio.svg" "$outdir/"
-                      fi
                     fi
                   done
                 fi

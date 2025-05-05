@@ -89,12 +89,19 @@ parent: "{% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% en
 # {% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% endif %}
 {{ '{: .no_toc }' }}
 
+{% if include_top_level_diagram %}
+{# Diagramgeneratoren werken niet goed, dus uitgezet #}
+{# ```{{ gen.mermaid_directive() }}
+{{ gen.mermaid_diagram() }}
+``` #}
+{% else %}
 ![Diagram](model.drawio.svg)
 
 <details>
 <summary>Legenda</summary>
 <p>Komt nog!</p>
 </details>
+{% endif %}
 
 <details markdown="1">
 <summary>LinkML</summary>
@@ -194,9 +201,9 @@ _dynamische waarden_
 {% if e.permissible_values -%}
 {% for pv in e.permissible_values.values() -%}
 | {{e.name}} | {{anchor(pv.text)}} | {% if pv.meaning %}{{gen.uri_link(pv.meaning)}}{% endif %} | {{omschrijving(pv)}} |
-{% endfor %}
-{% else %}
+{% endfor -%}
+{% else -%}
 | {{e.name}} | _dynamisch_ |  |  |
-{% endif %}
-{% endfor %}
+{% endif -%}
+{% endfor -%}
 {% endif %}
