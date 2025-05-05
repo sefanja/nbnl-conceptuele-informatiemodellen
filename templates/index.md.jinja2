@@ -176,34 +176,24 @@ Dit is een abstracte entiteit zonder directe instanties.
 ### Keuzelijsten
 {{ '{: .no_toc }' }}
 
-| Keuzelijst | Omschrijving | Keuzes |
-| :--- | :--- | :--- |
 {% for e in gen.all_enum_objects()|sort(attribute=sort_by) -%}
-| {{anchor(e.name)}} | {{omschrijving(e)}} | {% if e.permissible_values -%}
-{%- for pv in e.permissible_values.values() -%}
-{{link(pv.text)}}{% if not loop.last %}, {% endif -%}
-{%- endfor -%}
-{%- else -%}
-_dynamische waarden_
-{%- endif -%}
-|
+#### {{anchor(e.name)}}
+{{ '{: .no_toc }' }}
+
+{{omschrijving(e)}}
+
+| Keuzelijst | Keuze | Omschrijving |
+| :--- | :--- | :--- |
+{% if e.permissible_values -%}
+{% for pv in e.permissible_values.values() -%}
+| {{e.name}} | {{anchor(pv.text)}} | {% if pv.meaning %}_{{gen.uri_link(pv.meaning)}}_ {% endif %}{{omschrijving(pv)}} |
+{% endfor -%}
+{% else -%}
+| {{e.name}} | _dynamisch_ |  |
+{% endif -%}
+
 {% endfor %}
 
 {% endif %}
 
-{% if gen.all_enum_objects() -%}
-### Keuze-items
-{{ '{: .no_toc }' }}
 
-| Keuzelijst | Keuze | Betekenis | Omschrijving |
-| :--- | :--- | :--- | :--- |
-{% for e in gen.all_enum_objects()|sort(attribute=sort_by) -%}
-{% if e.permissible_values -%}
-{% for pv in e.permissible_values.values() -%}
-| {{e.name}} | {{anchor(pv.text)}} | {% if pv.meaning %}{{gen.uri_link(pv.meaning)}}{% endif %} | {{omschrijving(pv)}} |
-{% endfor -%}
-{% else -%}
-| {{e.name}} | _dynamisch_ |  |  |
-{% endif -%}
-{% endfor -%}
-{% endif %}
