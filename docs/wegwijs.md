@@ -17,16 +17,22 @@ De conceptuele informatiemodellen op deze website gebruiken eenvoudige diagramme
 
 Een **entiteit** is iets uit de werkelijkheid waarover we informatie vastleggen, bijvoorbeeld een aansluiting, een meter of een klant. In het diagram zie je entiteiten als **rechthoeken** met een naam erin.
 
+<div markdown="1">
+
 ```mermaid
 erDiagram
     Aansluiting {
     }
 ```
 
+</div>
+
 ## Eigenschappen
 
 Elke entiteit heeft eigenschappen: kenmerken die beschrijven wat iets is of hoe het zich gedraagt. Die staan in het model onder de entiteitsnaam.  
 Voorbeeld: een `Aansluiting` heeft een `EAN_code` en een `energiedrager` (elektriciteit of gas).
+
+<div markdown="1">
 
 ```mermaid
 erDiagram
@@ -37,14 +43,20 @@ erDiagram
     }
 ```
 
+</div>
+
 ## Relaties
 
 Entiteiten hangen vaak met elkaar samen. Zo liggen in een **netgebied** één of meer **aansluitingen**. Dat zie je als een lijn tussen twee entiteiten, met een naam erbij.
+
+<div markdown="1">
 
 ```mermaid
 erDiagram
     Netgebied |o--o{ Aansluiting : "gelegen in"
 ```
+
+</div>
 
 De positie van het label (bij `Aansluiting`) laat de richting van de relatie zien.
 
@@ -62,11 +74,15 @@ Bijvoorbeeld:
 - `}o--o|` → Nul of meer aansluitingen kunnen in één netgebied liggen
 - `}|--||` → Eén of meer overdrachtspunten zijn deel van exact één aansluiting
 
+<div markdown="1">
+
 ```mermaid
 erDiagram
     Netgebied |o--o{ Aansluiting : "gelegen in"
     Aansluiting }|--|| Overdrachtspunt : "deel van"
 ```
+
+</div>
 
 ## Tijdsaspecten
 
@@ -77,12 +93,16 @@ Sommige gegevens veranderen in de tijd. Denk aan een aansluiting die van status 
 
 Deze geven aan in welke periode een gegeven geldig is. Dit noemen we ook wel een tijdlijn of *tijdslijnmodellering* (NEN 3610).
 
+<div markdown="1">
+
 ```mermaid
 erDiagram
     Aansluiting {
         t tijdlijn_geldigheid
     }
 ```
+
+</div>
 
 ## TODO
 {: .no_toc }
