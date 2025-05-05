@@ -9,9 +9,7 @@ os.makedirs(BASE_OUTPUT_MODELS, exist_ok=True)
 
 index_lines = [
     "---",
-    "layout: default",
-    "title: Startpagina",
-    "nav_order: 1",
+    "title: Conceptuele informatiemodellen",
     "---",
     "",
     "# Conceptuele informatiemodellen"
