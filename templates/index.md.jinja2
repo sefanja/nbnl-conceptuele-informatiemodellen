@@ -91,6 +91,11 @@ parent: "{% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% en
 
 ![Diagram](model.drawio.svg)
 
+<details>
+<summary>Legenda</symmary>
+Komt nog!
+</details>
+
 <details markdown="block">
 <summary>LinkML-definitie</summary>
 <pre><code class="language-yaml">{{ gen.yaml(schema) | escape }}</code></pre>
@@ -100,6 +105,7 @@ parent: "{% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% en
 
 ## Inhoud
 {{ '{: .no_toc .text-delta }' }}
+1. TOC
 {{ '{:toc}' }}
 
 {% for class in gen.all_class_objects()|sort(attribute=sort_by) %}

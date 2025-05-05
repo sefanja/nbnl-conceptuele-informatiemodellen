@@ -1,6 +1,5 @@
 ---
 title: Startpagina
-layout: default
 ---
 
 # Conceptuele informatiemodellen

@@ -17,6 +17,5 @@ include:
 defaults:
   - scope:
       path: ""
-      type: modellen
     values:
       layout: default
