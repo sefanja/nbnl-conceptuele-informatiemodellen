@@ -1,0 +1,216 @@
+id: https://netbeheernederland.nl/conceptueelinformatiemodel/aansluitingenregister
+name: Aansluitingenregister
+# conventie: versienummer eindigt op bv. '-draft' zolang het model niet bouwklaar is
+# versienummer in pad op GitHub heeft gewoon de waarde van de beoogde versie, zonder '-draft'
+version: 1.1.2
+prefixes:
+  linkml: https://w3id.org/linkml/
+  aansluitingenregister: https://netbeheernederland.nl/conceptueelinformatiemodel/aansluitingenregister/
+  nbnl: https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/
+default_range: Tekst
+default_prefix: aansluitingenregister
+
+# conventie: Zin begint met hoofdletter en eindigt met punt. Een definitie (in `description`) is geen zin.
+
+classes:
+  Aangeslotene:
+    # conventie: altijd óf `description` óf `exact_mappings` aanwezig
+    exact_mappings:
+      - nbnl:aangeslotene
+    comments:
+      - Aangeslotenen worden niet uniek geïdentificeerd. Daarom gaat het hier om een gegevensgroep bij een aansluiting, niet om een zelfstandige entiteit.
+    attributes:
+      geboortedatum:
+        description: datum van de bevalling waarbij de aangeslotene is geboren
+        see_also:
+          - https://wetten.overheid.nl/jci1.3:c:BWBR0037934&hoofdstuk=3&paragraaf=3.3&sub-paragraaf=3.3.1&artikel=3.3.1.1&z=2023-06-28&g=2023-06-28
+      naam:
+        description: naam van een organisatie of de achternaam (zonder tussenvoegsel) van een natuurlijk persoon
+        required: true
+      tussenvoegsel:
+        description: verzameling van een of meer voorzetsels en/of lidwoorden die aan de achternaam van een aangeslotene vooraf gaat en daarmee gezamenlijk de volledige achternaam vormt
+        see_also:
+          - https://wetten.overheid.nl/jci1.3:c:BWBR0037934&hoofdstuk=2&paragraaf=2.9&sub-paragraaf=2.9.2&artikel=2.9.2.1&z=2022-12-20&g=2022-12-20
+      voorletters:
+        description: verzameling letters die wordt gevormd door de eerste letter van alle in volgorde voorkomende voornamen van een aangeslotene
+        see_also:
+          - https://wetten.overheid.nl/jci1.3:c:BWBR0037934&hoofdstuk=2&paragraaf=2.9&sub-paragraaf=2.9.2&artikel=2.9.2.1&z=2022-12-20&g=2022-12-20
+      KVK-nummer:
+        description: identificatie van de maatschappelijke activiteit van de aangeslotene in het Handelsregister
+        see_also:
+          - https://wetten.overheid.nl/jci1.3:c:BWBR0037934&hoofdstuk=3&paragraaf=3.3&sub-paragraaf=3.3.1&artikel=3.3.1.1&z=2023-06-28&g=2023-06-28
+      # conventie: Barker-stijl
+      # conventie: target-class-naam in relatienaam (om ze uniek te maken)
+      # conventie: relatie altijd als `attribute` onder eigenaar van relatie
+      beschikker over (Aansluiting):
+        range: Aansluiting
+        # conventie: multipliciteiten op relaties altijd expliciet
+        required: true
+        multivalued: false
+        annotations:
+          # conventie: omgekeerde multipliciteit als `inverse_cardinality`
+          inverse_cardinality: 0..1
+    unique_keys:
+      # conventie: natuurlijke sleutel / business key heet altijd `identificatie`
+      identificatie:
+        unique_key_slots:
+          - beschikker over (Aansluiting)
+  Aansluiting:
+    exact_mappings:
+      - nbnl:aansluiting
+    comments:
+      - Een koppeling met een gesloten distributiesysteem wordt in dit register beschouwd als aansluiting als de beheerder geen gebruik maakt van het elektronische berichtenverkeer ten behoeve van het faciliteren van derdentoegang ([artikel 2.4, vierde lid van de Netcode elektriciteit](https://wetten.overheid.nl/jci1.3:c:BWBR0037940&hoofdstuk=2&paragraaf=2.1&artikel=2.4&z=2023-04-01&g=2023-04-01)).
+    slots:
+      - EAN-code
+      - energiedrager
+    attributes:
+      gecontracteerde transportcapaciteit:
+        exact_mappings:
+          - nbnl:gecontracteerde-transportcapaciteit
+      grootte:
+        description: aanduiding van het formaat van de aansluiting op basis van de gewenste aansluitcapaciteiten van de overdrachtspunten
+        comments:
+          - "Validatie: als de gewenste aansluitcapaciteit van een van de overdrachtspunten 'groot' is of een geheel getal dan 'groot' anders 'klein'."
+        range: Groot of klein
+        required: true
+      marktsegment:
+        description: aanduiding van de categorie waartoe de aansluiting behoort, te weten kleinverbruikaansluiting of grootverbruikaansluiting
+        see_also:
+          - https://wetten.overheid.nl/jci1.3:c:BWBR0037934&hoofdstuk=2&paragraaf=2.1&artikel=2.1.3&z=2022-05-18&g=2022-05-18
+          - https://wetten.overheid.nl/jci1.3:c:BWBR0037938&hoofdstuk=1&artikel=1.1&z=2022-11-25&g=2022-11-25
+        comments:
+          - Een aansluiting met een kleine capaciteit kan onder voorwaarden worden beschouwd als grootverbruikaansluiting, bijvoorbeeld als het een aansluiting betreft op een gesloten distributiesysteem of een aansluiting zoals bedoeld in [artikel 1, lid 2 of 3 van de Elektriciteitswet 1998](https://wetten.overheid.nl/jci1.3:c:BWBR0009755&hoofdstuk=1&paragraaf=1&artikel=1&z=2022-10-01&g=2022-10-01).
+        range: Marktsegment
+        required: true
+      uitsluitend elektriciteitsproductie-eenheden:
+        description: indicatie of achter een aansluiting zich uitsluitend elektriciteitsproductie-eenheden bevinden en geen ander verbruik dan het eigen verbruik van de desbetreffende elektriciteitsproductie-eenheden
+        see_also:
+          - https://wetten.overheid.nl/jci1.3:c:BWBR0037951&hoofdstuk=3&paragraaf=3.7&artikel=3.7.13.b&z=2022-05-18&g=2022-05-18
+        comments:
+          - Ook wel bekend als 'zuivere teruglevering'.
+        range: Waar of onwaar
+        required: true
+      weekmax:
+        description: indicatie of de kWmax per week gemeten moet worden
+        see_also:
+          - https://wetten.overheid.nl/jci1.3:c:BWBR0037951&hoofdstuk=3&paragraaf=3.7&artikel=3.7.5a&z=2022-05-18&g=2022-05-18
+        range: Waar of onwaar
+      deel van (Netgebied):
+        range: Netgebied
+        required: false
+        multivalued: false
+        annotations:
+          inverse_cardinality: 0..*
+    unique_keys:
+      identificatie:
+        unique_key_slots:
+          - EAN-code
+  Allocatiepunt:
+    # conventie: `description` bevat altijd alleen maar de definitie, toelichting in `comments`
+    # conventie: altijd óf description óf exact_mappings aanwezig
+    description: punt waar invoeding, onttrekking of verbruik van elektriciteit of gas wordt toegerekend aan een marktdeelnemer
+    # conventie: supertype is altijd abstract, specialisatie vormt altijd een partitie (volledig en niet-overlappend)
+    abstract: true
+    slots:
+      - EAN-code
+    unique_keys:
+      identificatie:
+        unique_key_slots:
+          - EAN-code
+  Allocatiepunt bij aansluiting:
+    # vraag: hoe verwijs ik in `description` naar (de definitie van) `allocatiepunt`?
+    description: allocatiepunt toegekend aan een aansluiting
+    is_a: Allocatiepunt
+    attributes:
+      bij (Aansluiting):
+        range: Aansluiting
+        required: true
+        multivalued: false
+        annotations:
+          inverse_cardinality: 1..*
+  Allocatiepunt bij netgebied:
+    description: allocatiepunt toegekend aan een netgebied
+    is_a: Allocatiepunt
+    attributes:
+      bij (Netgebied):
+        range: Netgebied
+        required: true
+        multivalued: false
+        annotations:
+          inverse_cardinality: 1..*
+  Netgebied:
+    description: aaneengesloten en samenhangend deel van een energienet van één netbeheerder, waarbinnen de processen allocatie en reconciliatie plaatsvinden
+    # conventie: onder `see_also` eventuele bronnen waarop de definitie in `description` is gebaseerd
+    see_also:
+      # conventie: Juriconnect voor verwijzing naar regelgeving
+      - https://wetten.overheid.nl/jci1.3:c:BWBR0037938&hoofdstuk=1&artikel=1.1&z=2022-11-25&g=2022-11-25
+      - https://wetten.overheid.nl/jci1.3:c:BWBR0037923&hoofdstuk=1&artikel=1.1&z=2021-06-01&g=2021-06-01
+    slots:
+      - EAN-code
+    unique_keys:
+      identificatie:
+        unique_key_slots:
+          - EAN-code
+  Overdrachtspunt:
+    exact_mappings:
+      - nbnl:overdrachtspunt
+    slots:
+      - EAN-code
+    attributes:
+      deel van (Aansluiting):
+        range: Aansluiting
+        required: true
+        multivalued: false
+        annotations:
+          inverse_cardinality: 1..*
+    unique_keys:
+      identificatie:
+        unique_key_slots:
+          - EAN-code
+
+slots:
+  EAN-code:
+    description: unieke cijfercombinatie volgens de Europese Artikelnummer-standaard
+    range: EAN-18
+    required: true
+  energiedrager:
+    exact_mappings:
+      - nbnl:energiedrager
+    range: Energiedrager
+
+enums:
+  Energiedrager:
+    permissible_values:
+      elektriciteit:
+      gas:
+      waterstof:
+  Groot of klein:
+    permissible_values:
+      groot:
+      klein:
+  Marktsegment:
+    permissible_values:
+      grootverbruikaansluiting:
+        meaning: nbnl:grootverbruikaansluiting
+      kleinverbruikaansluiting:
+        meaning: nbnl:kleinverbruikaansluiting
+
+types:
+  EAN-18:
+    typeof: Tekst
+    description: Europees artikelnummer van achttien cijfers
+    pattern: "^[0-9]{18}$"
+    base: str
+  # basistypen
+  Getal:
+    description: voorstelling van een hoeveelheid
+    base: float
+  Geheel getal:
+    description: getal zonder decimalen
+    base: int
+  Tekst:
+    description: aanduiding bedoeld voor mensen, zonder vaste structuur of betekenis
+    base: str
+  Waar of onwaar:
+    description: binaire aanduiding die aangeeft of een propositie of kenmerk van toepassing is (waar) of niet van toepassing is (onwaar)
+    base: bool

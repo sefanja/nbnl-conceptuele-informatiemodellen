@@ -32,21 +32,12 @@
 
 {%- macro see_also(element) -%}
 {%- set link_labels = {
-    "https://wetten.overheid.nl/jci1.3:c:BWBR0037934": "Informatiecode elektriciteit en gas",
-    "https://wetten.overheid.nl/jci1.3:c:BWBR0037938": "Begrippencode elektriciteit",
     "https://wetten.overheid.nl/jci1.3:c:BWBR0009755": "Elektriciteitswet 1998",
-    "https://wetten.overheid.nl/jci1.3:c:BWBR0037946": "Meetcode elektriciteit",
     "https://wetten.overheid.nl/jci1.3:c:BWBR0037923": "Begrippencode gas",
-    "https://wetten.overheid.nl/jci1.3:c:BWBR0037925": "Informatiecode gas",
-    "https://wetten.overheid.nl/jci1.3:c:BWBR0037929": "Allocatiecode elektriciteit",
-    "https://wetten.overheid.nl/jci1.3:c:BWBR0037930": "Allocatiecode gas",
-    "https://wetten.overheid.nl/jci1.3:c:BWBR0037931": "Reconciliatiecode elektriciteit",
-    "https://wetten.overheid.nl/jci1.3:c:BWBR0037932": "Reconciliatiecode gas",
-    "https://wetten.overheid.nl/jci1.3:c:BWBR0037933": "Transportcode elektriciteit",
-    "https://wetten.overheid.nl/jci1.3:c:BWBR0037935": "Transportcode gas",
-    "https://wetten.overheid.nl/jci1.3:c:BWBR0037936": "Meetcode gas",
-    "https://wetten.overheid.nl/jci1.3:c:BWBR0037937": "Beheercode elektriciteit",
-    "https://wetten.overheid.nl/jci1.3:c:BWBR0037939": "Beheercode gas"
+    "https://wetten.overheid.nl/jci1.3:c:BWBR0037934": "Informatiecode elektriciteit en gas",
+    "https://wetten.overheid.nl/jci1.3:c:BWBR0037936": "Meetcode gas"
+    "https://wetten.overheid.nl/jci1.3:c:BWBR0037938": "Begrippencode elektriciteit",
+    "https://wetten.overheid.nl/jci1.3:c:BWBR0037946": "Meetcode elektriciteit"
 } -%}
 
 {%- if element.see_also -%}
@@ -98,20 +89,17 @@ parent: "{% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% en
 # {% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% endif %}
 {{ '{: .no_toc }' }}
 
-{% if schema.version %}_Versie {{ schema.version }}_{% endif %}
-
 ![Diagram](model.drawio.svg)
-
-{% if schema.description %}{{ schema.description }}{% endif %}
 
 <details markdown="block">
 <summary>LinkML-definitie</summary>
 <pre><code class="language-yaml">{{ gen.yaml(schema) | escape }}</code></pre>
 </details>
 
+{% if schema.description %}{{ schema.description }}{% endif %}
+
 ## Inhoud
 {{ '{: .no_toc .text-delta }' }}
-1. TOC
 {{ '{:toc}' }}
 
 {% for class in gen.all_class_objects()|sort(attribute=sort_by) %}

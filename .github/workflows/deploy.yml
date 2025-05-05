@@ -34,33 +34,35 @@ jobs:
 
       - name: Create docs per model version
         run: |
-          for model in modellen/*; do
-            modelname=$(basename "$model")
-            for version in "$model"/*; do
-              versionid=$(basename "$version")
-              echo "Processing $modelname version $versionid"
+          for category in modellen/*; do
+            for model in "$category"/*; do
+              modelname=$(basename "$model")
+              categoryname=$(basename "$category")
+              for version in "$model"/*; do
+                versionid=$(basename "$version")
+                echo "Processing $categoryname/$modelname version $versionid"
 
-              outdir=docs/_modellen/$modelname/$versionid
+                outdir=docs/_modellen/$categoryname/$modelname/$versionid
+                mkdir -p "$outdir"
 
-              mkdir -p "$outdir"
+                gen-doc \
+                  --template-directory templates \
+                  -d "$outdir" \
+                  "$version/model.yaml"
 
-              gen-doc \
-                --template-directory templates \
-                -d "$outdir" \
-                "$version/model.yaml"
+                # Remove all .md files except index.md
+                find "$outdir" -type f -name "*.md" ! -name "index.md" -delete
 
-              # Remove all .md files except index.md
-              find "$outdir" -type f -name "*.md" ! -name "index.md" -delete
-              
-              # Kopieer bijbehorende SVG indien aanwezig
-              if [ -f "$version/model.drawio.svg" ]; then
-                cp "$version/model.drawio.svg" "$outdir/"
-              fi
+                # Kopieer bijbehorende SVG indien aanwezig
+                if [ -f "$version/model.drawio.svg" ]; then
+                  cp "$version/model.drawio.svg" "$outdir/"
+                fi
+              done
             done
           done
 
-      - name: Create an index.md per model name
-        run: python scripts/generate_model_index.py
+      - name: Create model landing pages
+        run: python scripts/generate_model_landing_pages.py
 
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
