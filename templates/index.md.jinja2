@@ -56,6 +56,10 @@
 {% macro omschrijving(element) -%}
     {%- set parts = namespace(items=[]) -%}
 
+    {%- if element.meaning -%}
+        {%- set _ = parts.items.append('_' ~ gen.uri_link(element.meaning) ~ '_') -%}
+    {%- endif -%}
+
     {%- set mappings = schemaview.get_mappings(element.name).get("exact", []) -%}
     {%- if mappings -%}
         {%- set linked = [] -%}
@@ -182,11 +186,11 @@ Dit is een abstracte entiteit zonder directe instanties.
 
 {{omschrijving(e)}}
 
-| Keuzelijst | Keuze | Omschrijving |
-| :--- | :--- | :--- |
+| Keuze | Omschrijving |
+| :--- | :--- |
 {% if e.permissible_values -%}
 {% for pv in e.permissible_values.values() -%}
-| {{e.name}} | {{anchor(pv.text)}} | {% if pv.meaning %}_{{gen.uri_link(pv.meaning)}}_ {% endif %}{{omschrijving(pv)}} |
+| {{anchor(pv.text)}} | {{omschrijving(pv)}} |
 {% endfor -%}
 {% else -%}
 | {{e.name}} | _dynamisch_ |  |
