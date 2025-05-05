@@ -16,22 +16,31 @@ classes:
     attributes:
       beginmoment:
         description: ogenblik vanaf wanneer de energie is uitgewisseld
+        required: true
       eindmoment:
         description: ogenblik tot wanneer de energie is uitgewisseld
+        required: true
       energiedrager:
+        # vraag: waar de exact_mappings: bij attributes, enums of beide?
         exact_mappings:
           - nbnl:energiedrager
         range: Energiedrager
-      # vraag: waar de exact_mappings: bij attributes, enums of beide?
+        required: true
       energierichting:
+        exact_mappings:
+          - nbnl:energierichting
         range: Energierichting
+        required: true
       gebiedscode:
         description: unieke aanduiding waarmee een geografisch gebied wordt geïdentificeerd
+        required: true
       soort gebied:
         description: categorie die een geografische eenheid beschrijft
+        required: true
       waarde:
         description: aantal kWh of m3
         range: Geheel getal
+        required: true
 
 enums:
   Energiedrager:
@@ -40,15 +49,14 @@ enums:
       gas:
       waterstof:
   Energierichting:
+    # vraag: waarom verschijnt exact_mappings niet op de website?
     exact_mappings:
       - nbnl:energierichting
     permissible_values:
       afname:
-        exact_mappings:
-          - nbnl:afname
+        meaning: nbnl:afname
       invoeding:
-        exact_mappings:
-          - nbnl:invoeding
+        meaning: nbnl:invoeding
 
 types:
   Getal:
