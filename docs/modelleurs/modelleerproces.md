@@ -1,0 +1,18 @@
+---
+title: Modelleren en reviewproces
+parent: Voor modelleurs
+nav_order: 7
+---
+
+# Modelleren en reviewproces
+
+Werkwijze en kwaliteitsborging in het modelleerteam.
+
+## Rollen
+- Wie modelleert, wie reviewt?
+
+## Reviewcriteria
+- Wanneer is iets 'klaar'?
+
+## Overleg en besluitvorming
+- Synchroon/asynchroon overleg

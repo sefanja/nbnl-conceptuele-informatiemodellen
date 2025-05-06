@@ -79,7 +79,7 @@ Bijvoorbeeld:
 ```mermaid
 erDiagram
     Netgebied |o--o{ Aansluiting : "gelegen in"
-    Aansluiting }|--|| Overdrachtspunt : "deel van"
+    Aansluiting ||--|{ Overdrachtspunt : "deel van"
 ```
 
 </div>
@@ -107,15 +107,18 @@ erDiagram
 ## TODO
 {: .no_toc }
 
-- essentiële versus accidentiële eigenschappen (multipliciteit)
+- essentiële versus accidentiële eigenschappen (ook multipliciteit)
 - afleidbare elementen
-- verwijzingen naar andere modellen (grijs)
+- verwijzingen naar andere registers en basisregistraties
 - NBility-kleuren
 
-Meer voor modelleurs dan modellezers:
-
-- naamgevingsconventies
-- notatieconventies
-- Barker's naamgevingspatroon voor relaties
-- Juriconnect
-- LinkML-specifieke conventies
+```mermaid
+erDiagram
+    Entiteit {
+        i identificerende_eigenschap
+        e essentiele_eigenschap
+        a accidentiele_eigenschap
+        d afleidbare_eigenschap
+        t tijdslijnaanduiding
+    }   
+```
