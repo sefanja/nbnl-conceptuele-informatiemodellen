@@ -54,9 +54,11 @@ enums:
       - nbnl:energierichting
     permissible_values:
       afname:
-        meaning: nbnl:afname
+        exact_mappings:
+          - nbnl:afname
       invoeding:
-        meaning: nbnl:invoeding
+        exact_mappings:
+          - nbnl:invoeding
 
 types:
   Getal:

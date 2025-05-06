@@ -17,6 +17,7 @@ prefixes:
   linkml: https://w3id.org/linkml/
   aansluitingenregister: https://netbeheernederland.nl/conceptueelinformatiemodel/aansluitingenregister/
   nbnl: https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/
+  nbility: https://nbility-model.github.io/NBility-business-capabilities-Archi/
 # conventie: standaard geen `string` maar `Tekst`
 default_range: Tekst
 # conventie: gelijk aan name
@@ -70,12 +71,16 @@ classes:
         unique_key_slots:
           - beschikker over (Aansluiting)
     annotations:
+      # conventie: bij elke `class` de naam van een NBility-bedrijfsobject
+      nbility_object: Klant
       # conventie: NEN 3610 tijdslijnen als `nen3610_geldigheid`, `nen3610_registratie` en `nen3610_levensduur`
       nen3610_geldigheid: true
       nen3610_registratie: true
   Aansluiting:
     exact_mappings:
       - nbnl:aansluiting
+    narrow_mappings:
+      - nbility:aansluiting
     # conventie: opmerkingen als `comments` (niet in `description`)
     comments:
       - Een koppeling met een gesloten distributiesysteem wordt in dit register beschouwd als aansluiting als de beheerder geen gebruik maakt van het elektronische berichtenverkeer ten behoeve van het faciliteren van derdentoegang ([artikel 2.4, vierde lid van de Netcode elektriciteit](https://wetten.overheid.nl/jci1.3:c:BWBR0037940&hoofdstuk=2&paragraaf=2.1&artikel=2.4&z=2023-04-01&g=2023-04-01)).
@@ -128,6 +133,7 @@ classes:
         unique_key_slots:
           - EAN-code
     annotations:
+      nbility_object: Aansluiting
       nen3610_geldigheid: true
       nen3610_registratie: true
   Allocatiepunt:
@@ -140,6 +146,7 @@ classes:
         unique_key_slots:
           - EAN-code
     annotations:
+      nbility_object: Aansluiting
       # conventie: `annotations` op class-niveau worden geacht te overerven naar subclasses
       nen3610_geldigheid: true
       nen3610_registratie: true
@@ -175,6 +182,7 @@ classes:
         unique_key_slots:
           - EAN-code
     annotations:
+      nbility_object: Aansluiting
       nen3610_geldigheid: true
       nen3610_registratie: true
   Overdrachtspunt:
@@ -194,6 +202,7 @@ classes:
         unique_key_slots:
           - EAN-code
     annotations:
+      nbility_object: Aansluiting
       nen3610_geldigheid: true
       nen3610_registratie: true
 
@@ -220,9 +229,11 @@ enums:
   Marktsegment:
     permissible_values:
       grootverbruikaansluiting:
-        meaning: nbnl:grootverbruikaansluiting
+        exact_mappings:
+          - nbnl:grootverbruikaansluiting
       kleinverbruikaansluiting:
-        meaning: nbnl:kleinverbruikaansluiting
+        exact_mappings:
+          - nbnl:kleinverbruikaansluiting
 
 types:
   EAN-18:

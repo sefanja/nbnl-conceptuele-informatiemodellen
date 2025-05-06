@@ -57,6 +57,13 @@
 {% macro omschrijving(element) -%}
     {%- set parts = namespace(items=[]) -%}
 
+    {# NBility #}
+    {%- for a in element.annotations -%}
+        {%- if a == 'nbility_object' -%}
+            {%- set _ = parts.items.append('NBility-object: [' ~ element.annotations[a].value ~ '](https://nbility-model.github.io/NBility-business-capabilities-Archi/?view=id-492212)') -%}
+        {%- endif -%}
+    {%- endfor -%}
+
     {# meaning #}
     {%- if element.meaning -%}
         {%- set _ = parts.items.append('_' ~ gen.uri_link(element.meaning) ~ '_') -%}
@@ -91,7 +98,7 @@
     {# tijdlijnen #}
     {%- set tijdlijn_annotaties = [] -%}
     {%- for a in element.annotations -%}
-        {%- if a.startswith('nen3610_') -%}
+        {%- if a.startswith('nen3610_') and element.annotations[a].value|string|lower == "true" -%}
             {%- set _ = tijdlijn_annotaties.append(a.replace('nen3610_', '')) -%}
         {%- endif -%}
     {%- endfor -%}
