@@ -1,7 +1,6 @@
 ---
 title: Werken met GitHub
 parent: Voor modelleurs
-nav_order: 3
 ---
 
 # Werken met GitHub

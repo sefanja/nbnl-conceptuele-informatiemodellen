@@ -1,7 +1,6 @@
 ---
 title: Domeinkennis energiemarkt
 parent: Voor modelleurs
-nav_order: 5
 ---
 
 # Domeinkennis: energiemarkt en regelgeving

@@ -1,7 +1,6 @@
 ---
 title: Modelleren in Drawio
 parent: Voor modelleurs
-nav_order: 1
 ---
 
 # Modelleren in Drawio

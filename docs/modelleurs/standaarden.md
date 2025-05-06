@@ -1,21 +1,13 @@
 ---
-title: Verwijzingen naar standaarden
+title: Gebruikte standaarden
 parent: Voor modelleurs
-nav_order: 4
 ---
 
-# Verwijzingen naar standaarden
+# Gebruikte standaarden
 
-Referentiemodellen en formalisaties die de modellen ondersteunen.
-
-## NEN 3610
-- Toepassing van tijdslijnen
-
-## NBility
-- Gebruik als basismodel
-
-## NL-SBB
-- Begrippenkaderbeheer
-
-## Juriconnect
-- Verwijzingen naar juridische definities
+| Standaard | Toepassing |
+| :--- | :--- |
+| NEN 3610 | Tijdslijnen |
+| NBility | Structuur |
+| NL-SBB | Begrippenkader en mappings |
+| Juriconnect | Verwijzingen naar wet- en regelgeving |

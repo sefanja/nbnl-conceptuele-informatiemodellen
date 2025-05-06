@@ -1,15 +1,15 @@
 ---
 title: Naamgevingsconventies
 parent: Voor modelleurs
-nav_order: 6
 ---
 
 # Naamgevingsconventies
 
 Afspraken voor het benoemen van entiteiten, relaties, eigenschappen.
 
-## Relatienamen (Barker-notatie)
+## Relatienamen
 - Geen werkwoorden
+- Barker-patroon
 
 ## Entiteitsnamen
 - Enkelvoud, hoofdlettergebruik

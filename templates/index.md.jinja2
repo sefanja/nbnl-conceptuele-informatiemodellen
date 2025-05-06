@@ -57,10 +57,12 @@
 {% macro omschrijving(element) -%}
     {%- set parts = namespace(items=[]) -%}
 
+    {# meaning #}
     {%- if element.meaning -%}
         {%- set _ = parts.items.append('_' ~ gen.uri_link(element.meaning) ~ '_') -%}
     {%- endif -%}
 
+    {# exact_mappings  #}
     {%- set mappings = schemaview.get_mappings(element.name).get("exact", []) -%}
     {%- if mappings -%}
         {%- set linked = [] -%}
@@ -71,16 +73,30 @@
         {%- set _ = parts.items.append(markdown_line) -%}
     {%- endif -%}
 
+    {# description #}
     {%- if element.description -%}
         {%- set _ = parts.items.append('_' ~ element.description ~ '_') -%}
     {%- endif -%}
 
+    {# see_also #}
     {%- if element.see_also -%}
         {%- set _ = parts.items.append('Zie ook ' ~ see_also(element) ~ '.') -%}
     {%- endif -%}
 
+    {# comments #}
     {%- if element.comments -%}
         {%- set _ = parts.items.append(element.comments | join('<br/><br/>')) -%}
+    {%- endif -%}
+
+    {# tijdlijnen #}
+    {%- set tijdlijn_annotaties = [] -%}
+    {%- for a in element.annotations -%}
+        {%- if a.startswith('nen3610_') -%}
+            {%- set _ = tijdlijn_annotaties.append(a.replace('nen3610_', '')) -%}
+        {%- endif -%}
+    {%- endfor -%}
+    {%- if tijdlijn_annotaties -%}
+        {%- set _ = parts.items.append('Tijdlijnannotaties volgens NEN 3610: ' ~ tijdlijn_annotaties|join(', ') ~ '.') -%}
     {%- endif -%}
 
     {{ parts.items | join('<br/><br/>') }}
@@ -164,7 +180,7 @@ Dit is een abstracte entiteit zonder directe instanties.
 
 {% endfor %}
 
-# Waardesoorten en keuzelijsten
+# Waardesoorten en waardelijsten
 {{ '{: .no_toc }' }}
 
 {% if gen.all_type_objects() %}
@@ -180,7 +196,7 @@ Dit is een abstracte entiteit zonder directe instanties.
 {% endif %}
 
 {% if gen.all_enum_objects() %}
-### Keuzelijsten
+### Waardelijsten
 {{ '{: .no_toc }' }}
 
 {% for e in gen.all_enum_objects()|sort(attribute=sort_by) %}
@@ -189,7 +205,7 @@ Dit is een abstracte entiteit zonder directe instanties.
 
 {{omschrijving(e)}}
 
-| Keuze-item | Omschrijving |
+| Waarde | Omschrijving |
 | :--- | :--- |
 {% if e.permissible_values -%}
 {% for pv in e.permissible_values.values() -%}
