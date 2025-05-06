@@ -13,7 +13,7 @@ Definities leggen de betekenis vast van klassen en eigenschappen. Ze maken herge
 
 ## Praktische richtlijnen
 
-- Schrijf definities in de vorm van een volledige zin, zonder formele logica.
+- Schrijf de definitie zo dat het begrip in een zin kan worden vervangen door de definitie
 - Gebruik **genus-differentia**: benoem het type en het onderscheid.
 - Vermijd circulaire verwijzingen.
 - Vermeld bij voorkeur een bron in `see_also`.
@@ -21,16 +21,16 @@ Definities leggen de betekenis vast van klassen en eigenschappen. Ze maken herge
 
 ## Voorbeelden
 
-| Klasse         | Definitie                                                                       |
-|----------------|----------------------------------------------------------------------------------|
-| Aansluiting    | Een fysiek punt waarop een installatie is verbonden met het net.                |
-| Netbeheerder   | Een organisatie die verantwoordelijk is voor het beheer van een energie-infrastructuur. |
+| Klasse  | Definitie |
+| :--- | :--- |
+| Aansluiting | recht op het gebruik van een of meer verbindingen tussen een energienet en een onroerende zaak |
+| Aangeslotene  | iemand die beschikt over een aansluiting |
 
 ## Technische toepassing in LinkML
 
 - Gebruik `description` voor de formele definitie.
 - Gebruik `see_also` voor juridische of semantische bronverwijzing.
-- Gebruik `annotations` als toelichting of om statussen te markeren (bijv. conceptueel, voorlopig).
+- Gebruik `comments` als toelichting of om statussen te markeren (bijv. conceptueel, voorlopig).
 
 ## Hulpmiddelen
 
