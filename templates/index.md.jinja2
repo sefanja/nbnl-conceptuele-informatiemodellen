@@ -1,6 +1,6 @@
-{%- macro key_symbool(class, slot_name) -%}
+{%- macro key_symbol(class, slot) -%}
   {%- for key in class.unique_keys -%}
-    {%- if slot_name in class.unique_keys[key].unique_key_slots -%}
+    {%- if slot.name in class.unique_keys[key].unique_key_slots -%}
       <span title="Maakt deel uit van de identificatie">⚿</span>&nbsp;
     {%- endif -%}
   {%- endfor -%}
@@ -106,8 +106,8 @@
     {# tijdlijnen #}
     {%- set tijdlijn_annotaties = [] -%}
     {%- for a in element.annotations -%}
-        {%- if a.startswith('nen3610_') and element.annotations[a].value|string|lower == "true" -%}
-            {%- set _ = tijdlijn_annotaties.append(a.replace('nen3610_', '')) -%}
+        {%- if a.startswith('tijdlijn_') and element.annotations[a].value|string|lower == "true" -%}
+            {%- set _ = tijdlijn_annotaties.append(a.replace('tijdlijn_', '')) -%}
         {%- endif -%}
     {%- endfor -%}
     {%- if tijdlijn_annotaties -%}
@@ -163,12 +163,12 @@ parent: "{% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% en
 
 {{omschrijving(class)}}
 
-{% if class.abstract %}
-Dit is een abstracte entiteit zonder directe instanties.
+{% if class.is_a %}
+Deze entiteit is een specialisatie van {{link(schemaview.get_class(class.is_a).name)}}.
 {% endif %}
 
-{% if class.is_a %}
-Deze entiteit overerft alle eigenschappen en relaties van {{link(schemaview.get_class(class.is_a).name)}}.
+{% if 'external' in class.annotations and class.annotations.registry %}
+Deze entiteit wordt beheerd in: {{class.annotations.registry.value}}.
 {% endif %}
 
 {% set slots = gen.get_direct_slots(class) %}
@@ -182,7 +182,7 @@ Deze entiteit overerft alle eigenschappen en relaties van {{link(schemaview.get_
 | Eigenschap | Waardesoort | Omschrijving |
 | :---  | :--- | :--- |
 {% for slot in properties -%}
-| {{key_symbool(class, slot.name)}}{{slot.name}} {{is_unique_key_slot}} | {{compute_range(slot)}}<br/>_{{gen.cardinality(slot)}}_ | {{omschrijving(slot)}} |
+| {{key_symbol(class, slot)}}{{slot.name}} {{is_unique_key_slot}} | {{compute_range(slot)}}<br/>_{{gen.cardinality(slot)}}_ | {{omschrijving(slot)}} |
 {% endfor %}
 {% endif %}
 
@@ -193,7 +193,7 @@ Deze entiteit overerft alle eigenschappen en relaties van {{link(schemaview.get_
 | Relatie | Naar | Omschrijving |
 | :---  | :--- | :--- |
 {% for slot in relationships -%}
-| {{key_symbool(class, slot.name)}}{{slot.name}} | {{compute_range(slot)}}<br/>_{% if slot.annotations and 'inverse_cardinality' in slot.annotations %}{{slot.annotations['inverse_cardinality'].value }}{% endif %} → {{ gen.cardinality(slot) }}_ | {{omschrijving(slot)}} |
+| {{key_symbol(class, slot)}}{{slot.name}} | {{compute_range(slot)}}<br/>_{% if slot.annotations and 'inverse_cardinality' in slot.annotations %}{{slot.annotations['inverse_cardinality'].value }}{% endif %} → {{ gen.cardinality(slot) }}_ | {{omschrijving(slot)}} |
 {% endfor %}
 {% endif %}
 

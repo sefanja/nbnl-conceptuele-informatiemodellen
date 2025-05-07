@@ -20,7 +20,7 @@ Onderstaande tabel toont de relatie met [NBility](https://nbility-model.github.i
 | :--- | :--- |
 | Aangeslotenenregister | C.6.2.1. Aansluitingen/allocatiepunten beheren<br/>(gebruikt C.1.1.4. Relatie met klanten onderhouden) |
 | Aansluitingenregister | C.6.2.1. Aansluitingen/allocatiepunten beheren<br/>(gebruikt C.3.1.8. Opdracht voor uitvoeren van netaanpassing verstrekken, bewaken en administratief verwerken) |
-| Energiediefstalregister |C.1.4.5. Energiediefstal bestrijden |
+| Energiediefstalregister | C.1.4.5. Energiediefstal bestrijden |
 | Installatieregister | C.6.2.2. Installaties achter aansluitingen beheren |
 | Marktactiviteitenregister | C.6.3.1. Marktprocedures uitvoeren |
 | Marktpartijenregister | C.6.1.1. Relatie met marktpartijen onderhouden |

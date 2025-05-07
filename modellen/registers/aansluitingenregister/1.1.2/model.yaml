@@ -10,6 +10,7 @@ description: Het aansluitingenregister bevat alle elektriciteits- en gasaansluit
 comments:
   - Het aansluitingenregister wordt gezamenlijk beheerd door de netbeheerders en bevat zowel fysieke als administratieve gegevens over aansluitingen. Het register is essentieel voor de werking van de energiemarkt omdat het de basis vormt voor processen zoals leverancierswisselingen, verhuizingen en facturatie.
   - De verplichting tot het bijhouden van het aansluitingenregister is vastgelegd in de Informatiecode elektriciteit en gas, vastgesteld door de Autoriteit Consument en Markt (ACM).
+# vraag: of zou `source` beter zijn? Helaas 0..1 :(
 see_also:
     # conventie: Juriconnect voor verwijzing naar regelgeving
   - https://wetten.overheid.nl/jci1.3:c:BWBR0037934&hoofdstuk=2&paragraaf=2.1&z=2025-01-01&g=2025-01-01
@@ -73,9 +74,9 @@ classes:
     annotations:
       # conventie: bij elke `class` de naam van een NBility-bedrijfsobject
       nbility_object: Klant
-      # conventie: NEN 3610 tijdslijnen als `nen3610_geldigheid`, `nen3610_registratie` en `nen3610_levensduur`
-      nen3610_geldigheid: true
-      nen3610_registratie: true
+      # conventie: NEN 3610 tijdslijnen als `tijdlijn_geldigheid`, `tijdlijn_registratie` en `tijdlijn_levensduur`
+      tijdlijn_geldigheid: true
+      tijdlijn_registratie: true
   Aansluiting:
     exact_mappings:
       - nbnl:aansluiting
@@ -134,11 +135,12 @@ classes:
           - EAN-code
     annotations:
       nbility_object: Aansluiting
-      nen3610_geldigheid: true
-      nen3610_registratie: true
+      tijdlijn_geldigheid: true
+      tijdlijn_registratie: true
   Allocatiepunt:
     description: punt waar invoeding, onttrekking of verbruik van elektriciteit of gas wordt toegerekend aan een marktdeelnemer
-    abstract: true
+    # In een conceptueel model kan een entiteit niet abstract zijn. Dus:
+    # conventie: nooit `abstract` gebruiken
     slots:
       - EAN-code
     unique_keys:
@@ -148,8 +150,8 @@ classes:
     annotations:
       nbility_object: Aansluiting
       # conventie: `annotations` op class-niveau worden geacht te overerven naar subclasses
-      nen3610_geldigheid: true
-      nen3610_registratie: true
+      tijdlijn_geldigheid: true
+      tijdlijn_registratie: true
   Allocatiepunt bij aansluiting:
     description: allocatiepunt toegekend aan een aansluiting
     is_a: Allocatiepunt
@@ -183,8 +185,8 @@ classes:
           - EAN-code
     annotations:
       nbility_object: Aansluiting
-      nen3610_geldigheid: true
-      nen3610_registratie: true
+      tijdlijn_geldigheid: true
+      tijdlijn_registratie: true
   Overdrachtspunt:
     exact_mappings:
       - nbnl:overdrachtspunt
@@ -193,18 +195,120 @@ classes:
     attributes:
       deel van (Aansluiting):
         range: Aansluiting
+        required: false
+        multivalued: false
+        annotations:
+          inverse_cardinality: 1..*
+      deel van (Netkoppeling):
+        range: Netkoppeling
+        required: false
+        multivalued: false
+        annotations:
+          inverse_cardinality: 1..*
+      in (Aansluitlocatie):
+        range: Aansluitlocatie
         required: true
         multivalued: false
         annotations:
           inverse_cardinality: 1..*
+    # vraag: hoe modelleren we een OF-boog?
+    # exactly_one_of:
+    #   - attributes: deel van (Aansluiting)
+    #   - attributes: deel van (Netkoppeling)
     unique_keys:
       identificatie:
         unique_key_slots:
           - EAN-code
     annotations:
       nbility_object: Aansluiting
-      nen3610_geldigheid: true
-      nen3610_registratie: true
+      tijdlijn_geldigheid: true
+      tijdlijn_registratie: true
+  Aansluitlocatie:
+    description: plek waar zich het overdrachtspunt van een aansluiting of netkoppeling bevindt
+    see_also:
+      - https://wetten.overheid.nl/jci1.3:c:BWBR0009755&hoofdstuk=1&paragraaf=1&artikel=1&z=2022-10-01&g=2022-10-01
+      - https://wetten.overheid.nl/jci1.3:c:BWBR0011440&hoofdstuk=1&paragraaf=1.1&artikel=1&z=2022-10-01&g=2022-10-01
+    attributes:
+      locatienummer:
+        description: identificatie van een aansluitlocatie
+        required: true
+      toegangsinstructie:
+        description: beschrijving van wat je moet doen om een locatie binnen te kunnen of mogen gaan
+      verdieping toegang:
+        description: aanduiding op welke verdieping de toegangsdeur van de aansluitlocatie zich bevindt
+        see_also:
+          - https://www.amsterdam.nl/stelselpedia/bag-index/catalogus-bag/objectklasse-vbo/kenmerk-bouwlaag/
+        comments:
+          - Dit gegeven helpt bij het snel lokaliseren van storingen in hoogbouw.
+          - De begande grond geldt als `0`. Als de toegang meer dan 1,5 m onder het maaiveld ligt, wordt als verdieping `-1` aangemerkt.
+    unique_keys:
+      identificatie:
+        unique_key_slots:
+          - locatienummer
+    annotations:
+      nbility_object: Aansluiting
+      tijdlijn_geldigheid: true
+      tijdlijn_registratie: true
+  Locatieaanduiding:
+    attributes:
+      locatieomschrijving:
+      van (Aansluitlocatie):
+        range: Aansluitlocatie
+        required: true
+        multivalued: false
+        annotations:
+          inverse_cardinality: 0..1
+      afgeleid van (Nummeraanduiding):
+        range: Nummeraanduiding
+        required: false
+        multivalued: false
+        annotations:
+          inverse_cardinality: 0..*
+    unique_keys:
+      identificatie:
+        unique_key_slots:
+          - van (Aansluitlocatie)
+    annotations:
+      nbility_object: Aansluiting
+      tijdlijn_geldigheid: true
+      tijdlijn_registratie: true
+  Netkoppeling:
+    description: recht op het gebruik van één of meer verbindingen tussen twee energienetten of tussen een energienet en een interconnector
+    see_also:
+      - https://wetten.overheid.nl/jci1.3:c:BWBR0037923&hoofdstuk=1&artikel=1.1&z=2021-06-01&g=2021-06-01
+    comments:
+      - "Een koppeling met een gesloten distributiesysteem wordt in dit register beschouwd als netkoppeling als de beheerder gebruik maakt van het elektronische berichtenverkeer ten behoeve van het faciliteren van derdentoegang ([artikel 2.4, vierde lid van de Netcode elektriciteit](https://wetten.overheid.nl/jci1.3:c:BWBR0037940&hoofdstuk=2&paragraaf=2.1&artikel=2.4&z=2023-04-01&g=2023-04-01))."
+    slots:
+      - EAN-code
+    attributes:
+      deel van (Netgebied):
+        comments:
+          - De beheerder van het netgebied waartoe de netkoppeling behoort, is daarmee de beheerder van de netkoppeling.
+        required: true
+        multivalued: false
+        annotations:
+          inverse_cardinality: 0..*
+      koppeling met (Netgebied):
+        comments:
+          - Deze relatie is optioneel voor het geval het te koppelen netgebied nog niet bekend is of als er geen sprake is van een gekoppeld netgebied, zoals bij een koppeling met een interconnector.
+        required: false
+        multivalued: false
+        annotations:
+          inverse_cardinality: 0..*
+    unique_keys:
+      identificatie:
+        unique_key_slots:
+          - EAN-code
+    annotations:
+      nbility_object: Aansluiting
+      tijdlijn_geldigheid: true
+      tijdlijn_registratie: true
+
+  # conventie: onderstaand patroon voor entiteiten in andere registers
+  Nummeraanduiding:
+    annotations:
+      external: true
+      registry: "[Basisregistratie Adressen en Gebouwen](https://data.overheid.nl/dataset/4aca03b9-0bb1-454f-9d5a-53bb910029d0)"
 
 slots:
   EAN-code:
@@ -241,7 +345,7 @@ types:
     description: Europees artikelnummer van achttien cijfers
     pattern: "^[0-9]{18}$"
     base: str
-  # conventie: gebruik deze basistypen in plaats van de technische varianten
+  # conventie: conceptuele basistypen (in plaats van de technische varianten)
   Datum:
     description: kalenderdatum, zonder tijdsaanduiding
     base: date
