@@ -1,3 +1,11 @@
+{%- macro key_symbool(class, slot_name) -%}
+  {%- for key in class.unique_keys -%}
+    {%- if slot_name in class.unique_keys[key].unique_key_slots -%}
+      <span title="Maakt deel uit van de identificatie">⚿</span>&nbsp;
+    {%- endif -%}
+  {%- endfor -%}
+{%- endmacro -%}
+
 {%- macro id_safe(v) -%}
 {%- set allowed = 'abcdefghijklmnopqrstuvwxyz0123456789-' -%}
 {%- for c in v|lower -%}
@@ -174,13 +182,7 @@ Deze entiteit overerft alle eigenschappen en relaties van {{link(schemaview.get_
 | Eigenschap | Waardesoort | Omschrijving |
 | :---  | :--- | :--- |
 {% for slot in properties -%}
-    {%- set ns = namespace(is_unique_key_slot=false) -%}
-    {%- for key in class.unique_keys -%}
-        {%- if slot.name in class.unique_keys[key].unique_key_slots -%}
-            {%- set ns.is_unique_key_slot = true -%}
-        {%- endif -%}
-    {%- endfor -%}
-| {% if ns.is_unique_key_slot %}<span title="Maakt deel uit van de identificatie">⚿</span> {% endif %}{{slot.name}} {{is_unique_key_slot}} | {{compute_range(slot)}}<br/>_{{gen.cardinality(slot)}}_ | {{omschrijving(slot)}} |
+| {{key_symbool(class, slot.name)}}{{slot.name}} {{is_unique_key_slot}} | {{compute_range(slot)}}<br/>_{{gen.cardinality(slot)}}_ | {{omschrijving(slot)}} |
 {% endfor %}
 {% endif %}
 
@@ -191,7 +193,7 @@ Deze entiteit overerft alle eigenschappen en relaties van {{link(schemaview.get_
 | Relatie | Naar | Omschrijving |
 | :---  | :--- | :--- |
 {% for slot in relationships -%}
-| {{slot.name}} | {{compute_range(slot)}}<br/>_{% if slot.annotations and 'inverse_cardinality' in slot.annotations %}{{slot.annotations['inverse_cardinality'].value }}{% endif %} → {{ gen.cardinality(slot) }}_ | {{omschrijving(slot)}} |
+| {{key_symbool(class, slot.name)}}{{slot.name}} | {{compute_range(slot)}}<br/>_{% if slot.annotations and 'inverse_cardinality' in slot.annotations %}{{slot.annotations['inverse_cardinality'].value }}{% endif %} → {{ gen.cardinality(slot) }}_ | {{omschrijving(slot)}} |
 {% endfor %}
 {% endif %}
 
