@@ -47,11 +47,11 @@ Dit betreft momenten waarop informatie formeel van kracht wordt (bijvoorbeeld in
 
 ## Tijdlijn levensduur
 
-Dit betreft het moment van ontstaan en vergaan in de (doorgaans fysieke) werkelijkheid. Eigenschappen in het logisch model:
+Dit betreft het moment van ontstaan en vergaan in de (doorgaans fysieke) werkelijkheid. Standaard eigenschappen in het logisch model:
 
 - `object begintijd`  
 - `object eindtijd`  
 
-Als een entiteit ook is gemarkeerd met `tijdlijn geldigheid`, dan zijn `object begintijd` en `object eindtijd` doorgaans gelijk aan respectievelijk de eerste `begin geldigheid` en de laatste `eind geldigheid`.
+Aan de markering mogen aliassen worden toegevoegd, voor gebruik in logische modellen. Bijvoorbeeld `Mens` mag in draw.io worden gemarkeerd met `⏲ tijdlijn levensduur (moment van geboorte, moment van overlijden)`.
 
-Aan de markering mogen aliassen worden toegevoegd. Bijvoorbeeld `Mens` mag in draw.io worden gemarkeerd met `⏲ tijdlijn levensduur (moment van geboorte, moment van overlijden)`.
+Als een entiteit ook is gemarkeerd met `tijdlijn geldigheid`, dan zijn `object begintijd` en `object eindtijd` doorgaans gelijk aan respectievelijk de eerste `begin geldigheid` en de laatste `eind geldigheid`.

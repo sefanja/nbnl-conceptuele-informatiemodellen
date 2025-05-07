@@ -4,9 +4,9 @@ parent: Voor modelleurs
 ---
 
 # Modelleren in draw.io
-{: .no-toc }
+{: .no_toc }
 
-Voor het tekenen van conceptuele informatiemodellen gebruiken we [draw.io](https://www.drawio.com/). Deze tool is gekozen omdat ze vrij beschikbaar is, makkelijk in gebruik, en goed samenwerkt met versiebeheer via GitHub. Draw.io ondersteunt de diagramnotaties die we nodig hebben en maakt het mogelijk modellen visueel en consistent vast te leggen.
+Voor het tekenen van conceptuele informatiemodellen gebruiken we [draw.io](https://www.drawio.com/). Deze tool is gekozen omdat ze vrij beschikbaar is, makkelijk in gebruik, en goed samenwerkt met versiebeheer via GitHub. Draw.io ondersteunt de notatiestijl die wij hanteren voor conceptuele informatiemodellen: entiteit-relatienotatie in Barker-stijl.
 
 ## Inhoud
 {: .no_toc .text-delta }
@@ -32,14 +32,14 @@ Voor de notatie van onze diagrammen gebruiken we, net als [Salesforce](https://a
 
 De links in bovenstaande paragraaf leggen de notatiestijl gedetailleerd uit. Het diagram hieronder toont welke stijlkeuzen we hebben gemaakt in draw.io.
 
-![Aansluitingenregister](../modellen/registers/aansluitingenregister/1.1.2/model.drawio.svg)
+![Aansluitingenregister]({{ site.baseurl }}/modellen/registers/aansluitingenregister/1.1.2/model.drawio.svg)
 
 Enkele elementen lichten we eruit. Voor bijna elk punt is het achterliggende principe: visuele rust en duidelijkheid!
 
 ## Naamgeving
 
 - We gebruiken de Nederlandse spellingsregels. Dus geen PascalCase of snake_case.
-- Entiteiten zijn in enkelvoud maar hebben ook een meervoudsvorm. Dus geen `Suiker` maar wel `Suikerklontje`.
+- Entiteiten worden aangeduid in het enkelvoud, en moeten een bruikbare meervoudsvorm hebben volgens het woordenboek. Dus geen `Suiker`, maar wel `Suikerklontje`.
 - Entiteiten beginnen met een hoofdletter, eigenschappen en relaties met een kleine letter.
 
 ## Positionering
@@ -48,7 +48,6 @@ Enkele elementen lichten we eruit. Voor bijna elk punt is het achterliggende pri
 - Entiteiten lijnen op elkaar uit. Zie bijvoorbeeld de hoge `Aansluiting` en het brede `Overdrachtspunt`.
 - Lijnen zijn alleen horizontaal en verticaal. Ze mogen niet kruisen of knikken.
 - Bij een-op-veel-relaties staat de entiteit aan de een-zijde standaard links of boven.
-
 - De positie van een relatienaam bepaalt de leesrichting en staat dichtbij de entiteit die haar beheert. Bijvoorbeeld: een `Aansluiting` is `deel van` een `Netgebied`.
 
 ## Kleuren
@@ -70,9 +69,5 @@ Enkele elementen lichten we eruit. Voor bijna elk punt is het achterliggende pri
 - `#` voor identificerende eigenschappen en relaties
 - `●` voor essentiële (of 'verplichte') eigenschappen
 - `○` voor accidentiële (of 'optionele') eigenschappen
-- `/` voor afleidbare entiteiten, eigenschappen en relaties
+- `/` voor entiteiten, eigenschappen of relaties die logisch of computationeel afleidbaar zijn uit andere elementen in het model
 - `⏲` voor tijdslijnmarkeringen (zie [Tijdlijnen in conceptuele modellen](tijdlijnen))
-
-## Tijdslijnen
-
-Omdat een conceptueel informatiemodel de toestand van de wereld abstraheert zonder veranderingen of versies te modelleren, is aanvullende temporele semantiek nodig om dynamiek te beschrijven. In dit kader onderscheiden we, conform NEN 3610, drie soorten tijdlijnen: geldigheid (de periode waarin iets feitelijk gold), registratie (de periode waarin de informatie bekend was in het systeem), en levensduur (de werkelijke bestaansperiode van het object).
