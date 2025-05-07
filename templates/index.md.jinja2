@@ -103,7 +103,7 @@
         {%- endif -%}
     {%- endfor -%}
     {%- if tijdlijn_annotaties -%}
-        {%- set _ = parts.items.append('Tijdlijnannotaties volgens NEN 3610: ' ~ tijdlijn_annotaties|join(', ') ~ '.') -%}
+        {%- set _ = parts.items.append('Tijdslijnen: ' ~ tijdlijn_annotaties|join(', ') ~ '.') -%}
     {%- endif -%}
 
     {{ parts.items | join('<br/><br/>') }}
@@ -159,7 +159,11 @@ parent: "{% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% en
 Dit is een abstracte entiteit zonder directe instanties.
 {% endif %}
 
-{% set slots = gen.get_direct_slots(class) + gen.get_indirect_slots(class) %}
+{% if class.is_a %}
+Deze entiteit overerft alle eigenschappen en relaties van {{link(schemaview.get_class(class.is_a).name)}}.
+{% endif %}
+
+{% set slots = gen.get_direct_slots(class) %}
 {% set properties = slots | rejectattr('range', 'in', schemaview.all_classes()) | list %}
 {% set relationships = slots | selectattr('range', 'in', schemaview.all_classes()) | list %}
 
@@ -170,7 +174,13 @@ Dit is een abstracte entiteit zonder directe instanties.
 | Eigenschap | Waardesoort | Omschrijving |
 | :---  | :--- | :--- |
 {% for slot in properties -%}
-| {{slot.name}} | {{compute_range(slot)}}<br/>_{{gen.cardinality(slot)}}_ | {{omschrijving(slot)}} |
+    {%- set ns = namespace(is_unique_key_slot=false) -%}
+    {%- for key in class.unique_keys -%}
+        {%- if slot.name in class.unique_keys[key].unique_key_slots -%}
+            {%- set ns.is_unique_key_slot = true -%}
+        {%- endif -%}
+    {%- endfor -%}
+| {% if ns.is_unique_key_slot %}<span title="Maakt deel uit van de identificatie">⚿</span> {% endif %}{{slot.name}} {{is_unique_key_slot}} | {{compute_range(slot)}}<br/>_{{gen.cardinality(slot)}}_ | {{omschrijving(slot)}} |
 {% endfor %}
 {% endif %}
 
