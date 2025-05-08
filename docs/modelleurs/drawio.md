@@ -17,7 +17,7 @@ Voor het tekenen van conceptuele informatiemodellen gebruiken we [draw.io](https
 
 1. Ga naar [drawio.com](https://www.drawio.com/) en kies voor de online of desktopversie (**Start** of **Download**).
 2. Kies voor **Nieuw diagram aanmaken**.
-3. Selecteer **Blanco diagram** en klik op **Aanmaken**.
+3. Typ een bestandsnaam, selecteer **Bewerkbaar vector-bestand (.svg)**, kies **Blanco diagram** en klik op **Aanmaken**.
 4. Klik op **Meer vormen** en vink aan: **Algemeen** en **Entiteitsrelatie**. Klik daarna op **Toepassen**.
 5. Klik op **Weergave** en vink **Paginaweergave** en **Hulplijnen** uit.
 6. Klik alvast op **Bestand**, **Opslaan** zodat je je werk niet verliest.

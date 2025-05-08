@@ -188,8 +188,11 @@ classes:
       tijdlijn_geldigheid: true
       tijdlijn_registratie: true
   Overdrachtspunt:
+    description: overeengekomen grens waarop de verantwoordelijkheid overgaat van het energienet van de netbeheerder naar de installatie van de aangeslotene, of tussen twee energienetten
     exact_mappings:
       - nbnl:overdrachtspunt
+    comments:
+      - Afwijkend van gangbare definities in wet- en regelgeving wordt het overdrachtspunt hier opgevat als een overeengekomen grens, om de juridische verantwoordelijkheidsverdeling eenduidig vast te leggen, onafhankelijk van de fysieke realisatie.
     slots:
       - EAN-code
     attributes:
