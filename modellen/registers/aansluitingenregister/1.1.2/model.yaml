@@ -7,13 +7,11 @@ title: Aansluitingenregister
 # Versienummer in pad op GitHub heeft gewoon de waarde van de beoogde versie, zonder '-draft'.
 version: 1.1.2
 description: Het aansluitingenregister bevat alle elektriciteits- en gasaansluitingen in Nederland.
+# conventie: Juriconnect voor verwijzing naar regelgeving
+source: https://wetten.overheid.nl/jci1.3:c:BWBR0037934&hoofdstuk=2&paragraaf=2.1&z=2025-01-01&g=2025-01-01
 comments:
   - Het aansluitingenregister wordt gezamenlijk beheerd door de netbeheerders en bevat zowel fysieke als administratieve gegevens over aansluitingen. Het register is essentieel voor de werking van de energiemarkt omdat het de basis vormt voor processen zoals leverancierswisselingen, verhuizingen en facturatie.
   - De verplichting tot het bijhouden van het aansluitingenregister is vastgelegd in de Informatiecode elektriciteit en gas, vastgesteld door de Autoriteit Consument en Markt (ACM).
-# vraag: of zou `source` beter zijn? Helaas 0..1 :(
-see_also:
-    # conventie: Juriconnect voor verwijzing naar regelgeving
-  - https://wetten.overheid.nl/jci1.3:c:BWBR0037934&hoofdstuk=2&paragraaf=2.1&z=2025-01-01&g=2025-01-01
 prefixes:
   linkml: https://w3id.org/linkml/
   aansluitingenregister: https://netbeheernederland.nl/conceptueelinformatiemodel/aansluitingenregister/
@@ -33,29 +31,24 @@ classes:
       - nbnl:aangeslotene
     comments:
       - Aangeslotenen worden niet uniek geïdentificeerd. Daarom gaat het hier om een gegevensgroep bij een aansluiting, niet om een zelfstandige entiteit.
+    see_also:
+      - https://wetten.overheid.nl/jci1.3:c:BWBR0037934&hoofdstuk=2&paragraaf=2.9&sub-paragraaf=2.9.2&artikel=2.9.2.1&z=2022-12-20&g=2022-12-20
+      - https://wetten.overheid.nl/jci1.3:c:BWBR0037934&hoofdstuk=3&paragraaf=3.3&sub-paragraaf=3.3.1&artikel=3.3.1.1&z=2023-06-28&g=2023-06-28
+    
     attributes:
       geboortedatum:
         # conventie: description bevalt altijd de definitie zonder toelichting
         description: datum van de bevalling waarbij de aangeslotene is geboren
-        # conventie: see_also bevat de bronnen waarop de definitie is gebaseerd
-        see_also:
-          - https://wetten.overheid.nl/jci1.3:c:BWBR0037934&hoofdstuk=3&paragraaf=3.3&sub-paragraaf=3.3.1&artikel=3.3.1.1&z=2023-06-28&g=2023-06-28
       naam:
         description: naam van een organisatie of de achternaam (zonder tussenvoegsel) van een natuurlijk persoon
         # conventie: bij een essentiële eigenschap: required op true
         required: true
       tussenvoegsel:
         description: verzameling van een of meer voorzetsels en/of lidwoorden die aan de achternaam van een aangeslotene vooraf gaat en daarmee gezamenlijk de volledige achternaam vormt
-        see_also:
-          - https://wetten.overheid.nl/jci1.3:c:BWBR0037934&hoofdstuk=2&paragraaf=2.9&sub-paragraaf=2.9.2&artikel=2.9.2.1&z=2022-12-20&g=2022-12-20
       voorletters:
         description: verzameling letters die wordt gevormd door de eerste letter van alle in volgorde voorkomende voornamen van een aangeslotene
-        see_also:
-          - https://wetten.overheid.nl/jci1.3:c:BWBR0037934&hoofdstuk=2&paragraaf=2.9&sub-paragraaf=2.9.2&artikel=2.9.2.1&z=2022-12-20&g=2022-12-20
       KVK-nummer:
         description: identificatie van de maatschappelijke activiteit van de aangeslotene in het Handelsregister
-        see_also:
-          - https://wetten.overheid.nl/jci1.3:c:BWBR0037934&hoofdstuk=3&paragraaf=3.3&sub-paragraaf=3.3.1&artikel=3.3.1.1&z=2023-06-28&g=2023-06-28
       # conventie: target-class-naam in relatienaam (om ze uniek te maken)
       # conventie: relatie altijd als `attribute` onder eigenaar van relatie
       beschikker over (Aansluiting):
@@ -139,6 +132,8 @@ classes:
       tijdlijn_registratie: true
   Allocatiepunt:
     description: punt waar invoeding, onttrekking of verbruik van elektriciteit of gas wordt toegerekend aan een marktdeelnemer
+    # conventie: source bevat de bron waarop de definitie is gebaseerd
+    source: https://wetten.overheid.nl/jci1.3:c:BWBR0037938&z=2025-04-26&g=2025-04-26
     # In een conceptueel model kan een entiteit niet abstract zijn. Dus:
     # conventie: nooit `abstract` gebruiken
     slots:
@@ -174,9 +169,7 @@ classes:
           inverse_cardinality: 1..*
   Netgebied:
     description: aaneengesloten en samenhangend deel van een energienet van één netbeheerder, waarbinnen de processen allocatie en reconciliatie plaatsvinden
-    see_also:
-      - https://wetten.overheid.nl/jci1.3:c:BWBR0037938&hoofdstuk=1&artikel=1.1&z=2022-11-25&g=2022-11-25
-      - https://wetten.overheid.nl/jci1.3:c:BWBR0037923&hoofdstuk=1&artikel=1.1&z=2021-06-01&g=2021-06-01
+    source: https://wetten.overheid.nl/jci1.3:c:BWBR0037938&z=2025-04-26&g=2025-04-26
     slots:
       - EAN-code
     unique_keys:
@@ -188,11 +181,8 @@ classes:
       tijdlijn_geldigheid: true
       tijdlijn_registratie: true
   Overdrachtspunt:
-    description: overeengekomen grens waarop de verantwoordelijkheid overgaat van het energienet van de netbeheerder naar de installatie van de aangeslotene, of tussen twee energienetten
     exact_mappings:
       - nbnl:overdrachtspunt
-    comments:
-      - Afwijkend van gangbare definities in wet- en regelgeving wordt het overdrachtspunt hier opgevat als een overeengekomen grens, om de juridische verantwoordelijkheidsverdeling eenduidig vast te leggen, onafhankelijk van de fysieke realisatie.
     slots:
       - EAN-code
     attributes:
@@ -228,9 +218,6 @@ classes:
       tijdlijn_registratie: true
   Aansluitlocatie:
     description: plek waar zich het overdrachtspunt van een aansluiting of netkoppeling bevindt
-    see_also:
-      - https://wetten.overheid.nl/jci1.3:c:BWBR0009755&hoofdstuk=1&paragraaf=1&artikel=1&z=2022-10-01&g=2022-10-01
-      - https://wetten.overheid.nl/jci1.3:c:BWBR0011440&hoofdstuk=1&paragraaf=1.1&artikel=1&z=2022-10-01&g=2022-10-01
     attributes:
       locatienummer:
         description: identificatie van een aansluitlocatie
@@ -239,8 +226,7 @@ classes:
         description: beschrijving van wat je moet doen om een locatie binnen te kunnen of mogen gaan
       verdieping toegang:
         description: aanduiding op welke verdieping de toegangsdeur van de aansluitlocatie zich bevindt
-        see_also:
-          - https://www.amsterdam.nl/stelselpedia/bag-index/catalogus-bag/objectklasse-vbo/kenmerk-bouwlaag/
+        source: https://www.amsterdam.nl/stelselpedia/bag-index/catalogus-bag/objectklasse-vbo/kenmerk-bouwlaag/
         comments:
           - Dit gegeven helpt bij het snel lokaliseren van storingen in hoogbouw.
           - De begande grond geldt als `0`. Als de toegang meer dan 1,5 m onder het maaiveld ligt, wordt als verdieping `-1` aangemerkt.
@@ -277,8 +263,7 @@ classes:
       tijdlijn_registratie: true
   Netkoppeling:
     description: recht op het gebruik van één of meer verbindingen tussen twee energienetten of tussen een energienet en een interconnector
-    see_also:
-      - https://wetten.overheid.nl/jci1.3:c:BWBR0037923&hoofdstuk=1&artikel=1.1&z=2021-06-01&g=2021-06-01
+    source: https://wetten.overheid.nl/jci1.3:c:BWBR0037923&hoofdstuk=1&artikel=1.1&z=2021-06-01&g=2021-06-01
     comments:
       - "Een koppeling met een gesloten distributiesysteem wordt in dit register beschouwd als netkoppeling als de beheerder gebruik maakt van het elektronische berichtenverkeer ten behoeve van het faciliteren van derdentoegang ([artikel 2.4, vierde lid van de Netcode elektriciteit](https://wetten.overheid.nl/jci1.3:c:BWBR0037940&hoofdstuk=2&paragraaf=2.1&artikel=2.4&z=2023-04-01&g=2023-04-01))."
     slots:

@@ -84,13 +84,18 @@
         {%- for m in mappings -%}
             {%- set _ = linked.append(gen.uri_link(m)) -%}
         {%- endfor -%}
-        {%- set markdown_line = '_' ~ linked | join(', ') ~ '_' -%}
+        {%- set markdown_line = '*' ~ linked | join(', ') ~ '*' -%}
         {%- set _ = parts.items.append(markdown_line) -%}
     {%- endif -%}
 
     {# description #}
     {%- if element.description -%}
-        {%- set _ = parts.items.append('_' ~ element.description ~ '_') -%}
+        {%- set _ = parts.items.append('*' ~ element.description ~ '*') -%}
+    {%- endif -%}
+
+    {# source #}
+    {%- if element.source -%}
+        {%- set _ = parts.items.append('Bron: ' ~ element.source ~ '.') -%}
     {%- endif -%}
 
     {# see_also #}
@@ -136,9 +141,11 @@ parent: "{% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% en
 
 {% if include_top_level_diagram %}
 {# Diagramgeneratoren werken niet goed, dus uitgezet #}
-{# ```{{ gen.mermaid_directive() }}
+
+```{{ gen.mermaid_directive() }}
 {{ gen.mermaid_diagram() }}
-``` #}
+```
+
 {% else %}
 ![Diagram](model.drawio.svg)
 
@@ -182,7 +189,7 @@ Deze entiteit wordt beheerd in: {{class.annotations.registry.value}}.
 | Eigenschap | Waardesoort | Omschrijving |
 | :---  | :--- | :--- |
 {% for slot in properties -%}
-| {{key_symbol(class, slot)}}{{slot.name}} {{is_unique_key_slot}} | {{compute_range(slot)}}<br/>_{{gen.cardinality(slot)}}_ | {{omschrijving(slot)}} |
+| {{key_symbol(class, slot)}}{{slot.name}} {{is_unique_key_slot}} | {{compute_range(slot)}}<br/>*{{gen.cardinality(slot)}}* | {{omschrijving(slot)}} |
 {% endfor %}
 {% endif %}
 
@@ -193,7 +200,7 @@ Deze entiteit wordt beheerd in: {{class.annotations.registry.value}}.
 | Relatie | Naar | Omschrijving |
 | :---  | :--- | :--- |
 {% for slot in relationships -%}
-| {{key_symbol(class, slot)}}{{slot.name}} | {{compute_range(slot)}}<br/>_{% if slot.annotations and 'inverse_cardinality' in slot.annotations %}{{slot.annotations['inverse_cardinality'].value }}{% endif %} → {{ gen.cardinality(slot) }}_ | {{omschrijving(slot)}} |
+| {{key_symbol(class, slot)}}{{slot.name}} | {{compute_range(slot)}}<br/>*{% if slot.annotations and 'inverse_cardinality' in slot.annotations %}{{slot.annotations['inverse_cardinality'].value }}{% endif %} → {{ gen.cardinality(slot) }}* | {{omschrijving(slot)}} |
 {% endfor %}
 {% endif %}
 

@@ -5,19 +5,20 @@ parent: Voor modelleurs
 
 # Tijdlijnen in conceptuele modellen
 
-Een *conceptueel informatiemodel* beschrijft de toestand van de wereld op abstract niveau: welke objecttypen er zijn, met welke eigenschappen en relaties. Het model representeert de wereld zoals die bedoeld of waargenomen wordt, maar bevat geen informatie over veranderingen in de tijd, versies of individuele voorkomens.
+Een conceptueel informatiemodel beschrijft de toestand van de wereld op abstract niveau: welke objecttypen er zijn, met welke eigenschappen en relaties. Het model representeert de wereld zoals die bedoeld of waargenomen wordt, maar bevat geen informatie over veranderingen in de tijd, versies of individuele voorkomens.
 
 Toch is tijd vaak wél een essentieel onderdeel van de betekenis van objecten. Denk aan geldigheid, registratie of bestaansduur. Daarom nemen we in het conceptueel model expliciete tijdlijnmarkeringen op. Die geven aan welke soorten temporele informatie op een entiteit van toepassing zijn. In het logisch model worden deze tijdlijnen vervolgens uitgewerkt in attributen en versiestructuren. We volgen hierbij [NEN 3610](https://www.geonovum.nl/geo-standaarden/nen-3610-basismodel-voor-informatiemodellen) §8.3, waarin drie tijdlijnen worden onderscheiden. Wij voegen daar onze eigen `tijdlijn effectuering` aan toe (zie [artikel 2.1.8 van de Informatiecode elektriciteit en gas](https://wetten.overheid.nl/jci1.3:c:BWBR0037934&hoofdstuk=2&paragraaf=2.1&artikel=2.1.8&z=2025-01-01&g=2025-01-01)).
 
-
-Tijdlijnmarkeringen zijn alleen van toepassing op _enduranten_: entiteiten die op meerdere tijdstippen kunnen bestaan en daarbij hun identiteit behouden (zoals een gebouw of organisatie). _Perduranten_ (zoals gebeurtenissen of processen) bestaan uit meerdere fasen in de tijd en zijn niet als geheel aanwezig op één moment. Bij perduranten maakt tijd deel uit van de definitie van het objecttype zelf (bijvoorbeeld via `tijdstip`, `begintijd`, of `duur`). Tijdseigenschappen horen bij dit type entiteiten dus wel thuis in het conceptueel model.
+Tijdlijnmarkeringen zijn alleen van toepassing op *enduranten*: entiteiten die op meerdere tijdstippen kunnen bestaan en daarbij hun identiteit behouden (zoals een gebouw of organisatie). *Perduranten* (zoals gebeurtenissen of processen) bestaan uit meerdere fasen in de tijd en zijn niet als geheel aanwezig op één moment. Bij perduranten maakt tijd deel uit van de definitie van het objecttype zelf (bijvoorbeeld via `tijdstip`, `begintijd`, of `duur`). Tijdseigenschappen horen bij dit type entiteiten dus wel thuis in het conceptueel model.
 
 De markering gebeurt als volgt:
 
 - In draw.io: `⏲ tijdlijn <type>` na de lijst met eigenschappen.
 - In LinkML: `tijdlijn_<type>: true` binnen `annotations`.
 
-Deze markeringen maken de temporele semantiek van een entiteit expliciet, al in de conceptuele fase. Dat helpt om consistentie te waarborgen in latere uitwerkingen (bijvoorbeeld versiemodellering in het logisch model).
+Deze markeringen maken de temporele semantiek van een entiteit expliciet, al in de conceptuele fase. Dat helpt om consistentie te waarborgen in latere uitwerkingen, bijvoorbeeld versiemodellering in het gegevensmodel:
+
+![Tijdlijnen in een gegevensmodel](tijdlijnen.drawio.svg)
 
 ## Tijdlijn geldigheid
 
