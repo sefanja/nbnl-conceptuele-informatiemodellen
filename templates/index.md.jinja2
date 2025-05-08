@@ -141,11 +141,9 @@ parent: "{% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% en
 
 {% if include_top_level_diagram %}
 {# Diagramgeneratoren werken niet goed, dus uitgezet #}
-
-```{{ gen.mermaid_directive() }}
+{# ```{{ gen.mermaid_directive() }}
 {{ gen.mermaid_diagram() }}
-```
-
+``` #}
 {% else %}
 ![Diagram](model.drawio.svg)
 
