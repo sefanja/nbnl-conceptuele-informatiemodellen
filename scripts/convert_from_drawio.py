@@ -5,6 +5,11 @@ import yaml
 import re
 import unicodedata
 
+# TODO:
+# - relaties naar entiteiten in andere registers
+# - max-multipliciteit van eigenschap
+
+
 CARDINALITY_MAPPING = {
     'none':      {'required': False, 'multivalued': True, 'annotation': '0..*'},
     'ERmandOne':     {'required': True, 'multivalued': False, 'annotation': '1..1'},
@@ -260,9 +265,17 @@ def parse_drawio_xml(xml_string):
 
 def convert_to_linkml_schema(entities_data, candidate_slots):
     schema_dict = {
-        "id": "https://voorbeeld.com/mijnschema", "name": "mijnschema",
-        "description": "Automatisch gegenereerd schema.", "title": "Conceptueel Model",
-        "default_range": "Tekst", "classes": {},
+        "id": "https://voorbeeld.com/mijnmodel",
+        "name": "mijnmodel",
+        "title": "Conceptueel informatiemodel",
+        "description": "Automatisch gegenereerd schema.",
+        "version": "1.0.0-draft",
+        "default_range": "Tekst",
+        "prefixes": {
+            "nbnl": "https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/",
+            "nbility": "https://nbility-model.github.io/NBility-business-capabilities-Archi/"
+        },
+        "classes": {},
         "types": {
             "Datum": {
                 "description": "kalenderdatum, zonder tijdsaanduiding",
@@ -406,7 +419,7 @@ def main():
         out_dir = os.path.dirname(input_file)
         in_fname_base, _ = os.path.splitext(os.path.basename(input_file))
         if in_fname_base.lower().endswith('.drawio'): in_fname_base = in_fname_base[:-len('.drawio')]
-        out_f_path = os.path.join(out_dir, f"{in_fname_base}.linkml.yaml")
+        out_f_path = os.path.join(out_dir, f"{in_fname_base}.yaml")
         
         print(f"Opslaan LinkML schema naar: {out_f_path}")
         with open(out_f_path, 'w', encoding='utf-8') as f:

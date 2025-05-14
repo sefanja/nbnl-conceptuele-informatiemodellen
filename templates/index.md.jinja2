@@ -119,6 +119,11 @@
         {%- set _ = parts.items.append(element.comments | join('<br/><br/>')) -%}
     {%- endif -%}
 
+    {# derivation rule #}
+    {%- if 'derivation_rule' in element.annotations -%}
+        {%- set _ = parts.items.append('Afleidingsregel: ' ~ element.annotations.derivation_rule.value) ~ '.' -%}
+    {%- endif -%}
+
     {# tijdlijnen #}
     {%- set tijdlijn_annotaties = [] -%}
     {%- for a in element.annotations -%}

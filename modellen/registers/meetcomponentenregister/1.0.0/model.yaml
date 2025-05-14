@@ -1,0 +1,134 @@
+id: https://netbeheernederland.nl/conceptueelinformatiemodel/meetcomponentenregister
+name: meetcomponentenregister
+title: Meetcomponentenregister
+comments:
+  - Het Meetcomponentenregister bevat informatie over fysieke apparaten met meetgerelateerde functionaliteit, zoals energiehoeveelheidsmeters en communicatiegateways, die zijn ontworpen voor gebruik bij kleinverbruikaansluitingen. Deze componenten worden ingezet voor het registreren voor gegevens over energie-uitwisseling of het overbrengen daarvan via mobiele communicatie.
+version: 1.1.0-draft
+default_range: Tekst
+prefixes:
+  aansluitingenregister: https://netbeheernederland.nl/conceptueelinformatiemodel/aansluitingenregister/
+  nbnl: https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/
+  nbility: https://nbility-model.github.io/NBility-business-capabilities-Archi/
+classes:
+  Meetcomponent:
+    description: instrument dat energie-uitwisseling meet of deze meting op afstand uitleesbaar maakt
+    annotations:
+      tijdlijn_geldigheid: true
+      tijdlijn_registratie: true
+    attributes:
+      DSMR-versie:
+      hostnaam:
+      ICCID of EID:
+      IMEI:
+      lokaal communicatieprotocol:
+      typeaanduiding:
+        description: naam die door een fabrikant aan een reeks producten met vergelijkbare eigenschappen wordt gegeven
+  Meter:
+    description: instrument dat energie-uitwisseling meet
+    source: https://wetten.overheid.nl/jci1.3:c:BWBR0037938&z=2025-05-08&g=2025-05-08
+    see_also:
+      - https://wetten.overheid.nl/jci1.3:c:BWBR0037934&hoofdstuk=2&paragraaf=2.1&artikel=2.1.4&z=2025-01-01&g=2025-01-01
+      - https://www.netbeheernederland.nl/publicatie/reglement-meterparkbeheer-v62
+    attributes:
+      batterijvervangingsdatum:
+        comments:
+          - niet van toepassing op elektriciteitsmeters
+      bouwjaar:
+        description: jaar van productie of revisie zoals vermeld op de meter of geregistreerd in een daartoe bestemd systeem
+        required: true
+        range: Geheel getal
+      correctiefactor voor indirecte meting:
+        description: factor waarmee het getal van de telwerken vermenigvuldigd moet worden om de meetwaarde te corrigeren voor een meting via meettransformatoren
+        comments:
+          - Alleen van toepassing op elektriciteit.
+        range: Getal
+      facilitator voor (Meetgateway):
+        range: Meetgateway
+        required: false
+        multivalued: false
+        designates_zero_or_one: true
+        annotations:
+          inverse_cardinality: 0..1
+      meternummer:
+        description: identificatie van de meter, bestaande uit een combinatie van metercode, serienummer en de laatste twee cijfers van het bouwjaar
+        required: true
+        annotations:
+          derivation_rule: samenvoeging van `metercode`, `serienummer` en de laatste twee cijfers van het `bouwjaar`
+      mobiele-netwerktechnologie [0-n]: {}
+      reden technisch niet op afstand uitleesbaar:
+        description: verklaring voor het technisch niet op afstand uitleesbaar zijn van de meter
+        range: Reden technisch niet op afstand uitleesbaar
+      serienummer:
+        description: unieke code die door de fabrikant aan een exemplaar uit een reeks meters gegeven wordt
+        required: true
+      soort batterij (G): {}
+      technisch op afstand uitleesbaar:
+        description: kenmerk dat weergeeft of de meter gelet op externe factoren van technische aard al dan niet op afstand uitleesbaar is
+        range: Waar of onwaar
+      verzegeldatum: {}
+      zegelcategorie:
+        description: classificatie van de fabriekszegelstatus
+        range: Fabriekszegelstatus
+    unique_keys:
+      primary_key:
+        unique_key_slots:
+        - meternummer
+  Meetgateway:
+    description: instrument dat het op afstand uitleesbaar maken van meters faciliteert
+    attributes:
+      bouwjaar:
+        required: true
+        range: Geheel getal
+      gatewaynummer:
+        required: true
+        annotations:
+          derivation_rule: Samenvoeging van `gatewaycode`, `serienummer` en de laatste twee cijfers van het `bouwjaar`.
+      serienummer:
+        required: true
+    unique_keys:
+      primary_key:
+        unique_key_slots:
+        - gatewaynummer
+
+enums:
+  Fabriekszegelstatus:
+    permissible_values:
+      oorspronkelijke fabriekszegel:
+        description: de zegel is sinds fabricage niet verbroken
+      verbroken zegel:
+        description: de zegel is verbroken, zonder dat een revisie heeft plaatsgevonden
+      gereviseerd:
+        description: de zegel is vervangen na een formele revisie
+  Reden technisch niet op afstand uitleesbaar:
+    permissible_values:
+      geen fysieke toegang:
+      te lang niet uitgelezen:
+      geen communicatiepad:
+      anders:
+
+types:
+  Datum:
+    description: kalenderdatum, zonder tijdsaanduiding
+    base: date
+  Geheel getal:
+    description: getal zonder decimalen
+    base: int
+  Getal:
+    description: voorstelling van een hoeveelheid
+    base: float
+  Tekst:
+    description: aanduiding bedoeld voor mensen, zonder vaste structuur of betekenis
+    base: str
+  Tijdsduur:
+    description: lengte van een tijdsinterval, bijvoorbeeld een uur of een dag
+    base: duration
+  Tijdstip:
+    description: exacte aanduiding van datum en tijd, inclusief eventueel tijdzone-informatie
+    base: datetime
+  Waar of onwaar:
+    description: binaire aanduiding die aangeeft of een propositie of kenmerk van
+      toepassing is (waar) of niet van toepassing is (onwaar)
+    base: bool
+  URI:
+    description: uniforme aanduiding van een externe of interne bron
+    base: uri
