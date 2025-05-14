@@ -25,16 +25,29 @@
 <span id="{{ id_safe(name) }}">{{name}}</span>
 {%- endmacro -%}
 
+{%- macro range(name) -%}
+    {%- if name in schemaview.all_classes() -%}
+        {%- set class = schemaview.get_class(name) -%}
+        {%- if class.annotations and class.annotations.external_registry -%}
+            {{ name }} (in {{class.annotations.external_registry.value}})
+        {%- else -%}
+            {{ link(name) }}
+        {%- endif -%}
+    {%- else -%}
+        {{ link(name) }}
+    {%- endif -%}
+{%- endmacro -%}
+
 {%- macro compute_range(slot) -%}
     {%- if slot.any_of or slot.exactly_one_of -%}
         {%- for subslot_range in schemaview.slot_range_as_union(slot) -%}
-            {{ link(subslot_range) }}
+            {{ range(subslot_range) }}
             {%- if not loop.last -%}
-                &nbsp;or&nbsp;<br />
+                &nbsp;of&nbsp;<br />
             {%- endif -%}
         {%- endfor -%}
     {%- else -%}
-        {{ link(slot.range) }}
+        {{ range(slot.range) }}
     {%- endif -%}
 {%- endmacro -%}
 
@@ -112,7 +125,7 @@
 
     {# see_also #}
     {%- if element.see_also -%}
-        {%- set _ = parts.items.append('Zie ook: ' ~ see_also(element)) -%}
+        {%- set _ = parts.items.append('Zie ook ' ~ see_also(element)) -%}
     {%- endif -%}
 
     {# comments #}
@@ -187,15 +200,15 @@ Deze website is in opbouw. Pagina's kunnen onvolledige of onjuiste informatie be
 
 ## {{class.name}}
 
-{{omschrijving(class)}}
+{% if class.annotations and class.annotations.external_registry %}
+Beheerd in {{class.annotations.external_registry.value}}
+{% endif %}
 
 {% if class.is_a %}
-Specialisatie van: {{link(schemaview.get_class(class.is_a).name)}}
+Specialisatie van {{link(schemaview.get_class(class.is_a).name)}}
 {% endif %}
 
-{% if class.annotations and class.annotations.external and class.annotations.registry %}
-Beheerd in: {{class.annotations.registry.value}}
-{% endif %}
+{{omschrijving(class)}}
 
 {% set slots = gen.get_direct_slots(class) %}
 {% set properties = slots | rejectattr('range', 'in', schemaview.all_classes()) | list %}

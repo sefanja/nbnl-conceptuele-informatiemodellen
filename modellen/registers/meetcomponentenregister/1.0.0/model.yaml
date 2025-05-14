@@ -2,7 +2,7 @@ id: https://netbeheernederland.nl/conceptueelinformatiemodel/meetcomponentenregi
 name: meetcomponentenregister
 title: Meetcomponentenregister
 comments:
-  - Het Meetcomponentenregister bevat informatie over fysieke apparaten met meetgerelateerde functionaliteit, zoals energiehoeveelheidsmeters en communicatiegateways, die zijn ontworpen voor gebruik bij kleinverbruikaansluitingen. Deze componenten worden ingezet voor het registreren voor gegevens over energie-uitwisseling of het overbrengen daarvan via mobiele communicatie.
+  - Het Meetcomponentenregister bevat informatie over fysieke apparaten met meetgerelateerde functionaliteit, zoals energiehoeveelheidsmeters en communicatiegateways, die zijn ontworpen voor gebruik bij kleinverbruikaansluitingen. Deze componenten worden ingezet voor het registreren van gegevens over energie-uitwisseling of het overbrengen daarvan via mobiele communicatie.
 version: 1.0.0-draft
 default_range: Tekst
 prefixes:
@@ -21,7 +21,7 @@ classes:
         description: jaar van productie of revisie zoals vermeld op het apparaat of geregistreerd in een daartoe bestemd systeem
         required: true
         range: Geheel getal
-      communicatiemiddel voor (Aansluiting):
+      communicatiemiddel voor:
         range: Aansluiting
         required: false
         multivalued: true
@@ -52,7 +52,7 @@ classes:
       gatewaynummer:
         description: identificatie van de meetgateway, bestaande uit een combinatie van gatewaycode, serienummer en de laatste twee cijfers van het bouwjaar
         required: true
-      ingedeeld naar (Gatewaycodering):
+      ingedeeld naar:
         range: Gatewaycodering
         required: true
         multivalued: false
@@ -78,33 +78,30 @@ classes:
         description: datum waarop de batterij voor het laatst is vervangen
         comments:
           - niet van toepassing op elektriciteitsmeters
-      beheerd door (Marktpartijregistratie):
+      beheerd door:
         description: identificeert de marktpartij (netbeheerder) die verantwoordelijk is voor het beheer van deze meter, via diens registratie in marktcommunicatie
       correctiefactor voor indirecte meting:
         description: factor waarmee het getal van de telwerken vermenigvuldigd moet worden om de meetwaarde te corrigeren voor een meting via meettransformatoren
         comments:
           - Alleen van toepassing op elektriciteit.
         range: Getal
-      facilitator voor (Meetgateway):
+      facilitator voor:
         range: Meetgateway
         required: false
         multivalued: false
         annotations:
           inverse_cardinality: 0..1
-      ingedeeld naar (Metercodering):
+      ingedeeld naar:
         range: Metercodering
         required: true
         multivalued: false
         annotations:
           inverse_cardinality: "*"
-      meetmiddel voor (Allocatiepunt bij aansluiting):
-        range: Allocatiepunt bij aansluiting
-        required: false
-        multivalued: false
-        annotations:
-          inverse_cardinality: 0..1
-      meetmiddel voor (GCvO-installatie):
-        range: GCvO-installatie
+      meetmiddel voor:
+        range: Any
+        exactly_one_of:
+          - range: Allocatiepunt bij aansluiting
+          - range: GCvO-installatie
         required: false
         multivalued: false
         annotations:
@@ -129,7 +126,7 @@ classes:
       technisch op afstand uitleesbaar:
         description: kenmerk dat weergeeft of de meter gelet op externe factoren van technische aard al dan niet op afstand uitleesbaar is
         range: Waar of onwaar
-      vast uitgevoerd met (Telwerkconfiguratie):
+      vast uitgevoerd met:
         range: Telwerkconfiguratie
         required: false
         multivalued: false
@@ -148,32 +145,31 @@ classes:
 
   Aansluiting:
     annotations:
-      external: true
-      registry: "[Aansluitingenregister](../../aansluitingenregister)"
+      external_registry: "[Aansluitingenregister](../../aansluitingenregister)"
   Allocatiepunt bij aansluiting:
     annotations:
       external: true
-      registry: "[Aansluitingenregister](../../aansluitingenregister)"
+      external_registry: "[Aansluitingenregister](../../aansluitingenregister)"
   Gatewaycodering:
     annotations:
       external: true
-      registry: "[Meetcomponentstandaardenregister](../../meetcomponentstandaardenregister)"
+      external_registry: "[Meetcomponentstandaardenregister](../../meetcomponentstandaardenregister)"
   GCvO-installatie:
     annotations:
       external: true
-      registry: "[Installatieregister](../../installatieregister)"
+      external_registry: "[Installatieregister](../../installatieregister)"
   Marktpartijregistratie:
     annotations:
       external: true
-      registry: "[Marktpartijenregister](../../marktpartijenregister)"
+      external_registry: "[Marktpartijenregister](../../marktpartijenregister)"
   Metercodering:
     annotations:
       external: true
-      registry: "[Meetcomponentstandaardenregister](../../meetcomponentstandaardenregister)"
+      external_registry: "[Meetcomponentstandaardenregister](../../meetcomponentstandaardenregister)"
   Telwerkconfiguratie:
     annotations:
       external: true
-      registry: "[Meetcomponentstandaardenregister](../../meetcomponentstandaardenregister)"
+      external_registry: "[Meetcomponentstandaardenregister](../../meetcomponentstandaardenregister)"
 
 enums:
   Batterijtype:

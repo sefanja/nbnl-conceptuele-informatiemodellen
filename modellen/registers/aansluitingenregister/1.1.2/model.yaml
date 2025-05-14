@@ -49,9 +49,9 @@ classes:
         description: verzameling letters die wordt gevormd door de eerste letter van alle in volgorde voorkomende voornamen van een aangeslotene
       KVK-nummer:
         description: identificatie van de maatschappelijke activiteit van de aangeslotene in het Handelsregister
-      # conventie: target-class-naam in relatienaam (om ze uniek te maken)
+      # conventie: target-class-naam tussen haken () in relatienaam als nodig om deze uniek te maken
       # conventie: relatie altijd als `attribute` onder eigenaar van relatie
-      beschikker over (Aansluiting):
+      beschikker over:
         range: Aansluiting
         # conventie: multipliciteiten op relaties altijd expliciet
         required: true
@@ -63,7 +63,7 @@ classes:
       # conventie: natuurlijke sleutel / business key heet altijd `identificatie`
       identificatie:
         unique_key_slots:
-          - beschikker over (Aansluiting)
+          - beschikker over
     annotations:
       # conventie: bij elke `class` de naam van een NBility-bedrijfsobject
       nbility_object: Klant
@@ -121,7 +121,7 @@ classes:
         see_also:
           - https://wetten.overheid.nl/jci1.3:c:BWBR0037951&hoofdstuk=3&paragraaf=3.7&artikel=3.7.5a&z=2022-05-18&g=2022-05-18
         range: Waar of onwaar
-      deel van (Netgebied):
+      deel van:
         range: Netgebied
         required: false
         multivalued: false
@@ -156,7 +156,7 @@ classes:
     description: allocatiepunt toegekend aan een aansluiting
     is_a: Allocatiepunt
     attributes:
-      bij (Aansluiting):
+      bij:
         range: Aansluiting
         required: true
         multivalued: false
@@ -166,7 +166,7 @@ classes:
     description: allocatiepunt toegekend aan een netgebied
     is_a: Allocatiepunt
     attributes:
-      bij (Netgebied):
+      bij:
         range: Netgebied
         required: true
         multivalued: false
@@ -191,19 +191,16 @@ classes:
     slots:
       - EAN-code
     attributes:
-      deel van (Aansluiting):
-        range: Aansluiting
-        required: false
+      deel van:
+        range: Any
+        exactly_one_of:
+          - range: Aansluiting
+          - range: Netkoppeling
+        required: true
         multivalued: false
         annotations:
           inverse_cardinality: 1..*
-      deel van (Netkoppeling):
-        range: Netkoppeling
-        required: false
-        multivalued: false
-        annotations:
-          inverse_cardinality: 1..*
-      in (Aansluitlocatie):
+      in:
         range: Aansluitlocatie
         required: true
         multivalued: false
@@ -246,13 +243,13 @@ classes:
   Locatieaanduiding:
     attributes:
       locatieomschrijving:
-      van (Aansluitlocatie):
+      van:
         range: Aansluitlocatie
         required: true
         multivalued: false
         annotations:
           inverse_cardinality: 0..1
-      afgeleid van (Nummeraanduiding):
+      afgeleid van:
         range: Nummeraanduiding
         required: false
         multivalued: false
@@ -261,7 +258,7 @@ classes:
     unique_keys:
       identificatie:
         unique_key_slots:
-          - van (Aansluitlocatie)
+          - van
     annotations:
       nbility_object: Aansluiting
       tijdlijn_geldigheid: true
@@ -274,14 +271,14 @@ classes:
     slots:
       - EAN-code
     attributes:
-      deel van (Netgebied):
+      deel van:
         comments:
           - De beheerder van het netgebied waartoe de netkoppeling behoort, is daarmee de beheerder van de netkoppeling.
         required: true
         multivalued: false
         annotations:
           inverse_cardinality: "*"
-      koppeling met (Netgebied):
+      koppeling met:
         comments:
           - Deze relatie is optioneel voor het geval het te koppelen netgebied nog niet bekend is of als er geen sprake is van een gekoppeld netgebied, zoals bij een koppeling met een interconnector.
         required: false
@@ -300,8 +297,7 @@ classes:
   # conventie: onderstaand patroon voor entiteiten in andere registers
   Nummeraanduiding:
     annotations:
-      external: true
-      registry: "[Basisregistratie Adressen en Gebouwen](https://data.overheid.nl/dataset/4aca03b9-0bb1-454f-9d5a-53bb910029d0)"
+      external_registry: "[Basisregistratie Adressen en Gebouwen](https://data.overheid.nl/dataset/4aca03b9-0bb1-454f-9d5a-53bb910029d0)"
 
 slots:
   EAN-code:
