@@ -38,26 +38,37 @@
     {%- endif -%}
 {%- endmacro -%}
 
-{%- macro see_also(element) -%}
-{%- set link_labels = {
-    "https://wetten.overheid.nl/jci1.3:c:BWBR0009755": "Elektriciteitswet 1998",
-    "https://wetten.overheid.nl/jci1.3:c:BWBR0037923": "Begrippencode gas",
-    "https://wetten.overheid.nl/jci1.3:c:BWBR0037934": "Informatiecode elektriciteit en gas",
-    "https://wetten.overheid.nl/jci1.3:c:BWBR0037936": "Meetcode gas",
-    "https://wetten.overheid.nl/jci1.3:c:BWBR0037938": "Begrippencode elektriciteit",
-    "https://wetten.overheid.nl/jci1.3:c:BWBR0037946": "Meetcode elektriciteit",
-    "https://wetten.overheid.nl/jci1.3:c:BWBR0037951": "Tarievencode elektriciteit"
-} -%}
+{%- macro get_label(url) -%}
+    {%- set link_labels = {
+        "https://wetten.overheid.nl/jci1.3:c:BWBR0009755": "Elektriciteitswet 1998",
+        "https://wetten.overheid.nl/jci1.3:c:BWBR0037923": "Begrippencode gas",
+        "https://wetten.overheid.nl/jci1.3:c:BWBR0037934": "Informatiecode elektriciteit en gas",
+        "https://wetten.overheid.nl/jci1.3:c:BWBR0037936": "Meetcode gas",
+        "https://wetten.overheid.nl/jci1.3:c:BWBR0037938": "Begrippencode elektriciteit",
+        "https://wetten.overheid.nl/jci1.3:c:BWBR0037946": "Meetcode elektriciteit",
+        "https://wetten.overheid.nl/jci1.3:c:BWBR0037951": "Tarievencode elektriciteit"
+    } -%}
+    {%- set ns = namespace(label=None) -%}
+    {%- for prefix, label in link_labels.items() -%}
+        {%- if url.startswith(prefix) -%}
+            {%- set ns.label = label -%}
+        {%- endif -%}
+    {%- endfor -%}
+    {{- ns.label -}}
+{%- endmacro -%}
 
+{%- macro source(element) -%}
+{%- if element.source -%}
+    {%- set label = get_label(element.source) -%}
+    [{{ label if label else '1' }}]({{ element.source }})
+{%- endif -%}
+{%- endmacro -%}
+
+{%- macro see_also(element) -%}
 {%- if element.see_also -%}
     {%- for url in element.see_also -%}
-        {%- set ns = namespace(label=none) -%}
-        {%- for prefix, text in link_labels.items() -%}
-            {%- if url.startswith(prefix) -%}
-                {%- set ns.label = text -%}
-            {%- endif -%}
-        {%- endfor -%}
-        [{{ ns.label if ns.label else loop.index }}]({{ url }}){% if not loop.last %}, {% endif -%}
+        {%- set label = get_label(url) -%}
+        [{{ label if label else loop.index }}]({{ url }}){% if not loop.last %}, {% endif -%}
     {%- endfor -%}
 {%- endif -%}
 {%- endmacro -%}
@@ -95,7 +106,7 @@
 
     {# source #}
     {%- if element.source -%}
-        {%- set _ = parts.items.append('Bron: ' ~ element.source ~ '.') -%}
+        {%- set _ = parts.items.append('Bron: ' ~ source(element) ~ '.') -%}
     {%- endif -%}
 
     {# see_also #}

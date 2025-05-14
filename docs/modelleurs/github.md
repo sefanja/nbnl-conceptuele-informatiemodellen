@@ -1,5 +1,5 @@
 ---
-title: Werken met GitHub
+title: GitHub
 parent: Voor modelleurs
 ---
 

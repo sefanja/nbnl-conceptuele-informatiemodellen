@@ -24,3 +24,8 @@ defaults:
 
 mermaid:
   version: "11.6.0"
+
+callouts:
+  warning:
+    title: Warning
+    color: red
