@@ -81,6 +81,7 @@ classes:
           - niet van toepassing op elektriciteitsmeters
       beheerd door:
         description: identificeert de marktpartij (netbeheerder) die verantwoordelijk is voor het beheer van deze meter, via diens registratie in marktcommunicatie
+        range: Marktpartijregistratie
       correctiefactor voor indirecte meting:
         description: factor waarmee het getal van de telwerken vermenigvuldigd moet worden om de meetwaarde te corrigeren voor een meting via meettransformatoren
         comments:
@@ -148,27 +149,21 @@ classes:
       external_registry: "[Aansluitingenregister](../../aansluitingenregister)"
   Allocatiepunt bij aansluiting:
     annotations:
-      external: true
       external_registry: "[Aansluitingenregister](../../aansluitingenregister)"
   Gatewaycodering:
     annotations:
-      external: true
       external_registry: "[Meetcomponentstandaardenregister](../../meetcomponentstandaardenregister)"
   GCvO-installatie:
     annotations:
-      external: true
       external_registry: "[Installatieregister](../../installatieregister)"
   Marktpartijregistratie:
     annotations:
-      external: true
       external_registry: "[Marktpartijenregister](../../marktpartijenregister)"
   Metercodering:
     annotations:
-      external: true
       external_registry: "[Meetcomponentstandaardenregister](../../meetcomponentstandaardenregister)"
   Telwerkconfiguratie:
     annotations:
-      external: true
       external_registry: "[Meetcomponentstandaardenregister](../../meetcomponentstandaardenregister)"
 
 enums:
