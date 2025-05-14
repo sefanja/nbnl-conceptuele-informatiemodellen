@@ -3,7 +3,7 @@ name: meetcomponentenregister
 title: Meetcomponentenregister
 comments:
   - Het Meetcomponentenregister bevat informatie over fysieke apparaten met meetgerelateerde functionaliteit, zoals energiehoeveelheidsmeters en communicatiegateways, die zijn ontworpen voor gebruik bij kleinverbruikaansluitingen. Deze componenten worden ingezet voor het registreren voor gegevens over energie-uitwisseling of het overbrengen daarvan via mobiele communicatie.
-version: 1.1.0-draft
+version: 1.0.0-draft
 default_range: Tekst
 prefixes:
   meetcomponentenregister: https://netbeheernederland.nl/conceptueelinformatiemodel/meetcomponentenregister/
@@ -47,7 +47,7 @@ classes:
         description: naam die door een fabrikant aan een reeks producten met vergelijkbare eigenschappen wordt gegeven
   Meter:
     description: instrument dat energie-uitwisseling meet
-    source: https://wetten.overheid.nl/jci1.3:c:BWBR0037938&z=2025-05-08&g=2025-05-08
+    source: https://wetten.overheid.nl/jci1.3:c:BWBR0050714&z=2025-02-22&g=2025-02-22
     comments:
       - Een meter is een meetmiddel voor óf een allocatiepunt óf een GCvO-installatie.
     see_also:
@@ -78,7 +78,7 @@ classes:
         annotations:
           inverse_cardinality: 0..*
       meetmiddel voor (Allocatiepunt bij aansluiting):
-        range: Allocatiepunt
+        range: Allocatiepunt bij aansluiting
         required: false
         multivalued: false
         annotations:
