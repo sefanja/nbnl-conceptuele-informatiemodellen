@@ -69,7 +69,7 @@
 {%- if element.see_also -%}
     {%- for url in element.see_also -%}
         {%- set label = get_label(url) -%}
-        [{{ label if label else loop.index }}]({{ url }}){% if not loop.last %}, {% endif -%}
+        [{{ label if label != 'None' else loop.index }}]({{ url }}){% if not loop.last %}, {% endif -%}
     {%- endfor -%}
 {%- endif -%}
 {%- endmacro -%}
@@ -112,7 +112,7 @@
 
     {# see_also #}
     {%- if element.see_also -%}
-        {%- set _ = parts.items.append('Zie ook ' ~ see_also(element)) -%}
+        {%- set _ = parts.items.append('Zie ook: ' ~ see_also(element)) -%}
     {%- endif -%}
 
     {# comments #}

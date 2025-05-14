@@ -12,11 +12,11 @@ import unicodedata
 
 
 CARDINALITY_MAPPING = {
-    'none':      {'required': False, 'multivalued': True, 'annotation': '0..*'},
+    'none':      {'required': False, 'multivalued': True, 'annotation': '"*"'},
     'ERmandOne':     {'required': True, 'multivalued': False, 'annotation': '1..1'},
     'ERzeroToOne': {'required': False, 'multivalued': False, 'annotation': '0..1'},
     'ERoneToMany':{'required': True, 'multivalued': True, 'annotation': '1..*'},
-    'ERzeroToMany':{'required': False, 'multivalued': True, 'annotation': '0..*'},
+    'ERzeroToMany':{'required': False, 'multivalued': True, 'annotation': '"*"'},
 }
 
 def clean_and_convert_name(name_raw, is_entity_name=False, parse_slot_prefixes_symbols=True):

@@ -57,7 +57,7 @@ classes:
         required: true
         multivalued: false
         annotations:
-          inverse_cardinality: 0..*
+          inverse_cardinality: "*"
       serienummer:
         required: true
     unique_keys:
@@ -96,7 +96,7 @@ classes:
         required: true
         multivalued: false
         annotations:
-          inverse_cardinality: 0..*
+          inverse_cardinality: "*"
       meetmiddel voor (Allocatiepunt bij aansluiting):
         range: Allocatiepunt bij aansluiting
         required: false
@@ -134,7 +134,7 @@ classes:
         required: false
         multivalued: false
         annotations:
-          inverse_cardinality: 0..*
+          inverse_cardinality: "*"
       verzegeldatum:
         description: datum waarop het apparaat voor het laatst metrologisch is verzegeld ter waarborging van de meetintegriteit
         range: Datum
@@ -150,7 +150,7 @@ classes:
     annotations:
       external: true
       registry: "[Aansluitingenregister](../../aansluitingenregister)"
-  Allocatiepun bij aansluiting:
+  Allocatiepunt bij aansluiting:
     annotations:
       external: true
       registry: "[Aansluitingenregister](../../aansluitingenregister)"

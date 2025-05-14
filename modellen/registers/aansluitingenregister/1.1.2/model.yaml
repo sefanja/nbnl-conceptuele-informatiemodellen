@@ -126,7 +126,7 @@ classes:
         required: false
         multivalued: false
         annotations:
-          inverse_cardinality: 0..*
+          inverse_cardinality: "*"
     unique_keys:
       identificatie:
         unique_key_slots:
@@ -257,7 +257,7 @@ classes:
         required: false
         multivalued: false
         annotations:
-          inverse_cardinality: 0..*
+          inverse_cardinality: "*"
     unique_keys:
       identificatie:
         unique_key_slots:
@@ -280,14 +280,14 @@ classes:
         required: true
         multivalued: false
         annotations:
-          inverse_cardinality: 0..*
+          inverse_cardinality: "*"
       koppeling met (Netgebied):
         comments:
           - Deze relatie is optioneel voor het geval het te koppelen netgebied nog niet bekend is of als er geen sprake is van een gekoppeld netgebied, zoals bij een koppeling met een interconnector.
         required: false
         multivalued: false
         annotations:
-          inverse_cardinality: 0..*
+          inverse_cardinality: "*"
     unique_keys:
       identificatie:
         unique_key_slots:
