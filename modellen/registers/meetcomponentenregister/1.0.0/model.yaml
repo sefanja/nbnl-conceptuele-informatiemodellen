@@ -46,7 +46,6 @@ classes:
         range: Meetgateway
         required: false
         multivalued: false
-        designates_zero_or_one: true
         annotations:
           inverse_cardinality: 0..1
       meternummer:

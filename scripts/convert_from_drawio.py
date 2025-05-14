@@ -366,7 +366,7 @@ def convert_to_linkml_schema(entities_data, candidate_slots):
                 inv_card_info = CARDINALITY_MAPPING.get(s_info['cardinality_source_style'], CARDINALITY_MAPPING['none'])
                 
                 s_def = {"range": target_linkml_name, "required": card_info['required'],
-                           "multivalued": card_info['multivalued'], "designates_zero_or_one": not card_info['multivalued'],
+                           "multivalued": card_info['multivalued'],
                            "annotations": {"inverse_cardinality": inv_card_info['annotation']}}
                 if s_flags.get('is_derivable'): s_def['annotations']['derivation_rule'] = '<some rule>'
 
