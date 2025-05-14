@@ -96,23 +96,23 @@
         {%- for m in mappings -%}
             {%- set _ = linked.append(gen.uri_link(m)) -%}
         {%- endfor -%}
-        {%- set markdown_line = '*' ~ linked | join(', ') ~ '*' -%}
+        {%- set markdown_line = '_' ~ linked | join(', ') ~ '_' -%}
         {%- set _ = parts.items.append(markdown_line) -%}
     {%- endif -%}
 
     {# description #}
     {%- if element.description -%}
-        {%- set _ = parts.items.append('*' ~ element.description ~ '*') -%}
+        {%- set _ = parts.items.append('_' ~ element.description ~ '_') -%}
     {%- endif -%}
 
     {# source #}
     {%- if element.source -%}
-        {%- set _ = parts.items.append('Bron: ' ~ source(element) ~ '.') -%}
+        {%- set _ = parts.items.append('Bron: ' ~ source(element)) -%}
     {%- endif -%}
 
     {# see_also #}
     {%- if element.see_also -%}
-        {%- set _ = parts.items.append('Zie ook ' ~ see_also(element) ~ '.') -%}
+        {%- set _ = parts.items.append('Zie ook ' ~ see_also(element)) -%}
     {%- endif -%}
 
     {# comments #}
@@ -134,7 +134,7 @@
         {%- endif -%}
     {%- endfor -%}
     {%- if tijdlijn_annotaties -%}
-        {%- set _ = parts.items.append('Tijdslijnen: ' ~ tijdlijn_annotaties|join(', ') ~ '.') -%}
+        {%- set _ = parts.items.append('Tijdslijnen: ' ~ tijdlijn_annotaties|join(', ')) -%}
     {%- endif -%}
 
     {{ parts.items | join('<br/><br/>') }}
@@ -190,11 +190,11 @@ Deze website is in opbouw. Pagina's kunnen onvolledige of onjuiste informatie be
 {{omschrijving(class)}}
 
 {% if class.is_a %}
-Deze entiteit is een specialisatie van {{link(schemaview.get_class(class.is_a).name)}}.
+Specialisatie van: {{link(schemaview.get_class(class.is_a).name)}}
 {% endif %}
 
 {% if class.annotations and class.annotations.external and class.annotations.registry %}
-Deze entiteit wordt beheerd in: {{class.annotations.registry.value}}.
+Beheerd in: {{class.annotations.registry.value}}
 {% endif %}
 
 {% set slots = gen.get_direct_slots(class) %}

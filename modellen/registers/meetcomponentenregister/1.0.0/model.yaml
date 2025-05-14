@@ -45,9 +45,29 @@ classes:
         description: unieke identificatiecode van de simfunctionaliteit volgens de 3GPP-standaarden voor ICCID of EID
       typeaanduiding:
         description: naam die door een fabrikant aan een reeks producten met vergelijkbare eigenschappen wordt gegeven
+  Meetgateway:
+    description: instrument dat het op afstand uitleesbaar maken van meters faciliteert
+    is_a: Meetcomponent
+    attributes:
+      gatewaynummer:
+        description: identificatie van de meetgateway, bestaande uit een combinatie van gatewaycode, serienummer en de laatste twee cijfers van het bouwjaar
+        required: true
+      ingedeeld naar (Gatewaycodering):
+        range: Gatewaycodering
+        required: true
+        multivalued: false
+        annotations:
+          inverse_cardinality: 0..*
+      serienummer:
+        required: true
+    unique_keys:
+      primary_key:
+        unique_key_slots:
+        - gatewaynummer
   Meter:
     description: instrument dat energie-uitwisseling meet
     source: https://wetten.overheid.nl/jci1.3:c:BWBR0050714&z=2025-02-22&g=2025-02-22
+    is_a: Meetcomponent
     comments:
       - Een meter is een meetmiddel voor óf een allocatiepunt óf een GCvO-installatie.
     see_also:
@@ -125,24 +145,6 @@ classes:
       primary_key:
         unique_key_slots:
         - meternummer
-  Meetgateway:
-    description: instrument dat het op afstand uitleesbaar maken van meters faciliteert
-    attributes:
-      gatewaynummer:
-        description: identificatie van de meetgateway, bestaande uit een combinatie van gatewaycode, serienummer en de laatste twee cijfers van het bouwjaar
-        required: true
-      ingedeeld naar (Gatewaycodering):
-        range: Gatewaycodering
-        required: true
-        multivalued: false
-        annotations:
-          inverse_cardinality: 0..*
-      serienummer:
-        required: true
-    unique_keys:
-      primary_key:
-        unique_key_slots:
-        - gatewaynummer
 
   Aansluiting:
     annotations:

@@ -8,6 +8,7 @@ import unicodedata
 # TODO:
 # - relaties naar entiteiten in andere registers
 # - max-multipliciteit van eigenschap
+# - sorteer classes
 
 
 CARDINALITY_MAPPING = {
