@@ -119,11 +119,6 @@
         {%- set _ = parts.items.append(element.comments | join('<br/><br/>')) -%}
     {%- endif -%}
 
-    {# derivation rule #}
-    {%- if 'derivation_rule' in element.annotations -%}
-        {%- set _ = parts.items.append('Afleidingsregel: ' ~ element.annotations.derivation_rule.value) ~ '.' -%}
-    {%- endif -%}
-
     {# tijdlijnen #}
     {%- set tijdlijn_annotaties = [] -%}
     {%- for a in element.annotations -%}
@@ -197,7 +192,7 @@ Deze website is in opbouw. Pagina's kunnen onvolledige of onjuiste informatie be
 Deze entiteit is een specialisatie van {{link(schemaview.get_class(class.is_a).name)}}.
 {% endif %}
 
-{% if 'external' in class.annotations and class.annotations.registry %}
+{% if class.annotations and class.annotations.external and class.annotations.registry %}
 Deze entiteit wordt beheerd in: {{class.annotations.registry.value}}.
 {% endif %}
 
@@ -223,7 +218,7 @@ Deze entiteit wordt beheerd in: {{class.annotations.registry.value}}.
 | Relatie | Naar | Omschrijving |
 | :---  | :--- | :--- |
 {% for slot in relationships -%}
-| {{key_symbol(class, slot)}}{{slot.name}} | {{compute_range(slot)}}<br/>*{% if slot.annotations and 'inverse_cardinality' in slot.annotations %}{{slot.annotations['inverse_cardinality'].value }}{% endif %} → {{ gen.cardinality(slot) }}* | {{omschrijving(slot)}} |
+| {{key_symbol(class, slot)}}{{slot.name}} | {{compute_range(slot)}}<br/>*{% if slot.annotations and slot.annotations.inverse_cardinality %}{{slot.annotations.inverse_cardinality.value }}{% endif %} → {{ gen.cardinality(slot) }}* | {{omschrijving(slot)}} |
 {% endfor %}
 {% endif %}
 

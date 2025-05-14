@@ -6,9 +6,10 @@ comments:
 version: 1.1.0-draft
 default_range: Tekst
 prefixes:
-  aansluitingenregister: https://netbeheernederland.nl/conceptueelinformatiemodel/aansluitingenregister/
+  meetcomponentenregister: https://netbeheernederland.nl/conceptueelinformatiemodel/meetcomponentenregister/
   nbnl: https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/
   nbility: https://nbility-model.github.io/NBility-business-capabilities-Archi/
+default_prefix: meetcomponentenregister
 classes:
   Meetcomponent:
     description: instrument dat energie-uitwisseling meet of deze meting op afstand uitleesbaar maakt
@@ -16,27 +17,49 @@ classes:
       tijdlijn_geldigheid: true
       tijdlijn_registratie: true
     attributes:
+      bouwjaar:
+        description: jaar van productie of revisie zoals vermeld op het apparaat of geregistreerd in een daartoe bestemd systeem
+        required: true
+        range: Geheel getal
+      communicatiemiddel voor (Aansluiting):
+        range: Aansluiting
+        required: false
+        multivalued: true
+        annotations:
+          inverse_cardinality: 0..1
       DSMR-versie:
+        description: versie van de Dutch Smart Meter Requirements (DSMR) waaraan de meter voldoet
+        comments:
+          - Deze versie bepaalt de structuur en inhoud van de P1-data en het communicatiegedrag.
       hostnaam:
-      ICCID of EID:
+        description: tekstuele aanduiding van een apparaat, bedoeld voor identificatie binnen computernetwerken
       IMEI:
+        description: unieke identificatiecode van een mobiel apparaat volgens de 3GPP-standaard voor apparaatidentificatie
       lokaal communicatieprotocol:
+        description: protocol voor gegevensuitwisseling tussen gekoppelde meetcomponenten binnen een beperkte reikwijdte
+        range: Lokaal communicatieprotocol
+      serienummer:
+        description: unieke code die door de fabrikant aan een exemplaar uit een reeks meters gegeven wordt
+        required: true
+      simkaartnummer:
+        description: unieke identificatiecode van de simfunctionaliteit volgens de 3GPP-standaarden voor ICCID of EID
       typeaanduiding:
         description: naam die door een fabrikant aan een reeks producten met vergelijkbare eigenschappen wordt gegeven
   Meter:
     description: instrument dat energie-uitwisseling meet
     source: https://wetten.overheid.nl/jci1.3:c:BWBR0037938&z=2025-05-08&g=2025-05-08
+    comments:
+      - Een meter is een meetmiddel voor óf een allocatiepunt óf een GCvO-installatie.
     see_also:
       - https://wetten.overheid.nl/jci1.3:c:BWBR0037934&hoofdstuk=2&paragraaf=2.1&artikel=2.1.4&z=2025-01-01&g=2025-01-01
       - https://www.netbeheernederland.nl/publicatie/reglement-meterparkbeheer-v62
     attributes:
       batterijvervangingsdatum:
+        description: datum waarop de batterij voor het laatst is vervangen
         comments:
           - niet van toepassing op elektriciteitsmeters
-      bouwjaar:
-        description: jaar van productie of revisie zoals vermeld op de meter of geregistreerd in een daartoe bestemd systeem
-        required: true
-        range: Geheel getal
+      beheerd door (Marktpartijregistratie):
+        description: identificeert de marktpartij (netbeheerder) die verantwoordelijk is voor het beheer van deze meter, via diens registratie in marktcommunicatie
       correctiefactor voor indirecte meting:
         description: factor waarmee het getal van de telwerken vermenigvuldigd moet worden om de meetwaarde te corrigeren voor een meting via meettransformatoren
         comments:
@@ -48,23 +71,53 @@ classes:
         multivalued: false
         annotations:
           inverse_cardinality: 0..1
+      ingedeeld naar (Metercodering):
+        range: Metercodering
+        required: true
+        multivalued: false
+        annotations:
+          inverse_cardinality: 0..*
+      meetmiddel voor (Allocatiepunt bij aansluiting):
+        range: Allocatiepunt
+        required: false
+        multivalued: false
+        annotations:
+          inverse_cardinality: 0..1
+      meetmiddel voor (GCvO-installatie):
+        range: GCvO-installatie
+        required: false
+        multivalued: false
+        annotations:
+          inverse_cardinality: 0..1
       meternummer:
         description: identificatie van de meter, bestaande uit een combinatie van metercode, serienummer en de laatste twee cijfers van het bouwjaar
         required: true
-        annotations:
-          derivation_rule: samenvoeging van `metercode`, `serienummer` en de laatste twee cijfers van het `bouwjaar`
-      mobiele-netwerktechnologie [0-n]: {}
+      mobiele-netwerktechnologie:
+        description: technologie voor draadloze communicatie via publieke of private mobiele netwerken volgens gestandaardiseerde telecomprotocollen
+        comments:
+          - Beschrijft de mobiele-netwerktechnologieën die het apparaat technisch ondersteunt; dit impliceert niet dat deze technologieën geactiveerd of operationeel zijn.
+        multivalued: true
+        range: Mobiele-netwerktechnologie
       reden technisch niet op afstand uitleesbaar:
         description: verklaring voor het technisch niet op afstand uitleesbaar zijn van de meter
         range: Reden technisch niet op afstand uitleesbaar
-      serienummer:
-        description: unieke code die door de fabrikant aan een exemplaar uit een reeks meters gegeven wordt
-        required: true
-      soort batterij (G): {}
+      batterijtype:
+        description: chemisch type van de ingebouwde primaire batterij, bedoeld voor langdurige autonome werking
+        comments:
+          - Niet van toepassing op elektriciteitsmeters.
+        range: Batterijtype
       technisch op afstand uitleesbaar:
         description: kenmerk dat weergeeft of de meter gelet op externe factoren van technische aard al dan niet op afstand uitleesbaar is
         range: Waar of onwaar
-      verzegeldatum: {}
+      vast uitgevoerd met (Telwerkconfiguratie):
+        range: Telwerkconfiguratie
+        required: false
+        multivalued: false
+        annotations:
+          inverse_cardinality: 0..*
+      verzegeldatum:
+        decription: datum waarop het apparaat voor het laatst metrologisch is verzegeld ter waarborging van de meetintegriteit
+        range: Datum
       zegelcategorie:
         description: classificatie van de fabriekszegelstatus
         range: Fabriekszegelstatus
@@ -75,13 +128,15 @@ classes:
   Meetgateway:
     description: instrument dat het op afstand uitleesbaar maken van meters faciliteert
     attributes:
-      bouwjaar:
-        required: true
-        range: Geheel getal
       gatewaynummer:
+        description: identificatie van de meetgateway, bestaande uit een combinatie van gatewaycode, serienummer en de laatste twee cijfers van het bouwjaar
         required: true
+      ingedeeld naar (Gatewaycodering):
+        range: Gatewaycodering
+        required: true
+        multivalued: false
         annotations:
-          derivation_rule: Samenvoeging van `gatewaycode`, `serienummer` en de laatste twee cijfers van het `bouwjaar`.
+          inverse_cardinality: 0..*
       serienummer:
         required: true
     unique_keys:
@@ -89,7 +144,44 @@ classes:
         unique_key_slots:
         - gatewaynummer
 
+  Aansluiting:
+    annotations:
+      external: true
+      registry: "[Aansluitingenregister](../../aansluitingenregister)"
+  Allocatiepun bij aansluiting:
+    annotations:
+      external: true
+      registry: "[Aansluitingenregister](../../aansluitingenregister)"
+  Gatewaycodering:
+    annotations:
+      external: true
+      registry: "[Meetcomponentstandaardenregister](../../meetcomponentstandaardenregister)"
+  GCvO-installatie:
+    annotations:
+      external: true
+      registry: "[Installatieregister](../../installatieregister)"
+  Marktpartijregistratie:
+    annotations:
+      external: true
+      registry: "[Marktpartijenregister](../../marktpartijenregister)"
+  Metercodering:
+    annotations:
+      external: true
+      registry: "[Meetcomponentstandaardenregister](../../meetcomponentstandaardenregister)"
+  Telwerkconfiguratie:
+    annotations:
+      external: true
+      registry: "[Meetcomponentstandaardenregister](../../meetcomponentstandaardenregister)"
+
 enums:
+  Batterijtype:
+    permissible_values:
+      Li-SOC12:
+        description: lithium-thionylchloride
+      Li-MnO2:
+        description: lithium-mangaanoxide
+      LiFePO4:
+        description: lithium-ijzerfosfaat
   Fabriekszegelstatus:
     permissible_values:
       oorspronkelijke fabriekszegel:
@@ -98,6 +190,20 @@ enums:
         description: de zegel is verbroken, zonder dat een revisie heeft plaatsgevonden
       gereviseerd:
         description: de zegel is vervangen na een formele revisie
+  Lokaal communicatieprotocol:
+    permissible_values:
+      M-bus:
+      wM-bus:
+  Mobiele-netwerktechnologie:
+    permissible_values:
+      2G:
+        description: GPRS/EDGE
+      3G:
+        description: UMTS/HSPA
+      4G:
+        description: LTE
+      LTE-M:
+        description: Cat-M1
   Reden technisch niet op afstand uitleesbaar:
     permissible_values:
       geen fysieke toegang:

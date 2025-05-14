@@ -272,9 +272,11 @@ def convert_to_linkml_schema(entities_data, candidate_slots):
         "version": "1.0.0-draft",
         "default_range": "Tekst",
         "prefixes": {
+            "mijmodel": "https://voorbeeld.com/mijnmodel",
             "nbnl": "https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/",
             "nbility": "https://nbility-model.github.io/NBility-business-capabilities-Archi/"
         },
+        "default_prefix": "https://voorbeeld.com/mijnmodel/",
         "classes": {},
         "types": {
             "Datum": {
@@ -357,7 +359,7 @@ def convert_to_linkml_schema(entities_data, candidate_slots):
 
                 base_slot_name = s_info['name_linkml_base']
                 target_slot_part = target_linkml_name.replace(" ", "_")
-                s_name_linkml = f"{base_slot_name.lower()} {target_slot_part.lower()}" if base_slot_name.lower() not in ["relatie", ""] else target_slot_part.lower()
+                s_name_linkml = f"{base_slot_name.lower()} ({target_slot_part})" if base_slot_name.lower() not in ["relatie", ""] else target_slot_part
                 s_name_linkml, _, _ = clean_and_convert_name(s_name_linkml, is_entity_name=False, parse_slot_prefixes_symbols=False)
 
                 if not s_name_linkml or s_name_linkml == "invalid_slot_name": print(f"Waarschuwing: Relatie slotnaam ongeldig. Overslaan."); continue
