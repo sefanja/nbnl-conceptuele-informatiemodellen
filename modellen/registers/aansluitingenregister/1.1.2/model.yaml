@@ -70,6 +70,10 @@ classes:
       # conventie: NEN 3610 tijdslijnen als `tijdlijn_geldigheid`, `tijdlijn_registratie` en `tijdlijn_levensduur`
       tijdlijn_geldigheid: true
       tijdlijn_registratie: true
+      tijdlijn_effectuering: true
+      levensduur: true
+      levensduur_begin: moment van geboorte
+      levensduur_einde: moment van overlijden
   Aansluiting:
     exact_mappings:
       - nbnl:aansluiting
@@ -94,6 +98,7 @@ classes:
           - "Validatie: als de gewenste aansluitcapaciteit van een van de overdrachtspunten 'groot' is of een geheel getal dan 'groot' anders 'klein'."
         range: Groot of klein
         required: true
+        equals_expression: ""
       marktsegment:
         description: aanduiding van de categorie waartoe de aansluiting behoort, te weten kleinverbruikaansluiting of grootverbruikaansluiting
         see_also:

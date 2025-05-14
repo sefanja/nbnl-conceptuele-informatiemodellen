@@ -1,9 +1,12 @@
 ---
-title: Regelgeving als kader voor modelleren
+title: Wet- en regelgeving
 parent: Voor modelleurs
 ---
 
-# Regelgeving als kader voor modelleren
+{: .warning }
+Deze website is in opbouw. Pagina's kunnen onvolledige of onjuiste informatie bevatten.
+
+# Wet- en regelgeving als kader voor modelleren
 
 Bij het modelleren van gegevens over de energiemarkt is domeinkennis onmisbaar. De energiemarkt is sterk gereguleerd: wetten, codes en beleidsregels bepalen niet alleen hoe de markt functioneert, maar geven ook richting aan hoe we de werkelijkheid beschrijven.
 

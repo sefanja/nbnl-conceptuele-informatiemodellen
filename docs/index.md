@@ -3,6 +3,9 @@ title: Startpagina
 nav_order: 1
 ---
 
+{: .warning }
+Deze website is in opbouw. Pagina's kunnen onvolledige of onjuiste informatie bevatten.
+
 # Conceptuele informatiemodellen
 
 Bij Netbeheer Nederland zorgen wij ervoor dat onze data **helder en herbruikbaar** zijn. Dat doen we door de betekenis ervan eenduidig vast te leggen:

@@ -1,7 +1,10 @@
 ---
-title: Modelleren in LinkML
+title: LinkML
 parent: Voor modelleurs
 ---
+
+{: .warning }
+Deze website is in opbouw. Pagina's kunnen onvolledige of onjuiste informatie bevatten.
 
 # Modelleren in LinkML
 

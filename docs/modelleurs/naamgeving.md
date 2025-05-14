@@ -3,6 +3,9 @@ title: Naamgevingsconventies
 parent: Voor modelleurs
 ---
 
+{: .warning }
+Deze website is in opbouw. Pagina's kunnen onvolledige of onjuiste informatie bevatten.
+
 # Naamgevingsconventies
 
 Afspraken voor het benoemen van entiteiten, relaties, eigenschappen.

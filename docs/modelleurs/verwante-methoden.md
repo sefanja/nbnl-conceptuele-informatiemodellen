@@ -3,6 +3,9 @@ title: Verwante methoden
 parent: Voor modelleurs
 ---
 
+{: .warning }
+Deze website is in opbouw. Pagina's kunnen onvolledige of onjuiste informatie bevatten.
+
 # Verwante methoden bij conceptueel informatiemodelleren
 {: .no_toc }
 

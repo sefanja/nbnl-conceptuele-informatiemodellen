@@ -3,6 +3,9 @@ title: Werken met GitHub
 parent: Voor modelleurs
 ---
 
+{: .warning }
+Deze website is in opbouw. Pagina's kunnen onvolledige of onjuiste informatie bevatten.
+
 # Werken met GitHub
 
 Werkinstructies voor het gebruik van de repository.
