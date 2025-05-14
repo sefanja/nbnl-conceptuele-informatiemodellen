@@ -40,10 +40,14 @@
 
 {%- macro compute_range(slot) -%}
     {%- if slot.any_of or slot.exactly_one_of -%}
-        {%- for subslot_range in schemaview.slot_range_as_union(slot) -%}
-            {{ range(subslot_range) }}
+        {%- for subslot_range in schemaview.slot_range_as_union(slot) | reject('eq', slot.range) -%}
+            {%- if slot.exactly_one_of %}óf {% endif %}{{ range(subslot_range) }}
             {%- if not loop.last -%}
-                &nbsp;of&nbsp;<br />
+                {%- if slot.exactly_one_of -%}
+                    &nbsp;óf&nbsp;<br />
+                {%- else -%}
+                    &nbsp;en/of&nbsp;<br />
+                {%- endif -%}
             {%- endif -%}
         {%- endfor -%}
     {%- else -%}
@@ -196,7 +200,7 @@ Deze website is in opbouw. Pagina's kunnen onvolledige of onjuiste informatie be
 
 </details>
 
-{% for class in gen.all_class_objects() if not class.annotations.external_registry | sort(attribute=sort_by) %}
+{% for class in gen.all_class_objects() if not class.annotations.external_registry | rejectattr('name', 'eq', 'Any') | sort(attribute=sort_by) %}
 
 ## {{class.name}}
 

@@ -6,11 +6,14 @@ comments:
 version: 1.0.0-draft
 default_range: Tekst
 prefixes:
+  linkml: https://w3id.org/linkml/
   meetcomponentenregister: https://netbeheernederland.nl/conceptueelinformatiemodel/meetcomponentenregister/
   nbnl: https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/
   nbility: https://nbility-model.github.io/NBility-business-capabilities-Archi/
 default_prefix: meetcomponentenregister
 classes:
+  Any:
+    class_uri: linkml:Any
   Meetcomponent:
     description: instrument dat energie-uitwisseling meet of deze meting op afstand uitleesbaar maakt
     annotations:
@@ -68,8 +71,6 @@ classes:
     description: instrument dat energie-uitwisseling meet
     source: https://wetten.overheid.nl/jci1.3:c:BWBR0050714&z=2025-02-22&g=2025-02-22
     is_a: Meetcomponent
-    comments:
-      - Een meter is een meetmiddel voor óf een allocatiepunt óf een GCvO-installatie.
     see_also:
       - https://wetten.overheid.nl/jci1.3:c:BWBR0037934&hoofdstuk=2&paragraaf=2.1&artikel=2.1.4&z=2025-01-01&g=2025-01-01
       - https://www.netbeheernederland.nl/publicatie/reglement-meterparkbeheer-v62
@@ -98,7 +99,6 @@ classes:
         annotations:
           inverse_cardinality: "*"
       meetmiddel voor:
-        range: Any
         exactly_one_of:
           - range: Allocatiepunt bij aansluiting
           - range: GCvO-installatie
