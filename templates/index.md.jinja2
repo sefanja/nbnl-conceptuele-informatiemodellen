@@ -41,12 +41,15 @@
 {%- macro compute_range(slot) -%}
     {%- if slot.any_of or slot.exactly_one_of -%}
         {%- for subslot_range in schemaview.slot_range_as_union(slot) | reject('eq', slot.range) -%}
-            {%- if slot.exactly_one_of %}óf {% endif %}{{ range(subslot_range) }}
-            {%- if not loop.last -%}
-                {%- if slot.exactly_one_of -%}
-                    &nbsp;óf&nbsp;<br />
-                {%- else -%}
-                    &nbsp;en/of&nbsp;<br />
+            {%- if slot.exactly_one_of -%}
+                {%- if not loop.first -%}
+                    &nbsp;
+                {%- endif -%}
+                óf {{ range(subslot_range) }}
+            {%- else -%}
+                {{ range(subslot_range) }}
+                {%- if not loop.last -%}
+                    &nbsp;en/of&nbsp;
                 {%- endif -%}
             {%- endif -%}
         {%- endfor -%}
@@ -238,10 +241,10 @@ Specialisatie van {{link(schemaview.get_class(class.is_a).name)}}
 ### Relaties
 {{ '{: .no_toc }' }}
 
-| Relatie | Naar | Omschrijving |
-| :---  | :--- | :--- |
+| Relatie | Omschrijving |
+| :---  | :--- |
 {% for slot in relationships -%}
-| {{key_symbol(class, slot)}}{{slot.name}} | {{compute_range(slot)}}<br/>_{% if slot.annotations.inverse_cardinality %}{{slot.annotations.inverse_cardinality.value }}{% endif %} → {{ gen.cardinality(slot) }}_ | {{omschrijving(slot)}} |
+| {{key_symbol(class, slot)}}{{slot.name}} {{compute_range(slot)}}<br/>_{% if slot.annotations.inverse_cardinality %}{{slot.annotations.inverse_cardinality.value }}{% endif %} → {{ gen.cardinality(slot) }}_ | {{omschrijving(slot)}} |
 {% endfor %}
 {% endif %}
 

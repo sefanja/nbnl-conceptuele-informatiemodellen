@@ -17,9 +17,15 @@ classes:
   Meetcomponent:
     description: instrument dat energie-uitwisseling meet of deze meting op afstand uitleesbaar maakt
     annotations:
+      nbility_object: Netcomponent
       tijdlijn_geldigheid: true
       tijdlijn_registratie: true
     attributes:
+      beheerd door:
+        description: identificeert de marktpartij (netbeheerder) die verantwoordelijk is voor het beheer van deze meter, via diens registratie in marktcommunicatie
+        range: Marktpartijregistratie
+        annotations:
+          inverse_cardinality: "*"
       bouwjaar:
         description: jaar van productie of revisie zoals vermeld op het apparaat of geregistreerd in een daartoe bestemd systeem
         required: true
@@ -39,10 +45,10 @@ classes:
       IMEI:
         description: unieke identificatiecode van een mobiel apparaat volgens de 3GPP-standaard voor apparaatidentificatie
       lokaal communicatieprotocol:
-        description: protocol voor gegevensuitwisseling tussen gekoppelde meetcomponenten binnen een beperkte reikwijdte
+        description: protocol voor gegevensuitwisseling binnen een beperkte reikwijdte
         range: Lokaal communicatieprotocol
       serienummer:
-        description: unieke code die door de fabrikant aan een exemplaar uit een reeks meters gegeven wordt
+        description: unieke code die door de fabrikant aan een exemplaar uit een reeks producten gegeven wordt
         required: true
       simkaartnummer:
         description: unieke identificatiecode van de simfunctionaliteit volgens de 3GPP-standaarden voor ICCID of EID
@@ -61,8 +67,6 @@ classes:
         multivalued: false
         annotations:
           inverse_cardinality: "*"
-      serienummer:
-        required: true
     unique_keys:
       primary_key:
         unique_key_slots:
@@ -79,9 +83,6 @@ classes:
         description: datum waarop de batterij voor het laatst is vervangen
         comments:
           - niet van toepassing op elektriciteitsmeters
-      beheerd door:
-        description: identificeert de marktpartij (netbeheerder) die verantwoordelijk is voor het beheer van deze meter, via diens registratie in marktcommunicatie
-        range: Marktpartijregistratie
       correctiefactor voor indirecte meting:
         description: factor waarmee het getal van de telwerken vermenigvuldigd moet worden om de meetwaarde te corrigeren voor een meting via meettransformatoren
         comments:
@@ -139,7 +140,7 @@ classes:
         range: Datum
       zegelcategorie:
         description: classificatie van de fabriekszegelstatus
-        range: Fabriekszegelstatus
+        range: Zegelcategorie
     unique_keys:
       primary_key:
         unique_key_slots:
@@ -176,14 +177,6 @@ enums:
         description: lithium-mangaanoxide
       LiFePO4:
         description: lithium-ijzerfosfaat
-  Fabriekszegelstatus:
-    permissible_values:
-      oorspronkelijke fabriekszegel:
-        description: de zegel is sinds fabricage niet verbroken
-      verbroken zegel:
-        description: de zegel is verbroken, zonder dat een revisie heeft plaatsgevonden
-      gereviseerd:
-        description: de zegel is vervangen na een formele revisie
   Lokaal communicatieprotocol:
     permissible_values:
       M-bus:
@@ -204,6 +197,14 @@ enums:
       te lang niet uitgelezen:
       geen communicatiepad:
       anders:
+  Zegelcategorie:
+    permissible_values:
+      oorspronkelijke fabriekszegel:
+        description: de zegel is sinds fabricage niet verbroken
+      verbroken zegel:
+        description: de zegel is verbroken, zonder dat een revisie heeft plaatsgevonden
+      gereviseerd:
+        description: de zegel is vervangen na een formele revisie
 
 types:
   Datum:
