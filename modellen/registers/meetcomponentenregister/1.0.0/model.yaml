@@ -116,7 +116,7 @@ classes:
         annotations:
           inverse_cardinality: 0..*
       verzegeldatum:
-        decription: datum waarop het apparaat voor het laatst metrologisch is verzegeld ter waarborging van de meetintegriteit
+        description: datum waarop het apparaat voor het laatst metrologisch is verzegeld ter waarborging van de meetintegriteit
         range: Datum
       zegelcategorie:
         description: classificatie van de fabriekszegelstatus
