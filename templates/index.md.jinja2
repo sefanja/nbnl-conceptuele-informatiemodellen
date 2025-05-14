@@ -28,8 +28,8 @@
 {%- macro range(name) -%}
     {%- if name in schemaview.all_classes() -%}
         {%- set class = schemaview.get_class(name) -%}
-        {%- if class.annotations and class.annotations.external_registry -%}
-            {{ name }} (in {{class.annotations.external_registry.value}})
+        {%- if class.annotations.external_registry -%}
+            {{ name }} ({{class.annotations.external_registry.value}})
         {%- else -%}
             {{ link(name) }}
         {%- endif -%}
@@ -196,13 +196,9 @@ Deze website is in opbouw. Pagina's kunnen onvolledige of onjuiste informatie be
 
 </details>
 
-{% for class in gen.all_class_objects()|sort(attribute=sort_by) %}
+{% for class in gen.all_class_objects() if not class.annotations.external_registry | sort(attribute=sort_by) %}
 
 ## {{class.name}}
-
-{% if class.annotations and class.annotations.external_registry %}
-Beheerd in {{class.annotations.external_registry.value}}
-{% endif %}
 
 {% if class.is_a %}
 Specialisatie van {{link(schemaview.get_class(class.is_a).name)}}
@@ -232,7 +228,7 @@ Specialisatie van {{link(schemaview.get_class(class.is_a).name)}}
 | Relatie | Naar | Omschrijving |
 | :---  | :--- | :--- |
 {% for slot in relationships -%}
-| {{key_symbol(class, slot)}}{{slot.name}} | {{compute_range(slot)}}<br/>_{% if slot.annotations and slot.annotations.inverse_cardinality %}{{slot.annotations.inverse_cardinality.value }}{% endif %} → {{ gen.cardinality(slot) }}_ | {{omschrijving(slot)}} |
+| {{key_symbol(class, slot)}}{{slot.name}} | {{compute_range(slot)}}<br/>_{% if slot.annotations.inverse_cardinality %}{{slot.annotations.inverse_cardinality.value }}{% endif %} → {{ gen.cardinality(slot) }}_ | {{omschrijving(slot)}} |
 {% endfor %}
 {% endif %}
 
