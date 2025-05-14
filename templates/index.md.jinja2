@@ -206,9 +206,17 @@ Specialisatie van {{link(schemaview.get_class(class.is_a).name)}}
 
 {{omschrijving(class)}}
 
-{% set slots = gen.get_direct_slots(class) %}
-{% set properties = slots | rejectattr('range', 'in', schemaview.all_classes()) | list %}
-{% set relationships = slots | selectattr('range', 'in', schemaview.all_classes()) | list %}
+{% set properties = [] %}
+{% set relationships = [] %}
+{% for slot in gen.get_direct_slots(class) %}
+    {% set ranges = schemaview.slot_range_as_union(slot) %}
+    {% set some_are_classes = ranges | select('in', schemaview.all_classes()) | list | length > 0 %}
+    {% if some_are_classes %}
+        {% set _ = relationships.append(slot) %}
+    {% else %}
+        {% set _ = properties.append(slot) %}
+    {% endif %}
+{% endfor %}
 
 {% if properties %}
 ### Eigenschappen
