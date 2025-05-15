@@ -4,6 +4,7 @@ title: Meetcomponentenregister
 description: Register met gegevens over meters en meetgateways die worden beheerd door Nederlandse netbeheerders.
 comments:
   - Het Meetcomponentenregister bevat informatie over fysieke apparaten met meetgerelateerde functionaliteit, zoals energiehoeveelheidsmeters en communicatiegateways, die zijn ontworpen voor gebruik bij kleinverbruikaansluitingen. Deze componenten worden ingezet voor het registreren van gegevens over energie-uitwisseling of het overbrengen daarvan via mobiele communicatie.
+  - Aangenomen wordt dat een meetgateway altijd fysiek wordt ingeprikt op een gatewaybehuizing of de elektriciteitsmeter op het primaire allocatiepunt (PAP).
   - Items gemarkeerd met een ⚠ moeten expliciet zijn besproken in de review voordat het model naar versie 1.0 kan.
 version: 1.0.0-draft
 default_range: Tekst
@@ -54,7 +55,8 @@ classes:
         range: Geheel getal
       communicatiemiddel voor:
         comments:
-          - Deze relatie is veel-op-veel, bijvoorbeeld voor de situatie waarin er in één meterkast twee zelfstandig communicerende elektriciteitsmeters zijn en een gasmeter die wordt uitgelezen via een elektriciteitsmeter.
+          - In een standaardsituatie met een elektriciteitsmeter, gasmeter en gateway, is de gateway het communicatiemiddel voor beide aansluitingen. In een situatie zonder gateway is de elektriciteitsmeter het communicatiemiddel voor beide aansluitingen.
+          - Deze relatie is veel-op-veel, bijvoorbeeld voor de situatie waarin er in één meterkast twee zelfstandig communicerende elektriciteitsmeters zijn en een gasmeter die wordt uitgelezen via een van de elektriciteitsmeters.
         range: Aansluiting
         required: false
         multivalued: true
@@ -98,8 +100,8 @@ classes:
   Meter:
     description: instrument dat energie-uitwisseling meet
     comments:
-      - ⚠ Een elektriciteits'meter' die bij een sologasaansluiting niet meet maar slechts communiceert, moet gezien de definities worden beschouwd als `Meetgateway`.
-      - ⚠ Een elektriciteits'meter' die bij een sologasaansluiting niet meet of communiceert maar slechts dient ter ondersteuning van de meetgateway, moet gezien de definities worden beschouwd als 'Gatewaybehuizing'.
+      - ⚠ Een elektriciteits'meter' die bij een sologasaansluiting niet meet maar slechts communiceert, moet gezien de definities worden beschouwd als Meetgateway.
+      - ⚠ Een elektriciteits'meter' die bij een sologasaansluiting niet meet of communiceert maar slechts dient ter ondersteuning van de meetgateway, moet gezien de definities worden beschouwd als Gatewaybehuizing.
     source: https://wetten.overheid.nl/jci1.3:c:BWBR0050714&z=2025-02-22&g=2025-02-22
     is_a: Meetcomponent
     see_also:
@@ -154,6 +156,8 @@ classes:
         range: Waar of onwaar
       vast uitgevoerd met:
         range: Telwerkconfiguratie
+        comments:
+          - Niet van toepassing op meters waarvan de telwerkconfiguratie instelbaar is.
         required: false
         multivalued: false
         annotations:

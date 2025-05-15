@@ -99,6 +99,9 @@
 
     {# NBility #}
     {%- for a in element.annotations -%}
+        {%- if a == 'nbility_function' -%}
+            {%- set _ = parts.items.append('NBility-functie: [' ~ element.annotations[a].value ~ '](https://nbility-model.github.io/NBility-business-capabilities-Archi/?view=id-8becf2d90261476faa9d53240e6cf2c8)') -%}
+        {%- endif -%}
         {%- if a == 'nbility_object' -%}
             {%- set _ = parts.items.append('NBility-object: [' ~ element.annotations[a].value ~ '](https://nbility-model.github.io/NBility-business-capabilities-Archi/?view=id-8becf2d90261476faa9d53240e6cf2c8)') -%}
         {%- endif -%}
@@ -172,10 +175,6 @@ Deze website is in opbouw. Pagina's kunnen onvolledige of onjuiste informatie be
 {{ '{: .no_toc }' }}
 
 {{ omschrijving(schema) }}
-
-{% if schema.annotations.nbility_function %}
-NBility-functie: [{{ schema.annotations.nbility_function.value }}](https://nbility-model.github.io/NBility-business-capabilities-Archi/?view=id-8becf2d90261476faa9d53240e6cf2c8)
-{% endif %}
 
 ## Inhoud
 {{ '{: .no_toc .text-delta }' }}
