@@ -245,7 +245,7 @@ Specialisatie van {{link(schemaview.get_class(class.is_a).name)}}
 ### Relaties
 {{ '{: .no_toc }' }}
 
-| Relatie | Omschrijving |
+| {{class.name}} is ... | Omschrijving |
 | :---  | :--- |
 {% for slot in relationships -%}
 | {{key_symbol(class, slot)}}{{slot.name}} {{compute_range(slot)}}<br/>_{% if slot.annotations.inverse_cardinality %}{{slot.annotations.inverse_cardinality.value }}{% endif %} → {{ gen.cardinality(slot) }}_ | {{omschrijving(slot)}} |

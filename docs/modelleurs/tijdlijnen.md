@@ -16,8 +16,8 @@ Tijdlijnmarkeringen zijn alleen van toepassing op *enduranten*: entiteiten die o
 
 De markering gebeurt als volgt:
 
-- In draw.io: `⏲ tijdlijn <type>` na de lijst met eigenschappen.
-- In LinkML: `tijdlijn_<type>: true` binnen `annotations`.
+- In draw.io: `⏲ tijdlijn <type>` (of `⏲ levensduur`) na de lijst met eigenschappen.
+- In LinkML: `tijdlijn_<type>: true` (of `levensduur: true`) binnen `annotations`.
 
 Deze markeringen maken de temporele semantiek van een entiteit expliciet, al in de conceptuele fase. Dat helpt om consistentie te waarborgen in latere uitwerkingen, bijvoorbeeld versiemodellering in het gegevensmodel:
 
@@ -49,13 +49,13 @@ Dit betreft momenten waarop informatie formeel van kracht wordt (bijvoorbeeld in
 - `eind effectuering`  
 - `versie` (optioneel)
 
-## Tijdlijn levensduur
+## Levensduur
 
 Dit betreft het moment van ontstaan en vergaan in de (doorgaans fysieke) werkelijkheid. Standaard eigenschappen in het logisch model:
 
 - `object begintijd`  
 - `object eindtijd`  
 
-Aan de markering mogen aliassen worden toegevoegd, voor gebruik in logische modellen. Bijvoorbeeld `Mens` mag in draw.io worden gemarkeerd met `⏲ tijdlijn levensduur (moment van geboorte, moment van overlijden)`.
+Aan de markering mogen aliassen worden toegevoegd, voor gebruik in logische modellen. Bijvoorbeeld `Mens` mag in draw.io worden gemarkeerd met `⏲ levensduur (moment van geboorte, moment van overlijden)`.
 
 Als een entiteit ook is gemarkeerd met `tijdlijn geldigheid`, dan zijn `object begintijd` en `object eindtijd` doorgaans gelijk aan respectievelijk de eerste `begin geldigheid` en de laatste `eind geldigheid`.
