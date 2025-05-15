@@ -1,8 +1,10 @@
 id: https://netbeheernederland.nl/conceptueelinformatiemodel/meetcomponentenregister
 name: meetcomponentenregister
 title: Meetcomponentenregister
+description: Register met gegevens over meters en meetgateways die worden beheerd door Nederlandse netbeheerders.
 comments:
   - Het Meetcomponentenregister bevat informatie over fysieke apparaten met meetgerelateerde functionaliteit, zoals energiehoeveelheidsmeters en communicatiegateways, die zijn ontworpen voor gebruik bij kleinverbruikaansluitingen. Deze componenten worden ingezet voor het registreren van gegevens over energie-uitwisseling of het overbrengen daarvan via mobiele communicatie.
+  - Items gemarkeerd met een ⚠ moeten expliciet zijn besproken in de review voordat het model naar versie 1.0 kan.
 version: 1.0.0-draft
 default_range: Tekst
 prefixes:
@@ -11,9 +13,23 @@ prefixes:
   nbnl: https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/
   nbility: https://nbility-model.github.io/NBility-business-capabilities-Archi/
 default_prefix: meetcomponentenregister
+annotations:
+  nbility_function: C.3.1.9. Netcomponent in levenscyclusbeheer opnemen
 classes:
   Any:
     class_uri: linkml:Any
+  Gatewaybehuizing:
+    description: apparaat dat een meetgateway voorziet van voeding en gebruikersinterface, ongeacht of het een speciaal daarvoor bedoeld apparaat is of een niet-actieve elektriciteitsmeter
+    annotations:
+      nbility_object: Netcomponent
+    attributes:
+      identificatie:
+        description: unieke aanduiding waarmee een instantie van een object binnen een gegeven context ondubbelzinnig herkenbaar is
+        required: true
+    unique_keys:
+      primary_key:
+        unique_key_slots:
+        - identificatie
   Meetcomponent:
     description: instrument dat energie-uitwisseling meet of deze meting op afstand uitleesbaar maakt
     annotations:
@@ -22,7 +38,7 @@ classes:
       tijdlijn_registratie: true
     attributes:
       beheerd door:
-        description: identificeert de marktpartij (netbeheerder) die verantwoordelijk is voor het beheer van deze meter, via diens registratie in marktcommunicatie
+        description: identificeert de marktpartij (netbeheerder) die verantwoordelijk is voor het beheer, via diens registratie in marktcommunicatie
         range: Marktpartijregistratie
         annotations:
           inverse_cardinality: "*"
@@ -31,11 +47,13 @@ classes:
         required: true
         range: Geheel getal
       communicatiemiddel voor:
+        comments:
+          - Deze relatie is veel-op-veel, bijvoorbeeld voor de situatie waarin er in één meterkast twee zelfstandig communicerende elektriciteitsmeters zijn en een gasmeter die wordt uitgelezen via een elektriciteitsmeter.
         range: Aansluiting
         required: false
         multivalued: true
         annotations:
-          inverse_cardinality: 0..1
+          inverse_cardinality: 0..*
       DSMR-versie:
         description: versie van de Dutch Smart Meter Requirements (DSMR) waaraan de meter voldoet
         comments:
@@ -73,6 +91,9 @@ classes:
         - gatewaynummer
   Meter:
     description: instrument dat energie-uitwisseling meet
+    comments:
+      - ⚠ Een elektriciteits'meter' die bij een sologasaansluiting niet meet maar slechts communiceert, moet worden beschouwd als `Meetgateway`.
+      - ⚠ Een elektriciteits'meter' die bij een sologasaansluiting niet meet of communiceert maar slechts dient ter ondersteuning van de meetgateway, moet worden beschouwd als 'Gatewaybehuizing'.
     source: https://wetten.overheid.nl/jci1.3:c:BWBR0050714&z=2025-02-22&g=2025-02-22
     is_a: Meetcomponent
     see_also:
@@ -88,12 +109,6 @@ classes:
         comments:
           - Alleen van toepassing op elektriciteit.
         range: Getal
-      facilitator voor:
-        range: Meetgateway
-        required: false
-        multivalued: false
-        annotations:
-          inverse_cardinality: 0..1
       ingedeeld naar:
         range: Metercodering
         required: true
@@ -105,6 +120,8 @@ classes:
         exactly_one_of:
           - range: Allocatiepunt bij aansluiting
           - range: GCvO-installatie
+        comments:
+          - Alhoewel een GCvO-installatie of allocatiepunt in principe bemeten kan worden door meerdere meters, maakt dit model de aanname dat dat niet het geval kan zijn bij kleinverbruikaansluitingen.
         required: false
         multivalued: false
         annotations:

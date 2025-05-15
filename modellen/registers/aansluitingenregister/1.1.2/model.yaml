@@ -12,6 +12,9 @@ source: https://wetten.overheid.nl/jci1.3:c:BWBR0037934&hoofdstuk=2&paragraaf=2.
 comments:
   - Het aansluitingenregister wordt gezamenlijk beheerd door de netbeheerders en bevat zowel fysieke als administratieve gegevens over aansluitingen. Het register is essentieel voor de werking van de energiemarkt omdat het de basis vormt voor processen zoals leverancierswisselingen, verhuizingen en facturatie.
   - De verplichting tot het bijhouden van het aansluitingenregister is vastgelegd in de Informatiecode elektriciteit en gas, vastgesteld door de Autoriteit Consument en Markt (ACM).
+# conventie: altijd verwijzing naar NBility-functie/capability
+annotations:
+  nbility_function: C.6.2.1. Aansluitingen/allocatiepunten beheren
 prefixes:
   linkml: https://w3id.org/linkml/
   aansluitingenregister: https://netbeheernederland.nl/conceptueelinformatiemodel/aansluitingenregister/
