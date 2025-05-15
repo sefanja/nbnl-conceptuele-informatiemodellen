@@ -26,6 +26,12 @@ classes:
       identificatie:
         description: unieke aanduiding waarmee een instantie van een object binnen een gegeven context ondubbelzinnig herkenbaar is
         required: true
+      ondersteuning voor:
+        range: Meetgateway
+        required: true
+        multivalued: false
+        annotations:
+          inverse_cardinality: 0..1
     unique_keys:
       primary_key:
         unique_key_slots:
@@ -53,7 +59,7 @@ classes:
         required: false
         multivalued: true
         annotations:
-          inverse_cardinality: 0..*
+          inverse_cardinality: "*"
       DSMR-versie:
         description: versie van de Dutch Smart Meter Requirements (DSMR) waaraan de meter voldoet
         comments:
@@ -92,8 +98,8 @@ classes:
   Meter:
     description: instrument dat energie-uitwisseling meet
     comments:
-      - ⚠ Een elektriciteits'meter' die bij een sologasaansluiting niet meet maar slechts communiceert, moet worden beschouwd als `Meetgateway`.
-      - ⚠ Een elektriciteits'meter' die bij een sologasaansluiting niet meet of communiceert maar slechts dient ter ondersteuning van de meetgateway, moet worden beschouwd als 'Gatewaybehuizing'.
+      - ⚠ Een elektriciteits'meter' die bij een sologasaansluiting niet meet maar slechts communiceert, moet gezien de definities worden beschouwd als `Meetgateway`.
+      - ⚠ Een elektriciteits'meter' die bij een sologasaansluiting niet meet of communiceert maar slechts dient ter ondersteuning van de meetgateway, moet gezien de definities worden beschouwd als 'Gatewaybehuizing'.
     source: https://wetten.overheid.nl/jci1.3:c:BWBR0050714&z=2025-02-22&g=2025-02-22
     is_a: Meetcomponent
     see_also:
