@@ -44,7 +44,7 @@ classes:
     comments:
       - De term *marktmeter* is gekozen om expliciet te maken dat het uitsluitend gaat om meters die een rol spelen in het marktproces. Dit voorkomt verwarring met fysieke meetapparatuur die wordt ingezet als bijvoorbeeld sensor of gateway.
       - Buiten deze definitie vallen meters die worden ingezet als sensor of gateway. Zij leveren namelijk geen gegevens aan het marktproces en vallen onder een ander functioneel beheer dan marktmetering.
-      - De regelgeving lijkt niet eenduidig over de bemeting van een streng van lichtmasten ([artikel 3.3.3 van de Tarievencode elektriciteit](https://wetten.overheid.nl/jci1.3:c:BWBR0037951&hoofdstuk=3&paragraaf=3.3&artikel=3.3.3&z=2025-04-26&g=2025-04-26)). Een streng kan worden beschouwd als een aansluiting met één (primair) allocatiepunt en veel overdrachtspunten. Indien bemeting voor verrekening niet is toegestaan, dan is de meter geen marktmeter maar een sensor in het net. Een OVL-kast
+      - De regelgeving lijkt niet eenduidig over de bemeting van een streng van lichtmasten ([artikel 3.3.3 van de Tarievencode elektriciteit](https://wetten.overheid.nl/jci1.3:c:BWBR0037951&hoofdstuk=3&paragraaf=3.3&artikel=3.3.3&z=2025-04-26&g=2025-04-26)). Een streng kan worden beschouwd als een aansluiting met één (primair) allocatiepunt en veel overdrachtspunten. Indien bemeting voor verrekening in deze situatie niet is toegestaan, dan is de meter geen marktmeter maar een sensor in het net.
     source: https://wetten.overheid.nl/jci1.3:c:BWBR0050714&z=2025-02-22&g=2025-02-22
     is_a: Meetcomponent
     see_also:
