@@ -4,8 +4,8 @@ title: Meetcomponentenregister
 description: Register met gegevens over meters en meetgateways die worden beheerd door Nederlandse netbeheerders.
 comments:
   - Het Meetcomponentenregister bevat informatie over fysieke apparaten met meetgerelateerde functionaliteit, zoals energiehoeveelheidsmeters en communicatiegateways, die zijn bedoeld voor gebruik bij kleinverbruikaansluitingen. Deze componenten worden ingezet voor het registreren van gegevens over energie-uitwisseling of het overbrengen daarvan via mobiele communicatie.
-  - In het NBility-domein C.5 (Werkzaamheden uitvoeren aan energienetten) worden fysieke objecten beheerd als materiaal, op basis van technische eigenschappen en inzetmogelijkheden. In C.3 (Ontwikkeling en instandhouding van energienetten besturen) worden in beginsel alleen geplaatste objecten geregistreerd die een concrete netfunctie vervullen. Zij krijgen een netcomponenttype toegekend op basis van hun feitelijke inzet, zoals marktmeter, sensor of gateway. Deze functionele classificatie bepaalt niet alleen de rol van het object, maar ook in welk register het wordt opgenomen. Netcomponentbeheer in C.3 richt zich op werkzame, netrelevante onderdelen; alternatieve inzetmogelijkheden vallen buiten dit domein en behoren tot het materiaalbeheer in C.5. Zo blijven verantwoordelijkheden gescheiden en semantische zuiverheid gewaarborgd.
-  - Aangenomen wordt dat een meetgateway altijd fysiek wordt ingeprikt op een gatewaybehuizing of de elektriciteitsmeter op het primaire allocatiepunt (PAP). Dit maakt registratie van de 'prikconfiguratie' overbodig.
+  - Niet alle meters worden in dit register opgenomen als marktmeter. In het NBility-domein C.5 (Werkzaamheden uitvoeren aan energienetten) worden fysieke objecten beheerd als materiaal, op basis van hun technische eigenschappen en inzetmogelijkheden. In C.3 (Ontwikkeling en instandhouding van energienetten besturen) worden in beginsel alleen geplaatste objecten geregistreerd die een concrete netfunctie vervullen. Deze krijgen een netcomponenttype toegekend op basis van hun feitelijke inzet, zoals marktmeter, sensor of gateway. Zo kan een elektriciteitsmeter uit het magazijn (C.5) bij plaatsing worden geclassificeerd als meetgateway (C.3). Deze functionele classificatie bepaalt niet alleen de rol van het object, maar ook in welk register het thuishoort. Netcomponentbeheer in C.3 richt zich op werkzame, netrelevante onderdelen; alternatieve inzetmogelijkheden vallen buiten dit domein en behoren tot het materiaalbeheer in C.5. Zo blijven verantwoordelijkheden gescheiden en blijft semantische zuiverheid gewaarborgd.
+  - Aangenomen wordt dat een meetgateway altijd fysiek wordt ingeprikt op een gatewaybehuizing of de elektriciteitsmeter op het primaire allocatiepunt (PAP). Dit maakt expliciete registratie van de 'prikconfiguratie' overbodig.
 version: 1.0.0-draft
 default_range: Tekst
 prefixes:
@@ -22,7 +22,7 @@ classes:
   Gatewaybehuizing:
     description: apparaat dat een meetgateway voorziet van voeding en gebruikersinterface, ongeacht of het een speciaal daarvoor bedoeld apparaat is of een niet-actieve elektriciteitsmeter
     comments:
-      - Een elektriciteitsmeter die slechts dient als ondersteuning voor een meetgateway, zonder zelf te communiceren of meten, wordt in dit register beschouwd als Meetgateway.
+      - Een elektriciteitsmeter die slechts dient als ondersteuning voor een meetgateway, zonder zelf te communiceren of meten, wordt in dit register beschouwd als meetgateway.
     annotations:
       nbility_object: Netcomponent
     attributes:
@@ -162,7 +162,7 @@ classes:
   Meetgateway:
     description: instrument dat het op afstand uitleesbaar maken van marktmeters faciliteert, zonder zelf te meten
     comments:
-      - Een elektriciteitsmeter die slechts dient als communicatiemiddel voor een gasmeter, zonder zelf te meten, wordt in dit register beschouwd als Meetgateway.
+      - Een elektriciteitsmeter die slechts dient als communicatiemiddel voor een gasmeter, zonder zelf te meten, wordt in dit register beschouwd als meetgateway.
     is_a: Meetcomponent
     attributes:
       gatewaynummer:
