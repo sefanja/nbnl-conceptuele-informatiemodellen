@@ -3,7 +3,7 @@ name: meetcomponentenregister
 title: Meetcomponentenregister
 description: Register met gegevens over meters en meetgateways die worden beheerd door Nederlandse netbeheerders.
 comments:
-  - Het Meetcomponentenregister bevat informatie over fysieke apparaten met meetgerelateerde functionaliteit, zoals energiehoeveelheidsmeters en communicatiegateways, die zijn ontworpen voor gebruik bij kleinverbruikaansluitingen. Deze componenten worden ingezet voor het registreren van gegevens over energie-uitwisseling of het overbrengen daarvan via mobiele communicatie.
+  - Het Meetcomponentenregister bevat informatie over fysieke apparaten met meetgerelateerde functionaliteit, zoals energiehoeveelheidsmeters en communicatiegateways, die zijn bedoeld voor gebruik bij kleinverbruikaansluitingen. Deze componenten worden ingezet voor het registreren van gegevens over energie-uitwisseling of het overbrengen daarvan via mobiele communicatie.
   - Aangenomen wordt dat een meetgateway altijd fysiek wordt ingeprikt op een gatewaybehuizing of de elektriciteitsmeter op het primaire allocatiepunt (PAP).
   - Items gemarkeerd met een ⚠ moeten expliciet zijn besproken in de review voordat het model naar versie 1.0 kan.
 version: 1.0.0-draft
@@ -21,6 +21,8 @@ classes:
     class_uri: linkml:Any
   Gatewaybehuizing:
     description: apparaat dat een meetgateway voorziet van voeding en gebruikersinterface, ongeacht of het een speciaal daarvoor bedoeld apparaat is of een niet-actieve elektriciteitsmeter
+    comments:
+      - ⚠ Een elektriciteitsmeter die slechts dient als ondersteuning voor een meetgateway, zonder zelf te communiceren of meten, wordt in dit register beschouwd als Meetgateway.
     annotations:
       nbility_object: Netcomponent
     attributes:
@@ -40,9 +42,9 @@ classes:
   Marktmeter:
     description: instrument dat energie-uitwisseling meet ten behoeve van de verrekening
     comments:
-      - ⚠ Buiten deze definitie vallen 'meters' die worden ingezet als sensor in het net of als gateway of gatewaybehuizing voor bijvoorbeeld een sologasaansluiting. Zij leveren namelijk geen gegevens aan het marktproces en vallen onder een ander functioneel beheer dan marktmetering.
-      - ⚠ De regelgeving lijkt nog niet eenduidig over de bemeting van een streng van lichtmasten (zie [artikel 3.3.3 van de Tarievencode elektriciteit](https://wetten.overheid.nl/jci1.3:c:BWBR0037951&hoofdstuk=3&paragraaf=3.3&artikel=3.3.3&z=2025-04-26&g=2025-04-26)). Een streng moet worden beschouwd als een aansluiting met één (primair) allocatiepunt en veel overdrachtspunten. Indien bemeting (voor marktprocessen en verrekening) niet is toegestaan, dan is de meter geen marktmeter maar sensor in het net.
       - De term *marktmeter* is gekozen om expliciet te maken dat het uitsluitend gaat om meters die een rol spelen in het marktproces. Dit voorkomt verwarring met fysieke meetapparatuur die wordt ingezet als bijvoorbeeld sensor of gateway.
+      - ⚠ Buiten deze definitie vallen 'meters' die worden ingezet als sensor in het net of als gateway of gatewaybehuizing voor bijvoorbeeld een sologasaansluiting. Zij leveren namelijk geen gegevens aan het marktproces en vallen onder een ander functioneel beheer dan marktmetering.
+      - ⚠ De regelgeving lijkt nog niet eenduidig over de bemeting van een streng van lichtmasten (zie [artikel 3.3.3 van de Tarievencode elektriciteit](https://wetten.overheid.nl/jci1.3:c:BWBR0037951&hoofdstuk=3&paragraaf=3.3&artikel=3.3.3&z=2025-04-26&g=2025-04-26)). Een streng moet worden beschouwd als een aansluiting met één (primair) allocatiepunt en veel overdrachtspunten. Indien bemeting voor verrekening niet is toegestaan, dan is de meter geen marktmeter maar een sensor in het net.
     source: https://wetten.overheid.nl/jci1.3:c:BWBR0050714&z=2025-02-22&g=2025-02-22
     is_a: Meetcomponent
     see_also:
