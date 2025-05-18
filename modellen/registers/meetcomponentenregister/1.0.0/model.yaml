@@ -4,8 +4,8 @@ title: Meetcomponentenregister
 description: Register met gegevens over meters en meetgateways die worden beheerd door Nederlandse netbeheerders.
 comments:
   - Het Meetcomponentenregister bevat informatie over fysieke apparaten met meetgerelateerde functionaliteit, zoals energiehoeveelheidsmeters en communicatiegateways, die zijn bedoeld voor gebruik bij kleinverbruikaansluitingen. Deze componenten worden ingezet voor het registreren van gegevens over energie-uitwisseling of het overbrengen daarvan via mobiele communicatie.
-  - Niet alle meters worden in dit register opgenomen als marktmeter. In het NBility-domein C.5 (Werkzaamheden uitvoeren aan energienetten) worden fysieke objecten beheerd als materiaal, op basis van hun technische eigenschappen en inzetmogelijkheden. In C.3 (Ontwikkeling en instandhouding van energienetten besturen) worden in beginsel alleen geplaatste objecten geregistreerd die een concrete netfunctie vervullen. Deze krijgen een netcomponenttype toegekend op basis van hun feitelijke inzet, zoals marktmeter, sensor of gateway. Zo kan een elektriciteitsmeter uit het magazijn (C.5) bij plaatsing worden geclassificeerd als meetgateway (C.3). Deze functionele classificatie bepaalt niet alleen de rol van het object, maar ook in welk register het thuishoort. Netcomponentbeheer in C.3 richt zich op werkzame, netrelevante onderdelen; alternatieve inzetmogelijkheden vallen buiten dit domein en behoren tot het materiaalbeheer in C.5. Zo blijven verantwoordelijkheden gescheiden en blijft semantische zuiverheid gewaarborgd.
   - Aangenomen wordt dat een meetgateway altijd fysiek wordt ingeprikt op een gatewaybehuizing of de elektriciteitsmeter op het primaire allocatiepunt (PAP). Dit maakt expliciete registratie van de 'prikconfiguratie' overbodig.
+  - De regelgeving lijkt niet eenduidig over de bemeting van een streng van lichtmasten ([artikel 3.3.3 van de Tarievencode elektriciteit](https://wetten.overheid.nl/jci1.3:c:BWBR0037951&hoofdstuk=3&paragraaf=3.3&artikel=3.3.3&z=2025-04-26&g=2025-04-26)). Een streng kan worden beschouwd als een aansluiting met één (primair) allocatiepunt en veel overdrachtspunten. Indien bemeting voor verrekening in deze situatie niet is toegestaan, dan beschouwen we de meter niet als meter (ten behoeve van de verrekening) maar als sensor in het net, dat buiten het bereik van dit register valt.
 version: 1.0.0-draft
 default_range: Tekst
 prefixes:
@@ -16,13 +16,12 @@ prefixes:
 default_prefix: meetcomponentenregister
 annotations:
   nbility_function: C.3.1.9. Netcomponent in levenscyclusbeheer opnemen
+
 classes:
   Any:
     class_uri: linkml:Any
   Gatewaybehuizing:
-    description: apparaat dat een meetgateway voorziet van voeding en gebruikersinterface, ongeacht of het een speciaal daarvoor bedoeld apparaat is of een niet-actieve elektriciteitsmeter
-    comments:
-      - Een elektriciteitsmeter die slechts dient als ondersteuning voor een meetgateway, zonder zelf te communiceren of meten, wordt in dit register beschouwd als meetgateway.
+    description: apparaat bedoeld om een meetgateway te voorzien van voeding en gebruikersinterface
     annotations:
       nbility_object: Netcomponent
     attributes:
@@ -39,85 +38,8 @@ classes:
       primary_key:
         unique_key_slots:
         - identificatie
-  Marktmeter:
-    description: instrument dat energie-uitwisseling meet ten behoeve van de verrekening
-    comments:
-      - De term *marktmeter* is gekozen om expliciet te maken dat het uitsluitend gaat om meters die een rol spelen in het marktproces. Dit voorkomt verwarring met fysieke meetapparatuur die wordt ingezet als bijvoorbeeld sensor of gateway.
-      - Buiten deze definitie vallen meters die worden ingezet als sensor of gateway. Zij leveren namelijk geen gegevens aan het marktproces en vallen onder een ander functioneel beheer dan marktmetering.
-      - De regelgeving lijkt niet eenduidig over de bemeting van een streng van lichtmasten ([artikel 3.3.3 van de Tarievencode elektriciteit](https://wetten.overheid.nl/jci1.3:c:BWBR0037951&hoofdstuk=3&paragraaf=3.3&artikel=3.3.3&z=2025-04-26&g=2025-04-26)). Een streng kan worden beschouwd als een aansluiting met één (primair) allocatiepunt en veel overdrachtspunten. Indien bemeting voor verrekening in deze situatie niet is toegestaan, dan is de meter geen marktmeter maar een sensor in het net.
-    source: https://wetten.overheid.nl/jci1.3:c:BWBR0050714&z=2025-02-22&g=2025-02-22
-    is_a: Meetcomponent
-    see_also:
-      - https://wetten.overheid.nl/jci1.3:c:BWBR0037934&hoofdstuk=2&paragraaf=2.1&artikel=2.1.4&z=2025-01-01&g=2025-01-01
-      - https://www.netbeheernederland.nl/publicatie/reglement-meterparkbeheer-v62
-    attributes:
-      batterijvervangingsdatum:
-        description: datum waarop de batterij voor het laatst is vervangen
-        comments:
-          - niet van toepassing op elektriciteitsmeters
-      correctiefactor voor indirecte meting:
-        description: factor waarmee het getal van de telwerken vermenigvuldigd moet worden om de meetwaarde te corrigeren voor een meting via meettransformatoren
-        comments:
-          - Alleen van toepassing op elektriciteit.
-        range: Getal
-      ingedeeld naar:
-        range: Metercodering
-        required: true
-        multivalued: false
-        annotations:
-          inverse_cardinality: "*"
-      meetmiddel voor:
-        range: Any
-        exactly_one_of:
-          - range: Allocatiepunt bij aansluiting
-          - range: GCvO-installatie
-        comments:
-          - Alhoewel een GCvO-installatie of allocatiepunt in principe bemeten kan worden door meerdere meters, maakt dit model de aanname dat dat niet het geval kan zijn bij kleinverbruikaansluitingen.
-          - Deze relatie is verplicht omdat een meter zonder deze relatie per definitie geen marktmeter is. Vooraankondigingen van meters die nog niet geplaatst zijn, bijvoorbeeld via shipmentfiles, worden afgehandeld in het logistieke domein (NBility C.5) en maken geen onderdeel uit van het register van actieve netcomponenten (NBility C.3).
-        required: true
-        multivalued: false
-        annotations:
-          inverse_cardinality: 0..1
-      meternummer:
-        description: identificatie van de meter, bestaande uit een combinatie van metercode, serienummer en de laatste twee cijfers van het bouwjaar
-        required: true
-      mobiele-netwerktechnologie:
-        description: technologie voor draadloze communicatie via publieke of private mobiele netwerken volgens gestandaardiseerde telecomprotocollen
-        comments:
-          - Beschrijft de mobiele-netwerktechnologieën die het apparaat technisch ondersteunt; dit impliceert niet dat deze technologieën geactiveerd of operationeel zijn.
-        multivalued: true
-        range: Mobiele-netwerktechnologie
-      reden technisch niet op afstand uitleesbaar:
-        description: verklaring voor het technisch niet op afstand uitleesbaar zijn van de meter
-        range: Reden technisch niet op afstand uitleesbaar
-      batterijtype:
-        description: chemisch type van de ingebouwde primaire batterij, bedoeld voor langdurige autonome werking
-        comments:
-          - Niet van toepassing op elektriciteitsmeters.
-        range: Batterijtype
-      technisch op afstand uitleesbaar:
-        description: kenmerk dat weergeeft of de meter gelet op externe factoren van technische aard al dan niet op afstand uitleesbaar is
-        range: Waar of onwaar
-      vast uitgevoerd met:
-        range: Telwerkconfiguratie
-        comments:
-          - Niet van toepassing op meters waarvan de telwerkconfiguratie instelbaar is.
-        required: false
-        multivalued: false
-        annotations:
-          inverse_cardinality: "*"
-      verzegeldatum:
-        description: datum waarop het apparaat voor het laatst metrologisch is verzegeld ter waarborging van de meetintegriteit
-        range: Datum
-      zegelcategorie:
-        description: classificatie van de fabriekszegelstatus
-        range: Zegelcategorie
-    unique_keys:
-      primary_key:
-        unique_key_slots:
-        - meternummer
   Meetcomponent:
-    description: instrument dat energie-uitwisseling meet of deze meting op afstand uitleesbaar maakt
+    description: apparaat dat energie-uitwisseling meet of deze meting op afstand uitleesbaar maakt
     annotations:
       nbility_object: Netcomponent
       tijdlijn_geldigheid: true
@@ -160,9 +82,7 @@ classes:
       typeaanduiding:
         description: naam die door een fabrikant aan een reeks producten met vergelijkbare eigenschappen wordt gegeven
   Meetgateway:
-    description: instrument dat het op afstand uitleesbaar maken van marktmeters faciliteert, zonder zelf te meten
-    comments:
-      - Een elektriciteitsmeter die slechts dient als communicatiemiddel voor een gasmeter, zonder zelf te meten, wordt in dit register beschouwd als meetgateway.
+    description: apparaat bedoeld om meters op afstand uitleesbaar te maken, zonder zelf energie-uitwisseling te meten
     is_a: Meetcomponent
     attributes:
       gatewaynummer:
@@ -178,6 +98,86 @@ classes:
       primary_key:
         unique_key_slots:
         - gatewaynummer
+  Meter:
+    description: apparaat bedoeld om energie-uitwisseling te meten ten behoeve van de verrekening
+    source: https://wetten.overheid.nl/jci1.3:c:BWBR0050714&z=2025-02-22&g=2025-02-22
+    is_a: Meetcomponent
+    see_also:
+      - https://wetten.overheid.nl/jci1.3:c:BWBR0037934&hoofdstuk=2&paragraaf=2.1&artikel=2.1.4&z=2025-01-01&g=2025-01-01
+      - https://www.netbeheernederland.nl/publicatie/reglement-meterparkbeheer-v62
+    attributes:
+      batterijtype:
+        description: chemisch type van de ingebouwde primaire batterij, bedoeld voor langdurige autonome werking
+        comments:
+          - Niet van toepassing op elektriciteitsmeters.
+        range: Batterijtype
+      batterijvervangingsdatum:
+        description: datum waarop de batterij voor het laatst is vervangen
+        comments:
+          - niet van toepassing op elektriciteitsmeters
+      correctiefactor voor indirecte meting:
+        description: factor waarmee het getal van de telwerken vermenigvuldigd moet worden om de meetwaarde te corrigeren voor een meting via meettransformatoren
+        comments:
+          - Alleen van toepassing op elektriciteit.
+        range: Getal
+      ingedeeld naar:
+        range: Metercodering
+        required: true
+        multivalued: false
+        annotations:
+          inverse_cardinality: "*"
+      meetmiddel voor:
+        range: Any
+        exactly_one_of:
+          - range: Allocatiepunt bij aansluiting
+          - range: GCvO-installatie
+        comments:
+          - Alhoewel een GCvO-installatie of allocatiepunt in principe bemeten kan worden door meerdere meters, maakt dit model de aanname dat dat niet het geval kan zijn bij kleinverbruikaansluitingen.
+        required: false
+        multivalued: false
+        annotations:
+          inverse_cardinality: 0..1
+      ondersteuning voor:
+        range: Meetgateway
+        required: false
+        multivalued: false
+        annotations:
+          inverse_cardinality: 0..1
+      meternummer:
+        description: identificatie van de meter, bestaande uit een combinatie van metercode, serienummer en de laatste twee cijfers van het bouwjaar
+        required: true
+      mobiele-netwerktechnologie:
+        description: technologie voor draadloze communicatie via publieke of private mobiele netwerken volgens gestandaardiseerde telecomprotocollen
+        comments:
+          - Beschrijft de mobiele-netwerktechnologieën die het apparaat technisch ondersteunt; dit impliceert niet dat deze technologieën geactiveerd of operationeel zijn.
+        multivalued: true
+        range: Mobiele-netwerktechnologie
+      reden technisch niet op afstand uitleesbaar:
+        description: verklaring voor het technisch niet op afstand uitleesbaar zijn van de meter
+        range: Reden technisch niet op afstand uitleesbaar
+      technisch op afstand uitleesbaar:
+        description: kenmerk dat weergeeft of de meter gelet op externe factoren van technische aard al dan niet op afstand uitleesbaar is
+        range: Waar of onwaar
+      vast uitgevoerd met:
+        range: Telwerkconfiguratie
+        comments:
+          - Niet van toepassing op meters waarvan de telwerkconfiguratie instelbaar is.
+        required: false
+        multivalued: false
+        annotations:
+          inverse_cardinality: "*"
+      verzegeldatum:
+        description: datum waarop het apparaat voor het laatst metrologisch is verzegeld ter waarborging van de meetintegriteit
+        range: Datum
+      zegelcategorie:
+        description: classificatie van de fabriekszegelstatus
+        range: Zegelcategorie
+    unique_keys:
+      primary_key:
+        unique_key_slots:
+        - meternummer
+
+  # extern:
   Aansluiting:
     annotations:
       external_registry: "[Aansluitingenregister](../../aansluitingenregister)"
@@ -239,6 +239,7 @@ enums:
         description: de zegel is vervangen na een formele revisie
 
 types:
+  # basistypen:
   Datum:
     description: kalenderdatum, zonder tijdsaanduiding
     base: date
