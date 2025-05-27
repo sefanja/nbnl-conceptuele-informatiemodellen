@@ -1,13 +1,12 @@
-\{: .warning } Deze website is in opbouw. Pagina’s kunnen onvolledige of
+[WARNING,caption="let op"]
+--
+Deze website is in opbouw. Pagina’s kunnen onvolledige of
 onjuiste informatie bevatten.
+--
 
 == Wegwijs in de modellen
 
-\{: .no_toc }
-
 === Inhoud
-
-\{: .no_toc .text-delta } 1. TOC \{:toc}
 
 De conceptuele informatiemodellen op deze website gebruiken eenvoudige
 diagrammen om te laten zien _welke begrippen er zijn_ en _hoe die met
@@ -19,12 +18,13 @@ Een *entiteit* is iets uit de werkelijkheid waarover we informatie
 vastleggen, bijvoorbeeld een aansluiting, een meter of een klant. In het
 diagram zie je entiteiten als *rechthoeken* met een naam erin.
 
-[source,mermaid]
+[mermaid,svg]
 ----
 erDiagram
     Aansluiting {
     }
 ----
+
 
 === Eigenschappen
 
@@ -34,7 +34,7 @@ entiteitsnaam. +
 Voorbeeld: een `+Aansluiting+` heeft een `+EAN_code+` en een
 `+energiedrager+` (elektriciteit of gas).
 
-[source,mermaid]
+[mermaid]
 ----
 erDiagram
     Aansluiting {
@@ -50,7 +50,7 @@ Entiteiten hangen vaak met elkaar samen. Zo liggen in een *netgebied*
 één of meer *aansluitingen*. Dat zie je als een lijn tussen twee
 entiteiten, met een naam erbij.
 
-[source,mermaid]
+[mermaid]
 ----
 erDiagram
     Netgebied |o--o{ Aansluiting : "gelegen in"
@@ -77,7 +77,7 @@ Bijvoorbeeld:
 * `+}|--||+` → Eén of meer overdrachtspunten zijn deel van exact één
 aansluiting
 
-[source,mermaid]
+[mermaid]
 ----
 erDiagram
     Netgebied |o--o{ Aansluiting : "gelegen in"
@@ -96,7 +96,7 @@ tijdinformatie bevat, zie je annotaties als:
 Deze geven aan in welke periode een gegeven geldig is. Dit noemen we ook
 wel een tijdlijn of _tijdslijnmodellering_ (NEN 3610).
 
-[source,mermaid]
+[mermaid]
 ----
 erDiagram
     Aansluiting {
@@ -106,14 +106,12 @@ erDiagram
 
 === TODO
 
-\{: .no_toc }
-
 * essentiële versus accidentiële eigenschappen (ook multipliciteit)
 * afleidbare elementen
 * verwijzingen naar andere registers en basisregistraties
 * NBility-kleuren
 
-[source,mermaid]
+[mermaid]
 ----
 erDiagram
     Entiteit {

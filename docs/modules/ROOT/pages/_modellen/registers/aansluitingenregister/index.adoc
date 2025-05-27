@@ -1,0 +1,3 @@
+# aansluitingenregister
+:title: aansluitingenregister
+:parent: Registers

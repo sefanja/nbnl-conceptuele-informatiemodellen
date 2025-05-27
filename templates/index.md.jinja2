@@ -1,7 +1,17 @@
+= {% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% endif %}
+
+:toc:
+:toclevels: 3
+:parent: {% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% endif %}
+
+{%- macro uri_link(curie) -%}
+  {{ curie }}
+{%- endmacro -%}
+
 {%- macro key_symbol(class, slot) -%}
   {%- for key in class.unique_keys -%}
     {%- if slot.name in class.unique_keys[key].unique_key_slots -%}
-      <span title="Maakt deel uit van de identificatie">⚿</span>&nbsp;
+      link:#[^⚿^,title="Maakt deel uit van de identificatie"]
     {%- endif -%}
   {%- endfor -%}
 {%- endmacro -%}
@@ -18,11 +28,12 @@
 {%- endmacro -%}
 
 {%- macro link(name) -%}
-[{{ name }}](#{{ id_safe(name) }})
+{# {{ id_safe(name) }}[#{{ name }}] #}
+{{ name }}
 {%- endmacro -%}
 
 {%- macro anchor(name) -%}
-<span id="{{ id_safe(name) }}">{{name}}</span>
+<<id_safe(name),{{ name }}>>
 {%- endmacro -%}
 
 {%- macro range(name) -%}
@@ -43,13 +54,13 @@
         {%- for subslot_range in schemaview.slot_range_as_union(slot) | reject('eq', slot.range) -%}
             {%- if slot.exactly_one_of -%}
                 {%- if not loop.first -%}
-                    &nbsp;
+                    {nbsp}
                 {%- endif -%}
                 óf {{ range(subslot_range) }}
             {%- else -%}
                 {{ range(subslot_range) }}
                 {%- if not loop.last -%}
-                    &nbsp;en/of&nbsp;
+                    {nbsp}en/of{nbsp}
                 {%- endif -%}
             {%- endif -%}
         {%- endfor -%}
@@ -81,7 +92,7 @@
 {%- macro source(element) -%}
 {%- if element.source -%}
     {%- set label = get_label(element.source) -%}
-    [{{ label if label else '1' }}]({{ element.source }})
+    {{ element.source }}[{{ label if label else '1' }}]
 {%- endif -%}
 {%- endmacro -%}
 
@@ -89,7 +100,7 @@
 {%- if element.see_also -%}
     {%- for url in element.see_also -%}
         {%- set label = get_label(url) -%}
-        [{{ label if label != 'None' else loop.index }}]({{ url }}){% if not loop.last %}, {% endif -%}
+        {{ url }}[{{ label if label != 'None' else loop.index }}]{% if not loop.last %}, {% endif -%}
     {%- endfor -%}
 {%- endif -%}
 {%- endmacro -%}
@@ -100,16 +111,16 @@
     {# NBility #}
     {%- for a in element.annotations -%}
         {%- if a == 'nbility_function' -%}
-            {%- set _ = parts.items.append('NBility-functie: [' ~ element.annotations[a].value ~ '](https://nbility-model.github.io/NBility-business-capabilities-Archi/?view=id-8becf2d90261476faa9d53240e6cf2c8)') -%}
+            {%- set _ = parts.items.append('NBility-functie: https://nbility-model.github.io/NBility-business-capabilities-Archi/?view=id-8becf2d90261476faa9d53240e6cf2c8[' ~ element.annotations[a].value ~ ']') -%}
         {%- endif -%}
         {%- if a == 'nbility_object' -%}
-            {%- set _ = parts.items.append('NBility-object: [' ~ element.annotations[a].value ~ '](https://nbility-model.github.io/NBility-business-capabilities-Archi/?view=id-8becf2d90261476faa9d53240e6cf2c8)') -%}
+            {%- set _ = parts.items.append('NBility-object: https://nbility-model.github.io/NBility-business-capabilities-Archi/?view=id-8becf2d90261476faa9d53240e6cf2c8)[' ~ element.annotations[a].value ~ ']') -%}
         {%- endif -%}
     {%- endfor -%}
 
     {# meaning #}
     {%- if element.meaning -%}
-        {%- set _ = parts.items.append('_' ~ gen.uri_link(element.meaning) ~ '_') -%}
+        {%- set _ = parts.items.append('_' ~ uri_link(element.meaning) ~ '_') -%}
     {%- endif -%}
 
     {# exact_mappings  #}
@@ -117,7 +128,7 @@
     {%- if mappings -%}
         {%- set linked = [] -%}
         {%- for m in mappings -%}
-            {%- set _ = linked.append(gen.uri_link(m)) -%}
+            {%- set _ = linked.append(uri_link(m)) -%}
         {%- endfor -%}
         {%- set markdown_line = '_' ~ linked | join(', ') ~ '_' -%}
         {%- set _ = parts.items.append(markdown_line) -%}
@@ -140,7 +151,7 @@
 
     {# comments #}
     {%- if element.comments -%}
-        {%- set _ = parts.items.append(element.comments | join('<br/><br/>')) -%}
+        {%- set _ = parts.items.append(element.comments | join('\n\n')) -%}
     {%- endif -%}
 
     {# tijdlijnen #}
@@ -160,28 +171,15 @@
         {%- set _ = parts.items.append('Tijdslijnen: ' ~ tijdlijn_annotaties|join(', ')) -%}
     {%- endif -%}
 
-    {{ parts.items | join('<br/><br/>') }}
-{%- endmacro -%}
+    {{ parts.items | join('\n\n') }}
+{%- endmacro %}
 
----
-title: "v{{ schema.version }}"
-parent: "{% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% endif %}"
----
-
-{: .warning }
+[WARNING,caption="Let op"]
+--
 Deze website is in opbouw. Pagina's kunnen onvolledige of onjuiste informatie bevatten.
-
-# {% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% endif %}
-{{ '{: .no_toc }' }}
+--
 
 {{ omschrijving(schema) }}
-
-## Inhoud
-{{ '{: .no_toc .text-delta }' }}
-1. TOC
-{{ '{:toc}' }}
-
----
 
 {% if include_top_level_diagram %}
 {# Diagramgeneratoren werken niet goed, dus uitgezet #}
@@ -189,27 +187,32 @@ Deze website is in opbouw. Pagina's kunnen onvolledige of onjuiste informatie be
 {{ gen.mermaid_diagram() }}
 ``` #}
 {% else %}
-![Diagram](model.drawio.svg)
+image::model.drawio.svg[title="Diagram"]
 
-<details>
-<summary>Legenda</summary>
-<p>Komt nog!</p>
-</details>
+.Legenda
+[%collapsible]
+====
+Komt nog!
+====
 {% endif %}
 
-<details markdown="1">
-<summary>LinkML</summary>
+.LinkML
+[%collapsible]
+====
 
-```yaml
+[source,yaml]
+....
 {{ gen.yaml(schema) | escape }}
-```
+....
 
-</details>
+====
+
+== Entiteiten
 
 {% for class in gen.all_class_objects() | sort(attribute=sort_by) %}
 {% if class.name != 'Any' and not class.annotations.external_registry %}
 
-## {{class.name}}
+=== {{class.name}}
 
 {% if class.is_a %}
 Specialisatie van {{link(schemaview.get_class(class.is_a).name)}}
@@ -230,64 +233,82 @@ Specialisatie van {{link(schemaview.get_class(class.is_a).name)}}
 {% endfor %}
 
 {% if properties %}
-### Eigenschappen
-{{ '{: .no_toc }' }}
+==== Eigenschappen
 
-| Eigenschap | Waardesoort | Omschrijving |
-| :---  | :--- | :--- |
+[cols="2,1,5",width="100%"]
+|===
+| Eigenschap | Waardesoort | Omschrijving
+
 {% for slot in properties -%}
-| {{key_symbol(class, slot)}}{{slot.name}} {{is_unique_key_slot}} | {{compute_range(slot)}}<br/>_{{gen.cardinality(slot)}}_ | {{omschrijving(slot)}} |
+| {{key_symbol(class, slot)}}{{slot.name}} {{is_unique_key_slot}}
+a| {{compute_range(slot)}} +
+_{{gen.cardinality(slot)}}_
+| {{omschrijving(slot)}}
 {% endfor %}
+|===
+
 {% endif %}
 
 {% if relationships %}
-### Relaties
-{{ '{: .no_toc }' }}
+==== Relaties
 
-| {{class.name}} is ... | Omschrijving |
-| :---  | :--- |
+[cols="2,3",width="100%"]
+|===
+| {{class.name}} is ... | Omschrijving
+
 {% for slot in relationships -%}
-| {{key_symbol(class, slot)}}{{slot.name}} {{compute_range(slot)}}<br/>_{% if slot.annotations.inverse_cardinality %}{{slot.annotations.inverse_cardinality.value }}{% endif %} → {{ gen.cardinality(slot) }}_ | {{omschrijving(slot)}} |
+a| {{key_symbol(class, slot)}}{{slot.name}} {{compute_range(slot)}} +
+_{% if slot.annotations.inverse_cardinality %}{{slot.annotations.inverse_cardinality.value }}{% endif %} → {{ gen.cardinality(slot) }}_
+| {{omschrijving(slot)}}
 {% endfor %}
+|===
 {% endif %}
 
 {% endif %}
 {% endfor %}
 
-# Waardesoorten en waardelijsten
-{{ '{: .no_toc }' }}
+== Waardesoorten en waardelijsten
 
 {% if gen.all_type_objects() %}
-### Waardesoorten
-{{ '{: .no_toc }' }}
+=== Waardesoorten
 
-| Waardesoort | Omschrijving | Gebaseerd op | Patroon |
-| :--- | :--- | :--- | :--- |
+[cols="1,4,1,1",width="100%"]
+|===
+| Waardesoort | Omschrijving | Gebaseerd op | Patroon
+
 {% for t in gen.all_type_objects() -%}
-| {{anchor(t.name)}} | {{omschrijving(t)}} | {% if t.typeof %}{{link(t.typeof)}}{% else %}{{t.base}}{% endif %} | {% if t.pattern %}`{{t.pattern}}`{% endif %} |
+| {{anchor(t.name)}}
+| {{omschrijving(t)}}
+| {% if t.typeof %}{{link(t.typeof)}}{% else %}{{t.base}}{% endif %}
+| {% if t.pattern %}`{{t.pattern}}`{% endif %}
 {% endfor %}
+
+|===
 
 {% endif %}
 
 {% if gen.all_enum_objects() %}
-### Waardelijsten
-{{ '{: .no_toc }' }}
+=== Waardelijsten
 
 {% for e in gen.all_enum_objects()|sort(attribute=sort_by) %}
-#### {{anchor(e.name)}}
-{{ '{: .no_toc }' }}
+==== {{anchor(e.name)}}
 
 {{omschrijving(e)}}
 
-| Waarde | Omschrijving |
-| :--- | :--- |
+[cols="1,2",width="100%"]
+|===
+| Waarde | Omschrijving
+
 {% if e.permissible_values -%}
 {% for pv in e.permissible_values.values() -%}
-| {{anchor(pv.text)}} | {{omschrijving(pv)}} |
+| {{anchor(pv.text)}}
+| {{omschrijving(pv)}}
 {% endfor -%}
 {% else -%}
-| {{e.name}} | _dynamisch_ |  |
+| {{e.name}}
+| _dynamisch_
 {% endif -%}
+|===
 
 {% endfor %}
 {% endif %}

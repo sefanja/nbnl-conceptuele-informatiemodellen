@@ -1,34 +1,37 @@
----
-title: "v1.1.2"
-parent: "Aansluitingenregister"
----
+= Aansluitingenregister
+
+:toc:
+:toclevels: 3
+:parent: Aansluitingenregister
 
 [WARNING,caption="Let op"]
 --
 Deze website is in opbouw. Pagina's kunnen onvolledige of onjuiste informatie bevatten.
 --
 
-# Aansluitingenregister
+NBility-functie: https://nbility-model.github.io/NBility-business-capabilities-Archi/?view=id-8becf2d90261476faa9d53240e6cf2c8[C.6.2.1. Aansluitingen/allocatiepunten beheren]
 
-NBility-functie: [C.6.2.1. Aansluitingen/allocatiepunten beheren](https://nbility-model.github.io/NBility-business-capabilities-Archi/?view=id-8becf2d90261476faa9d53240e6cf2c8)<br/><br/>_Het aansluitingenregister bevat alle elektriciteits- en gasaansluitingen in Nederland._<br/><br/>Bron: [Informatiecode elektriciteit en gas](https://wetten.overheid.nl/jci1.3:c:BWBR0037934&hoofdstuk=2&paragraaf=2.1&z=2025-01-01&g=2025-01-01)<br/><br/>Het aansluitingenregister wordt gezamenlijk beheerd door de netbeheerders en bevat zowel fysieke als administratieve gegevens over aansluitingen. Het register is essentieel voor de werking van de energiemarkt omdat het de basis vormt voor processen zoals leverancierswisselingen, verhuizingen en facturatie.<br/><br/>De verplichting tot het bijhouden van het aansluitingenregister is vastgelegd in de Informatiecode elektriciteit en gas, vastgesteld door de Autoriteit Consument en Markt (ACM).
+_Het aansluitingenregister bevat alle elektriciteits- en gasaansluitingen in Nederland._
 
-## Inhoud
----
+Bron: https://wetten.overheid.nl/jci1.3:c:BWBR0037934&hoofdstuk=2&paragraaf=2.1&z=2025-01-01&g=2025-01-01[Informatiecode elektriciteit en gas]
+
+Het aansluitingenregister wordt gezamenlijk beheerd door de netbeheerders en bevat zowel fysieke als administratieve gegevens over aansluitingen. Het register is essentieel voor de werking van de energiemarkt omdat het de basis vormt voor processen zoals leverancierswisselingen, verhuizingen en facturatie.
+
+De verplichting tot het bijhouden van het aansluitingenregister is vastgelegd in de Informatiecode elektriciteit en gas, vastgesteld door de Autoriteit Consument en Markt (ACM).
 
 
-![Diagram](model.drawio.svg)
+image::model.drawio.svg[title="Diagram"]
 
 .Legenda
 [%collapsible]
-####
+====
 Komt nog!
-####
---
+====
 
 
 .LinkML
 [%collapsible]
-####
+====
 
 [source,yaml]
 ....
@@ -598,16 +601,26 @@ source_file: modellen/registers/aansluitingenregister/1.1.2/model.yaml
 
 ....
 
-####
+====
+
+== Entiteiten
 
 
 
 
-## Aangeslotene
+=== Aangeslotene
 
 
 
-NBility-object: [Klant](https://nbility-model.github.io/NBility-business-capabilities-Archi/?view=id-8becf2d90261476faa9d53240e6cf2c8)<br/><br/>_[nbnl:aangeslotene](https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/aangeslotene)_<br/><br/>Zie ook [Informatiecode elektriciteit en gas](https://wetten.overheid.nl/jci1.3:c:BWBR0037934&hoofdstuk=2&paragraaf=2.9&sub-paragraaf=2.9.2&artikel=2.9.2.1&z=2022-12-20&g=2022-12-20), [Informatiecode elektriciteit en gas](https://wetten.overheid.nl/jci1.3:c:BWBR0037934&hoofdstuk=3&paragraaf=3.3&sub-paragraaf=3.3.1&artikel=3.3.1.1&z=2023-06-28&g=2023-06-28)<br/><br/>Aangeslotenen worden niet uniek geïdentificeerd. Daarom gaat het hier om een gegevensgroep bij een aansluiting, niet om een zelfstandige entiteit.<br/><br/>Tijdslijnen: geldigheid, registratie, effectuering, levensduur (moment van geboorte, moment van overlijden)
+NBility-object: https://nbility-model.github.io/NBility-business-capabilities-Archi/?view=id-8becf2d90261476faa9d53240e6cf2c8)[Klant]
+
+_nbnl:aangeslotene_
+
+Zie ook https://wetten.overheid.nl/jci1.3:c:BWBR0037934&hoofdstuk=2&paragraaf=2.9&sub-paragraaf=2.9.2&artikel=2.9.2.1&z=2022-12-20&g=2022-12-20[Informatiecode elektriciteit en gas], https://wetten.overheid.nl/jci1.3:c:BWBR0037934&hoofdstuk=3&paragraaf=3.3&sub-paragraaf=3.3.1&artikel=3.3.1.1&z=2023-06-28&g=2023-06-28[Informatiecode elektriciteit en gas]
+
+Aangeslotenen worden niet uniek geïdentificeerd. Daarom gaat het hier om een gegevensgroep bij een aansluiting, niet om een zelfstandige entiteit.
+
+Tijdslijnen: geldigheid, registratie, effectuering, levensduur (moment van geboorte, moment van overlijden)
 
 
 
@@ -650,27 +663,36 @@ NBility-object: [Klant](https://nbility-model.github.io/NBility-business-capabil
 
 
 
-### Eigenschappen
+==== Eigenschappen
 
 [cols="2,1,5",width="100%"]
 |===
-
 | Eigenschap | Waardesoort | Omschrijving
 
 | geboortedatum 
-| tekst[#Tekst] + _0..1_
+a| 
+Tekst +
+_0..1_
 | _datum van de bevalling waarbij de aangeslotene is geboren_
 | naam 
-| tekst[#Tekst] + _1_
+a| 
+Tekst +
+_1_
 | _naam van een organisatie of de achternaam (zonder tussenvoegsel) van een natuurlijk persoon_
 | tussenvoegsel 
-| tekst[#Tekst] + _0..1_
+a| 
+Tekst +
+_0..1_
 | _verzameling van een of meer voorzetsels en/of lidwoorden die aan de achternaam van een aangeslotene vooraf gaat en daarmee gezamenlijk de volledige achternaam vormt_
 | voorletters 
-| tekst[#Tekst] + _0..1_
+a| 
+Tekst +
+_0..1_
 | _verzameling letters die wordt gevormd door de eerste letter van alle in volgorde voorkomende voornamen van een aangeslotene_
 | KVK-nummer 
-| tekst[#Tekst] + _0..1_
+a| 
+Tekst +
+_0..1_
 | _identificatie van de maatschappelijke activiteit van de aangeslotene in het Handelsregister_
 
 |===
@@ -678,14 +700,15 @@ NBility-object: [Klant](https://nbility-model.github.io/NBility-business-capabil
 
 
 
-### Relaties
+==== Relaties
 
 [cols="2,3",width="100%"]
 |===
-
 | Aangeslotene is ... | Omschrijving
 
-| [^⚿^,title="Maakt deel uit van de identificatie"]beschikker over aansluiting[#Aansluiting] + _0..1 → 1_
+a| link:#[^⚿^,title="Maakt deel uit van de identificatie"]beschikker over 
+Aansluiting +
+_0..1 → 1_
 | 
 
 |===
@@ -695,26 +718,20 @@ NBility-object: [Klant](https://nbility-model.github.io/NBility-business-capabil
 
 
 
-## Aansluiting
+=== Aansluiting
 
 
 
-NBility-object: [Aansluiting](https://nbility-model.github.io/NBility-business-capabilities-Archi/?view=id-8becf2d90261476faa9d53240e6cf2c8)<br/><br/>_[nbnl:aansluiting](https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/aansluiting)_<br/><br/>Een koppeling met een gesloten distributiesysteem wordt in dit register beschouwd als aansluiting als de beheerder geen gebruik maakt van het elektronische berichtenverkeer ten behoeve van het faciliteren van derdentoegang ([artikel 2.4, vierde lid van de Netcode elektriciteit](https://wetten.overheid.nl/jci1.3:c:BWBR0037940&hoofdstuk=2&paragraaf=2.1&artikel=2.4&z=2023-04-01&g=2023-04-01)).<br/><br/>Tijdslijnen: geldigheid, registratie
+NBility-object: https://nbility-model.github.io/NBility-business-capabilities-Archi/?view=id-8becf2d90261476faa9d53240e6cf2c8)[Aansluiting]
+
+_nbnl:aansluiting_
+
+Een koppeling met een gesloten distributiesysteem wordt in dit register beschouwd als aansluiting als de beheerder geen gebruik maakt van het elektronische berichtenverkeer ten behoeve van het faciliteren van derdentoegang ([artikel 2.4, vierde lid van de Netcode elektriciteit](https://wetten.overheid.nl/jci1.3:c:BWBR0037940&hoofdstuk=2&paragraaf=2.1&artikel=2.4&z=2023-04-01&g=2023-04-01)).
+
+Tijdslijnen: geldigheid, registratie
 
 
 
-
-    
-    
-    
-        
-    
-
-    
-    
-    
-        
-    
 
     
     
@@ -752,50 +769,88 @@ NBility-object: [Aansluiting](https://nbility-model.github.io/NBility-business-c
         
     
 
+    
+    
+    
+        
+    
+
+    
+    
+    
+        
+    
 
 
-### Eigenschappen
+
+==== Eigenschappen
 
 [cols="2,1,5",width="100%"]
 |===
-
 | Eigenschap | Waardesoort | Omschrijving
 
-| [^⚿^,title="Maakt deel uit van de identificatie"]EAN-code 
-| ean-18[#EAN-18] + _1_
+| link:#[^⚿^,title="Maakt deel uit van de identificatie"]EAN-code 
+a| 
+EAN-18 +
+_1_
 | _unieke cijfercombinatie volgens de Europese Artikelnummer-standaard_
 | energiedrager 
-| energiedrager[#Energiedrager] + _0..1_
-| _[nbnl:energiedrager](https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/energiedrager)_
+a| 
+Energiedrager +
+_0..1_
+| _nbnl:energiedrager_
 | gecontracteerde transportcapaciteit 
-| tekst[#Tekst] + _0..1_
-| _[nbnl:gecontracteerde-transportcapaciteit](https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/gecontracteerde-transportcapaciteit)_
+a| 
+Tekst +
+_0..1_
+| _nbnl:gecontracteerde-transportcapaciteit_
 | grootte 
-| groot-of-klein[#Groot of klein] + _1_
-| _aanduiding van het formaat van de aansluiting op basis van de gewenste aansluitcapaciteiten van de overdrachtspunten_<br/><br/>Validatie: als de gewenste aansluitcapaciteit van een van de overdrachtspunten 'groot' is of een geheel getal dan 'groot' anders 'klein'.
+a| 
+Groot of klein +
+_1_
+| _aanduiding van het formaat van de aansluiting op basis van de gewenste aansluitcapaciteiten van de overdrachtspunten_
+
+Validatie: als de gewenste aansluitcapaciteit van een van de overdrachtspunten 'groot' is of een geheel getal dan 'groot' anders 'klein'.
 | marktsegment 
-| marktsegment[#Marktsegment] + _1_
-| _aanduiding van de categorie waartoe de aansluiting behoort, te weten kleinverbruikaansluiting of grootverbruikaansluiting_<br/><br/>Zie ook [Informatiecode elektriciteit en gas](https://wetten.overheid.nl/jci1.3:c:BWBR0037934&hoofdstuk=2&paragraaf=2.1&artikel=2.1.3&z=2022-05-18&g=2022-05-18), [Begrippencode elektriciteit](https://wetten.overheid.nl/jci1.3:c:BWBR0037938&hoofdstuk=1&artikel=1.1&z=2022-11-25&g=2022-11-25)<br/><br/>Een aansluiting met een kleine capaciteit kan onder voorwaarden worden beschouwd als grootverbruikaansluiting, bijvoorbeeld als het een aansluiting betreft op een gesloten distributiesysteem of een aansluiting zoals bedoeld in [artikel 1, lid 2 of 3 van de Elektriciteitswet 1998](https://wetten.overheid.nl/jci1.3:c:BWBR0009755&hoofdstuk=1&paragraaf=1&artikel=1&z=2022-10-01&g=2022-10-01).
+a| 
+Marktsegment +
+_1_
+| _aanduiding van de categorie waartoe de aansluiting behoort, te weten kleinverbruikaansluiting of grootverbruikaansluiting_
+
+Zie ook https://wetten.overheid.nl/jci1.3:c:BWBR0037934&hoofdstuk=2&paragraaf=2.1&artikel=2.1.3&z=2022-05-18&g=2022-05-18[Informatiecode elektriciteit en gas], https://wetten.overheid.nl/jci1.3:c:BWBR0037938&hoofdstuk=1&artikel=1.1&z=2022-11-25&g=2022-11-25[Begrippencode elektriciteit]
+
+Een aansluiting met een kleine capaciteit kan onder voorwaarden worden beschouwd als grootverbruikaansluiting, bijvoorbeeld als het een aansluiting betreft op een gesloten distributiesysteem of een aansluiting zoals bedoeld in [artikel 1, lid 2 of 3 van de Elektriciteitswet 1998](https://wetten.overheid.nl/jci1.3:c:BWBR0009755&hoofdstuk=1&paragraaf=1&artikel=1&z=2022-10-01&g=2022-10-01).
 | uitsluitend elektriciteitsproductie-eenheden 
-| waar-of-onwaar[#Waar of onwaar] + _1_
-| _indicatie of achter een aansluiting zich uitsluitend elektriciteitsproductie-eenheden bevinden en geen ander verbruik dan het eigen verbruik van de desbetreffende elektriciteitsproductie-eenheden_<br/><br/>Zie ook [Tarievencode elektriciteit](https://wetten.overheid.nl/jci1.3:c:BWBR0037951&hoofdstuk=3&paragraaf=3.7&artikel=3.7.13.b&z=2022-05-18&g=2022-05-18)<br/><br/>Ook wel bekend als 'zuivere teruglevering'.
+a| 
+Waar of onwaar +
+_1_
+| _indicatie of achter een aansluiting zich uitsluitend elektriciteitsproductie-eenheden bevinden en geen ander verbruik dan het eigen verbruik van de desbetreffende elektriciteitsproductie-eenheden_
+
+Zie ook https://wetten.overheid.nl/jci1.3:c:BWBR0037951&hoofdstuk=3&paragraaf=3.7&artikel=3.7.13.b&z=2022-05-18&g=2022-05-18[Tarievencode elektriciteit]
+
+Ook wel bekend als 'zuivere teruglevering'.
 | weekmax 
-| waar-of-onwaar[#Waar of onwaar] + _0..1_
-| _indicatie of de kWmax per week gemeten moet worden_<br/><br/>Zie ook [Tarievencode elektriciteit](https://wetten.overheid.nl/jci1.3:c:BWBR0037951&hoofdstuk=3&paragraaf=3.7&artikel=3.7.5a&z=2022-05-18&g=2022-05-18)
+a| 
+Waar of onwaar +
+_0..1_
+| _indicatie of de kWmax per week gemeten moet worden_
+
+Zie ook https://wetten.overheid.nl/jci1.3:c:BWBR0037951&hoofdstuk=3&paragraaf=3.7&artikel=3.7.5a&z=2022-05-18&g=2022-05-18[Tarievencode elektriciteit]
 
 |===
 
 
 
 
-### Relaties
+==== Relaties
 
 [cols="2,3",width="100%"]
 |===
-
 | Aansluiting is ... | Omschrijving
 
-| deel van netgebied[#Netgebied] + _* → 0..1_
+a| deel van 
+Netgebied +
+_* → 0..1_
 | 
 
 |===
@@ -805,20 +860,18 @@ NBility-object: [Aansluiting](https://nbility-model.github.io/NBility-business-c
 
 
 
-## Aansluitlocatie
+=== Aansluitlocatie
 
 
 
-NBility-object: [Aansluiting](https://nbility-model.github.io/NBility-business-capabilities-Archi/?view=id-8becf2d90261476faa9d53240e6cf2c8)<br/><br/>_plek waar zich het overdrachtspunt van een aansluiting of netkoppeling bevindt_<br/><br/>Tijdslijnen: geldigheid, registratie
+NBility-object: https://nbility-model.github.io/NBility-business-capabilities-Archi/?view=id-8becf2d90261476faa9d53240e6cf2c8)[Aansluiting]
+
+_plek waar zich het overdrachtspunt van een aansluiting of netkoppeling bevindt_
+
+Tijdslijnen: geldigheid, registratie
 
 
 
-
-    
-    
-    
-        
-    
 
     
     
@@ -832,24 +885,41 @@ NBility-object: [Aansluiting](https://nbility-model.github.io/NBility-business-c
         
     
 
+    
+    
+    
+        
+    
 
 
-### Eigenschappen
+
+==== Eigenschappen
 
 [cols="2,1,5",width="100%"]
 |===
-
 | Eigenschap | Waardesoort | Omschrijving
 
-| [^⚿^,title="Maakt deel uit van de identificatie"]locatienummer 
-| tekst[#Tekst] + _1_
+| link:#[^⚿^,title="Maakt deel uit van de identificatie"]locatienummer 
+a| 
+Tekst +
+_1_
 | _identificatie van een aansluitlocatie_
 | toegangsinstructie 
-| tekst[#Tekst] + _0..1_
+a| 
+Tekst +
+_0..1_
 | _beschrijving van wat je moet doen om een locatie binnen te kunnen of mogen gaan_
 | verdieping toegang 
-| tekst[#Tekst] + _0..1_
-| _aanduiding op welke verdieping de toegangsdeur van de aansluitlocatie zich bevindt_<br/><br/>Bron: [None](https://www.amsterdam.nl/stelselpedia/bag-index/catalogus-bag/objectklasse-vbo/kenmerk-bouwlaag/)<br/><br/>Dit gegeven helpt bij het snel lokaliseren van storingen in hoogbouw.<br/><br/>De begande grond geldt als `0`. Als de toegang meer dan 1,5 m onder het maaiveld ligt, wordt als verdieping `-1` aangemerkt.
+a| 
+Tekst +
+_0..1_
+| _aanduiding op welke verdieping de toegangsdeur van de aansluitlocatie zich bevindt_
+
+Bron: https://www.amsterdam.nl/stelselpedia/bag-index/catalogus-bag/objectklasse-vbo/kenmerk-bouwlaag/[None]
+
+Dit gegeven helpt bij het snel lokaliseren van storingen in hoogbouw.
+
+De begande grond geldt als `0`. Als de toegang meer dan 1,5 m onder het maaiveld ligt, wordt als verdieping `-1` aangemerkt.
 
 |===
 
@@ -861,11 +931,17 @@ NBility-object: [Aansluiting](https://nbility-model.github.io/NBility-business-c
 
 
 
-## Allocatiepunt
+=== Allocatiepunt
 
 
 
-NBility-object: [Aansluiting](https://nbility-model.github.io/NBility-business-capabilities-Archi/?view=id-8becf2d90261476faa9d53240e6cf2c8)<br/><br/>_punt waar invoeding, onttrekking of verbruik van elektriciteit of gas wordt toegerekend aan een marktdeelnemer_<br/><br/>Bron: [Begrippencode elektriciteit](https://wetten.overheid.nl/jci1.3:c:BWBR0037938&z=2025-04-26&g=2025-04-26)<br/><br/>Tijdslijnen: geldigheid, registratie
+NBility-object: https://nbility-model.github.io/NBility-business-capabilities-Archi/?view=id-8becf2d90261476faa9d53240e6cf2c8)[Aansluiting]
+
+_punt waar invoeding, onttrekking of verbruik van elektriciteit of gas wordt toegerekend aan een marktdeelnemer_
+
+Bron: https://wetten.overheid.nl/jci1.3:c:BWBR0037938&z=2025-04-26&g=2025-04-26[Begrippencode elektriciteit]
+
+Tijdslijnen: geldigheid, registratie
 
 
 
@@ -878,15 +954,16 @@ NBility-object: [Aansluiting](https://nbility-model.github.io/NBility-business-c
 
 
 
-### Eigenschappen
+==== Eigenschappen
 
 [cols="2,1,5",width="100%"]
 |===
-
 | Eigenschap | Waardesoort | Omschrijving
 
-| [^⚿^,title="Maakt deel uit van de identificatie"]EAN-code 
-| ean-18[#EAN-18] + _1_
+| link:#[^⚿^,title="Maakt deel uit van de identificatie"]EAN-code 
+a| 
+EAN-18 +
+_1_
 | _unieke cijfercombinatie volgens de Europese Artikelnummer-standaard_
 
 |===
@@ -899,10 +976,11 @@ NBility-object: [Aansluiting](https://nbility-model.github.io/NBility-business-c
 
 
 
-## Allocatiepunt bij aansluiting
+=== Allocatiepunt bij aansluiting
 
 
-Specialisatie van allocatiepunt[#Allocatiepunt]
+Specialisatie van 
+Allocatiepunt
 
 
 _allocatiepunt toegekend aan een aansluiting_
@@ -920,14 +998,15 @@ _allocatiepunt toegekend aan een aansluiting_
 
 
 
-### Relaties
+==== Relaties
 
 [cols="2,3",width="100%"]
 |===
-
 | Allocatiepunt bij aansluiting is ... | Omschrijving
 
-| bij aansluiting[#Aansluiting] + _1..* → 1_
+a| bij 
+Aansluiting +
+_1..* → 1_
 | 
 
 |===
@@ -937,10 +1016,11 @@ _allocatiepunt toegekend aan een aansluiting_
 
 
 
-## Allocatiepunt bij netgebied
+=== Allocatiepunt bij netgebied
 
 
-Specialisatie van allocatiepunt[#Allocatiepunt]
+Specialisatie van 
+Allocatiepunt
 
 
 _allocatiepunt toegekend aan een netgebied_
@@ -958,14 +1038,15 @@ _allocatiepunt toegekend aan een netgebied_
 
 
 
-### Relaties
+==== Relaties
 
 [cols="2,3",width="100%"]
 |===
-
 | Allocatiepunt bij netgebied is ... | Omschrijving
 
-| bij netgebied[#Netgebied] + _1..* → 1_
+a| bij 
+Netgebied +
+_1..* → 1_
 | 
 
 |===
@@ -975,20 +1056,16 @@ _allocatiepunt toegekend aan een netgebied_
 
 
 
-## Locatieaanduiding
+=== Locatieaanduiding
 
 
 
-NBility-object: [Aansluiting](https://nbility-model.github.io/NBility-business-capabilities-Archi/?view=id-8becf2d90261476faa9d53240e6cf2c8)<br/><br/>Tijdslijnen: geldigheid, registratie
+NBility-object: https://nbility-model.github.io/NBility-business-capabilities-Archi/?view=id-8becf2d90261476faa9d53240e6cf2c8)[Aansluiting]
+
+Tijdslijnen: geldigheid, registratie
 
 
 
-
-    
-    
-    
-        
-    
 
     
     
@@ -1002,17 +1079,24 @@ NBility-object: [Aansluiting](https://nbility-model.github.io/NBility-business-c
         
     
 
+    
+    
+    
+        
+    
 
 
-### Eigenschappen
+
+==== Eigenschappen
 
 [cols="2,1,5",width="100%"]
 |===
-
 | Eigenschap | Waardesoort | Omschrijving
 
 | locatieomschrijving 
-| tekst[#Tekst] + _0..1_
+a| 
+Tekst +
+_0..1_
 | 
 
 |===
@@ -1020,16 +1104,18 @@ NBility-object: [Aansluiting](https://nbility-model.github.io/NBility-business-c
 
 
 
-### Relaties
+==== Relaties
 
 [cols="2,3",width="100%"]
 |===
-
 | Locatieaanduiding is ... | Omschrijving
 
-| [^⚿^,title="Maakt deel uit van de identificatie"]van aansluitlocatie[#Aansluitlocatie] + _0..1 → 1_
+a| link:#[^⚿^,title="Maakt deel uit van de identificatie"]van 
+Aansluitlocatie +
+_0..1 → 1_
 | 
-| afgeleid van Nummeraanduiding ([Basisregistratie Adressen en Gebouwen](https://data.overheid.nl/dataset/4aca03b9-0bb1-454f-9d5a-53bb910029d0)) + _* → 0..1_
+a| afgeleid van Nummeraanduiding ([Basisregistratie Adressen en Gebouwen](https://data.overheid.nl/dataset/4aca03b9-0bb1-454f-9d5a-53bb910029d0)) +
+_* → 0..1_
 | 
 
 |===
@@ -1039,11 +1125,17 @@ NBility-object: [Aansluiting](https://nbility-model.github.io/NBility-business-c
 
 
 
-## Netgebied
+=== Netgebied
 
 
 
-NBility-object: [Aansluiting](https://nbility-model.github.io/NBility-business-capabilities-Archi/?view=id-8becf2d90261476faa9d53240e6cf2c8)<br/><br/>_aaneengesloten en samenhangend deel van een energienet van één netbeheerder, waarbinnen de processen allocatie en reconciliatie plaatsvinden_<br/><br/>Bron: [Begrippencode elektriciteit](https://wetten.overheid.nl/jci1.3:c:BWBR0037938&z=2025-04-26&g=2025-04-26)<br/><br/>Tijdslijnen: geldigheid, registratie
+NBility-object: https://nbility-model.github.io/NBility-business-capabilities-Archi/?view=id-8becf2d90261476faa9d53240e6cf2c8)[Aansluiting]
+
+_aaneengesloten en samenhangend deel van een energienet van één netbeheerder, waarbinnen de processen allocatie en reconciliatie plaatsvinden_
+
+Bron: https://wetten.overheid.nl/jci1.3:c:BWBR0037938&z=2025-04-26&g=2025-04-26[Begrippencode elektriciteit]
+
+Tijdslijnen: geldigheid, registratie
 
 
 
@@ -1056,15 +1148,16 @@ NBility-object: [Aansluiting](https://nbility-model.github.io/NBility-business-c
 
 
 
-### Eigenschappen
+==== Eigenschappen
 
 [cols="2,1,5",width="100%"]
 |===
-
 | Eigenschap | Waardesoort | Omschrijving
 
-| [^⚿^,title="Maakt deel uit van de identificatie"]EAN-code 
-| ean-18[#EAN-18] + _1_
+| link:#[^⚿^,title="Maakt deel uit van de identificatie"]EAN-code 
+a| 
+EAN-18 +
+_1_
 | _unieke cijfercombinatie volgens de Europese Artikelnummer-standaard_
 
 |===
@@ -1077,14 +1170,28 @@ NBility-object: [Aansluiting](https://nbility-model.github.io/NBility-business-c
 
 
 
-## Netkoppeling
+=== Netkoppeling
 
 
 
-NBility-object: [Aansluiting](https://nbility-model.github.io/NBility-business-capabilities-Archi/?view=id-8becf2d90261476faa9d53240e6cf2c8)<br/><br/>_recht op het gebruik van één of meer verbindingen tussen twee energienetten of tussen een energienet en een interconnector_<br/><br/>Bron: [Begrippencode gas](https://wetten.overheid.nl/jci1.3:c:BWBR0037923&hoofdstuk=1&artikel=1.1&z=2021-06-01&g=2021-06-01)<br/><br/>Een koppeling met een gesloten distributiesysteem wordt in dit register beschouwd als netkoppeling als de beheerder gebruik maakt van het elektronische berichtenverkeer ten behoeve van het faciliteren van derdentoegang ([artikel 2.4, vierde lid van de Netcode elektriciteit](https://wetten.overheid.nl/jci1.3:c:BWBR0037940&hoofdstuk=2&paragraaf=2.1&artikel=2.4&z=2023-04-01&g=2023-04-01)).<br/><br/>Tijdslijnen: geldigheid, registratie
+NBility-object: https://nbility-model.github.io/NBility-business-capabilities-Archi/?view=id-8becf2d90261476faa9d53240e6cf2c8)[Aansluiting]
+
+_recht op het gebruik van één of meer verbindingen tussen twee energienetten of tussen een energienet en een interconnector_
+
+Bron: https://wetten.overheid.nl/jci1.3:c:BWBR0037923&hoofdstuk=1&artikel=1.1&z=2021-06-01&g=2021-06-01[Begrippencode gas]
+
+Een koppeling met een gesloten distributiesysteem wordt in dit register beschouwd als netkoppeling als de beheerder gebruik maakt van het elektronische berichtenverkeer ten behoeve van het faciliteren van derdentoegang ([artikel 2.4, vierde lid van de Netcode elektriciteit](https://wetten.overheid.nl/jci1.3:c:BWBR0037940&hoofdstuk=2&paragraaf=2.1&artikel=2.4&z=2023-04-01&g=2023-04-01)).
+
+Tijdslijnen: geldigheid, registratie
 
 
 
+
+    
+    
+    
+        
+    
 
     
     
@@ -1098,29 +1205,28 @@ NBility-object: [Aansluiting](https://nbility-model.github.io/NBility-business-c
         
     
 
-    
-    
-    
-        
-    
 
 
-
-### Eigenschappen
+==== Eigenschappen
 
 [cols="2,1,5",width="100%"]
 |===
-
 | Eigenschap | Waardesoort | Omschrijving
 
-| [^⚿^,title="Maakt deel uit van de identificatie"]EAN-code 
-| ean-18[#EAN-18] + _1_
+| link:#[^⚿^,title="Maakt deel uit van de identificatie"]EAN-code 
+a| 
+EAN-18 +
+_1_
 | _unieke cijfercombinatie volgens de Europese Artikelnummer-standaard_
 | deel van 
-| tekst[#Tekst] + _1_
+a| 
+Tekst +
+_1_
 | De beheerder van het netgebied waartoe de netkoppeling behoort, is daarmee de beheerder van de netkoppeling.
 | koppeling met 
-| tekst[#Tekst] + _0..1_
+a| 
+Tekst +
+_0..1_
 | Deze relatie is optioneel voor het geval het te koppelen netgebied nog niet bekend is of als er geen sprake is van een gekoppeld netgebied, zoals bij een koppeling met een interconnector.
 
 |===
@@ -1135,20 +1241,18 @@ NBility-object: [Aansluiting](https://nbility-model.github.io/NBility-business-c
 
 
 
-## Overdrachtspunt
+=== Overdrachtspunt
 
 
 
-NBility-object: [Aansluiting](https://nbility-model.github.io/NBility-business-capabilities-Archi/?view=id-8becf2d90261476faa9d53240e6cf2c8)<br/><br/>_[nbnl:overdrachtspunt](https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/overdrachtspunt)_<br/><br/>Tijdslijnen: geldigheid, registratie
+NBility-object: https://nbility-model.github.io/NBility-business-capabilities-Archi/?view=id-8becf2d90261476faa9d53240e6cf2c8)[Aansluiting]
+
+_nbnl:overdrachtspunt_
+
+Tijdslijnen: geldigheid, registratie
 
 
 
-
-    
-    
-    
-        
-    
 
     
     
@@ -1162,17 +1266,24 @@ NBility-object: [Aansluiting](https://nbility-model.github.io/NBility-business-c
         
     
 
+    
+    
+    
+        
+    
 
 
-### Eigenschappen
+
+==== Eigenschappen
 
 [cols="2,1,5",width="100%"]
 |===
-
 | Eigenschap | Waardesoort | Omschrijving
 
-| [^⚿^,title="Maakt deel uit van de identificatie"]EAN-code 
-| ean-18[#EAN-18] + _1_
+| link:#[^⚿^,title="Maakt deel uit van de identificatie"]EAN-code 
+a| 
+EAN-18 +
+_1_
 | _unieke cijfercombinatie volgens de Europese Artikelnummer-standaard_
 
 |===
@@ -1180,16 +1291,20 @@ NBility-object: [Aansluiting](https://nbility-model.github.io/NBility-business-c
 
 
 
-### Relaties
+==== Relaties
 
 [cols="2,3",width="100%"]
 |===
-
 | Overdrachtspunt is ... | Omschrijving
 
-| deel van óf aansluiting[#Aansluiting]{nbsp}óf netkoppeling[#Netkoppeling] + _1..* → 1_
+a| deel van óf 
+Aansluiting{nbsp}óf 
+Netkoppeling +
+_1..* → 1_
 | 
-| in aansluitlocatie[#Aansluitlocatie] + _1..* → 1_
+a| in 
+Aansluitlocatie +
+_1..* → 1_
 | 
 
 |===
@@ -1198,106 +1313,105 @@ NBility-object: [Aansluiting](https://nbility-model.github.io/NBility-business-c
 
 
 
-# Waardesoorten en waardelijsten
+== Waardesoorten en waardelijsten
 
 
-### Waardesoorten
+=== Waardesoorten
 
 [cols="1,4,1,1",width="100%"]
 |===
-
 | Waardesoort | Omschrijving | Gebaseerd op | Patroon
 
-| <<id_safe(name),name>>
+| <<id_safe(name),EAN-18>>
 | _Europees artikelnummer van achttien cijfers_
-| tekst[#Tekst]
+| 
+Tekst
 | `^[0-9]{18}$`
-| <<id_safe(name),name>>
+| <<id_safe(name),Datum>>
 | _kalenderdatum, zonder tijdsaanduiding_
 | date
 | 
-| <<id_safe(name),name>>
+| <<id_safe(name),Geheel getal>>
 | _getal zonder decimalen_
 | int
 | 
-| <<id_safe(name),name>>
+| <<id_safe(name),Getal>>
 | _voorstelling van een hoeveelheid_
 | float
 | 
-| <<id_safe(name),name>>
+| <<id_safe(name),Tekst>>
 | _aanduiding bedoeld voor mensen, zonder vaste structuur of betekenis_
 | str
 | 
-| <<id_safe(name),name>>
+| <<id_safe(name),Tijdsduur>>
 | _lengte van een tijdsinterval, bijvoorbeeld een uur of een dag_
 | duration
 | 
-| <<id_safe(name),name>>
+| <<id_safe(name),Tijdstip>>
 | _exacte aanduiding van datum en tijd, inclusief eventueel tijdzone-informatie_
 | datetime
 | 
-| <<id_safe(name),name>>
+| <<id_safe(name),Waar of onwaar>>
 | _binaire aanduiding die aangeeft of een propositie of kenmerk van toepassing is (waar) of niet van toepassing is (onwaar)_
 | bool
 | 
-| <<id_safe(name),name>>
+| <<id_safe(name),URI>>
 | _uniforme aanduiding van een externe of interne bron_
 | uri
 | 
 
 
+|===
 
 
 
-### Waardelijsten
+
+=== Waardelijsten
 
 
-#### <<id_safe(name),name>>
+==== <<id_safe(name),Energiedrager>>
 
 
 
 [cols="1,2",width="100%"]
 |===
-
 | Waarde | Omschrijving
 
-| <<id_safe(name),name>>
+| <<id_safe(name),elektriciteit>>
 | 
-| <<id_safe(name),name>>
+| <<id_safe(name),gas>>
 | 
-| <<id_safe(name),name>>
+| <<id_safe(name),waterstof>>
 | 
 |===
 
 
-#### <<id_safe(name),name>>
+==== <<id_safe(name),Groot of klein>>
 
 
 
 [cols="1,2",width="100%"]
 |===
-
 | Waarde | Omschrijving
 
-| <<id_safe(name),name>>
+| <<id_safe(name),groot>>
 | 
-| <<id_safe(name),name>>
+| <<id_safe(name),klein>>
 | 
 |===
 
 
-#### <<id_safe(name),name>>
+==== <<id_safe(name),Marktsegment>>
 
 
 
 [cols="1,2",width="100%"]
 |===
-
 | Waarde | Omschrijving
 
-| <<id_safe(name),name>>
+| <<id_safe(name),grootverbruikaansluiting>>
 | 
-| <<id_safe(name),name>>
+| <<id_safe(name),kleinverbruikaansluiting>>
 | 
 |===
 

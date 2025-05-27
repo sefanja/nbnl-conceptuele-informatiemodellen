@@ -2,7 +2,7 @@ import os
 import yaml
 
 BASE_INPUT_MODELS = "modellen"
-BASE_OUTPUT_MODELS = os.path.join("docs", "_modellen")
+BASE_OUTPUT_MODELS = os.path.join("docs", "modules", "ROOT", "pages", "_modellen")
 
 os.makedirs(BASE_OUTPUT_MODELS, exist_ok=True)
 
@@ -33,6 +33,7 @@ for category_dir in sorted(os.listdir(BASE_INPUT_MODELS)):
     for model_dir in sorted(os.listdir(category_path)):
         model_path = os.path.join(category_path, model_dir)
         if not os.path.isdir(model_path):
+            print(f"Ignored: {model_path} ")
             continue
 
         model_name = model_dir  # fallback

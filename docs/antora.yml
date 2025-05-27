@@ -1,0 +1,5 @@
+name: nbnl-conceptual-models
+title: NBNL Conceptuele Informatiemodellen
+version: true
+nav:
+- modules/ROOT/nav.adoc

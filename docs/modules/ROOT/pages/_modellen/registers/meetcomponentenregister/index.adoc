@@ -1,0 +1,3 @@
+# meetcomponentenregister
+:title: meetcomponentenregister
+:parent: Registers
