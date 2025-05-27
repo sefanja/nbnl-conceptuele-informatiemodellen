@@ -1,0 +1,24 @@
+\{: .warning } Deze website is in opbouw. Pagina’s kunnen onvolledige of
+onjuiste informatie bevatten.
+
+== Conceptuele informatiemodellen
+
+Bij Netbeheer Nederland zorgen wij ervoor dat onze data *helder en
+herbruikbaar* zijn. Dat doen we door de betekenis ervan eenduidig vast
+te leggen:
+
+[arabic]
+. In een *conceptueel informatiemodel*: een overzicht van begrippen en
+hoe ze samenhangen, per register of datadienst
+. In een *begrippenkader*: een verzameling van algemene definities voor
+samenhang tussen de modellen
+
+Een conceptueel informatiemodel helpt mensen met verschillende
+achtergronden, van domeinexperts tot systeemontwerpers, om een gedeeld
+beeld te krijgen van hoe iets werkt.
+
+De modellen kunnen er technisch uitzien, maar zijn bedoeld voor een
+breed publiek: link:wegwijs[Wegwijs in de modellen].
+
+De begrippen zijn ook afzonderlijk te bekijken op
+https://begrippen.netbeheernederland.nl/[begrippen.netbeheernederland.nl].
