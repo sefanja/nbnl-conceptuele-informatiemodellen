@@ -22,14 +22,12 @@ for category_dir in sorted(os.listdir(BASE_INPUT_MODELS)):
     category_output_dir = os.path.join(BASE_OUTPUT_MODELS, category_dir)
     os.makedirs(category_output_dir, exist_ok=True)
 
-    # Genereer docs/_modellen/<categorie>/index.md
-    category_index_path = os.path.join(category_output_dir, "index.md")
+    # Genereer docs/_modellen/<categorie>/index.adoc
+    category_index_path = os.path.join(category_output_dir, "index.adoc")
     if not os.path.exists(category_index_path):
         with open(category_index_path, "w", encoding="utf-8") as f:
-            f.write("---\n")
-            f.write(f'title: "{category_dir.capitalize()}"\n')
-            f.write("---\n\n")
-            f.write(f"# {category_dir.capitalize()}\n")
+            f.write(f"= {category_dir.capitalize()}\n")
+            f.write(f':title: {category_dir.capitalize()}\n')
 
     # Itereer over modellen binnen de categorie
     for model_dir in sorted(os.listdir(category_path)):
@@ -40,26 +38,24 @@ for category_dir in sorted(os.listdir(BASE_INPUT_MODELS)):
         model_name = model_dir  # fallback
         for version in sorted(os.listdir(model_path), reverse=True):
             yaml_path = os.path.join(model_path, version, "model.yaml")
-            gen_md_path = os.path.join(BASE_OUTPUT_MODELS, category_dir, model_dir, version, "index.md")
+            gen_adoc_path = os.path.join(BASE_OUTPUT_MODELS, category_dir, model_dir, version, "index.adoc")
 
             if not os.path.exists(yaml_path):
                 print(f"Missing YAML: {yaml_path}")
                 continue
-            if not os.path.exists(gen_md_path):
-                print(f"Missing index.md: {gen_md_path}")
+            if not os.path.exists(gen_adoc_path):
+                print(f"Missing index.adoc: {gen_adoc_path}")
                 continue
 
             model_name, _ = get_model_metadata(yaml_path)
             break  # één versie is genoeg voor de naam
 
-        # Genereer docs/_modellen/<categorie>/<modelnaam>/index.md
+        # Genereer docs/_modellen/<categorie>/<modelnaam>/index.adoc
         model_output_dir = os.path.join(BASE_OUTPUT_MODELS, category_dir, model_dir)
         os.makedirs(model_output_dir, exist_ok=True)
 
-        model_index_path = os.path.join(model_output_dir, "index.md")
+        model_index_path = os.path.join(model_output_dir, "index.adoc")
         with open(model_index_path, "w", encoding="utf-8") as f:
-            f.write("---\n")
-            f.write(f'title: "{model_name}"\n')
-            f.write(f'parent: "{category_dir.capitalize()}"\n')
-            f.write("---\n\n")
             f.write(f"# {model_name}\n")
+            f.write(f':title: {model_name}\n')
+            f.write(f':parent: {category_dir.capitalize()}\n')
