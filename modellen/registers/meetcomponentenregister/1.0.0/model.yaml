@@ -21,7 +21,7 @@ annotations:
 classes:
   Any:
     class_uri: linkml:Any
-  Gatewaybehuizing:
+  Gatewayadapter:
     description: apparaat bedoeld om een meetgateway te voorzien van voeding en gebruikersinterface
     annotations:
       nbility_object: Netcomponent
@@ -29,6 +29,7 @@ classes:
       identificatie:
         description: unieke aanduiding waarmee een instantie van een object binnen een gegeven context ondubbelzinnig herkenbaar is
         required: true
+      # relaties:
       ondersteuning voor:
         range: Meetgateway
         required: true
@@ -46,24 +47,10 @@ classes:
       tijdlijn_geldigheid: true
       tijdlijn_registratie: true
     attributes:
-      beheerd door:
-        description: identificeert de marktpartij (netbeheerder) die verantwoordelijk is voor het beheer, via diens registratie in marktcommunicatie
-        range: Marktpartijregistratie
-        annotations:
-          inverse_cardinality: "*"
       bouwjaar:
         description: jaar van productie of revisie zoals vermeld op het apparaat of geregistreerd in een daartoe bestemd systeem
         required: true
         range: Geheel getal
-      communicatiemiddel voor:
-        comments:
-          - In een standaardsituatie met een elektriciteitsmeter, gasmeter en gateway, is de gateway het communicatiemiddel voor beide aansluitingen. In een situatie zonder gateway is de elektriciteitsmeter het communicatiemiddel voor beide aansluitingen.
-          - Deze relatie is veel-op-veel, bijvoorbeeld voor de situatie waarin er in één meterkast twee zelfstandig communicerende elektriciteitsmeters zijn en een gasmeter die wordt uitgelezen via een van de elektriciteitsmeters.
-        range: Aansluiting
-        required: false
-        multivalued: true
-        annotations:
-          inverse_cardinality: "*"
       DSMR-versie:
         description: versie van de Dutch Smart Meter Requirements (DSMR) waaraan de meter voldoet
         comments:
@@ -82,6 +69,21 @@ classes:
         description: unieke identificatiecode van de simfunctionaliteit volgens de 3GPP-standaarden voor ICCID of EID
       typeaanduiding:
         description: naam die door een fabrikant aan een reeks producten met vergelijkbare eigenschappen wordt gegeven
+      # relaties:
+      beheerd door:
+        description: identificeert de marktpartij (netbeheerder) die verantwoordelijk is voor het beheer, via diens registratie in marktcommunicatie
+        range: Marktpartijregistratie
+        annotations:
+          inverse_cardinality: "*"
+      communicatiemiddel voor:
+        comments:
+          - In een standaardsituatie met een elektriciteitsmeter, gasmeter en gateway, is de gateway het communicatiemiddel voor beide aansluitingen. In een situatie zonder gateway is de elektriciteitsmeter het communicatiemiddel voor beide aansluitingen.
+          - Deze relatie is veel-op-veel, bijvoorbeeld voor de situatie waarin er in één meterkast twee zelfstandig communicerende elektriciteitsmeters zijn en een gasmeter die wordt uitgelezen via een van de elektriciteitsmeters.
+        range: Aansluiting
+        required: false
+        multivalued: true
+        annotations:
+          inverse_cardinality: "0..1"
   Meetgateway:
     description: apparaat bedoeld om meters op afstand uitleesbaar te maken, zonder zelf energie-uitwisseling te meten
     is_a: Meetcomponent
@@ -89,6 +91,7 @@ classes:
       gatewaynummer:
         description: identificatie van de meetgateway, bestaande uit een combinatie van gatewaycode, serienummer en de laatste twee cijfers van het bouwjaar
         required: true
+      # relaties:
       ingedeeld naar:
         range: Gatewaycodering
         required: true
@@ -111,11 +114,13 @@ classes:
         description: chemisch type van de ingebouwde primaire batterij, bedoeld voor langdurige autonome werking
         comments:
           - Niet van toepassing op elektriciteitsmeters.
+          - ⚠ Deze eigenschap komt te vervallen tenzij iemand weet waarom het nodig is deze te registreren.
         range: Batterijtype
       batterijvervangingsdatum:
         description: datum waarop de batterij voor het laatst is vervangen
         comments:
           - niet van toepassing op elektriciteitsmeters
+          - ⚠ Deze eigenschap komt te vervallen tenzij iemand weet waarom het nodig is deze te registreren.
         range: Datum
       correctiefactor voor indirecte meting:
         description: factor waarmee het getal van de telwerken vermenigvuldigd moet worden om de meetwaarde te corrigeren voor een meting via meettransformatoren
@@ -123,18 +128,12 @@ classes:
           - Alleen van toepassing op elektriciteitsmeters.
           - Als de meter zelf corrigeert, is de waarde `1`.
         range: Getal
-      # vraag: hoe annoteren dat meternummer afleidbaar is?
+      # vraag: (hoe) annoteren dat meternummer afleidbaar is?
       meternummer:
         description: identificatie van de meter, bestaande uit een combinatie van metercode, serienummer en de laatste twee cijfers van het bouwjaar
         comments:
           - In de praktijk wordt het serienummer soms ook het (korte) meternummer genoemd.
         required: true
-      mobiele-netwerktechnologie:
-        description: technologie voor draadloze communicatie via publieke of private mobiele netwerken volgens gestandaardiseerde telecomprotocollen
-        comments:
-          - Beschrijft de mobiele-netwerktechnologieën die het apparaat technisch ondersteunt; dit impliceert niet dat deze technologieën geactiveerd of operationeel zijn.
-        multivalued: true
-        range: Mobiele-netwerktechnologie
       reden technisch niet op afstand uitleesbaar:
         description: verklaring voor het technisch niet op afstand uitleesbaar zijn van de meter
         range: Reden technisch niet op afstand uitleesbaar
@@ -177,14 +176,16 @@ classes:
       identificatie:
         unique_key_slots:
         - meternummer
-  Telwerk met fysieke indicatie:
-    description: onderdeel van een meter dat een hoeveelheid energie registreert en een vaste aanduiding heeft op een vaste plek of in een vaste volgorde op de meter
+  Telwerk met cijferaanduiding:
+    description: onderdeel van een meter dat een hoeveelheid energie registreert, met een aanduiding die niet rechtstreeks verwijst naar de betekenis of functie van het telwerk
     comments:
-      - Niet van toepassing op meters waarvan de telwerkconfiguratie op afstand instelbaar is.
+      - Niet van toepassing op meters die telwerken aanduiden met OBIS-codes.
     attributes:
-      indicatie:
-        description: aanduiding van een telwerk waarmee het kan worden onderscheiden van andere telwerken in dezelfde meter
+      aanduiding:
+        description: zichtbaar cijfer of vaste afleespositie waarmee dit telwerk op de meter wordt aangeduid, zonder inherente betekenis over wat er wordt gemeten
         required: true
+        range: Cijfer
+      # relaties:
       deel van:
         range: Meter
         required: true
@@ -238,17 +239,9 @@ enums:
     permissible_values:
       M-bus:
       wM-bus:
-  Mobiele-netwerktechnologie:
-    permissible_values:
-      2G:
-        description: GPRS/EDGE
-      3G:
-        description: UMTS/HSPA
-      4G:
-        description: LTE
-      LTE-M:
-        description: Cat-M1
   Reden technisch niet op afstand uitleesbaar:
+    comments:
+      - ⚠ Welke toegestane waarden zijn afgesproken en gedefinieerd in de sector?
     permissible_values:
       geen fysieke toegang:
       te lang niet uitgelezen:
@@ -264,6 +257,10 @@ enums:
         description: de zegel is vervangen na een formele revisie
 
 types:
+  Cijfer:
+    description: enkel karakter dat een numeriek symbool weergeeft
+    base: Tekst
+    pattern: "^[0-9]$"
   # basistypen:
   Datum:
     description: kalenderdatum, zonder tijdsaanduiding

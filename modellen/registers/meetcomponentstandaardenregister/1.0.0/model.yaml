@@ -28,6 +28,7 @@ classes:
         required: true
       mobiele-netwerktechnologie:
         description: technologie voor draadloze communicatie via publieke of private mobiele netwerken volgens gestandaardiseerde telecomprotocollen
+        range: Mobiele-netwerktechnologie
         required: true
         multivalued: true
     unique_keys:
@@ -66,7 +67,7 @@ classes:
         unique_key_slots:
           - metercode
   Telwerkdefinitie:
-    description: beschrijving van wat een telwerk meet, vastgesteld in een standaard of beleidsafspraak
+    description: beschrijving van een cumulatieve energiehoeveelheidsmeting ten behoeve van verrekening
     annotations:
       nbility_object: Technische bedrijfsstandaard
     see_also:
@@ -106,12 +107,15 @@ enums:
   Energierichting:
     permissible_values:
       afname:
-        exact_mappings:
-          - nbnl:afnmame
+        meaning: nbnl:afnmame
       invoeding:
-        # vraag: waarom verschijnt dit niet in output via jinja2-template?
-        exact_mappings:
-          - nbnl:invoeding
+        meaning: nbnl:invoeding
+  Mobiele-netwerktechnologie:
+    permissible_values:
+      GPRS:
+      CDMA:
+      LTE Cat. 1:
+      LTE Cat. M1:
   Tariefzone:
     permissible_values:
       normaal:
