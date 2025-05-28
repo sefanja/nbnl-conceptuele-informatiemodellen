@@ -83,7 +83,7 @@ classes:
         required: false
         multivalued: true
         annotations:
-          inverse_cardinality: "0..1"
+          inverse_cardinality: "*"
   Meetgateway:
     description: apparaat bedoeld om meters op afstand uitleesbaar te maken, zonder zelf energie-uitwisseling te meten
     is_a: Meetcomponent
