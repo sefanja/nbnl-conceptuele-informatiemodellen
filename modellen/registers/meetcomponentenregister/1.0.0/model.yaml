@@ -6,7 +6,6 @@ comments:
   - Het Meetcomponentenregister bevat informatie over fysieke apparaten met meetgerelateerde functionaliteit, zoals energiehoeveelheidsmeters en communicatiegateways, die zijn bedoeld voor gebruik bij kleinverbruikaansluitingen. Deze componenten worden ingezet voor het registreren van gegevens over energie-uitwisseling of het overbrengen daarvan via mobiele communicatie.
   - "Binnen het meetdomein nemen wij ook meetgateways op in het meetcomponentenregister, ondanks hun telecomkarakter. De reden is dat deze gateways een essentiële schakel vormen in de keten van meetdata: zij transporteren juridisch en financieel bindende meetwaarden richting marktpartijen en zijn functioneel gekoppeld aan specifieke meters of meternetwerken. Net als meters ontvangen zij een unieke codering en vallen zij onder specifieke eisen ten aanzien van beschikbaarheid, beveiliging en controleerbaarheid. Om de meetverantwoordelijkheid sluitend en auditbaar te organiseren, hanteren wij daarom eerst een onderscheid tussen netbeheerder en meterbeheerder, en pas daarna een functionele uitsplitsing (zoals meten, communiceren, synchroniseren). Vanuit die logica maken gateways integraal deel uit van het meetcomponentenregister."
   - De regelgeving lijkt niet eenduidig over de bemeting van een streng van lichtmasten ([artikel 3.3.3 van de Tarievencode elektriciteit](https://wetten.overheid.nl/jci1.3:c:BWBR0037951&hoofdstuk=3&paragraaf=3.3&artikel=3.3.3&z=2025-04-26&g=2025-04-26)). Een streng kan worden beschouwd als een aansluiting met één (primair) allocatiepunt en veel overdrachtspunten. Indien bemeting voor verrekening in deze situatie niet is toegestaan, dan beschouwen we de meter niet als meter (ten behoeve van de verrekening) maar als sensor in het net, dat buiten het bereik van dit register valt.
-  - Aangenomen wordt dat een meetgateway altijd fysiek wordt ingeprikt op een gatewaybehuizing of de elektriciteitsmeter op het primaire allocatiepunt (PAP). Dit maakt expliciete registratie van de 'prikconfiguratie' overbodig.
   - ⚠ Enexis heeft aangegeven graag ook meters die als sensor in het net worden ingezet (en dus niet als meetcomponent in de traditionele zin) in dit register op te nemen. Die wens is nu nog niet verwerkt, mede omdat het achterliggende doel nog niet helemaal duidelijk is. Mogelijk speelt de behoefte aan een sluitende rondrekening van alle fysieke meters mee. Tegelijk willen we voorkomen dat sensordata en verrekenbare meetdata door elkaar gaan lopen. Als het doel helderder wordt, kunnen we samen bepalen of en hoe dit een plek krijgt.
 version: 1.0.0-draft
 default_range: Tekst
@@ -37,7 +36,7 @@ classes:
         annotations:
           inverse_cardinality: 0..1
     unique_keys:
-      primary_key:
+      identificatie:
         unique_key_slots:
         - identificatie
   Meetcomponent:
@@ -97,7 +96,7 @@ classes:
         annotations:
           inverse_cardinality: "*"
     unique_keys:
-      primary_key:
+      identificatie:
         unique_key_slots:
         - gatewaynummer
   Meter:
@@ -120,8 +119,36 @@ classes:
       correctiefactor voor indirecte meting:
         description: factor waarmee het getal van de telwerken vermenigvuldigd moet worden om de meetwaarde te corrigeren voor een meting via meettransformatoren
         comments:
-          - Alleen van toepassing op elektriciteit.
+          - Alleen van toepassing op elektriciteitsmeters.
+          - Als de meter zelf corrigeert, is de waarde `1`.
         range: Getal
+      # vraag: hoe annoteren dat meternummer afleidbaar is?
+      meternummer:
+        description: identificatie van de meter, bestaande uit een combinatie van metercode, serienummer en de laatste twee cijfers van het bouwjaar
+        comments:
+          - In de praktijk wordt het serienummer soms ook het (korte) meternummer genoemd.
+        required: true
+      mobiele-netwerktechnologie:
+        description: technologie voor draadloze communicatie via publieke of private mobiele netwerken volgens gestandaardiseerde telecomprotocollen
+        comments:
+          - Beschrijft de mobiele-netwerktechnologieën die het apparaat technisch ondersteunt; dit impliceert niet dat deze technologieën geactiveerd of operationeel zijn.
+        multivalued: true
+        range: Mobiele-netwerktechnologie
+      reden technisch niet op afstand uitleesbaar:
+        description: verklaring voor het technisch niet op afstand uitleesbaar zijn van de meter
+        range: Reden technisch niet op afstand uitleesbaar
+      technisch op afstand uitleesbaar:
+        description: kenmerk dat weergeeft of de meter gelet op externe factoren van technische aard al dan niet op afstand uitleesbaar is
+        comments:
+          - De uitleesbaarheid van de meter heeft invloed op marktprocessen zoals allocatie.
+        range: Waar of onwaar
+      verzegeldatum:
+        description: datum waarop het apparaat voor het laatst metrologisch is verzegeld ter waarborging van de meetintegriteit
+        range: Datum
+      zegelcategorie:
+        description: classificatie van de fabriekszegelstatus
+        range: Zegelcategorie
+      # relaties:
       ingedeeld naar:
         range: Metercodering
         required: true
@@ -145,39 +172,34 @@ classes:
         multivalued: false
         annotations:
           inverse_cardinality: 0..1
-      meternummer:
-        description: identificatie van de meter, bestaande uit een combinatie van metercode, serienummer en de laatste twee cijfers van het bouwjaar
+    unique_keys:
+      identificatie:
+        unique_key_slots:
+        - meternummer
+  Telwerk met fysieke indicatie:
+    description: onderdeel van een meter dat een hoeveelheid energie registreert en een vaste aanduiding heeft op een vaste plek of in een vaste volgorde op de meter
+    comments:
+      - Niet van toepassing op meters waarvan de telwerkconfiguratie op afstand instelbaar is.
+    attributes:
+      indicatie:
+        description: aanduiding van een telwerk waarmee het kan worden onderscheiden van andere telwerken in dezelfde meter
         required: true
-      mobiele-netwerktechnologie:
-        description: technologie voor draadloze communicatie via publieke of private mobiele netwerken volgens gestandaardiseerde telecomprotocollen
-        comments:
-          - Beschrijft de mobiele-netwerktechnologieën die het apparaat technisch ondersteunt; dit impliceert niet dat deze technologieën geactiveerd of operationeel zijn.
-        multivalued: true
-        range: Mobiele-netwerktechnologie
-      reden technisch niet op afstand uitleesbaar:
-        description: verklaring voor het technisch niet op afstand uitleesbaar zijn van de meter
-        range: Reden technisch niet op afstand uitleesbaar
-      technisch op afstand uitleesbaar:
-        description: kenmerk dat weergeeft of de meter gelet op externe factoren van technische aard al dan niet op afstand uitleesbaar is
-        range: Waar of onwaar
-      vast uitgevoerd met:
-        range: Telwerkconfiguratie
-        comments:
-          - Niet van toepassing op meters waarvan de telwerkconfiguratie instelbaar is.
-        required: false
+      deel van:
+        range: Meter
+        required: true
         multivalued: false
         annotations:
           inverse_cardinality: "*"
-      verzegeldatum:
-        description: datum waarop het apparaat voor het laatst metrologisch is verzegeld ter waarborging van de meetintegriteit
-        range: Datum
-      zegelcategorie:
-        description: classificatie van de fabriekszegelstatus
-        range: Zegelcategorie
+      gedefinieerd volgens:
+        range: Telwerkdefinitie
+        required: true
+        multivalued: false
+        annotations:
+          inverse_cardinality: "*"
     unique_keys:
-      primary_key:
+      identificatie:
         unique_key_slots:
-        - meternummer
+        - indicatie
 
   # extern:
   Aansluiting:
@@ -198,7 +220,7 @@ classes:
   Metercodering:
     annotations:
       external_registry: "[Meetcomponentstandaardenregister](../../meetcomponentstandaardenregister)"
-  Telwerkconfiguratie:
+  Telwerkdefinitie:
     annotations:
       external_registry: "[Meetcomponentstandaardenregister](../../meetcomponentstandaardenregister)"
 

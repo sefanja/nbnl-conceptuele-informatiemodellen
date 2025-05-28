@@ -7,8 +7,7 @@ parent: Voor modelleurs
 Deze website is in opbouw. Pagina's kunnen onvolledige of onjuiste informatie bevatten.
 
 # Modelleren en reviewproces
-
-Werkwijze en kwaliteitsborging in het modelleerteam.
+Werkwijze en kwaliteitsborging in het modelleerteam. WRSPM.
 
 ## Rollen
 - Wie modelleert, wie reviewt?

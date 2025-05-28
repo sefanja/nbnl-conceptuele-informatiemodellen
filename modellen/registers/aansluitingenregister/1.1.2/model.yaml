@@ -27,6 +27,8 @@ default_prefix: aansluitingenregister
 
 classes:
   # conventie: class-naam begint met hoofdletter
+  Any:
+    class_uri: linkml:Any
   Aangeslotene:
     # conventie: altijd óf `description` óf `exact_mappings` aanwezig
     # conventie: `exact_mappings` voor verwijzing naar begrippen.netbeheernederland.nl
