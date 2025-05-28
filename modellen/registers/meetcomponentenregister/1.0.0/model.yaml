@@ -116,6 +116,7 @@ classes:
         description: datum waarop de batterij voor het laatst is vervangen
         comments:
           - niet van toepassing op elektriciteitsmeters
+        range: Datum
       correctiefactor voor indirecte meting:
         description: factor waarmee het getal van de telwerken vermenigvuldigd moet worden om de meetwaarde te corrigeren voor een meting via meettransformatoren
         comments:
@@ -276,16 +277,7 @@ types:
   Tekst:
     description: aanduiding bedoeld voor mensen, zonder vaste structuur of betekenis
     base: str
-  Tijdsduur:
-    description: lengte van een tijdsinterval, bijvoorbeeld een uur of een dag
-    base: duration
-  Tijdstip:
-    description: exacte aanduiding van datum en tijd, inclusief eventueel tijdzone-informatie
-    base: datetime
   Waar of onwaar:
     description: binaire aanduiding die aangeeft of een propositie of kenmerk van
       toepassing is (waar) of niet van toepassing is (onwaar)
     base: bool
-  URI:
-    description: uniforme aanduiding van een externe of interne bron
-    base: uri

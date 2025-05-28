@@ -18,6 +18,8 @@ annotations:
 classes:
   Gatewaycodering:
     description: categorisering van meetgateways met gelijke functionele en technische kenmerken, afkomstig van dezelfde fabrikant
+    annotations:
+      nbility_object: Technische bedrijfsstandaard
     slots:
       - fabrikant
     attributes:
@@ -35,6 +37,8 @@ classes:
   Metercodering:
     description: categorisering van energiehoeveelheidsmeters met dezelfde (metrologische) kenmerken en van dezelfde fabrikant
     source: https://www.netbeheernederland.nl/publicatie/reglement-meterparkbeheer-v62
+    annotations:
+      nbility_object: Technische bedrijfsstandaard
     see_also:
       - https://wetten.overheid.nl/jci1.3:c:BWBR0037934&hoofdstuk=2&paragraaf=2.1&artikel=2.1.4&z=2025-01-01&g=2025-01-01
     slots:
@@ -63,6 +67,8 @@ classes:
           - metercode
   Telwerkdefinitie:
     description: beschrijving van wat een telwerk meet, vastgesteld in een standaard of beleidsafspraak
+    annotations:
+      nbility_object: Technische bedrijfsstandaard
     see_also:
       - https://wetten.overheid.nl/jci1.3:c:BWBR0037934&hoofdstuk=2&paragraaf=2.1&artikel=2.1.4&z=2025-01-01&g=2025-01-01
       - https://wetten.overheid.nl/jci1.3:c:BWBR0037938&z=2025-05-08&g=2025-05-08
@@ -82,6 +88,10 @@ classes:
       tariefzone:
         description: aanduiding die aangeeft tijdens welke tariefperiode het telwerk de energie-uitwisseling registreert
         range: Tariefzone
+    unique_keys:
+      identificatie:
+        unique_key_slots:
+          - OBIS-code
 
 slots:
   fabrikant:
@@ -95,10 +105,11 @@ enums:
       waterstof:
   Energierichting:
     permissible_values:
-      afnmame:
+      afname:
         exact_mappings:
           - nbnl:afnmame
       invoeding:
+        # vraag: waarom verschijnt dit niet in output via jinja2-template?
         exact_mappings:
           - nbnl:invoeding
   Tariefzone:
