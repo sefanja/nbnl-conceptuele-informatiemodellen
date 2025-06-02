@@ -49,8 +49,7 @@ Het informatiemodel in Ampersand bestaat uit concepten en relaties, een conceptu
 
 - **Relevantie voor informatiemodellering**: Helpt bij het formaliseren, verifiëren en afdwingbaar maken van beperkingen die vaak impliciet blijven in diagrammen.
 - **Toepassing**: Domeinen met strikte consistentie-eisen of regelgedreven logica.
-- **Tooling**: [Ampersand IDE](https://ampersandtarski.github.io/)
-- **Meer info**: [Ampersand handleiding](https://ampersandtarski.github.io/Manual/)
+- **Meer info**: [Ampersand](https://ampersandtarski.github.io/)
 
 ## Ontologische benaderingen (BFO, UFO, DOLCE)
 

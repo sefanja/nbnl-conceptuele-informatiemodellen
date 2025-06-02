@@ -21,3 +21,5 @@ Een goed vertrekpunt is het overzicht van actuele wet- en regelgeving op de site
 In het marktdomein zijn we energiedrageragnostisch (een variabele in het model).
 
 Over het algemeen zijn we netvlakagnostisch (een variabele in het model).
+
+TODO: https://regels.overheid.nl/standaarden/wetsanalyse#juridisch-analyschema
