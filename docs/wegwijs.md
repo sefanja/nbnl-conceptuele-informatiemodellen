@@ -20,108 +20,68 @@ De conceptuele informatiemodellen op deze website gebruiken eenvoudige diagramme
 
 Een **entiteit** is iets uit de werkelijkheid waarover we informatie vastleggen, bijvoorbeeld een aansluiting, een meter of een klant. In het diagram zie je entiteiten als **rechthoeken** met een naam erin.
 
-<div markdown="1">
-
-```mermaid
-erDiagram
-    Aansluiting {
-    }
-```
-
-</div>
+![Entiteit]({{ site.baseurl }}/assets/images/wegwijs1.drawio.svg)
 
 ## Eigenschappen
 
-Elke entiteit heeft eigenschappen: kenmerken die beschrijven wat iets is of hoe het zich gedraagt. Die staan in het model onder de entiteitsnaam.  
-Voorbeeld: een `Aansluiting` heeft een `EAN_code` en een `energiedrager` (elektriciteit of gas).
+Elke entiteit heeft eigenschappen: kenmerken die beschrijven wat iets is of hoe het zich gedraagt. Die staan in het model onder de entiteitsnaam. Voorbeeld: een `Aansluiting` heeft een `EAN-code` en een `energiedrager` (elektriciteit, gas of waterstof).
 
-<div markdown="1">
+![Eigenschappen]({{ site.baseurl }}/assets/images/wegwijs2.drawio.svg)
 
-```mermaid
-erDiagram
-    Aansluiting {
-        v EAN_code
-        v energiedrager
-        o gecontracteerde_transportcapaciteit
-    }
-```
+Elke eigenschap begint met een symbool:
 
-</div>
+- `#` identificerend
+- `●` essentieel (verplicht)
+- `○` accidentieel (optioneel)
+
+Hieruit kun je aflezen dat aansluitingen van elkaar worden onderscheiden middels hun `EAN-code`; dat een aansluiting zonder `energiedrager` geen aansluiting is; terwijl een aansluiting zonder `weekmax` nog steeds een aansluiting kan zijn (deze eigenschap komt alleen voor bij grote elektriciteitsaansluitingen).
+
+Als een eigenschap begint met `/` dan is deze afleidbaar uit een ander gegeven in het model. In dit geval is de `grootte` van de aansluiting afleidbaar uit de `aansluitcapaciteit` van het gerelateerde `Overdrachtspunt` (niet afgebeeld).
+
+Een eigenschap die eindigt met `[n]` kan meerdere waarden bevatten.
 
 ## Relaties
 
-Entiteiten hangen vaak met elkaar samen. Zo liggen in een **netgebied** één of meer **aansluitingen**. Dat zie je als een lijn tussen twee entiteiten, met een naam erbij.
+Entiteiten hangen vaak met elkaar samen. Zo liggen in een `Netgebied` één of meer `Aansluitingen`. Dat zie je als een lijn tussen twee entiteiten, met een naam erbij.
 
-<div markdown="1">
+![Relaties]({{ site.baseurl }}/assets/images/wegwijs3.drawio.svg)
 
-```mermaid
-erDiagram
-    Netgebied |o--o{ Aansluiting : "gelegen in"
-```
-
-</div>
-
-De positie van het label (bij `Aansluiting`) laat de richting van de relatie zien.
+De positie van het label (bij `Aansluiting`) laat de richting van de relatie zien: een `Aansluiting` is `deel van` een `Netgebied`.
 
 ## Multipliciteit
 
-Crow’s foot notation gebruikt symbolen om aan te geven hoeveel elementen aan elke kant van de relatie voorkomen. Daarbij staat een cirkel voor 0, een streep voor 1 en een driepoot voor veel. In paren geven zij het minimum en maximum aan:
+De kraaienpootnotatie gebruikt symbolen om aan te geven hoeveel elementen aan elke kant van de relatie voorkomen. Daarbij staat een cirkel voor 0, een streep voor 1 en een driepoot voor veel. In paren geven zij het minimum en maximum aan:
 
-- `||` betekent: precies één (minimaal en maximaal 1)
-- `o|` betekent: nul of één
-- `o{` betekent: nul of meer
-- `|{` betekent: één of meer
+- Elke `Aansluiting` kan deel zijn van één `Netgebied`
+- Elk `Netgebeid` kan een groepering zijn van één of meer `Aansluitingen`
+- Elke `Overdrachtspunt` moet deel zijn van exact één `Aansluiting`
+- Elke `Aansluiting` moet de groepering zijn van één of meer `Overdrachtspunten`
 
-Bijvoorbeeld:
+## OF-bogen
 
-- `}o--o|` → Nul of meer aansluitingen kunnen in één netgebied liggen
-- `}|--||` → Eén of meer overdrachtspunten zijn deel van exact één aansluiting
+Een boog met daarop het woord `OF` geeft aan dat óf de ene óf de andere relatie geldt, maar nooit beide. Zo is een `Overdrachtspunt` óf deel van een `Aansluiting` óf deel van een `Netkoppeling` maar nooit deel van beide.
 
-<div markdown="1">
+![OF-bogen]({{ site.baseurl }}/assets/images/wegwijs4.drawio.svg)
 
-```mermaid
-erDiagram
-    Netgebied |o--o{ Aansluiting : "gelegen in"
-    Aansluiting ||--|{ Overdrachtspunt : "deel van"
-```
+## Overerving
 
-</div>
+Een entiteit die wordt omsloten door een andere entiteit is daarvan een specialisatie en overerft daarom alle eigenschappen en relaties. `Spanningsmeettransformator` en `Stroommeettransformator` zijn beide voorbeelden van `Meettransformator` en overerven daarom beide de eigenschappen `serienummer` en `fabrikant`. Maar de eigenschappen `thermisch grensvermogen` en `overstroomfactor` zijn dan weer uniek per type meettransformator.
+
+![Overerving]({{ site.baseurl }}/assets/images/wegwijs5.drawio.svg)
 
 ## Tijdsaspecten
 
-Sommige gegevens veranderen in de tijd. Denk aan een aansluiting die van status verandert of een klant die verhuist. Als het model dat soort tijdinformatie bevat, zie je annotaties als:
+Sommige gegevens veranderen in de tijd. Denk aan een verzwaring van de aansluiting of adreswijziging. Als het van belang is om het verleden te reconstrueren of op de toekomst te anticiperen, dan zie je annotaties als:
 
-- `tijdlijn geldigheid`
-- `tijdlijn levensduur`
+- `⏲ tijdlijn geldigheid`
+- `⏲ tijdlijn registratie`
 
-Deze geven aan in welke periode een gegeven geldig is. Dit noemen we ook wel een tijdlijn of *tijdslijnmodellering* (NEN 3610).
+Deze geven aan in welke periode een feit geldig was in de werkelijkheid (`tijdlijn geldigheid`) en wanneer deze bekend was in het systeem (`tijdlijn registratie`).
 
-<div markdown="1">
+## Kleuren
 
-```mermaid
-erDiagram
-    Aansluiting {
-        t tijdlijn_geldigheid
-    }
-```
+Elke entiteit heeft een kleur die de relatie naar [NBility](https://nbility-model.github.io/) weergeeft.
 
-</div>
+Zo behoort de `Aangeslotene` bij **Klant**, de `Aansluiting` en het `Overdrachtspunt` bij **Aansluiting** (binnen de **Energiemarkt**) en het `Primair deel meetinrichting` bij **Netcomponent** (binnen het **Energienet**).
 
-## TODO
-{: .no_toc }
-
-- essentiële versus accidentiële eigenschappen (ook multipliciteit)
-- afleidbare elementen
-- verwijzingen naar andere registers en basisregistraties
-- NBility-kleuren
-
-```mermaid
-erDiagram
-    Entiteit {
-        i identificerende_eigenschap
-        e essentiele_eigenschap
-        a accidentiele_eigenschap
-        d afleidbare_eigenschap
-        t tijdslijnaanduiding
-    }   
-```
+![Kleuren]({{ site.baseurl }}/assets/images/wegwijs6.drawio.svg)
