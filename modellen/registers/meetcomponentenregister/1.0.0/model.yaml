@@ -177,6 +177,8 @@ classes:
         unique_key_slots:
         - meternummer
   Telwerk met cijferaanduiding:
+    annotations:
+      nbility_object: Netcomponent
     description: onderdeel van een meter dat een hoeveelheid energie registreert, met een aanduiding die niet rechtstreeks verwijst naar de betekenis of functie van het telwerk
     comments:
       - Niet van toepassing op meters die telwerken aanduiden met OBIS-codes.
@@ -202,6 +204,7 @@ classes:
       identificatie:
         unique_key_slots:
         - indicatie
+        - deel van
 
   # extern:
   Aansluiting:
