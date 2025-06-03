@@ -203,7 +203,7 @@ classes:
     unique_keys:
       identificatie:
         unique_key_slots:
-        - indicatie
+        - aanduiding
         - deel van
 
   # extern:
