@@ -244,8 +244,6 @@ enums:
       M-bus:
       wM-bus:
   Reden technisch niet op afstand uitleesbaar:
-    comments:
-      - ⚠ Welke toegestane waarden zijn afgesproken en gedefinieerd in de sector?
     permissible_values:
       39.1:
         description: geen fysieke toegang
