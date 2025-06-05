@@ -233,7 +233,7 @@ Specialisatie van {{link(schemaview.get_class(class.is_a).name)}}
 ### Eigenschappen
 {{ '{: .no_toc }' }}
 
-| Eigenschap | Waardesoort | Omschrijving |
+| Eigenschap | Specificatie | Omschrijving |
 | :---  | :--- | :--- |
 {% for slot in properties -%}
 | {{key_symbol(class, slot)}}{{slot.name}} {{is_unique_key_slot}} | {{compute_range(slot)}}<br/>_{{gen.cardinality(slot)}}_ | {{omschrijving(slot)}} |

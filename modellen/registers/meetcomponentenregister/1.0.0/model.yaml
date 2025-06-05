@@ -55,18 +55,19 @@ classes:
         description: versie van de Dutch Smart Meter Requirements (DSMR) waaraan de meter voldoet
         comments:
           - Deze versie bepaalt de structuur en inhoud van de P1-data en het communicatiegedrag.
-      hostnaam:
-        description: tekstuele aanduiding van een apparaat, bedoeld voor identificatie binnen computernetwerken
-      IMEI:
-        description: unieke identificatiecode van een mobiel apparaat volgens de 3GPP-standaard voor apparaatidentificatie
+      # TODO: verplaatsen naar ander register:
+      # hostnaam:
+      #   description: tekstuele aanduiding van een apparaat, bedoeld voor identificatie binnen computernetwerken
+      # IMEI:
+      #   description: unieke identificatiecode van een mobiel apparaat volgens de 3GPP-standaard voor apparaatidentificatie
+      # simkaartnummer:
+      #   description: unieke identificatiecode van de simfunctionaliteit volgens de 3GPP-standaarden voor ICCID of EID
       lokaal communicatieprotocol:
         description: protocol voor gegevensuitwisseling binnen een beperkte reikwijdte
         range: Lokaal communicatieprotocol
       serienummer:
         description: unieke code die door de fabrikant aan een exemplaar uit een reeks producten gegeven wordt
         required: true
-      simkaartnummer:
-        description: unieke identificatiecode van de simfunctionaliteit volgens de 3GPP-standaarden voor ICCID of EID
       typeaanduiding:
         description: naam die door een fabrikant aan een reeks producten met vergelijkbare eigenschappen wordt gegeven
       # relaties:
@@ -246,10 +247,18 @@ enums:
     comments:
       - ⚠ Welke toegestane waarden zijn afgesproken en gedefinieerd in de sector?
     permissible_values:
-      geen fysieke toegang:
-      te lang niet uitgelezen:
-      geen communicatiepad:
-      anders:
+      39.1:
+        description: geen fysieke toegang
+      39.2:
+        description: aansluiting langdurig spanningsloos of niet in gebruik
+      39.3:
+        description: uitlezing geblokkeerd i.v.m. incident meter of telecom
+      39.4:
+        description: geen telecomdekking door inpandige situatie
+      39.5:
+        description: geen telecomdekking aanwezig
+      39.6:
+        description: gasmeter hangt te ver van elektrameter of er hangt een losse gasmeter
   Zegelcategorie:
     permissible_values:
       oorspronkelijke fabriekszegel:
