@@ -1,0 +1,73 @@
+id: https://voorbeeld.com/mijnmodel
+name: mijnmodel
+title: Conceptueel informatiemodel
+description: Automatisch gegenereerd schema.
+version: 1.0.0-draft
+default_range: Tekst
+prefixes:
+  mijmodel: https://voorbeeld.com/mijnmodel
+  nbnl: https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/
+  nbility: https://nbility-model.github.io/NBility-business-capabilities-Archi/
+default_prefix: https://voorbeeld.com/mijnmodel/
+classes:
+  Beschrijving van aangeslotene:
+    description: Definitie van Beschrijving van aangeslotene
+    attributes:
+      e-mailadres: {}
+      geboortedatum: {}
+      naam:
+        required: true
+      roepnaam: {}
+      telefoonnummer: {}
+      tussenvoegsel: {}
+      voorletters: {}
+  Correspondentieadres:
+    description: Definitie van Correspondentieadres
+    attributes:
+      deel van (Beschrijving_van_aangeslotene):
+        range: Beschrijving van aangeslotene
+        required: true
+        multivalued: false
+        annotations:
+          inverse_cardinality: 0..1
+      huisnummer:
+        required: true
+      huisnummertoevoeging: {}
+      landcode:
+        required: true
+      postcode:
+        required: true
+      straatnaam:
+        required: true
+      woonplaatsnaam:
+        required: true
+    unique_keys:
+      primary_key:
+        unique_key_slots:
+        - deel van (Beschrijving_van_aangeslotene)
+types:
+  Datum:
+    description: kalenderdatum, zonder tijdsaanduiding
+    base: date
+  Geheel getal:
+    description: getal zonder decimalen
+    base: int
+  Getal:
+    description: voorstelling van een hoeveelheid
+    base: float
+  Tekst:
+    description: aanduiding bedoeld voor mensen, zonder vaste structuur of betekenis
+    base: str
+  Tijdsduur:
+    description: lengte van een tijdsinterval, bijvoorbeeld een uur of een dag
+    base: duration
+  Tijdstip:
+    description: exacte aanduiding van datum en tijd, inclusief eventueel tijdzone-informatie
+    base: datetime
+  Waar of onwaar:
+    description: binaire aanduiding die aangeeft of een propositie of kenmerk van
+      toepassing is (waar) of niet van toepassing is (onwaar)
+    base: bool
+  URI:
+    description: uniforme aanduiding van een externe of interne bron
+    base: uri
