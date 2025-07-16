@@ -47,7 +47,7 @@ classes:
         required: false
         multivalued: false
         annotations:
-          inverse_cardinality: *
+          inverse_cardinality: "*"
     unique_keys:
       primary_key:
         unique_key_slots:
