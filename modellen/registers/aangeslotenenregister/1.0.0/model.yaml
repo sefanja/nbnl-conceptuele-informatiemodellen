@@ -1,50 +1,96 @@
-id: https://voorbeeld.com/mijnmodel
-name: mijnmodel
-title: Conceptueel informatiemodel
-description: Automatisch gegenereerd schema.
+id: https://netbeheernederland.nl/conceptueelinformatiemodel/aangeslotenenregister
+name: aangeslotenenregister
+title: Aangeslotenenregister
+description: Het aangeslotenenregister bevat (beschrijvingen van) consumenten en ondernemingen die beschikken over een elektriciteits- of gasaansluiting in Nederland of net over de grens.
 version: 1.0.0-draft
 default_range: Tekst
 prefixes:
-  mijmodel: https://voorbeeld.com/mijnmodel
+  mijmodel: https://netbeheernederland.nl/conceptueelinformatiemodel/aangeslotenenregister/
   nbnl: https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/
   nbility: https://nbility-model.github.io/NBility-business-capabilities-Archi/
-default_prefix: https://voorbeeld.com/mijnmodel/
+default_prefix: https://netbeheernederland.nl/conceptueelinformatiemodel/aangeslotenenregister/
+annotations: 
+  nbility_function: C.6.2.1. Aansluitingen/allocatiepunten beheren
 classes:
   Beschrijving van aangeslotene:
-    description: Definitie van Beschrijving van aangeslotene
+    description: opsomming van de kenmerken van een consument, onderneming of maatschappelijke activiteit die van een netbeheerder de beschikking heeft gekregen over een aansluiting
+    annotations:
+      nbility_object: Klant
     attributes:
-      e-mailadres: {}
-      geboortedatum: {}
+      e-mailadres:
+        description: uniek adres voor digitaal, elektronisch postverkeer
+      geboortedatum:
+        description: datum van geboorte van een persoon
+        comments: Deze definitie is gebaseerd op NEN 1888:2002.
       naam:
+        description: organisatienaam of achternaam (zonder tussenvoegsel)
         required: true
-      roepnaam: {}
-      telefoonnummer: {}
-      tussenvoegsel: {}
-      voorletters: {}
+      voornamen:
+        description: verzameling van een of meer naamgegevens, ter onderscheiding van personen met dezelfde achternaam
+        comments: Deze definitie is gebaseerd op NEN 1888:2002.
+      telefoonnummer:
+        description: uniek nummer dat toegekend wordt om een aansluiting op het publieke telefoonnet te identificeren, bestaande uit het plusteken, een landnummer, een netnummer en een abonneenummer
+      voorvoegsel:
+        description: verzameling van een of meer voorzetsels en/of lidwoorden die aan het significante deel van de achternaam vooraf gaat en daarmee gezamelijk de achternaam vormt
+        comments: Deze definitie is gebaseerd op NEN 1888:2002.
+      voorletters:
+        description: afkorting van voornamen
+        comments: Deze definitie is een samenvoeging van voorletters-1 en voorletters-n uit NEN 1888:2002.
+      bij:
+        range: Aansluiting
+        required: true
+        multivalued: false
+        annotations:
+          inverse_cardinality: 0..1
+      beschrijving van:
+        range: Onderneming
+        required: false
+        multivalued: false
+        annotations:
+          inverse_cardinality: *
+    unique_keys:
+      primary_key:
+        unique_key_slots:
+        - bij
   Correspondentieadres:
-    description: Definitie van Correspondentieadres
+    description: postadres waar een aangeslotene zijn correspondentie wil ontvangen anders dan het aansluitadres
+    annotations:
+      nbility_object: Klant
     attributes:
-      deel van (Beschrijving_van_aangeslotene):
+      deel van:
         range: Beschrijving van aangeslotene
         required: true
         multivalued: false
         annotations:
           inverse_cardinality: 0..1
       huisnummer:
+        description: aan een object toegekende nummering, een antwoordnummer of een postbusnummer
         required: true
-      huisnummertoevoeging: {}
+      huisnummertoevoeging:
+        description: aan een object toegekende nadere toevoeging aan een huisnummer inclusief huisletter
       landcode:
+        description: identificatie van een land met twee letters conform ISO 3166-1
         required: true
       postcode:
+        description: reeks tekens die in een postadres wordt opgenomen om het automatisch sorteren van de post gemakkelijker te maken
         required: true
       straatnaam:
+        description: naam om openbare ruimten als straten, lanen, wegen en stegen mee aan te duiden, of 'antwoordnummer' of 'postbus'
         required: true
       woonplaatsnaam:
+        description: aanduiding van een gebied met bewoning zoals een stad of dorp
         required: true
     unique_keys:
       primary_key:
         unique_key_slots:
-        - deel van (Beschrijving_van_aangeslotene)
+        - deel van
+  Aansluiting:
+    annotations:
+      external_registry: Aansluitingenregister
+  Onderneming:
+    annotations:
+      external_registry: Handelsregister
+      
 types:
   Datum:
     description: kalenderdatum, zonder tijdsaanduiding
