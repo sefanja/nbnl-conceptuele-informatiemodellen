@@ -51,6 +51,13 @@ classes:
         range: Energiedrager
         required: true
         multivalued: true
+      luchtdrukgecorrigeerd:
+        description: aanduiding of de metingen door de meter worden gecorrigeerd voor luchtdruk
+        range: Waar of onwaar
+        required: true
+      metercapaciteit:
+        description: maximale hoeveelheid energie, vermogen of volume per tijdseenheid waarvoor de meter is ontworpen
+        required: true
       metercode:
         description: unieke code die een type energiehoeveelheidsmeter aanduidt op basis van metrologische eigenschappen en fabrikant
         required: true
@@ -114,8 +121,11 @@ enums:
     permissible_values:
       GPRS:
       CDMA:
-      LTE Cat. 1:
-      LTE Cat. M1:
+      LTE (450 MHz):
+      LTE (commercieel):
+      LTE-M (multiband):
+        description: commerciële frequenties en 450 MHz
+      LTE-M (single band):
   Tariefzone:
     permissible_values:
       normaal:

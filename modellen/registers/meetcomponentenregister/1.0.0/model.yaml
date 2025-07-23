@@ -47,14 +47,16 @@ classes:
       tijdlijn_geldigheid: true
       tijdlijn_registratie: true
     attributes:
+      afkeurjaar:
+        description: kalenderjaar waarin is vastgesteld dat het apparaat ongeschikt is voor verder gebruik
+        range: Geheel getal
       bouwjaar:
         description: jaar van productie of revisie zoals vermeld op het apparaat of geregistreerd in een daartoe bestemd systeem
         required: true
         range: Geheel getal
-      DSMR-versie:
-        description: versie van de Dutch Smart Meter Requirements (DSMR) waaraan de meter voldoet
-        comments:
-          - Deze versie bepaalt de structuur en inhoud van de P1-data en het communicatiegedrag.
+      generatie:
+        description: classificatie op basis van technische mogelijkheden
+        range: Generatie
       # TODO: verplaatsen naar ander register:
       # hostnaam:
       #   description: tekstuele aanduiding van een apparaat, bedoeld voor identificatie binnen computernetwerken
@@ -239,10 +241,16 @@ enums:
         description: lithium-mangaanoxide
       LiFePO4:
         description: lithium-ijzerfosfaat
-  Lokaal communicatieprotocol:
+  Generatie:
     permissible_values:
+      DSMR4:
+        description: ⚠ Deze lijst wordt nog volledig gemaakt
+  Lokaal communicatieprofiel:
+    permissible_values:
+      ethernet:
       M-bus:
       wM-bus:
+      Wi-SUN:
   Reden technisch niet op afstand uitleesbaar:
     permissible_values:
       39.1:
@@ -260,7 +268,7 @@ enums:
   Zegelcategorie:
     permissible_values:
       oorspronkelijke fabriekszegel:
-        description: de zegel is sinds fabricage niet verbroken
+        description: de zegel, inclusief als zegel bedoelde sealing, is sinds fabricage niet verbroken
       verbroken zegel:
         description: de zegel is verbroken, zonder dat een revisie heeft plaatsgevonden
       gereviseerd:
