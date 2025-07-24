@@ -54,9 +54,12 @@ classes:
         description: jaar van productie of revisie zoals vermeld op het apparaat of geregistreerd in een daartoe bestemd systeem
         required: true
         range: Geheel getal
+      dossierreden:
+        description: oorzaak van het niet tijdig verwijderen van een afgekeurde meter
+        range: Dossierreden
       generatie:
         description: classificatie op basis van technische mogelijkheden
-        range: Generatie
+        range: Geheel getal
       # TODO: verplaatsen naar ander register:
       # hostnaam:
       #   description: tekstuele aanduiding van een apparaat, bedoeld voor identificatie binnen computernetwerken
@@ -113,18 +116,6 @@ classes:
       - https://wetten.overheid.nl/jci1.3:c:BWBR0037934&hoofdstuk=2&paragraaf=2.1&artikel=2.1.4&z=2025-01-01&g=2025-01-01
       - https://www.netbeheernederland.nl/publicatie/reglement-meterparkbeheer-v62
     attributes:
-      batterijtype:
-        description: chemisch type van de ingebouwde primaire batterij, bedoeld voor langdurige autonome werking
-        comments:
-          - Niet van toepassing op elektriciteitsmeters.
-          - ⚠ Deze eigenschap komt te vervallen tenzij iemand weet waarom het nodig is deze te registreren.
-        range: Batterijtype
-      batterijvervangingsdatum:
-        description: datum waarop de batterij voor het laatst is vervangen
-        comments:
-          - niet van toepassing op elektriciteitsmeters
-          - ⚠ Deze eigenschap komt te vervallen tenzij iemand weet waarom het nodig is deze te registreren.
-        range: Datum
       correctiefactor voor indirecte meting:
         description: factor waarmee het getal van de telwerken vermenigvuldigd moet worden om de meetwaarde te corrigeren voor een meting via meettransformatoren
         comments:
@@ -233,18 +224,20 @@ classes:
       external_registry: "[Meetcomponentstandaardenregister](../../meetcomponentstandaardenregister)"
 
 enums:
-  Batterijtype:
+  Dossierreden:
     permissible_values:
-      Li-SOC12:
-        description: lithium-thionylchloride
-      Li-MnO2:
-        description: lithium-mangaanoxide
-      LiFePO4:
-        description: lithium-ijzerfosfaat
-  Generatie:
-    permissible_values:
-      DSMR4:
-        description: ⚠ Deze lijst wordt nog volledig gemaakt
+      1:
+        description: Geen contact met klant mogelijk
+      2:
+        description: Klant werkt niet mee
+      3:
+        description: Installatie moet worden vervangen/aangepast
+      4:
+        description: Sloop of verbouw aansluiting/pand
+      5:
+        description: Meter kan niet worden vervangen
+      6:
+        description: Administratieve onduidelijkheid
   Lokaal communicatieprofiel:
     permissible_values:
       ethernet:
