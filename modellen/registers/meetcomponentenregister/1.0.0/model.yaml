@@ -51,9 +51,10 @@ classes:
         description: kalenderjaar waarin is vastgesteld dat het apparaat ongeschikt is voor verder gebruik
         range: Geheel getal
       bouwjaar:
-        description: jaar van productie of revisie zoals vermeld op het apparaat of geregistreerd in een daartoe bestemd systeem
-        required: true
+        description: jaar waarin de meter voor het eerst is geproduceerd, zoals vermeld op het apparaat of geregistreerd in een daartoe bestemd systeem
         range: Geheel getal
+        comments:
+          - Verplicht indien niet gereviseerd.
       dossierreden:
         description: oorzaak van het niet tijdig verwijderen van een afgekeurde meter
         range: Dossierreden
@@ -73,6 +74,11 @@ classes:
       serienummer:
         description: unieke code die door de fabrikant aan een exemplaar uit een reeks producten gegeven wordt
         required: true
+      revisiejaar:
+        description: jaar waarin de meter gereviseerd is voor hergebruik, zoals vermeld op het apparaat of geregistreerd in een daartoe bestemd systeem
+        range: Geheel getal
+        comments:
+          - Verplicht indien gereviseerd.
       typeaanduiding:
         description: naam die door een fabrikant aan een reeks producten met vergelijkbare eigenschappen wordt gegeven
       # relaties:
@@ -122,6 +128,9 @@ classes:
           - Alleen van toepassing op elektriciteitsmeters.
           - Als de meter zelf corrigeert, is de waarde `1`.
         range: Getal
+      deelpopulatiecodering:
+        description: aanvullende codering die, samen met de metercode, een subset van meters met gedeelde kenmerken aanduidt die binnen het meterpark apart worden behandeld
+        range: Cijfer
       # vraag: (hoe) annoteren dat meternummer afleidbaar is?
       meternummer:
         description: identificatie van de meter, bestaande uit een combinatie van metercode, serienummer en de laatste twee cijfers van het bouwjaar
@@ -149,6 +158,9 @@ classes:
         multivalued: false
         annotations:
           inverse_cardinality: "*"
+      jaar van afkeur door coördinator:
+        description: kalenderjaar waarin de coördinator heeft vastgesteld dat de meter niet langer geschikt is voor gebruik
+        range: Geheel getal
       meetmiddel voor:
         range: Any
         exactly_one_of:
