@@ -58,6 +58,7 @@ classes:
       G-waarde:
         description: classificatie van een gasmeter op basis van de nominale debietcapaciteit, uitgedrukt als G-waarde conform internationale normen (zoals EN 1359).
         range: G-waarde
+        multivalued: true
       luchtdrukgecorrigeerd:
         description: aanduiding of de metingen door de meter worden gecorrigeerd voor luchtdruk
         range: Waar of onwaar
