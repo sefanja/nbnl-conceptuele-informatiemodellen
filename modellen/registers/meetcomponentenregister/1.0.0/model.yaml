@@ -6,7 +6,7 @@ comments:
   - Het Meetcomponentenregister bevat informatie over fysieke apparaten met meetgerelateerde functionaliteit, zoals energiehoeveelheidsmeters en communicatiegateways, die zijn bedoeld voor gebruik bij kleinverbruikaansluitingen. Deze componenten worden ingezet voor het registreren van gegevens over energie-uitwisseling of het overbrengen daarvan via mobiele communicatie.
   - "Binnen het meetdomein nemen wij ook meetgateways op in het meetcomponentenregister, ondanks hun telecomkarakter. De reden is dat deze gateways een essentiële schakel vormen in de keten van meetdata: zij transporteren juridisch en financieel bindende meetwaarden richting marktpartijen en zijn functioneel gekoppeld aan specifieke meters of meternetwerken. Net als meters ontvangen zij een unieke codering en vallen zij onder specifieke eisen ten aanzien van beschikbaarheid, beveiliging en controleerbaarheid. Om de meetverantwoordelijkheid sluitend en auditbaar te organiseren, hanteren wij daarom eerst een onderscheid binnen de netbeheerder tussen zuiver netbeheer en meterbeheer (op kleinverbruikaansluitingen), en pas daarna een functionele uitsplitsing (zoals meten, communiceren, synchroniseren). Vanuit die logica maken gateways integraal deel uit van het meetcomponentenregister."
   - Een streng van lichtmasten ([artikel 3.3.3 van de Tarievencode elektriciteit](https://wetten.overheid.nl/jci1.3:c:BWBR0037951&hoofdstuk=3&paragraaf=3.3&artikel=3.3.3&z=2025-04-26&g=2025-04-26)) kan worden beschouwd als een aansluiting met één (primair) allocatiepunt en veel overdrachtspunten. Indien bemeting voor verrekening in deze situatie niet is toegestaan, dan beschouwen we de meter niet als meter (ten behoeve van de verrekening) maar als sensor in het net, dat buiten het bereik van dit register valt.
-  - ⚠ Enexis heeft aangegeven graag ook meters die als sensor in het net worden ingezet (en dus niet als meetcomponent in de traditionele zin) in dit register op te nemen. Die wens is nu nog niet verwerkt, mede omdat het achterliggende doel nog niet helemaal duidelijk is. Doen deze apparaten mee met steekproeven? Worden ze verwijderd nadat de populatie is afgekeurd? Moeten de meetwaarden via de centrale head-end worden uitgelezen? Kunnen deze apparaten een herinzet krijgen als meter bij een aansluiting? Als het doel helder wordt, kunnen we samen bepalen hoe dit een plek krijgt. Tot die tijd hanteren we het onderscheid binnen de netbeheerder tussen zuiver netbeheerd en meterbeheer (op kleinverbruikaansluitingen), waarbij dit register zich beperkt tot de doelen van de meterbeheerder (op kleinverbruikaansluitingen).
+  - ⚠ Enexis heeft aangegeven graag ook meters die als sensor in het net worden ingezet (en dus niet als meetcomponent in de traditionele zin) in dit register op te nemen. Die wens is nu nog niet verwerkt, mede omdat het achterliggende doel nog niet helemaal duidelijk is. Doen deze apparaten mee met steekproeven? Worden ze verwijderd nadat de populatie is afgekeurd? Moeten de meetwaarden via de centrale head-end worden uitgelezen? Kunnen deze apparaten een herinzet krijgen als meter bij een aansluiting? Als het doel helder wordt, kunnen we samen bepalen hoe dit een plek krijgt. Tot die tijd hanteren we het onderscheid binnen de netbeheerder tussen zuiver netbeheer en meterbeheer (op kleinverbruikaansluitingen), waarbij dit register zich beperkt tot de doelen van de meterbeheerder (op kleinverbruikaansluitingen).
 version: 1.0.0-draft
 default_range: Tekst
 prefixes:
@@ -31,6 +31,7 @@ classes:
         required: true
       # relaties:
       ondersteuning voor:
+        description: voorziet de meetgateway van voeding en/of display
         range: Meetgateway
         required: true
         multivalued: false
@@ -175,6 +176,7 @@ classes:
         annotations:
           inverse_cardinality: 0..1
       ondersteuning voor:
+        description: voorziet de meetgateway van voeding en/of display
         range: Meetgateway
         required: false
         multivalued: false
