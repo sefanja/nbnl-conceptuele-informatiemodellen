@@ -128,6 +128,7 @@ enums:
         meaning: nbnl:invoeding
   G-waarde:
     permissible_values:
+      G2:
       G4:
       G6:
       G10:
