@@ -140,8 +140,8 @@
         {%- for m in mappings -%}
             {%- set _ = linked.append(gen.uri_link(m)) -%}
         {%- endfor -%}
-        {%- set markdown_line = linked | join(', ') -%}
-        {%- set _ = 'Gerelateerde begrippen: ' ~ parts.items.append(markdown_line) -%}
+        {%- set markdown_line = 'Gerelateerde begrippen: ' ~ linked | join(', ') -%}
+        {%- set _ = parts.items.append(markdown_line) -%}
     {%- endif -%}
 
     {# see_also #}
