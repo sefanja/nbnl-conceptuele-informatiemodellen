@@ -57,7 +57,7 @@ classes:
     unique_keys:
       primary_key:
         unique_key_slots:
-        - bij
+        - representatie van houder van
   Correspondentieadres:
     description: postadres waar een aangeslotene zijn correspondentie wil ontvangen anders dan het aansluitadres
     annotations:
