@@ -1,7 +1,7 @@
 id: https://netbeheernederland.nl/conceptueelinformatiemodel/aangeslotenenregister
 name: aangeslotenenregister
 title: Aangeslotenenregister
-description: Het aangeslotenenregister bevat beschrijvingen van (natuurlijke en niet-natuurlijke) personen die de beschikking hebben gekregen over een elektriciteits- of gasaansluiting van een Nederlandse netbeheerder, of afnemer zijn op een van de allocatiepunten.
+description: Het aangeslotenenregister bevat beschrijvingen van (natuurlijke en niet-natuurlijke) personen die de beschikking hebben gekregen over een elektriciteits- of gasaansluiting van een Nederlandse netbeheerder.
 version: 1.0.0-draft
 default_range: Tekst
 prefixes:
@@ -14,9 +14,7 @@ annotations:
 
 classes:
   Beschrijving van aangeslotene:
-    description: opsomming van de kenmerken van een (natuurlijk of niet-natuurlijk) persoon die van een netbeheerder de beschikking heeft gekregen over een aansluiting, of die via een toebedeeld secundair allocatiepunt gebruikmaakt van een gezamenlijke aansluiting
-    comments:
-      - De definitie van 'aangeslotene' is opgerekt om personen in te sluiten aan wie een secundair allocatiepunt is toebedeeld zodat zij zelf hun energieleverancier kunnen kiezen. Dit is in navolging van artikel 1.1.15 van de Informatiecode elektriciteit en gas (geldend vanaf 1-1-2025).
+    description: opsomming van de kenmerken van een (natuurlijk of niet-natuurlijk) persoon die van een netbeheerder de beschikking heeft gekregen over een aansluiting
     annotations:
       nbility_object: Klant
     attributes:
@@ -25,10 +23,6 @@ classes:
       geboortedatum:
         description: datum van geboorte van een persoon
         comments: Deze definitie is gebaseerd op NEN 1888:2002.
-      huishoudelijk eindafnemer of micro-onderneming:
-        description: geeft aan of een aangeslotene elektriciteit of gas afneemt of wil afnemen voor eigen huishoudelijk gebruik, of een onderneming is met minder dan tien werknemers en met een jaaromzet of jaarlijks balanstotaal van ten hoogste € 2 miljoen
-        source: https://wetten.overheid.nl/BWBR0050714/
-        range: Waar of onwaar
       naam:
         description: organisatienaam of achternaam (zonder tussenvoegsel)
         required: true
@@ -43,10 +37,11 @@ classes:
       voorletters:
         description: afkorting van voornamen
         comments: Deze definitie is een samenvoeging van voorletters-1 en voorletters-n uit NEN 1888:2002.
-      representatie van gebruiker op:
-        comments:
-          - Bij een gezamenlijke aansluiting kan een secundair allocatiepunt een afnemer hebben die afwijkt van de persoon die beschikt over de aansluiting als geheel (in dit register is dat de gebruiker op het primaire allocatiepunt). Alhoewel strikt genomen alleen de laatstgenoemde geldt als 'aangeslotene', beschouwt dit register beide als 'aangeslotene', in navolging van artikel 1.1.15 van de Informatiecode elektriciteit en gas (geldend vanaf 1-1-2025).
-        range: Allocatiepunt bij aansluiting
+      type aangeslotene:
+        description: categorie waartoe de aangeslotene behoort
+        range: Type aangeslotene
+      representatie van houder van:
+        range: Aansluiting
         required: true
         multivalued: false
         annotations:
@@ -93,13 +88,23 @@ classes:
       primary_key:
         unique_key_slots:
         - deel van
-  Allocatiepunt bij aansluiting:
+  Aansluiting:
     annotations:
       external_registry: Aansluitingenregister
   Onderneming:
     annotations:
       external_registry: Handelsregister
-      
+
+enums:
+  Type aangeslotene:
+    permissible_values:
+      huishoudelijk eindafnemer:
+        description: eindafnemer die elektriciteit of gas koopt of wil kopen voor eigen huishoudelijk gebruik
+        source: https://wetten.overheid.nl/BWBR0050714/
+      onderneming of overige zakelijke eindafnemer:
+        description:  entiteit, ongeacht rechtsvorm of wijze van financiering, die een economische activiteit verricht, in de zin van artikel 101, eerste lid, van het Verdrag betreffende de werking van de Europese Unie
+        source: https://wetten.overheid.nl/BWBR0050714/
+
 types:
   Datum:
     description: kalenderdatum, zonder tijdsaanduiding
