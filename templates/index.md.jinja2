@@ -81,7 +81,7 @@
 {%- macro source(element) -%}
 {%- if element.source -%}
     {%- set label = get_label(element.source) -%}
-    [{{ label if label != 'None' else '1' }}]({{ element.source }})
+    [{{ label if label != 'None' else '[1]' }}]({{ element.source }})
 {%- endif -%}
 {%- endmacro -%}
 
@@ -89,7 +89,7 @@
 {%- if element.see_also -%}
     {%- for url in element.see_also -%}
         {%- set label = get_label(url) -%}
-        [{{ label if label != 'None' else loop.index }}]({{ url }}){% if not loop.last %}, {% endif -%}
+        [{{ label if label != 'None' else '[' ~ loop.index ~ ']' }}]({{ url }}){% if not loop.last %}, {% endif -%}
     {%- endfor -%}
 {%- endif -%}
 {%- endmacro -%}
