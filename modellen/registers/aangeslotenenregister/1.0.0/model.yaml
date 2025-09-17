@@ -100,10 +100,10 @@ enums:
     permissible_values:
       huishoudelijk eindafnemer:
         description: eindafnemer die elektriciteit of gas koopt of wil kopen voor eigen huishoudelijk gebruik
-        source: https://wetten.overheid.nl/BWBR0050714/
+        source: https://wetten.overheid.nl/jci1.3:c:BWBR0050714
       onderneming of overige zakelijke eindafnemer:
         description:  entiteit, ongeacht rechtsvorm of wijze van financiering, die een economische activiteit verricht, in de zin van artikel 101, eerste lid, van het Verdrag betreffende de werking van de Europese Unie
-        source: https://wetten.overheid.nl/BWBR0050714/
+        source: https://wetten.overheid.nl/jci1.3:c:BWBR0050714
 
 types:
   Datum:
