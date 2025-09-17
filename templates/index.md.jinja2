@@ -133,6 +133,17 @@
         {%- set _ = parts.items.append('Bron: ' ~ source(element)) -%}
     {%- endif -%}
 
+    {# related_mappings  #}
+    {%- set mappings = schemaview.get_mappings(element.name).get("related", []) -%}
+    {%- if mappings -%}
+        {%- set linked = [] -%}
+        {%- for m in mappings -%}
+            {%- set _ = linked.append(gen.uri_link(m)) -%}
+        {%- endfor -%}
+        {%- set markdown_line = linked | join(', ') -%}
+        {%- set _ = 'Gerelateerde begrippen: ' ~ parts.items.append(markdown_line) -%}
+    {%- endif -%}
+
     {# see_also #}
     {%- if element.see_also -%}
         {%- set _ = parts.items.append('Zie ook ' ~ see_also(element)) -%}
