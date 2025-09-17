@@ -15,6 +15,7 @@ annotations:
 classes:
   Beschrijving van aangeslotene:
     description: opsomming van de kenmerken van een (natuurlijk of niet-natuurlijk) persoon die van een netbeheerder de beschikking heeft gekregen over een aansluiting
+    source: nbnl:aangeslotene
     annotations:
       nbility_object: Klant
     attributes:
