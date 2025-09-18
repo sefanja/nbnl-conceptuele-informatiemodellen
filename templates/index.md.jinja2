@@ -27,14 +27,14 @@
 
 {%- macro range(name) -%}
     {%- set base_types = {
-        'bool': 'Waar of onwaar',
-        'date': 'Datum',
-        'datetime': 'Tijdstip',
-        'duration': 'Tijdsduur',
-        'float': 'Getal',
-        'int': 'Geheel getal',
-        'str': 'Tekst',
-        'uri': 'URI' } -%}
+        'bool': 'waar of onwaar',
+        'date': 'datum',
+        'datetime': 'tijdstip',
+        'duration': 'tijdsduur',
+        'float': 'getal',
+        'int': 'geheel getal',
+        'str': 'tekst',
+        'uri': 'uri' } -%}
     {%- if name in base_types -%}
         {{ base_types[name] }}
     {%- elif name in schemaview.all_classes() -%}
