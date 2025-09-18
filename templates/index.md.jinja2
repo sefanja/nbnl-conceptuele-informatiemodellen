@@ -129,12 +129,12 @@
 
     {# description #}
     {%- if element.description -%}
-        {%- set _ = parts.items.append('_' ~ element.description ~ '_') -%}
-    {%- endif -%}
-
-    {# source #}
-    {%- if element.source -%}
-        {%- set _ = parts.items.append('Definitie gebaseerd op: ' ~ source(element)) -%}
+        {# source #}
+        {%- if element.source -%}
+            {%- set _ = parts.items.append('_' ~ element.description ~ '_' ~ ' (gebaseerd op ' ~ source(element) ~ ')') -%}
+        {%- else -%}
+            {%- set _ = parts.items.append('_' ~ element.description ~ '_') -%}
+        {%- endif -%}
     {%- endif -%}
 
     {# related_mappings  #}
