@@ -124,13 +124,13 @@ classes:
           - tce:hoofdstuk=3&paragraaf=3.7&artikel=3.7.13.b&z=2022-05-18&g=2022-05-18
         comments:
           - Ook wel bekend als 'zuivere teruglevering'.
-        range: Waar of onwaar
+        range: bool
         required: true
       weekmax:
         description: indicatie of de kWmax per week gemeten moet worden
         see_also:
           - tce:hoofdstuk=3&paragraaf=3.7&artikel=3.7.5a&z=2022-05-18&g=2022-05-18
-        range: Waar of onwaar
+        range: bool
       deel van:
         range: Netgebied
         required: false
