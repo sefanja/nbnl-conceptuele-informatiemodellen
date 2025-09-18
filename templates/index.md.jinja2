@@ -17,7 +17,7 @@
 {%- endfor -%}
 {%- endmacro -%}
 
-{%- macro link(name) -%}
+{%- macro name_link(name) -%}
 [{{ name }}](#{{ id_safe(name) }})
 {%- endmacro -%}
 
@@ -31,10 +31,10 @@
         {%- if class.annotations.external_registry -%}
             {{ name }} ({{class.annotations.external_registry.value}})
         {%- else -%}
-            {{ link(name) }}
+            {{ name_link(name) }}
         {%- endif -%}
     {%- else -%}
-        {{ link(name) }}
+        {{ name_link(name) }}
     {%- endif -%}
 {%- endmacro -%}
 
@@ -58,45 +58,25 @@
     {%- endif -%}
 {%- endmacro -%}
 
-{%- macro get_label(url) -%}
-    {%- set link_labels = {
-        "https://wetten.overheid.nl/jci1.3:c:BWBR0009755": "Elektriciteitswet 1998",
-        "https://wetten.overheid.nl/jci1.3:c:BWBR0037923": "Begrippencode gas",
-        "https://wetten.overheid.nl/jci1.3:c:BWBR0037934": "Informatiecode elektriciteit en gas",
-        "https://wetten.overheid.nl/jci1.3:c:BWBR0037936": "Meetcode gas",
-        "https://wetten.overheid.nl/jci1.3:c:BWBR0037938": "Begrippencode elektriciteit",
-        "https://wetten.overheid.nl/jci1.3:c:BWBR0037946": "Meetcode elektriciteit",
-        "https://wetten.overheid.nl/jci1.3:c:BWBR0037951": "Tarievencode elektriciteit",
-        "https://wetten.overheid.nl/jci1.3:c:BWBR0050714": "Energiewet",
-        "https://www.nen.nl/": "NEN",
-        "https://www.iso.org/": "ISO",
-        "https://nl.wikipedia.org/": "Wikipedia",
-        "https://en.wikipedia.org/": "Wikipedia"
-    } -%}
-    {%- set ns = namespace(label=None) -%}
-    {%- for prefix, label in link_labels.items() -%}
-        {%- if url.startswith(prefix) -%}
-            {%- set ns.label = label -%}
-        {%- endif -%}
-    {%- endfor -%}
-    {{- ns.label -}}
+{%- macro uri_link(uri) -%}
+    {%- if(uri.startswith('http://') or uri.startswith('https://')) -%}
+        [{{ uri|replace('https://', '')|replace('http://', '')|truncate(15) }}]
+    {%- else -%}
+        [{{ uri }}]
+    {%- endif -%}
+    ({{ schemaview.expand_curie(uri) }})
 {%- endmacro -%}
-
-{%- macro get_label(url) -%}
-    {{ url|replace('https://', '')|replace('http://', '')|truncate(15) }}
-{%- endmacro -%}
-
 
 {%- macro source(element) -%}
 {%- if element.source -%}
-    [{{ get_label(element.source) }}]({{ schemaview.expand_curie(element.source) }})
+    uri_link(element.source)
 {%- endif -%}
 {%- endmacro -%}
 
 {%- macro see_also(element) -%}
 {%- if element.see_also -%}
-    {%- for url in element.see_also -%}
-        [{{ get_label(url) }}]({{ url }}){% if not loop.last %}, {% endif -%}
+    {%- for uri in element.see_also -%}
+        uri_link(uri){% if not loop.last %}, {% endif -%}
     {%- endfor -%}
 {%- endif -%}
 {%- endmacro -%}
@@ -230,7 +210,7 @@ Deze website is in opbouw. Pagina's kunnen onvolledige of onjuiste informatie be
 ## {{class.name}}
 
 {% if class.is_a %}
-Specialisatie van {{link(schemaview.get_class(class.is_a).name)}}
+Specialisatie van {{name_link(schemaview.get_class(class.is_a).name)}}
 {% endif %}
 
 {{omschrijving(class)}}
@@ -282,7 +262,7 @@ Specialisatie van {{link(schemaview.get_class(class.is_a).name)}}
 | Waardesoort | Omschrijving | Gebaseerd op | Patroon |
 | :--- | :--- | :--- | :--- |
 {% for t in gen.all_type_objects() -%}
-| {{anchor(t.name)}} | {{omschrijving(t)}} | {% if t.typeof %}{{link(t.typeof)}}{% else %}{{t.base}}{% endif %} | {% if t.pattern %}`{{t.pattern}}`{% endif %} |
+| {{anchor(t.name)}} | {{omschrijving(t)}} | {% if t.typeof %}{{name_link(t.typeof)}}{% else %}{{t.base}}{% endif %} | {% if t.pattern %}`{{t.pattern}}`{% endif %} |
 {% endfor %}
 
 {% endif %}

@@ -8,8 +8,12 @@ prefixes:
   mijmodel: https://netbeheernederland.nl/conceptueelinformatiemodel/aangeslotenenregister/
   nbnl: https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/
   nbility: https://nbility-model.github.io/NBility-business-capabilities-Archi/
+  wiki: https://nl.wikipedia.org/wiki/
+  nen: https://www.nen.nl/
+  iso: https://www.iso.org/
+  wetten: https://wetten.overheid.nl/
 default_prefix: https://netbeheernederland.nl/conceptueelinformatiemodel/aangeslotenenregister/
-annotations: 
+annotations:
   nbility_function: C.6.2.1. Aansluitingen/allocatiepunten beheren
 
 classes:
@@ -23,26 +27,26 @@ classes:
     attributes:
       e-mailadres:
         description: uniek adres voor digitaal, elektronisch postverkeer
-        source: https://nl.wikipedia.org/wiki/E-mail
+        source: wiki:E-mail
       geboortedatum:
         description: datum van geboorte van een persoon
-        source: https://www.nen.nl/nen-1888-2002-nl-62341
+        source: nen:nen-1888-2002-nl-62341
         range: Datum
       naam:
         description: statutaire naam van de niet-natuurlijke persoon of achternaam zonder tussenvoegsel van de natuurlijke persoon
         required: true
       voornamen:
         description: verzameling van een of meer naamgegevens, ter onderscheiding van personen met dezelfde achternaam
-        source: https://www.nen.nl/nen-1888-2002-nl-62341
+        source: nen:nen-1888-2002-nl-62341
       telefoonnummer:
         description: uniek nummer dat toegekend wordt om een aansluiting op het publieke telefoonnet te identificeren, bestaande uit het plusteken, een landnummer, een netnummer en een abonneenummer
-        source: https://nl.wikipedia.org/wiki/Telefoonnummer
+        source: wiki:Telefoonnummer
       voorvoegsel:
         description: verzameling van een of meer voorzetsels en/of lidwoorden die aan het significante deel van de achternaam vooraf gaat en daarmee gezamelijk de achternaam vormt
-        source: https://www.nen.nl/nen-1888-2002-nl-62341
+        source: nen:nen-1888-2002-nl-62341
       voorletters:
         description: afkorting van voornamen
-        source: https://www.nen.nl/nen-1888-2002-nl-62341
+        source: nen:nen-1888-2002-nl-62341
         comments:
           - ⚠ NEN 1888:2002 onderscheidt voorletters-1 van voorletters-n. Bijvoorbeeld Theo Adriaan kan worden afgekort als TA of als Th.Adr. Is het nodig hier iets over af te spreken?
       type aangeslotene:
@@ -77,27 +81,27 @@ classes:
           inverse_cardinality: 0..1
       huisnummer:
         description: aan een verblijfsobject, standplaats of ligplaats toegekend nummer, een antwoordnummer of een postbusnummer
-        source: https://nl.wikipedia.org/wiki/Huisnummer
+        source: wiki:Huisnummer
         required: true
         range: Geheel getal
       huisnummertoevoeging:
         description: aan een verblijfsobject, standplaats of ligplaats toegekende nadere toevoeging aan een huisnummer inclusief huisletter
-        source: https://nl.wikipedia.org/wiki/Huisnummer
+        source: wiki:Huisnummer
       landcode:
         description: identificatie van een land met twee letters conform ISO 3166-1
-        source: https://www.iso.org/iso-3166-country-codes.html
+        source: iso:iso-3166-country-codes.html
         required: true
       postcode:
         description: reeks tekens die in een postadres wordt opgenomen om het automatisch sorteren van de post gemakkelijker te maken
-        source: https://nl.wikipedia.org/wiki/Postcode
+        source: wiki:Postcode
         required: true
       straatnaam:
         description: naam om openbare ruimten zoals straten, lanen, wegen en stegen mee aan te duiden, of 'antwoordnummer' of 'postbus'
-        source: https://nl.wikipedia.org/wiki/Straatnaam
+        source: wiki:Straatnaam
         required: true
       woonplaatsnaam:
         description: aanduiding van een gebied met bewoning zoals een stad of dorp
-        source: https://nl.wikipedia.org/wiki/Woonplaats
+        source: wiki:Woonplaats
         required: true
     unique_keys:
       primary_key:
@@ -115,10 +119,10 @@ enums:
     permissible_values:
       huishoudelijk eindafnemer:
         description: eindafnemer die elektriciteit of gas koopt of wil kopen voor eigen huishoudelijk gebruik
-        source: https://wetten.overheid.nl/jci1.3:c:BWBR0050714
+        source: wetten:jci1.3:c:BWBR0050714
       onderneming of overige zakelijke eindafnemer:
         description:  entiteit, ongeacht rechtsvorm of wijze van financiering, die een economische activiteit verricht, in de zin van artikel 101, eerste lid, van het Verdrag betreffende de werking van de Europese Unie
-        source: https://wetten.overheid.nl/jci1.3:c:BWBR0050714
+        source: wetten:jci1.3:c:BWBR0050714
 
 types:
   Datum:
