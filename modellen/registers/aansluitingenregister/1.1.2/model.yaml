@@ -343,6 +343,3 @@ types:
     description: Europees artikelnummer van achttien cijfers
     pattern: "^[0-9]{18}$"
     base: str
-  URI:
-    description: uniforme aanduiding van een externe of interne bron
-    base: uri

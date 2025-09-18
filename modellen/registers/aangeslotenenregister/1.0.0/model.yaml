@@ -3,7 +3,7 @@ name: aangeslotenenregister
 title: Aangeslotenenregister
 description: Het aangeslotenenregister bevat beschrijvingen van (natuurlijke en niet-natuurlijke) personen die de beschikking hebben gekregen over een elektriciteits- of gasaansluiting van een Nederlandse netbeheerder.
 version: 1.0.0-draft
-default_range: Tekst
+default_range: str
 prefixes:
   nbnl: https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/
   nbility: https://nbility-model.github.io/NBility-business-capabilities-Archi/
@@ -31,7 +31,7 @@ classes:
       geboortedatum:
         description: datum van geboorte van een persoon
         source: nen:nen-1888-2002-nl-62341
-        range: Datum
+        range: date
       naam:
         description: statutaire naam van de niet-natuurlijke persoon of achternaam zonder tussenvoegsel van de natuurlijke persoon
         required: true
@@ -83,7 +83,7 @@ classes:
         description: aan een verblijfsobject, standplaats of ligplaats toegekend nummer, een antwoordnummer of een postbusnummer
         source: wiki:Huisnummer
         required: true
-        range: Geheel getal
+        range: int
       huisnummertoevoeging:
         description: aan een verblijfsobject, standplaats of ligplaats toegekende nadere toevoeging aan een huisnummer inclusief huisletter
         source: wiki:Huisnummer
@@ -123,30 +123,3 @@ enums:
       onderneming of overige zakelijke eindafnemer:
         description:  entiteit, ongeacht rechtsvorm of wijze van financiering, die een economische activiteit verricht, in de zin van artikel 101, eerste lid, van het Verdrag betreffende de werking van de Europese Unie
         source: energiewet:z=2025-02-22&g=2025-02-22
-
-types:
-  Datum:
-    description: kalenderdatum, zonder tijdsaanduiding
-    base: date
-  Geheel getal:
-    description: getal zonder decimalen
-    base: int
-  # Getal:
-  #   description: voorstelling van een hoeveelheid
-  #   base: float
-  Tekst:
-    description: aanduiding bedoeld voor mensen, zonder vaste structuur of betekenis
-    base: str
-  # Tijdsduur:
-  #   description: lengte van een tijdsinterval, bijvoorbeeld een uur of een dag
-  #   base: duration
-  # Tijdstip:
-  #   description: exacte aanduiding van datum en tijd, inclusief eventueel tijdzone-informatie
-  #   base: datetime
-  Waar of onwaar:
-    description: binaire aanduiding die aangeeft of een propositie of kenmerk van
-      toepassing is (waar) of niet van toepassing is (onwaar)
-    base: bool
-  # URI:
-  #   description: uniforme aanduiding van een externe of interne bron
-  #   base: uri

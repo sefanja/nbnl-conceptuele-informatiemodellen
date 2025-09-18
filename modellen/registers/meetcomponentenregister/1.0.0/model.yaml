@@ -8,7 +8,7 @@ comments:
   - Een streng van lichtmasten ([artikel 3.3.3 van de Tarievencode elektriciteit](https://wetten.overheid.nl/jci1.3:c:BWBR0037951&hoofdstuk=3&paragraaf=3.3&artikel=3.3.3&z=2025-04-26&g=2025-04-26)) kan worden beschouwd als een aansluiting met één (primair) allocatiepunt en veel overdrachtspunten. Indien bemeting voor verrekening in deze situatie niet is toegestaan, dan beschouwen we de meter niet als meter (ten behoeve van de verrekening) maar als sensor in het net, dat buiten het bereik van dit register valt.
   - ⚠ Enexis heeft aangegeven graag ook meters die als sensor in het net worden ingezet (en dus niet als meetcomponent in de traditionele zin) in dit register op te nemen. Die wens is nu nog niet verwerkt, mede omdat het achterliggende doel nog niet helemaal duidelijk is. Doen deze apparaten mee met steekproeven? Worden ze verwijderd nadat de populatie is afgekeurd? Moeten de meetwaarden via de centrale head-end worden uitgelezen? Vindt daardoor ongewenste IT/OT-vermenging plaats? Kunnen deze apparaten een herinzet krijgen als meter bij een aansluiting? Antwoorden verschillende netbeheerders verschillend op deze vragen? Als de apparaten worden ingezet als sensor in het net, welke extra informatie moet dan worden geregistreerd? Stationsnummer, netfunctie-ID, ...? Als het doel helder wordt, kunnen we samen bepalen hoe dit een plek krijgt. Tot die tijd hanteren we het onderscheid binnen de netbeheerder tussen zuiver netbeheer en meterbeheer (op kleinverbruikaansluitingen), waarbij dit register zich beperkt tot de doelen van de meterbeheerder (op kleinverbruikaansluitingen).
 version: 1.0.0-draft
-default_range: Tekst
+default_range: str
 prefixes:
   linkml: https://w3id.org/linkml/
   nbnl: https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/
@@ -53,10 +53,10 @@ classes:
     attributes:
       afkeurjaar:
         description: kalenderjaar waarin is vastgesteld dat het apparaat ongeschikt is voor verder gebruik
-        range: Geheel getal
+        range: int
       bouwjaar:
         description: jaar waarin de meter voor het eerst is geproduceerd, zoals vermeld op het apparaat of geregistreerd in een daartoe bestemd systeem
-        range: Geheel getal
+        range: int
         comments:
           - Verplicht indien niet gereviseerd.
       dossierreden:
@@ -64,7 +64,7 @@ classes:
         range: Dossierreden
       generatie:
         description: classificatie op basis van technische mogelijkheden
-        range: Geheel getal
+        range: int
       # TODO: verplaatsen naar ander register:
       # hostnaam:
       #   description: tekstuele aanduiding van een apparaat, bedoeld voor identificatie binnen computernetwerken
@@ -80,7 +80,7 @@ classes:
         required: true
       revisiejaar:
         description: jaar waarin de meter gereviseerd is voor hergebruik, zoals vermeld op het apparaat of geregistreerd in een daartoe bestemd systeem
-        range: Geheel getal
+        range: int
         comments:
           - Verplicht indien gereviseerd.
       typeaanduiding:
@@ -130,13 +130,13 @@ classes:
     attributes:
       afkeurjaar:
         description: kalenderjaar waarin is vastgesteld dat de meter niet langer geschikt is voor gebruik
-        range: Geheel getal
+        range: int
       correctiefactor voor indirecte meting:
         description: factor waarmee het getal van de telwerken vermenigvuldigd moet worden om de meetwaarde te corrigeren voor een meting via meettransformatoren
         comments:
           - Alleen van toepassing op elektriciteitsmeters.
           - Als de meter zelf corrigeert, is de waarde `1`.
-        range: Getal
+        range: float
       deelpopulatiecodering:
         description: aanvullende codering die, samen met de metercode, een subset van meters met gedeelde kenmerken aanduidt die binnen het meterpark apart worden behandeld
         range: Cijfer
@@ -153,10 +153,10 @@ classes:
         description: kenmerk dat weergeeft of de meter gelet op externe factoren van technische aard al dan niet op afstand uitleesbaar is
         comments:
           - De uitleesbaarheid van de meter heeft invloed op marktprocessen zoals allocatie.
-        range: Waar of onwaar
+        range: bool
       verzegeldatum:
         description: datum waarop het apparaat voor het laatst metrologisch is verzegeld ter waarborging van de meetintegriteit
-        range: Datum
+        range: date
       zegelcategorie:
         description: classificatie van de fabriekszegelstatus
         range: Zegelcategorie
@@ -289,22 +289,5 @@ enums:
 types:
   Cijfer:
     description: enkel karakter dat een numeriek symbool weergeeft
-    base: Tekst
-    pattern: "^[0-9]$"
-  # basistypen:
-  Datum:
-    description: kalenderdatum, zonder tijdsaanduiding
-    base: date
-  Geheel getal:
-    description: getal zonder decimalen
-    base: int
-  Getal:
-    description: voorstelling van een hoeveelheid
-    base: float
-  Tekst:
-    description: aanduiding bedoeld voor mensen, zonder vaste structuur of betekenis
     base: str
-  Waar of onwaar:
-    description: binaire aanduiding die aangeeft of een propositie of kenmerk van
-      toepassing is (waar) of niet van toepassing is (onwaar)
-    base: bool
+    pattern: "^[0-9]$"

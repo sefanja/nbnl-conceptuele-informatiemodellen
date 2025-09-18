@@ -5,7 +5,7 @@ description: Register met vastgestelde standaarden, richtlijnen en definities vo
 comments:
   - Dit register kan eventueel nog worden uitgebreid met meetcomponentconfiguratiebeleid met betrekking tot bijvoorbeeld firmwareversies en mobiele-netwerktechnologieën.
 version: 1.0.0-draft
-default_range: Tekst
+default_range: str
 prefixes:
   linkml: https://w3id.org/linkml/
   meetcomponentenregister: https://netbeheernederland.nl/conceptueelinformatiemodel/meetcomponentenregister/
@@ -65,18 +65,18 @@ classes:
         multivalued: true
       luchtdrukgecorrigeerd:
         description: aanduiding of de metingen door de meter worden gecorrigeerd voor luchtdruk
-        range: Waar of onwaar
+        range: bool
         required: true
       metercode:
         description: unieke code die een type energiehoeveelheidsmeter aanduidt op basis van metrologische eigenschappen en fabrikant
         required: true
       op afstand uitleesbaar:
         description: kenmerk dat weergeeft of de meter voldoet aan het Besluit op afstand uitleesbare meetinrichtingen
-        range: Waar of onwaar
+        range: bool
         required: true
       temperatuurgecorrigeerd:
         description: aanduiding of de metingen door de meter worden gecorrigeerd voor temperatuur
-        range: Waar of onwaar
+        range: bool
         required: true
     unique_keys:
       identificatie:
@@ -92,7 +92,7 @@ classes:
     attributes:
       aantal posities voor de komma:
         description: maximaal aantal posities in het decimale talstelsel dat het telwerk kan bevatten
-        range: Geheel getal
+        range: int
       energierichting:
         exact_mappings:
           - nbnl:energierichting
@@ -166,16 +166,3 @@ enums:
     permissible_values:
       kWh:
       m3:
-
-types:
-  # basistypen:
-  Geheel getal:
-    description: getal zonder decimalen
-    base: int
-  Tekst:
-    description: aanduiding bedoeld voor mensen, zonder vaste structuur of betekenis
-    base: str
-  Waar of onwaar:
-    description: binaire aanduiding die aangeeft of een propositie of kenmerk van
-      toepassing is (waar) of niet van toepassing is (onwaar)
-    base: bool
