@@ -25,7 +25,7 @@
 <span id="{{ id_safe(name) }}">{{name}}</span>
 {%- endmacro -%}
 
-{%- macro translate_base_type(type) -%}
+{%- macro range(name) -%}
     {%- set base_types = {
         'date': 'Datum',
         'datetime': 'Tijdstip',
@@ -33,27 +33,18 @@
         'float': 'Getal',
         'int': 'Geheel getal',
         'str': 'Tekst',
-        'uri': 'URI'
-    } -%}
-    {%- if type in base_types -%}
-        {{ base_types[type] }}
-    {%- else -%}
-        {{ type }}
-    {%- endif -%}
-{%- endmacro -%}
-
-{%- macro range(name) -%}
-    {%- if name in schemaview.all_classes() -%}
+        'uri': 'URI' } -%}
+    {%- if name in base_types -%}
+        {{ base_types[name] }}
+    {%- elif name in schemaview.all_classes() -%}
         {%- set class = schemaview.get_class(name) -%}
         {%- if class.annotations.external_registry -%}
             {{ name }} ({{class.annotations.external_registry.value}})
         {%- else -%}
             {{ link(name) }}
         {%- endif -%}
-    {%- elif name in gen.all_type_objects() -%}
-        {{ link(name) }}
     {%- else -%}
-        {{ translate_base_type(name) }}
+        {{ link(name) }}
     {%- endif -%}
 {%- endmacro -%}
 
@@ -272,7 +263,7 @@ Specialisatie van {{link(schemaview.get_class(class.is_a).name)}}
 | Waardesoort | Omschrijving | Gebaseerd op | Patroon |
 | :--- | :--- | :--- | :--- |
 {% for t in gen.all_type_objects() -%}
-| {{anchor(t.name)}} | {{omschrijving(t)}} | {% if t.typeof %}{{link(t.typeof)}}{% else %}{{translate_base_type(t.base)}}{% endif %} | {% if t.pattern %}`{{t.pattern}}`{% endif %} |
+| {{anchor(t.name)}} | {{omschrijving(t)}} | {% if t.typeof %}{{link(t.typeof)}}{% else %}{{range(t.base)}}{% endif %} | {% if t.pattern %}`{{t.pattern}}`{% endif %} |
 {% endfor %}
 
 {% endif %}
