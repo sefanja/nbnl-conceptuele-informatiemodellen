@@ -8,7 +8,7 @@ title: Aansluitingenregister
 version: 1.1.2
 description: Het aansluitingenregister bevat alle elektriciteits- en gasaansluitingen in Nederland.
 # conventie: Juriconnect voor verwijzing naar regelgeving
-source: wetten:BWBR0037934&hoofdstuk=2&paragraaf=2.1&z=2025-01-01&g=2025-01-01
+source: iceg:hoofdstuk=2&paragraaf=2.1&z=2025-01-01&g=2025-01-01
 comments:
   - Het aansluitingenregister wordt gezamenlijk beheerd door de netbeheerders en bevat zowel fysieke als administratieve gegevens over aansluitingen. Het register is essentieel voor de werking van de energiemarkt omdat het de basis vormt voor processen zoals leverancierswisselingen, verhuizingen en facturatie.
   - De verplichting tot het bijhouden van het aansluitingenregister is vastgelegd in de Informatiecode elektriciteit en gas, vastgesteld door de Autoriteit Consument en Markt (ACM).

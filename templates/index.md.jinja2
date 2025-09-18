@@ -17,12 +17,29 @@
 {%- endfor -%}
 {%- endmacro -%}
 
-{%- macro name_link(name) -%}
+{%- macro link(name) -%}
 [{{ name }}](#{{ id_safe(name) }})
 {%- endmacro -%}
 
 {%- macro anchor(name) -%}
 <span id="{{ id_safe(name) }}">{{name}}</span>
+{%- endmacro -%}
+
+{%- macro translate_base_type(type) -%}
+    {%- set base_types = {
+        'date': 'Datum',
+        'datetime': 'Tijdstip',
+        'duration': 'Tijdsduur',
+        'float': 'Getal',
+        'int': 'Geheel getal',
+        'str': 'Tekst',
+        'uri': 'URI'
+    } -%}
+    {%- if type in base_types -%}
+        base_types[type]
+    {%- else -%}
+        type
+    {%- endif -%}
 {%- endmacro -%}
 
 {%- macro range(name) -%}
@@ -31,10 +48,12 @@
         {%- if class.annotations.external_registry -%}
             {{ name }} ({{class.annotations.external_registry.value}})
         {%- else -%}
-            {{ name_link(name) }}
+            {{ link(name) }}
         {%- endif -%}
+    {%- elif name in gen.all_type_objects() -%}
+        {{ link(name) }}
     {%- else -%}
-        {{ name_link(name) }}
+        translate_base_type(name)
     {%- endif -%}
 {%- endmacro -%}
 
@@ -201,7 +220,7 @@ Deze website is in opbouw. Pagina's kunnen onvolledige of onjuiste informatie be
 ## {{class.name}}
 
 {% if class.is_a %}
-Specialisatie van {{name_link(schemaview.get_class(class.is_a).name)}}
+Specialisatie van {{link(schemaview.get_class(class.is_a).name)}}
 {% endif %}
 
 {{omschrijving(class)}}
@@ -253,7 +272,7 @@ Specialisatie van {{name_link(schemaview.get_class(class.is_a).name)}}
 | Waardesoort | Omschrijving | Gebaseerd op | Patroon |
 | :--- | :--- | :--- | :--- |
 {% for t in gen.all_type_objects() -%}
-| {{anchor(t.name)}} | {{omschrijving(t)}} | {% if t.typeof %}{{name_link(t.typeof)}}{% else %}{{t.base}}{% endif %} | {% if t.pattern %}`{{t.pattern}}`{% endif %} |
+| {{anchor(t.name)}} | {{omschrijving(t)}} | {% if t.typeof %}{{link(t.typeof)}}{% else %}{{translate_base_type(t.base)}}{% endif %} | {% if t.pattern %}`{{t.pattern}}`{% endif %} |
 {% endfor %}
 
 {% endif %}
