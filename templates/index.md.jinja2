@@ -85,7 +85,7 @@
 {%- macro source(element) -%}
 {%- if element.source -%}
     {%- set label = get_label(element.source) -%}
-    [{{ label if label != 'None' else '[1]' }}]({{ element.source }})
+    [{{ label if label != 'None' else '[1]' }}]({{ gen.uri_link(element.source) }})
 {%- endif -%}
 {%- endmacro -%}
 

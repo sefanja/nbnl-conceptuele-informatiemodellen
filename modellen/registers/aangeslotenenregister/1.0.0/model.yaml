@@ -17,8 +17,7 @@ classes:
     description: opsomming van de kenmerken van een (natuurlijk of niet-natuurlijk) persoon die van een netbeheerder de beschikking heeft gekregen over een aansluiting
     comments:
       - Netbeheerders beschikken vaak niet over de gegevens om aangeslotenen eenduidig te identificeren. Daarom hanteert dit register niet het begrip 'Aangeslotene' maar 'Beschrijving van aangeslotene'.
-    related_mappings:
-      - nbnl:aangeslotene
+    source: nbnl:aangeslotene
     annotations:
       nbility_object: Klant
     attributes:
