@@ -27,7 +27,7 @@ prefixes:
   bcg: https://wetten.overheid.nl/jci1.3:c:BWBR0037923&
   adamstelsel: https://www.amsterdam.nl/stelselpedia/
 # conventie: standaard geen `string` maar `Tekst`
-default_range: Tekst
+default_range: str
 default_prefix: https://netbeheernederland.nl/conceptueelinformatiemodel/aansluitingenregister/
 
 classes:
@@ -340,32 +340,9 @@ enums:
 
 types:
   EAN-18:
-    typeof: Tekst
     description: Europees artikelnummer van achttien cijfers
     pattern: "^[0-9]{18}$"
     base: str
-  # conventie: conceptuele basistypen (in plaats van de technische varianten)
-  Datum:
-    description: kalenderdatum, zonder tijdsaanduiding
-    base: date
-  Geheel getal:
-    description: getal zonder decimalen
-    base: int
-  Getal:
-    description: voorstelling van een hoeveelheid
-    base: float
-  Tekst:
-    description: aanduiding bedoeld voor mensen, zonder vaste structuur of betekenis
-    base: str
-  Tijdsduur:
-    description: lengte van een tijdsinterval, bijvoorbeeld een uur of een dag
-    base: duration
-  Tijdstip:
-    description: exacte aanduiding van datum en tijd, inclusief eventueel tijdzone-informatie
-    base: datetime
-  Waar of onwaar:
-    description: binaire aanduiding die aangeeft of een propositie of kenmerk van toepassing is (waar) of niet van toepassing is (onwaar)
-    base: bool
   URI:
     description: uniforme aanduiding van een externe of interne bron
     base: uri

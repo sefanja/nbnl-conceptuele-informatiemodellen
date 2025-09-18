@@ -53,7 +53,7 @@
     {%- elif name in gen.all_type_objects() -%}
         {{ link(name) }}
     {%- else -%}
-        translate_base_type(name)
+        {{ translate_base_type(name) }}
     {%- endif -%}
 {%- endmacro -%}
 
