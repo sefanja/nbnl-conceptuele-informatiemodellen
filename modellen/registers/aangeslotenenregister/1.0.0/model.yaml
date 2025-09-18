@@ -30,19 +30,22 @@ classes:
         source: https://www.nen.nl/nen-1888-2002-nl-62341
         range: Datum
       naam:
-        description: organisatienaam of achternaam zonder tussenvoegsel
+        description: statutaire naam van de niet-natuurlijke persoon of achternaam zonder tussenvoegsel van de natuurlijke persoon
         required: true
       voornamen:
         description: verzameling van een of meer naamgegevens, ter onderscheiding van personen met dezelfde achternaam
         source: https://www.nen.nl/nen-1888-2002-nl-62341
       telefoonnummer:
         description: uniek nummer dat toegekend wordt om een aansluiting op het publieke telefoonnet te identificeren, bestaande uit het plusteken, een landnummer, een netnummer en een abonneenummer
+        source: https://nl.wikipedia.org/wiki/Telefoonnummer
       voorvoegsel:
         description: verzameling van een of meer voorzetsels en/of lidwoorden die aan het significante deel van de achternaam vooraf gaat en daarmee gezamelijk de achternaam vormt
         source: https://www.nen.nl/nen-1888-2002-nl-62341
       voorletters:
         description: afkorting van voornamen
         source: https://www.nen.nl/nen-1888-2002-nl-62341
+        comments:
+          - ⚠ NEN 1888:2002 onderscheidt voorletters-1 van voorletters-n. Bijvoorbeeld Theo Adriaan kan worden afgekort als TA of als Th.Adr. Is het nodig hier iets over af te spreken?
       type aangeslotene:
         description: categorie waartoe de aangeslotene behoort
         range: Type aangeslotene
@@ -74,12 +77,12 @@ classes:
         annotations:
           inverse_cardinality: 0..1
       huisnummer:
-        description: aan een object toegekende nummering, een antwoordnummer of een postbusnummer
+        description: aan een verblijfsobject, standplaats of ligplaats toegekend nummer, een antwoordnummer of een postbusnummer
         source: https://nl.wikipedia.org/wiki/Huisnummer
         required: true
         range: Geheel getal
       huisnummertoevoeging:
-        description: aan een object toegekende nadere toevoeging aan een huisnummer inclusief huisletter
+        description: aan een verblijfsobject, standplaats of ligplaats toegekende nadere toevoeging aan een huisnummer inclusief huisletter
         source: https://nl.wikipedia.org/wiki/Huisnummer
       landcode:
         description: identificatie van een land met twee letters conform ISO 3166-1
@@ -90,7 +93,7 @@ classes:
         source: https://nl.wikipedia.org/wiki/Postcode
         required: true
       straatnaam:
-        description: naam om openbare ruimten als straten, lanen, wegen en stegen mee aan te duiden, of 'antwoordnummer' of 'postbus'
+        description: naam om openbare ruimten zoals straten, lanen, wegen en stegen mee aan te duiden, of 'antwoordnummer' of 'postbus'
         source: https://nl.wikipedia.org/wiki/Straatnaam
         required: true
       woonplaatsnaam:
