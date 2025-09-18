@@ -5,13 +5,12 @@ description: Het aangeslotenenregister bevat beschrijvingen van (natuurlijke en 
 version: 1.0.0-draft
 default_range: Tekst
 prefixes:
-  mijmodel: https://netbeheernederland.nl/conceptueelinformatiemodel/aangeslotenenregister/
   nbnl: https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/
   nbility: https://nbility-model.github.io/NBility-business-capabilities-Archi/
   wiki: https://nl.wikipedia.org/wiki/
   nen: https://www.nen.nl/
   iso: https://www.iso.org/
-  wetten: https://wetten.overheid.nl/
+  wetten: "https://wetten.overheid.nl/jci1.3:c:"
 default_prefix: https://netbeheernederland.nl/conceptueelinformatiemodel/aangeslotenenregister/
 annotations:
   nbility_function: C.6.2.1. Aansluitingen/allocatiepunten beheren
@@ -119,10 +118,10 @@ enums:
     permissible_values:
       huishoudelijk eindafnemer:
         description: eindafnemer die elektriciteit of gas koopt of wil kopen voor eigen huishoudelijk gebruik
-        source: wetten:jci1.3:c:BWBR0050714
+        source: wetten:BWBR0050714
       onderneming of overige zakelijke eindafnemer:
         description:  entiteit, ongeacht rechtsvorm of wijze van financiering, die een economische activiteit verricht, in de zin van artikel 101, eerste lid, van het Verdrag betreffende de werking van de Europese Unie
-        source: wetten:jci1.3:c:BWBR0050714
+        source: wetten:BWBR0050714
 
 types:
   Datum:
