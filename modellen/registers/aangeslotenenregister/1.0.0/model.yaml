@@ -15,6 +15,8 @@ annotations:
 classes:
   Beschrijving van aangeslotene:
     description: opsomming van de kenmerken van een (natuurlijk of niet-natuurlijk) persoon die van een netbeheerder de beschikking heeft gekregen over een aansluiting
+    comments:
+      - Netbeheerders beschikken vaak niet over de gegevens om aangeslotenen eenduidig te identificeren. Daarom hanteert dit register niet het begrip 'Aangeslotene' maar 'Beschrijving van aangeslotene'.
     related_mappings:
       - nbnl:aangeslotene
     annotations:
@@ -25,6 +27,7 @@ classes:
       geboortedatum:
         description: datum van geboorte van een persoon
         comments: Deze definitie is gebaseerd op NEN 1888:2002.
+        range: Datum
       naam:
         description: organisatienaam of achternaam (zonder tussenvoegsel)
         required: true
@@ -72,6 +75,7 @@ classes:
       huisnummer:
         description: aan een object toegekende nummering, een antwoordnummer of een postbusnummer
         required: true
+        range: Geheel getal
       huisnummertoevoeging:
         description: aan een object toegekende nadere toevoeging aan een huisnummer inclusief huisletter
       landcode:
@@ -114,22 +118,22 @@ types:
   Geheel getal:
     description: getal zonder decimalen
     base: int
-  Getal:
-    description: voorstelling van een hoeveelheid
-    base: float
+  # Getal:
+  #   description: voorstelling van een hoeveelheid
+  #   base: float
   Tekst:
     description: aanduiding bedoeld voor mensen, zonder vaste structuur of betekenis
     base: str
-  Tijdsduur:
-    description: lengte van een tijdsinterval, bijvoorbeeld een uur of een dag
-    base: duration
-  Tijdstip:
-    description: exacte aanduiding van datum en tijd, inclusief eventueel tijdzone-informatie
-    base: datetime
+  # Tijdsduur:
+  #   description: lengte van een tijdsinterval, bijvoorbeeld een uur of een dag
+  #   base: duration
+  # Tijdstip:
+  #   description: exacte aanduiding van datum en tijd, inclusief eventueel tijdzone-informatie
+  #   base: datetime
   Waar of onwaar:
     description: binaire aanduiding die aangeeft of een propositie of kenmerk van
       toepassing is (waar) of niet van toepassing is (onwaar)
     base: bool
-  URI:
-    description: uniforme aanduiding van een externe of interne bron
-    base: uri
+  # URI:
+  #   description: uniforme aanduiding van een externe of interne bron
+  #   base: uri
