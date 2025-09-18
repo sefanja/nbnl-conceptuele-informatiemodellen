@@ -26,22 +26,22 @@ classes:
         description: uniek adres voor digitaal, elektronisch postverkeer
       geboortedatum:
         description: datum van geboorte van een persoon
-        comments: Deze definitie is gebaseerd op NEN 1888:2002.
+        source: https://www.nen.nl/nen-1888-2002-nl-62341
         range: Datum
       naam:
         description: organisatienaam of achternaam (zonder tussenvoegsel)
         required: true
       voornamen:
         description: verzameling van een of meer naamgegevens, ter onderscheiding van personen met dezelfde achternaam
-        comments: Deze definitie is gebaseerd op NEN 1888:2002.
+        source: https://www.nen.nl/nen-1888-2002-nl-62341
       telefoonnummer:
         description: uniek nummer dat toegekend wordt om een aansluiting op het publieke telefoonnet te identificeren, bestaande uit het plusteken, een landnummer, een netnummer en een abonneenummer
       voorvoegsel:
         description: verzameling van een of meer voorzetsels en/of lidwoorden die aan het significante deel van de achternaam vooraf gaat en daarmee gezamelijk de achternaam vormt
-        comments: Deze definitie is gebaseerd op NEN 1888:2002.
+        source: https://www.nen.nl/nen-1888-2002-nl-62341
       voorletters:
         description: afkorting van voornamen
-        comments: Deze definitie is een samenvoeging van voorletters-1 en voorletters-n uit NEN 1888:2002.
+        source: https://www.nen.nl/nen-1888-2002-nl-62341
       type aangeslotene:
         description: categorie waartoe de aangeslotene behoort
         range: Type aangeslotene
