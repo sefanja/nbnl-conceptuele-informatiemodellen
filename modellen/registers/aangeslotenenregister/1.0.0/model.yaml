@@ -24,12 +24,13 @@ classes:
     attributes:
       e-mailadres:
         description: uniek adres voor digitaal, elektronisch postverkeer
+        source: https://nl.wikipedia.org/wiki/E-mail
       geboortedatum:
         description: datum van geboorte van een persoon
         source: https://www.nen.nl/nen-1888-2002-nl-62341
         range: Datum
       naam:
-        description: organisatienaam of achternaam (zonder tussenvoegsel)
+        description: organisatienaam of achternaam zonder tussenvoegsel
         required: true
       voornamen:
         description: verzameling van een of meer naamgegevens, ter onderscheiding van personen met dezelfde achternaam
@@ -74,21 +75,27 @@ classes:
           inverse_cardinality: 0..1
       huisnummer:
         description: aan een object toegekende nummering, een antwoordnummer of een postbusnummer
+        source: https://nl.wikipedia.org/wiki/Huisnummer
         required: true
         range: Geheel getal
       huisnummertoevoeging:
         description: aan een object toegekende nadere toevoeging aan een huisnummer inclusief huisletter
+        source: https://nl.wikipedia.org/wiki/Huisnummer
       landcode:
         description: identificatie van een land met twee letters conform ISO 3166-1
+        source: https://www.iso.org/iso-3166-country-codes.html
         required: true
       postcode:
         description: reeks tekens die in een postadres wordt opgenomen om het automatisch sorteren van de post gemakkelijker te maken
+        source: https://nl.wikipedia.org/wiki/Postcode
         required: true
       straatnaam:
         description: naam om openbare ruimten als straten, lanen, wegen en stegen mee aan te duiden, of 'antwoordnummer' of 'postbus'
+        source: https://nl.wikipedia.org/wiki/Straatnaam
         required: true
       woonplaatsnaam:
         description: aanduiding van een gebied met bewoning zoals een stad of dorp
+        source: https://nl.wikipedia.org/wiki/Woonplaats
         required: true
     unique_keys:
       primary_key:
