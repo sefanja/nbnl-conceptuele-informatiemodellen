@@ -13,8 +13,8 @@ prefixes:
   nbnlpub: https://www.netbeheernederland.nl/publicatie/
   nbility: https://nbility-model.github.io/NBility-business-capabilities-Archi/
   wetten: "https://wetten.overheid.nl/jci1.3:c:"
-  iceg: https://wetten.overheid.nl/jci1.3:c:BWBR0037934
-  bce: https://wetten.overheid.nl/jci1.3:c:BWBR0037938
+  iceg: https://wetten.overheid.nl/jci1.3:c:BWBR0037934&
+  bce: https://wetten.overheid.nl/jci1.3:c:BWBR0037938&
 default_prefix: meetcomponentstandaardenregister
 annotations:
   nbility_function: C.3.3.4. Beleid en standaardisatie van energienetten opstellen en onderhouden
@@ -45,7 +45,7 @@ classes:
     annotations:
       nbility_object: Technische bedrijfsstandaard
     see_also:
-      - iceg:&hoofdstuk=2&paragraaf=2.1&artikel=2.1.4&z=2025-01-01&g=2025-01-01
+      - iceg:hoofdstuk=2&paragraaf=2.1&artikel=2.1.4&z=2025-01-01&g=2025-01-01
     slots:
       - fabrikant
     attributes:
@@ -87,8 +87,8 @@ classes:
     annotations:
       nbility_object: Technische bedrijfsstandaard
     see_also:
-      - iceg:&hoofdstuk=2&paragraaf=2.1&artikel=2.1.4&z=2025-01-01&g=2025-01-01
-      - bce:&z=2025-05-08&g=2025-05-08
+      - iceg:hoofdstuk=2&paragraaf=2.1&artikel=2.1.4&z=2025-01-01&g=2025-01-01
+      - bce:z=2025-05-08&g=2025-05-08
     attributes:
       aantal posities voor de komma:
         description: maximaal aantal posities in het decimale talstelsel dat het telwerk kan bevatten
