@@ -58,16 +58,45 @@
     {%- endif -%}
 {%- endmacro -%}
 
+{%- macro get_label(url) -%}
+    {%- set link_labels = {
+        "https://wetten.overheid.nl/jci1.3:c:BWBR0009755": "Elektriciteitswet 1998",
+        "https://wetten.overheid.nl/jci1.3:c:BWBR0037923": "Begrippencode gas",
+        "https://wetten.overheid.nl/jci1.3:c:BWBR0037934": "Informatiecode elektriciteit en gas",
+        "https://wetten.overheid.nl/jci1.3:c:BWBR0037936": "Meetcode gas",
+        "https://wetten.overheid.nl/jci1.3:c:BWBR0037938": "Begrippencode elektriciteit",
+        "https://wetten.overheid.nl/jci1.3:c:BWBR0037946": "Meetcode elektriciteit",
+        "https://wetten.overheid.nl/jci1.3:c:BWBR0037951": "Tarievencode elektriciteit",
+        "https://wetten.overheid.nl/jci1.3:c:BWBR0050714": "Energiewet",
+        "https://www.nen.nl/": "NEN",
+        "https://www.iso.org/": "ISO",
+        "https://nl.wikipedia.org/": "Wikipedia",
+        "https://en.wikipedia.org/": "Wikipedia"
+    } -%}
+    {%- set ns = namespace(label=None) -%}
+    {%- for prefix, label in link_labels.items() -%}
+        {%- if url.startswith(prefix) -%}
+            {%- set ns.label = label -%}
+        {%- endif -%}
+    {%- endfor -%}
+    {{- ns.label -}}
+{%- endmacro -%}
+
+{%- macro get_label(url) -%}
+    {{ url|replace('https://', '')|replace('http://', '')|truncate(20) }}
+{%- endmacro -%}
+
+
 {%- macro source(element) -%}
 {%- if element.source -%}
-    [{{ element.source|truncate(25) }}]({{ schemaview.expand_curie(element.source) }})
+    [{{ get_label(element.source) }}]({{ schemaview.expand_curie(element.source) }})
 {%- endif -%}
 {%- endmacro -%}
 
 {%- macro see_also(element) -%}
 {%- if element.see_also -%}
     {%- for url in element.see_also -%}
-        [{{ url|truncate(25) }}]({{ url }}){% if not loop.last %}, {% endif -%}
+        [{{ get_label(url) }}]({{ url }}){% if not loop.last %}, {% endif -%}
     {%- endfor -%}
 {%- endif -%}
 {%- endmacro -%}
