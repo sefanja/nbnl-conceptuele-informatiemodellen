@@ -12,7 +12,9 @@ default_range: Tekst
 prefixes:
   linkml: https://w3id.org/linkml/
   nbnl: https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/
+  nbnlpub: https://www.netbeheernederland.nl/publicatie/
   nbility: https://nbility-model.github.io/NBility-business-capabilities-Archi/
+  wetten: "https://wetten.overheid.nl/jci1.3:c:"
 default_prefix: https://netbeheernederland.nl/conceptueelinformatiemodel/meetcomponentenregister/
 annotations:
   nbility_function: C.3.1.9. Netcomponent in levenscyclusbeheer opnemen
@@ -116,13 +118,13 @@ classes:
         - gatewaynummer
   Meter:
     description: apparaat bedoeld om energie-uitwisseling te meten ten behoeve van de verrekening
-    source: https://wetten.overheid.nl/jci1.3:c:BWBR0050714&z=2025-02-22&g=2025-02-22
+    source: wetten:BWBR0050714&z=2025-02-22&g=2025-02-22
     is_a: Meetcomponent
     comments:
       - Dit register ondersteunt geen controlemeters. Een controlemeter is een meter die naast een andere meter is geplaatst om daarvan de meterstanden op nauwkeurigheid te conroleren, vaak op verzoek van de aangeslotene.
     see_also:
-      - https://wetten.overheid.nl/jci1.3:c:BWBR0037934&hoofdstuk=2&paragraaf=2.1&artikel=2.1.4&z=2025-01-01&g=2025-01-01
-      - https://www.netbeheernederland.nl/publicatie/reglement-meterparkbeheer-v62
+      - wetten:BWBR0037934&hoofdstuk=2&paragraaf=2.1&artikel=2.1.4&z=2025-01-01&g=2025-01-01
+      - nbnlpub:reglement-meterparkbeheer-v62
     attributes:
       afkeurjaar:
         description: kalenderjaar waarin is vastgesteld dat de meter niet langer geschikt is voor gebruik
