@@ -58,25 +58,16 @@
     {%- endif -%}
 {%- endmacro -%}
 
-{%- macro uri_link(uri) -%}
-    {%- if(uri.startswith('http://') or uri.startswith('https://')) -%}
-        [{{ uri|replace('https://', '')|replace('http://', '')|truncate(15) }}]
-    {%- else -%}
-        [{{ uri }}]
-    {%- endif -%}
-    ({{ schemaview.expand_curie(uri) }})
-{%- endmacro -%}
-
 {%- macro source(element) -%}
 {%- if element.source -%}
-    {{ uri_link(element.source) }}
+    {{ gen.uri_link(element.source) }}
 {%- endif -%}
 {%- endmacro -%}
 
 {%- macro see_also(element) -%}
 {%- if element.see_also -%}
     {%- for uri in element.see_also -%}
-        {{ uri_link(uri) }}{% if not loop.last %}, {% endif -%}
+        {{ gen.uri_link(uri) }}{% if not loop.last %}, {% endif -%}
     {%- endfor -%}
 {%- endif -%}
 {%- endmacro -%}
