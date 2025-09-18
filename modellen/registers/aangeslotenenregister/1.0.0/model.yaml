@@ -11,6 +11,7 @@ prefixes:
   nen: https://www.nen.nl/
   iso: https://www.iso.org/
   wetten: "https://wetten.overheid.nl/jci1.3:c:"
+  energiewet: https://wetten.overheid.nl/jci1.3:c:BWBR0050714
 default_prefix: https://netbeheernederland.nl/conceptueelinformatiemodel/aangeslotenenregister/
 annotations:
   nbility_function: C.6.2.1. Aansluitingen/allocatiepunten beheren
@@ -118,10 +119,10 @@ enums:
     permissible_values:
       huishoudelijk eindafnemer:
         description: eindafnemer die elektriciteit of gas koopt of wil kopen voor eigen huishoudelijk gebruik
-        source: wetten:BWBR0050714
+        source: energiewet:&z=2025-02-22&g=2025-02-22
       onderneming of overige zakelijke eindafnemer:
         description:  entiteit, ongeacht rechtsvorm of wijze van financiering, die een economische activiteit verricht, in de zin van artikel 101, eerste lid, van het Verdrag betreffende de werking van de Europese Unie
-        source: wetten:BWBR0050714
+        source: energiewet:&z=2025-02-22&g=2025-02-22
 
 types:
   Datum:
