@@ -69,14 +69,14 @@
 
 {%- macro source(element) -%}
 {%- if element.source -%}
-    uri_link(element.source)
+    {{ uri_link(element.source) }}
 {%- endif -%}
 {%- endmacro -%}
 
 {%- macro see_also(element) -%}
 {%- if element.see_also -%}
     {%- for uri in element.see_also -%}
-        uri_link(uri){% if not loop.last %}, {% endif -%}
+        {{ uri_link(uri){% if not loop.last %}, {% endif -%} }}
     {%- endfor -%}
 {%- endif -%}
 {%- endmacro -%}
