@@ -27,6 +27,7 @@
 
 {%- macro range(name) -%}
     {%- set base_types = {
+        'bool': 'Waar of onwaar',
         'date': 'Datum',
         'datetime': 'Tijdstip',
         'duration': 'Tijdsduur',
@@ -256,7 +257,7 @@ Specialisatie van {{link(schemaview.get_class(class.is_a).name)}}
 # Waardesoorten en waardelijsten
 {{ '{: .no_toc }' }}
 
-{% if gen.all_type_objects() %}
+{% if gen.all_type_objects()|length() > 0 %}
 ### Waardesoorten
 {{ '{: .no_toc }' }}
 
@@ -268,7 +269,7 @@ Specialisatie van {{link(schemaview.get_class(class.is_a).name)}}
 
 {% endif %}
 
-{% if gen.all_enum_objects() %}
+{% if gen.all_enum_objects()|length() > 0 %}
 ### Waardelijsten
 {{ '{: .no_toc }' }}
 
