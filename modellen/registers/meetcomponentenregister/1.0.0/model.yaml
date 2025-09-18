@@ -11,10 +11,9 @@ version: 1.0.0-draft
 default_range: Tekst
 prefixes:
   linkml: https://w3id.org/linkml/
-  meetcomponentenregister: https://netbeheernederland.nl/conceptueelinformatiemodel/meetcomponentenregister/
   nbnl: https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/
   nbility: https://nbility-model.github.io/NBility-business-capabilities-Archi/
-default_prefix: meetcomponentenregister
+default_prefix: https://netbeheernederland.nl/conceptueelinformatiemodel/meetcomponentenregister/
 annotations:
   nbility_function: C.3.1.9. Netcomponent in levenscyclusbeheer opnemen
 

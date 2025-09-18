@@ -17,13 +17,11 @@ annotations:
   nbility_function: C.6.2.1. Aansluitingen/allocatiepunten beheren
 prefixes:
   linkml: https://w3id.org/linkml/
-  aansluitingenregister: https://netbeheernederland.nl/conceptueelinformatiemodel/aansluitingenregister/
   nbnl: https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/
   nbility: https://nbility-model.github.io/NBility-business-capabilities-Archi/
 # conventie: standaard geen `string` maar `Tekst`
 default_range: Tekst
-# conventie: gelijk aan name
-default_prefix: aansluitingenregister
+default_prefix: https://netbeheernederland.nl/conceptueelinformatiemodel/aansluitingenregister/
 
 classes:
   # conventie: class-naam begint met hoofdletter
