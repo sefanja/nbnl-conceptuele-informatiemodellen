@@ -83,7 +83,7 @@
 {%- endmacro -%}
 
 {%- macro get_label(url) -%}
-    {{ url|replace('https://', '')|replace('http://', '')|truncate(20) }}
+    {{ url|replace('https://', '')|replace('http://', '')|truncate(15) }}
 {%- endmacro -%}
 
 
