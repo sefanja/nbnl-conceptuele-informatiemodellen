@@ -257,23 +257,25 @@ Specialisatie van {{link(schemaview.get_class(class.is_a).name)}}
 # Waardesoorten en waardelijsten
 {{ '{: .no_toc }' }}
 
-{% if gen.all_type_objects() | length > 0 %}
+{% for t in gen.all_type_objects() -%}
+{% if  loop.first %}
 ### Waardesoorten
 {{ '{: .no_toc }' }}
 
 | Waardesoort | Omschrijving | Gebaseerd op | Patroon |
 | :--- | :--- | :--- | :--- |
-{% for t in gen.all_type_objects() -%}
+{% endif %}
 | {{anchor(t.name)}} | {{omschrijving(t)}} | {% if t.typeof %}{{link(t.typeof)}}{% else %}{{range(t.base)}}{% endif %} | {% if t.pattern %}`{{t.pattern}}`{% endif %} |
 {% endfor %}
 
 {% endif %}
 
-{% if gen.all_enum_objects() | length > 0 %}
+{% for e in gen.all_enum_objects()|sort(attribute=sort_by) %}
+{% if  loop.first %}
 ### Waardelijsten
 {{ '{: .no_toc }' }}
 
-{% for e in gen.all_enum_objects()|sort(attribute=sort_by) %}
+{% endif %}
 #### {{anchor(e.name)}}
 {{ '{: .no_toc }' }}
 
