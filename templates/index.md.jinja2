@@ -36,9 +36,9 @@
         'uri': 'URI'
     } -%}
     {%- if type in base_types -%}
-        base_types[type]
+        {{ base_types[type] }}
     {%- else -%}
-        type
+        {{ type }}
     {%- endif -%}
 {%- endmacro -%}
 
