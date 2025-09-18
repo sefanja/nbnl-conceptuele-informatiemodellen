@@ -258,7 +258,7 @@ Specialisatie van {{link(schemaview.get_class(class.is_a).name)}}
 {{ '{: .no_toc }' }}
 
 {% for t in gen.all_type_objects() -%}
-{% if  loop.first %}
+{% if loop.first %}
 ### Waardesoorten
 {{ '{: .no_toc }' }}
 
@@ -268,14 +268,12 @@ Specialisatie van {{link(schemaview.get_class(class.is_a).name)}}
 | {{anchor(t.name)}} | {{omschrijving(t)}} | {% if t.typeof %}{{link(t.typeof)}}{% else %}{{range(t.base)}}{% endif %} | {% if t.pattern %}`{{t.pattern}}`{% endif %} |
 {% endfor %}
 
-{% endif %}
-
 {% for e in gen.all_enum_objects()|sort(attribute=sort_by) %}
-{% if  loop.first %}
+{% if loop.first %}
 ### Waardelijsten
 {{ '{: .no_toc }' }}
-
 {% endif %}
+
 #### {{anchor(e.name)}}
 {{ '{: .no_toc }' }}
 
@@ -292,4 +290,3 @@ Specialisatie van {{link(schemaview.get_class(class.is_a).name)}}
 {% endif -%}
 
 {% endfor %}
-{% endif %}
