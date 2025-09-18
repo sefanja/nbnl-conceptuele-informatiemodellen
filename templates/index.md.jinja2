@@ -131,7 +131,7 @@
     {%- if element.description -%}
         {# source #}
         {%- if element.source -%}
-            {%- set _ = parts.items.append('_' ~ element.description ~ '_' ~ ' (gebaseerd op ' ~ source(element) ~ ')') -%}
+            {%- set _ = parts.items.append('_' ~ element.description ~ '_' ~ ' (zie ' ~ source(element) ~ ')') -%}
         {%- else -%}
             {%- set _ = parts.items.append('_' ~ element.description ~ '_') -%}
         {%- endif -%}
