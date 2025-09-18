@@ -86,7 +86,7 @@
 {%- if element.source -%}
     {# {%- set label = get_label(element.source) -%} #}
     {# [{{ label if label != 'None' else '[1]' }}]({{ schemaview.expand_curie(element.source) }}) #}
-    [{{ element.source|truncate(35) }}]({{ schemaview.expand_curie(element.source) }})
+    [{{ element.source }}]({{ schemaview.expand_curie(element.source) }})
 {%- endif -%}
 {%- endmacro -%}
 
