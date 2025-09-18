@@ -264,7 +264,7 @@ Specialisatie van {{link(schemaview.get_class(class.is_a).name)}}
 
 | Waardesoort | Omschrijving | Gebaseerd op | Patroon |
 | :--- | :--- | :--- | :--- |
-{% endif %}
+{% endif -%}
 | {{anchor(t.name)}} | {{omschrijving(t)}} | {% if t.typeof %}{{link(t.typeof)}}{% else %}{{range(t.base)}}{% endif %} | {% if t.pattern %}`{{t.pattern}}`{% endif %} |
 {% endfor %}
 
