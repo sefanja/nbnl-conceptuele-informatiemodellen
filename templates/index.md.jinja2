@@ -74,7 +74,7 @@
     {%- if mappings -%}
         {%- set linked = [] -%}
         {%- for m in mappings -%}
-            {%- linked.append(gen.uri_link(m)) -%}
+            {%- set _ = linked.append(gen.uri_link(m)) -%}
         {%- endfor -%}
         {{- label ~ ': ' ~ linked | join(', ') -}}
     {%- endif -%}
@@ -205,15 +205,6 @@ Deze website is in opbouw. Pagina's kunnen onvolledige of onjuiste informatie be
 <a href="https://sefanja.github.io/nbnl-conceptuele-informatiemodellen/wegwijs.html">Wegwijs in de modellen</a>
 </details>
 {% endif %}
-
-<details markdown="1">
-<summary>LinkML</summary>
-
-```yaml
-{{ gen.yaml(schema) | escape }}
-```
-
-</details>
 
 {% for class in gen.all_class_objects() | sort(attribute=sort_by) %}
 {% if class.name != 'Any' and not class.annotations.external_registry %}
