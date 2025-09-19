@@ -219,7 +219,7 @@ Specialisatie van {{link(schemaview.get_class(class.is_a).name)}}
 
 {% set properties = [] %}
 {% set relationships = [] %}
-{% for slot in gen.get_direct_slots(class) %}
+{% for slot in gen.get_direct_slots(class) | sort(attribute=sort_by) %}
     {% set ranges = schemaview.slot_range_as_union(slot) %}
     {% set some_are_classes = ranges | select('in', schemaview.all_classes()) | list | length > 0 %}
     {% if some_are_classes %}
@@ -257,7 +257,7 @@ Specialisatie van {{link(schemaview.get_class(class.is_a).name)}}
 # Waardesoorten en waardelijsten
 {{ '{: .no_toc }' }}
 
-{% for t in gen.all_type_objects() -%}
+{% for t in gen.all_type_objects() | sort(attribute=sort_by) -%}
 {% if loop.first %}
 ### Waardesoorten
 {{ '{: .no_toc }' }}
@@ -268,7 +268,7 @@ Specialisatie van {{link(schemaview.get_class(class.is_a).name)}}
 | {{anchor(t.name)}} | {{omschrijving(t)}} | {% if t.typeof %}{{link(t.typeof)}}{% else %}{{range(t.base)}}{% endif %} | {% if t.pattern %}`{{t.pattern}}`{% endif %} |
 {% endfor %}
 
-{% for e in gen.all_enum_objects()|sort(attribute=sort_by) %}
+{% for e in gen.all_enum_objects() | sort(attribute=sort_by) %}
 {% if loop.first %}
 ### Waardelijsten
 {{ '{: .no_toc }' }}
