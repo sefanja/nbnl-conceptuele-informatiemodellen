@@ -6,7 +6,6 @@ version: 1.0.0-draft
 default_range: str
 prefixes:
   nbnl: https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/
-  nbility: https://nbility-model.github.io/NBility-business-capabilities-Archi/
   wiki: https://nl.wikipedia.org/wiki/
   nen: https://www.nen.nl/
   iso: https://www.iso.org/
