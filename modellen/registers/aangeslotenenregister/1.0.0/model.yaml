@@ -35,23 +35,21 @@ classes:
       naam:
         description: statutaire naam van de niet-natuurlijke persoon of achternaam zonder tussenvoegsel van de natuurlijke persoon
         required: true
-      voornamen:
-        description: verzameling van een of meer naamgegevens, ter onderscheiding van personen met dezelfde achternaam
-        source: nen:nen-1888-2002-nl-62341
+      roepnaam:
+        description: naam waarmee iemand wil worden aangesproken
+        source: wiki:Voornaam#Roepnaam
       telefoonnummer:
         description: uniek nummer dat toegekend wordt om een aansluiting op het publieke telefoonnet te identificeren, bestaande uit het plusteken, een landnummer, een netnummer en een abonneenummer
         source: wiki:Telefoonnummer
+      type aangeslotene:
+        description: categorie waartoe de aangeslotene behoort
+        range: Type aangeslotene
       voorvoegsel:
         description: verzameling van een of meer voorzetsels en/of lidwoorden die aan het significante deel van de achternaam vooraf gaat en daarmee gezamelijk de achternaam vormt
         source: nen:nen-1888-2002-nl-62341
       voorletters:
-        description: afkorting van voornamen
+        description: verzameling tekens die wordt gevormd door alle in volgorde voorkomende voornamen naar gangbaar gebruik aan te duiden met één of meer letters en verbindingsstreepjes en een punt
         source: nen:nen-1888-2002-nl-62341
-        comments:
-          - ⚠ NEN 1888:2002 onderscheidt voorletters-1 van voorletters-n. Bijvoorbeeld Theo Adriaan kan worden afgekort als TA of als Th.Adr. Is het nodig hier iets over af te spreken?
-      type aangeslotene:
-        description: categorie waartoe de aangeslotene behoort
-        range: Type aangeslotene
       representatie van houder van:
         range: Aansluiting
         required: true
