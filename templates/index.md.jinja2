@@ -69,7 +69,7 @@
     {%- endif -%}
 {%- endmacro -%}
 
-{%- macro mappings_line(type, label) -%}
+{%- macro mappings_line(element, type, label) -%}
     {%- set mappings = schemaview.get_mappings(element.name).get(type, []) -%}
     {%- if mappings -%}
         {%- set linked = [] -%}
@@ -109,7 +109,7 @@
     {%- endif -%}
 
     {# exact_mappings  #}
-    {%- set exact_mappings = mappings_line('exact', 'Exact overeenkomstig') -%}
+    {%- set exact_mappings = mappings_line(element, 'exact', 'Exact overeenkomstig') -%}
     {%- if exact_mappings != 'None' -%}
         {%- set _ = parts.items.append(exact_mappings) -%}
     {%- endif -%}
