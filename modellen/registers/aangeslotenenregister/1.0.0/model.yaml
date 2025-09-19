@@ -21,9 +21,12 @@ classes:
     description: opsomming van de kenmerken van een (natuurlijk of niet-natuurlijk) persoon die van een netbeheerder de beschikking heeft gekregen over een aansluiting
     comments:
       - Netbeheerders beschikken vaak niet over de gegevens om aangeslotenen eenduidig te identificeren. Daarom hanteert dit register niet het begrip 'Aangeslotene' maar 'Beschrijving van aangeslotene'.
+      - Persoonsgegevens zijn zo veel mogelijk overeenkomstig NEN 1888.
     source: nbnl:aangeslotene
     annotations:
       nbility_object: Klant
+      tijdlijn_geldigheid: true
+      tijdlijn_registratie: true
     attributes:
       e-mailadres:
         description: uniek adres voor digitaal, elektronisch postverkeer
@@ -68,8 +71,12 @@ classes:
         - representatie van houder van
   Correspondentieadres:
     description: postadres waar een aangeslotene zijn correspondentie wil ontvangen anders dan het aansluitadres
+    comments:
+      - Adresgegevens zijn zo veel mogelijk overeenkomstig NEN 5825.
     annotations:
       nbility_object: Klant
+      tijdlijn_geldigheid: true
+      tijdlijn_registratie: true
     attributes:
       deel van:
         range: Beschrijving van aangeslotene
@@ -79,27 +86,27 @@ classes:
           inverse_cardinality: 0..1
       huisnummer:
         description: aan een verblijfsobject, standplaats of ligplaats toegekend nummer, een antwoordnummer of een postbusnummer
-        source: wiki:Huisnummer
+        source: nen:nen-5825-2002-nl-83617
         required: true
         range: int
       huisnummertoevoeging:
         description: aan een verblijfsobject, standplaats of ligplaats toegekende nadere toevoeging aan een huisnummer inclusief huisletter
-        source: wiki:Huisnummer
+        source: nen:nen-5825-2002-nl-83617
       landcode:
         description: identificatie van een land met twee letters conform ISO 3166-1
         source: iso:iso-3166-country-codes.html
         required: true
       postcode:
         description: reeks tekens die in een postadres wordt opgenomen om het automatisch sorteren van de post gemakkelijker te maken
-        source: wiki:Postcode
+        source: nen:nen-5825-2002-nl-83617
         required: true
       straatnaam:
         description: naam om openbare ruimten zoals straten, lanen, wegen en stegen mee aan te duiden, of 'antwoordnummer' of 'postbus'
-        source: wiki:Straatnaam
+        source: nen:nen-5825-2002-nl-83617
         required: true
       woonplaatsnaam:
         description: aanduiding van een gebied met bewoning zoals een stad of dorp
-        source: wiki:Woonplaats
+        source: nen:nen-5825-2002-nl-83617
         required: true
     unique_keys:
       primary_key:
