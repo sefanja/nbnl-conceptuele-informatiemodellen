@@ -1,28 +1,28 @@
 {%- macro key_symbol(class, slot) -%}
-  {%- for key in class.unique_keys -%}
-    {%- if slot.name in class.unique_keys[key].unique_key_slots -%}
-      <span title="Maakt deel uit van de identificatie">⚿</span>&nbsp;
-    {%- endif -%}
-  {%- endfor -%}
+    {%- for key in class.unique_keys -%}
+        {%- if slot.name in class.unique_keys[key].unique_key_slots -%}
+            <span title="Maakt deel uit van de identificatie">⚿</span>&nbsp;
+        {%- endif -%}
+    {%- endfor -%}
 {%- endmacro -%}
 
 {%- macro id_safe(v) -%}
 {%- set allowed = 'abcdefghijklmnopqrstuvwxyz0123456789-' -%}
 {%- for c in v|lower -%}
-  {%- if c in allowed -%}
-    {{ c }}
-  {%- elif c == ' ' -%}
+    {%- if c in allowed -%}
+        {{ c }}
+    {%- elif c == ' ' -%}
     -
-  {%- endif -%}
+    {%- endif -%}
 {%- endfor -%}
 {%- endmacro -%}
 
 {%- macro link(name) -%}
-[{{ name }}](#{{ id_safe(name) }})
+    [{{ name }}](#{{ id_safe(name) }})
 {%- endmacro -%}
 
 {%- macro anchor(name) -%}
-<span id="{{ id_safe(name) }}">{{name}}</span>
+    <span id="{{ id_safe(name) }}">{{name}}</span>
 {%- endmacro -%}
 
 {%- macro range(name) -%}
@@ -69,6 +69,17 @@
     {%- endif -%}
 {%- endmacro -%}
 
+{%- macro mappings_line(type, label) -%}
+    {%- set mappings = schemaview.get_mappings(element.name).get(type, []) -%}
+    {%- if mappings -%}
+        {%- set linked = [] -%}
+        {%- for m in mappings -%}
+            {%- linked.append(gen.uri_link(m)) -%}
+        {%- endfor -%}
+        {{- label ~ ': ' ~ linked | join(', ') -}}
+    {%- endif -%}
+{%- endmacro -%}
+
 {% macro omschrijving(element) -%}
     {%- set parts = namespace(items=[]) -%}
 
@@ -82,22 +93,6 @@
         {%- endif -%}
     {%- endfor -%}
 
-    {# meaning #}
-    {%- if element.meaning -%}
-        {%- set _ = parts.items.append('_' ~ gen.uri_link(element.meaning) ~ '_') -%}
-    {%- endif -%}
-
-    {# exact_mappings  #}
-    {%- set mappings = schemaview.get_mappings(element.name).get("exact", []) -%}
-    {%- if mappings -%}
-        {%- set linked = [] -%}
-        {%- for m in mappings -%}
-            {%- set _ = linked.append(gen.uri_link(m)) -%}
-        {%- endfor -%}
-        {%- set markdown_line = '_' ~ linked | join(', ') ~ '_' -%}
-        {%- set _ = parts.items.append(markdown_line) -%}
-    {%- endif -%}
-
     {# description #}
     {%- if element.description -%}
         {# source #}
@@ -108,14 +103,39 @@
         {%- endif -%}
     {%- endif -%}
 
+    {# meaning #}
+    {%- if element.meaning -%}
+        {%- set _ = parts.items.append('_' ~ gen.uri_link(element.meaning) ~ '_') -%}
+    {%- endif -%}
+
+    {# exact_mappings  #}
+    {%- set exact_mappings = mappings_line('exact', 'Exact overeenkomstig') -%}
+    {%- if exact_mappings != 'None' -%}
+        {%- set _ = parts.items.append(exact_mappings) -%}
+    {%- endif -%}
+
+    {# close_mappings  #}
+    {%- set close_mappings = mappings_line('close', 'Vrijwel overeenkomstig') -%}
+    {%- if close_mappings != 'None' -%}
+        {%- set _ = parts.items.append(close_mappings) -%}
+    {%- endif -%}
+
     {# related_mappings  #}
-    {%- set mappings = schemaview.get_mappings(element.name).get("related", []) -%}
-    {%- if mappings -%}
-        {%- set linked = [] -%}
-        {%- for m in mappings -%}
-            {%- set _ = linked.append(gen.uri_link(m)) -%}
-        {%- endfor -%}
-        {%- set _ = parts.items.append('Gerelateerde begrippen: ' ~ linked | join(', ')) -%}
+    {%- set related_mappings = mappings_line('related', 'Gerelateerd') -%}
+    {%- if related_mappings != 'None' -%}
+        {%- set _ = parts.items.append(related_mappings) -%}
+    {%- endif -%}
+
+    {# narrow_mappings  #}
+    {%- set narrow_mappings = mappings_line('narrow', 'Nauwer') -%}
+    {%- if narrow_mappings != 'None' -%}
+        {%- set _ = parts.items.append(narrow_mappings) -%}
+    {%- endif -%}
+
+    {# broad_mappings  #}
+    {%- set broad_mappings = mappings_line('broad', 'Breder') -%}
+    {%- if broad_mappings != 'None' -%}
+        {%- set _ = parts.items.append(broad_mappings) -%}
     {%- endif -%}
 
     {# see_also #}
@@ -146,7 +166,7 @@
         {%- endif -%}
     {%- endfor -%}
     {%- if tijdlijn_annotaties -%}
-        {%- set _ = parts.items.append('Tijdslijnen: ' ~ tijdlijn_annotaties|join(', ')) -%}
+        {%- set _ = parts.items.append('Tijdlijnen: ' ~ tijdlijn_annotaties|join(', ')) -%}
     {%- endif -%}
 
     {{ parts.items | join('<br/><br/>') }}
