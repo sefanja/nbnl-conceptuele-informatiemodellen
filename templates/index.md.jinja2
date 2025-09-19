@@ -282,7 +282,7 @@ Specialisatie van {{link(schemaview.get_class(class.is_a).name)}}
 | Waarde | Omschrijving |
 | :--- | :--- |
 {% if e.permissible_values -%}
-{% for pv in e.permissible_values.values() | sort(attribute=sort_by) -%}
+{% for pv in e.permissible_values.values() | sort(attribute='text') -%}
 | {{anchor(pv.text)}} | {{omschrijving(pv)}} |
 {% endfor -%}
 {% else -%}
