@@ -11,7 +11,6 @@ prefixes:
   meetcomponentenregister: https://netbeheernederland.nl/conceptueelinformatiemodel/meetcomponentenregister/
   nbnl: https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/
   nbnlpub: https://www.netbeheernederland.nl/publicatie/
-  nbility: https://nbility-model.github.io/NBility-business-capabilities-Archi/
   wetten: "https://wetten.overheid.nl/jci1.3:c:"
   iceg: https://wetten.overheid.nl/jci1.3:c:BWBR0037934&
   bce: https://wetten.overheid.nl/jci1.3:c:BWBR0037938&

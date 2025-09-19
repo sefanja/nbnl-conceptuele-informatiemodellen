@@ -21,7 +21,8 @@ classes:
     comments:
       - Netbeheerders beschikken vaak niet over de gegevens om aangeslotenen eenduidig te identificeren. Daarom hanteert dit register niet het begrip 'Aangeslotene' maar 'Beschrijving van aangeslotene'.
       - Persoonsgegevens zijn zo veel mogelijk overeenkomstig NEN 1888.
-    source: nbnl:aangeslotene
+    related_mappings:
+      - nbnl:aangeslotene
     annotations:
       nbility: Klant
       tijdlijn_geldigheid: true
