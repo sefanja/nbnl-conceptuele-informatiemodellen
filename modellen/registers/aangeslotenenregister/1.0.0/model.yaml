@@ -119,5 +119,5 @@ enums:
         description: eindafnemer die elektriciteit of gas koopt of wil kopen voor eigen huishoudelijk gebruik
         source: energiewet:z=2025-02-22&g=2025-02-22
       onderneming of overige zakelijke eindafnemer:
-        description:  entiteit, ongeacht rechtsvorm of wijze van financiering, die een economische activiteit verricht, in de zin van artikel 101, eerste lid, van het Verdrag betreffende de werking van de Europese Unie
+        description:  eindafnemer die elektriciteit of gas koopt of wil kopen anders dan voor eigen huishoudelijk gebruik
         source: energiewet:z=2025-02-22&g=2025-02-22
