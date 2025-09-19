@@ -14,7 +14,7 @@ prefixes:
   energiewet: https://wetten.overheid.nl/jci1.3:c:BWBR0050714&
 default_prefix: https://netbeheernederland.nl/conceptueelinformatiemodel/aangeslotenenregister/
 annotations:
-  nbility_function: C.6.2.1. Aansluitingen/allocatiepunten beheren
+  nbility: C.6.2.1. Aansluitingen/allocatiepunten beheren
 
 classes:
   Beschrijving van aangeslotene:
@@ -24,7 +24,7 @@ classes:
       - Persoonsgegevens zijn zo veel mogelijk overeenkomstig NEN 1888.
     source: nbnl:aangeslotene
     annotations:
-      nbility_object: Klant
+      nbility: Klant
       tijdlijn_geldigheid: true
       tijdlijn_registratie: true
     attributes:
@@ -74,7 +74,7 @@ classes:
     comments:
       - Adresgegevens zijn zo veel mogelijk overeenkomstig NEN 5825.
     annotations:
-      nbility_object: Klant
+      nbility: Klant
       tijdlijn_geldigheid: true
       tijdlijn_registratie: true
     attributes:
