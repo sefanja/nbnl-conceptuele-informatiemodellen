@@ -85,11 +85,9 @@
 
     {# NBility #}
     {%- for a in element.annotations -%}
-        {%- if a == 'nbility_function' -%}
-            {%- set _ = parts.items.append('NBility-functie: [' ~ element.annotations[a].value ~ '](https://nbility-model.github.io/NBility-business-capabilities-Archi/?view=id-8becf2d90261476faa9d53240e6cf2c8)') -%}
-        {%- endif -%}
-        {%- if a == 'nbility_object' -%}
-            {%- set _ = parts.items.append('NBility-object: [' ~ element.annotations[a].value ~ '](https://nbility-model.github.io/NBility-business-capabilities-Archi/?view=id-8becf2d90261476faa9d53240e6cf2c8)') -%}
+        {%- set _ = parts.items.append(a) -%}
+        {%- if a == 'nbility' -%}
+            {%- set _ = parts.items.append('NBility: [' ~ element.annotations[a].value ~ '](https://nbility-model.github.io/NBility-business-capabilities-Archi/?view=id-8becf2d90261476faa9d53240e6cf2c8)') -%}
         {%- endif -%}
     {%- endfor -%}
 
