@@ -69,20 +69,6 @@
     {%- endif -%}
 {%- endmacro -%}
 
-{%- macro source(element) -%}
-{%- if element.source -%}
-    {{ gen.uri_link(element.source) }}
-{%- endif -%}
-{%- endmacro -%}
-
-{%- macro see_also(element) -%}
-{%- if element.see_also -%}
-    {%- for uri in element.see_also -%}
-        {{ gen.uri_link(uri) }}{% if not loop.last %}, {% endif -%}
-    {%- endfor -%}
-{%- endif -%}
-{%- endmacro -%}
-
 {% macro omschrijving(element) -%}
     {%- set parts = namespace(items=[]) -%}
 
@@ -116,7 +102,7 @@
     {%- if element.description -%}
         {# source #}
         {%- if element.source -%}
-            {%- set _ = parts.items.append('_' ~ element.description ~ '_' ~ ' (zie ' ~ source(element) ~ ')') -%}
+            {%- set _ = parts.items.append('_' ~ element.description ~ '_' ~ ' (zie ' ~ gen.uri_link(element.source) ~ ')') -%}
         {%- else -%}
             {%- set _ = parts.items.append('_' ~ element.description ~ '_') -%}
         {%- endif -%}
@@ -129,13 +115,16 @@
         {%- for m in mappings -%}
             {%- set _ = linked.append(gen.uri_link(m)) -%}
         {%- endfor -%}
-        {%- set markdown_line = 'Gerelateerde begrippen: ' ~ linked | join(', ') -%}
-        {%- set _ = parts.items.append(markdown_line) -%}
+        {%- set _ = parts.items.append('Gerelateerde begrippen: ' ~ linked | join(', ')) -%}
     {%- endif -%}
 
     {# see_also #}
     {%- if element.see_also -%}
-        {%- set _ = parts.items.append('Zie ook ' ~ see_also(element)) -%}
+        {%- set linked = [] -%}
+        {%- for s in element.see_also -%}
+            {%- set _ = linked.append(gen.uri_link(s)) -%}
+        {%- endfor -%}
+        {%- set _ = parts.items.append('Zie ook ' ~ linked | join(', ')) -%}
     {%- endif -%}
 
     {# comments #}
