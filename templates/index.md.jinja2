@@ -85,7 +85,6 @@
 
     {# NBility #}
     {%- for a in element.annotations -%}
-        {%- set _ = parts.items.append(a) -%}
         {%- if a == 'nbility' -%}
             {%- set _ = parts.items.append('NBility: [' ~ element.annotations[a].value ~ '](https://nbility-model.github.io/NBility-business-capabilities-Archi/?view=id-8becf2d90261476faa9d53240e6cf2c8)') -%}
         {%- endif -%}
