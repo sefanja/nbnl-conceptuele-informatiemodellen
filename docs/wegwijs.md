@@ -42,11 +42,11 @@ Een eigenschap die eindigt met `[n]` kan meerdere waarden bevatten.
 
 ## Relaties
 
-Entiteiten hangen vaak met elkaar samen. Zo liggen in een `Netgebied` één of meer `Aansluitingen`. Dat zie je als een lijn tussen twee entiteiten, met een naam erbij.
+Entiteiten hangen vaak met elkaar samen. Zo liggen `Aansluitingen` in een `Netgebied`. Dat zie je als een lijn tussen twee entiteiten, met een naam erbij.
 
 ![Relaties]({{ site.baseurl }}/assets/images/wegwijs3.drawio.svg)
 
-De positie van het label (bij `Aansluiting`) laat de richting van de relatie zien: een `Aansluiting` is `deel van` een `Netgebied`.
+De positie van het label laat de richting van de relatie zien: een `Aansluiting` is `deel van` een `Netgebied`.
 
 ## Multipliciteit
 

@@ -77,8 +77,6 @@ classes:
   Aansluiting:
     exact_mappings:
       - nbnl:aansluiting
-    narrow_mappings:
-      - nbility:aansluiting
     comments:
       - Een koppeling met een gesloten distributiesysteem wordt in dit register beschouwd als aansluiting als de beheerder geen gebruik maakt van het elektronische berichtenverkeer ten behoeve van het faciliteren van derdentoegang ([artikel 2.4, vierde lid van de Netcode elektriciteit](https://wetten.overheid.nl/jci1.3:c:BWBR0037940&hoofdstuk=2&paragraaf=2.1&artikel=2.4&z=2023-04-01&g=2023-04-01)).
     slots:
@@ -134,7 +132,7 @@ classes:
       tijdlijn_registratie: true
   Allocatiepunt:
     description: punt waar invoeding, onttrekking of verbruik van elektriciteit of gas wordt toegerekend aan een marktdeelnemer
-    # conventie: source bevat de bron waarop de definitie is gebaseerd
+    # conventie: `source` bevat de bron waarop de definitie is gebaseerd
     source: bce:z=2025-04-26&g=2025-04-26
     slots:
       - EAN-code
@@ -290,7 +288,7 @@ classes:
   # conventie: onderstaand patroon voor entiteiten in andere registers
   Nummeraanduiding:
     annotations:
-      external_registry: "[Basisregistratie Adressen en Gebouwen](https://data.overheid.nl/dataset/4aca03b9-0bb1-454f-9d5a-53bb910029d0)"
+      external_registry: Basisregistratie Adressen en Gebouwen
 
 slots:
   EAN-code:

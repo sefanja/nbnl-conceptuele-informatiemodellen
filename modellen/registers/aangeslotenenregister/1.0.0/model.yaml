@@ -34,6 +34,8 @@ classes:
       geboortedatum:
         description: datum van geboorte van een persoon
         source: nen:nen-1888-2002-nl-62341
+        comments:
+          - "Validatie: leeg bij 'onderneming of overige zakelijke eindafnemer'."
         range: date
       naam:
         description: statutaire naam van de niet-natuurlijke persoon of achternaam zonder tussenvoegsel van de natuurlijke persoon
@@ -41,6 +43,8 @@ classes:
       roepnaam:
         description: naam waarmee iemand wil worden aangesproken
         source: wiki:Voornaam#Roepnaam
+        comments:
+          - "Validatie: leeg bij 'onderneming of overige zakelijke eindafnemer'."
       telefoonnummer:
         description: uniek nummer dat toegekend wordt om een aansluiting op het publieke telefoonnet te identificeren, bestaande uit het plusteken, een landnummer, een netnummer en een abonneenummer
         source: wiki:Telefoonnummer
@@ -50,9 +54,14 @@ classes:
       voorvoegsel:
         description: verzameling van een of meer voorzetsels en/of lidwoorden die aan het significante deel van de achternaam vooraf gaat en daarmee gezamelijk de achternaam vormt
         source: nen:nen-1888-2002-nl-62341
+        comments:
+          - "Validatie: leeg bij 'onderneming of overige zakelijke eindafnemer'."
       voorletters:
-        description: verzameling tekens die wordt gevormd door alle in volgorde voorkomende voornamen naar gangbaar gebruik aan te duiden met één of meer letters en verbindingsstreepjes en een punt
+        description: verzameling letters die wordt gevormd door de eerste letter van alle in volgorde voorkomende voornamen
         source: nen:nen-1888-2002-nl-62341
+        comments:
+          - "Validatie: leeg bij 'onderneming of overige zakelijke eindafnemer'."
+          - NEN 1888 onderscheidt voorletters-n van voorletters-1. Bijvoorbeeld Theo Adriaan wordt afgekort als Th.Adr. (voorletters-n) en als TA (voorletters-1, zonder puntjes). Dit register hanteert voorletters-1.
       representatie van houder van:
         range: Aansluiting
         required: true
@@ -60,6 +69,8 @@ classes:
         annotations:
           inverse_cardinality: 0..1
       representatie van:
+        comments:
+          - "Validatie: afwezig bij 'huishoudelijke eindafnemer'."
         range: Onderneming
         required: false
         multivalued: false
@@ -122,7 +133,7 @@ classes:
 enums:
   Type aangeslotene:
     permissible_values:
-      huishoudelijk eindafnemer:
+      huishoudelijke eindafnemer:
         description: eindafnemer die elektriciteit of gas koopt of wil kopen voor eigen huishoudelijk gebruik
         source: energiewet:z=2025-02-22&g=2025-02-22
       onderneming of overige zakelijke eindafnemer:

@@ -144,6 +144,7 @@ classes:
         description: identificatie van de meter, bestaande uit een combinatie van metercode, serienummer en de laatste twee cijfers van het bouwjaar
         comments:
           - In de praktijk wordt het serienummer soms ook het (korte) meternummer genoemd.
+          - "Validatie: meternummer is een combinatie van metercode, serienummer en de laatste twee cijfers van het bouwjaar."
         required: true
       reden technisch niet op afstand uitleesbaar:
         description: verklaring voor het technisch niet op afstand uitleesbaar zijn van de meter
@@ -221,25 +222,25 @@ classes:
   # extern:
   Aansluiting:
     annotations:
-      external_registry: "[Aansluitingenregister](../../aansluitingenregister)"
+      external_registry: Aansluitingenregister
   Allocatiepunt bij aansluiting:
     annotations:
-      external_registry: "[Aansluitingenregister](../../aansluitingenregister)"
+      external_registry: Aansluitingenregister
   Gatewaycodering:
     annotations:
-      external_registry: "[Meetcomponentstandaardenregister](../../meetcomponentstandaardenregister)"
+      external_registry: Meetcomponentstandaardenregister
   GCvO-installatie:
     annotations:
-      external_registry: "[Installatieregister](../../installatieregister)"
+      external_registry: Installatieregister
   Marktpartijregistratie:
     annotations:
-      external_registry: "[Marktpartijenregister](../../marktpartijenregister)"
+      external_registry: Marktpartijenregister
   Metercodering:
     annotations:
-      external_registry: "[Meetcomponentstandaardenregister](../../meetcomponentstandaardenregister)"
+      external_registry: Meetcomponentstandaardenregister
   Telwerkdefinitie:
     annotations:
-      external_registry: "[Meetcomponentstandaardenregister](../../meetcomponentstandaardenregister)"
+      external_registry: Meetcomponentstandaardenregister
 
 enums:
   Dossierreden:
