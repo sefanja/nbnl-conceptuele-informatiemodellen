@@ -110,31 +110,31 @@
 
     {# exact_mappings  #}
     {%- set exact_mappings = mappings_line(element, 'exact', 'Exact overeenkomstig') -%}
-    {%- if exact_mappings != 'None' -%}
+    {%- if exact_mappings -%}
         {%- set _ = parts.items.append(exact_mappings) -%}
     {%- endif -%}
 
     {# close_mappings  #}
     {%- set close_mappings = mappings_line('close', 'Vrijwel overeenkomstig') -%}
-    {%- if close_mappings != 'None' -%}
+    {%- if close_mappings -%}
         {%- set _ = parts.items.append(close_mappings) -%}
     {%- endif -%}
 
     {# related_mappings  #}
     {%- set related_mappings = mappings_line('related', 'Gerelateerd') -%}
-    {%- if related_mappings != 'None' -%}
+    {%- if related_mappings -%}
         {%- set _ = parts.items.append(related_mappings) -%}
     {%- endif -%}
 
     {# narrow_mappings  #}
     {%- set narrow_mappings = mappings_line('narrow', 'Nauwer') -%}
-    {%- if narrow_mappings != 'None' -%}
+    {%- if narrow_mappings -%}
         {%- set _ = parts.items.append(narrow_mappings) -%}
     {%- endif -%}
 
     {# broad_mappings  #}
     {%- set broad_mappings = mappings_line('broad', 'Breder') -%}
-    {%- if broad_mappings != 'None' -%}
+    {%- if broad_mappings -%}
         {%- set _ = parts.items.append(broad_mappings) -%}
     {%- endif -%}
 
