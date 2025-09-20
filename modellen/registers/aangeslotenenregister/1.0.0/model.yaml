@@ -17,6 +17,10 @@ annotations:
 
 classes:
   Aangeslotene bij aansluiting:
+    annotations:
+      nbility: Klant
+      tijdlijn_geldigheid: true
+      tijdlijn_registratie: true
     description: rol van een aangeslotene als houder van een specifieke aansluiting
     related_mappings:
       - nbnl:aangeslotene
@@ -24,10 +28,6 @@ classes:
     comments:
       - Omdat netbeheerders aangeslotenen niet altijd uniek kunnen identificeren, wordt in dit register informatie over de aangeslotene per aansluiting vastgelegd. Hierdoor kan één aangeslotene meerdere keren voorkomen in dit register.
       - Persoonsgegevens zijn zo veel mogelijk overeenkomstig NEN 1888.
-    annotations:
-      nbility: Klant
-      tijdlijn_geldigheid: true
-      tijdlijn_registratie: true
     attributes:
       e-mailadres:
         description: uniek adres voor digitaal, elektronisch postverkeer
@@ -74,12 +74,11 @@ classes:
           inverse_cardinality: 0..1
       rol van:
         comments:
-          - "Validatie: afwezig bij 'huishoudelijke eindafnemer'."
-        range: Maatschappelijke activiteit
-        comments:
           - Een onderneming is een voorbeeld van een maatschappelijke activiteit. Beide worden geïdentificeerd met een KVK-nummer.
+          - "Validatie: afwezig bij 'huishoudelijke eindafnemer'."
         see_also:
           - kvk:over-het-handelsregister/de-nummers-van-het-handelsregister/
+        range: Maatschappelijke activiteit
         required: false
         multivalued: false
         annotations:
@@ -89,13 +88,13 @@ classes:
         unique_key_slots:
         - rol van
   Correspondentieadres:
-    description: postadres waar een aangeslotene zijn correspondentie wil ontvangen anders dan het aansluitadres
-    comments:
-      - Adresgegevens zijn zo veel mogelijk overeenkomstig NEN 5825.
     annotations:
       nbility: Klant
       tijdlijn_geldigheid: true
       tijdlijn_registratie: true
+    description: postadres waar een aangeslotene zijn correspondentie wil ontvangen anders dan het aansluitadres
+    comments:
+      - Adresgegevens zijn zo veel mogelijk overeenkomstig NEN 5825.
     attributes:
       huisnummer:
         description: aan een verblijfsobject, standplaats of ligplaats toegekend nummer, een antwoordnummer of een postbusnummer
