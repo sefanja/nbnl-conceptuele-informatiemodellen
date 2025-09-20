@@ -24,8 +24,6 @@ classes:
     comments:
       - Omdat netbeheerders aangeslotenen niet altijd uniek kunnen identificeren, wordt in dit register informatie over de aangeslotene per aansluiting vastgelegd. Hierdoor kan één aangeslotene meerdere keren voorkomen in dit register.
       - Persoonsgegevens zijn zo veel mogelijk overeenkomstig NEN 1888.
-    related_mappings:
-      - nbnl:aangeslotene
     annotations:
       nbility: Klant
       tijdlijn_geldigheid: true
