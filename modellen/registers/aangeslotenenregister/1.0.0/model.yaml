@@ -1,9 +1,8 @@
 id: https://netbeheernederland.nl/conceptueelinformatiemodel/aangeslotenenregister
 name: aangeslotenenregister
 title: Aangeslotenenregister
-description: Het aangeslotenenregister bevat beschrijvingen van (natuurlijke en niet-natuurlijke) personen die de beschikking hebben gekregen over een elektriciteits- of gasaansluiting van een Nederlandse netbeheerder.
+description: Het aangeslotenenregister bevat informatie over (natuurlijke en niet-natuurlijke) personen die de beschikking hebben gekregen over een elektriciteits- of gasaansluiting van een Nederlandse netbeheerder.
 version: 1.0.0-draft
-default_range: str
 prefixes:
   nbnl: https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/
   wiki: https://nl.wikipedia.org/wiki/
@@ -16,10 +15,11 @@ annotations:
   nbility: C.6.2.1. Aansluitingen/allocatiepunten beheren
 
 classes:
-  Beschrijving van aangeslotene:
-    description: opsomming van de kenmerken van een (natuurlijk of niet-natuurlijk) persoon die van een netbeheerder de beschikking heeft gekregen over een aansluiting
+  Aangeslotene:
+    exact_mappings:
+      - nbnl:aangeslotene
     comments:
-      - Netbeheerders beschikken vaak niet over de gegevens om aangeslotenen eenduidig te identificeren. Daarom hanteert dit register niet het begrip 'Aangeslotene' maar 'Beschrijving van aangeslotene'.
+      - Omdat netbeheerders aangeslotenen niet altijd uniek kunnen identificeren, wordt in dit register per aansluiting een beschrijving van de aangeslotene vastgelegd. Hierdoor kan één aangeslotene in de werkelijkheid als meerdere aangeslotenen in dit register voorkomen.
       - Persoonsgegevens zijn zo veel mogelijk overeenkomstig NEN 1888.
     related_mappings:
       - nbnl:aangeslotene
@@ -48,7 +48,7 @@ classes:
       telefoonnummer:
         description: uniek nummer dat toegekend wordt om een aansluiting op het publieke telefoonnet te identificeren, bestaande uit het plusteken, een landnummer, een netnummer en een abonneenummer
         source: wiki:Telefoonnummer
-      type aangeslotene:
+      type:
         description: categorie waartoe de aangeslotene behoort
         range: Type aangeslotene
       voorvoegsel:
@@ -62,16 +62,17 @@ classes:
         comments:
           - "Validatie: leeg bij 'onderneming of overige zakelijke eindafnemer'."
           - NEN 1888 onderscheidt voorletters-n van voorletters-1. Bijvoorbeeld Theo Adriaan wordt afgekort als Th.Adr. (voorletters-n) en als TA (voorletters-1, zonder puntjes). Dit register hanteert voorletters-1.
-      representatie van houder van:
+      # relaties
+      houder van:
         range: Aansluiting
         required: true
         multivalued: false
         annotations:
           inverse_cardinality: 0..1
-      representatie van:
+      rol van:
         comments:
           - "Validatie: afwezig bij 'huishoudelijke eindafnemer'."
-        range: Onderneming
+        range: Maatschappelijke activiteit
         required: false
         multivalued: false
         annotations:
@@ -79,7 +80,7 @@ classes:
     unique_keys:
       primary_key:
         unique_key_slots:
-        - representatie van houder van
+        - rol van
   Correspondentieadres:
     description: postadres waar een aangeslotene zijn correspondentie wil ontvangen anders dan het aansluitadres
     comments:
@@ -89,12 +90,6 @@ classes:
       tijdlijn_geldigheid: true
       tijdlijn_registratie: true
     attributes:
-      deel van:
-        range: Beschrijving van aangeslotene
-        required: true
-        multivalued: false
-        annotations:
-          inverse_cardinality: 0..1
       huisnummer:
         description: aan een verblijfsobject, standplaats of ligplaats toegekend nummer, een antwoordnummer of een postbusnummer
         source: nen:nen-5825-2002-nl-83617
@@ -119,14 +114,21 @@ classes:
         description: aanduiding van een gebied met bewoning zoals een stad of dorp
         source: nen:nen-5825-2002-nl-83617
         required: true
+      # relaties
+      van:
+        range: Aangeslotene
+        required: true
+        multivalued: false
+        annotations:
+          inverse_cardinality: 0..1
     unique_keys:
       primary_key:
         unique_key_slots:
-        - deel van
+        - van
   Aansluiting:
     annotations:
       external_registry: Aansluitingenregister
-  Onderneming:
+  Maatschappelijke activiteit:
     annotations:
       external_registry: Handelsregister
 

@@ -21,22 +21,33 @@ prefixes:
   bce: https://wetten.overheid.nl/jci1.3:c:BWBR0037938&
   bcg: https://wetten.overheid.nl/jci1.3:c:BWBR0037923&
   adamstelsel: https://www.amsterdam.nl/stelselpedia/
-default_range: str
 default_prefix: https://netbeheernederland.nl/conceptueelinformatiemodel/aansluitingenregister/
 
 classes:
+
   Any:
     class_uri: linkml:Any
+
   Aangeslotene:
+    annotations:
+      # conventie: bij elke `class` de naam van een NBility-bedrijfsobject
+      nbility: Klant
+      # conventie: NEN 3610 tijdlijnen als `tijdlijn_geldigheid`, `tijdlijn_registratie` en `tijdlijn_levensduur`
+      tijdlijn_geldigheid: true
+      tijdlijn_registratie: true
+      tijdlijn_effectuering: true
+      levensduur: true
+      levensduur_begin: moment van geboorte
+      levensduur_einde: moment van overlijden
     # conventie: altijd óf `description` óf `exact_mappings` aanwezig
     exact_mappings:
       - nbnl:aangeslotene
     comments:
       - Aangeslotenen worden niet uniek geïdentificeerd. Daarom gaat het hier om een gegevensgroep bij een aansluiting, niet om een zelfstandige entiteit.
+    # conventie: `see_also` voor achtergrond/context/motivatie van adminsistratie
     see_also:
       - iceg:hoofdstuk=2&paragraaf=2.9&sub-paragraaf=2.9.2&artikel=2.9.2.1&z=2022-12-20&g=2022-12-20
       - iceg:hoofdstuk=3&paragraaf=3.3&sub-paragraaf=3.3.1&artikel=3.3.1.1&z=2023-06-28&g=2023-06-28
-    
     attributes:
       geboortedatum:
         # conventie: description bevat altijd de definitie zonder toelichting
@@ -50,30 +61,20 @@ classes:
         description: verzameling letters die wordt gevormd door de eerste letter van alle in volgorde voorkomende voornamen van een aangeslotene
       KVK-nummer:
         description: identificatie van de maatschappelijke activiteit van de aangeslotene in het Handelsregister
-      # conventie: relatie altijd als `attribute` onder eigenaar van relatie
+      # relates
       beschikker over:
         range: Aansluiting
         # conventie: multipliciteiten op relaties altijd expliciet
         required: true
         multivalued: false
         annotations:
-          # conventie: omgekeerde multipliciteit als `inverse_cardinality`
+          # conventie: omgekeerde multipliciteit als `inverse_cardinality` (opties: *, 0..1, 1..*, 1)
           inverse_cardinality: 0..1
     unique_keys:
       # conventie: natuurlijke sleutel / business key heet altijd `identificatie`
       identificatie:
         unique_key_slots:
           - beschikker over
-    annotations:
-      # conventie: bij elke `class` de naam van een NBility-bedrijfsobject
-      nbility: Klant
-      # conventie: NEN 3610 tijdlijnen als `tijdlijn_geldigheid`, `tijdlijn_registratie` en `tijdlijn_levensduur`
-      tijdlijn_geldigheid: true
-      tijdlijn_registratie: true
-      tijdlijn_effectuering: true
-      levensduur: true
-      levensduur_begin: moment van geboorte
-      levensduur_einde: moment van overlijden
   Aansluiting:
     exact_mappings:
       - nbnl:aansluiting
