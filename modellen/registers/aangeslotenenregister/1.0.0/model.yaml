@@ -10,16 +10,19 @@ prefixes:
   iso: https://www.iso.org/
   wetten: "https://wetten.overheid.nl/jci1.3:c:"
   energiewet: https://wetten.overheid.nl/jci1.3:c:BWBR0050714&
+  kvk: https://www.kvk.nl/
 default_prefix: https://netbeheernederland.nl/conceptueelinformatiemodel/aangeslotenenregister/
 annotations:
   nbility: C.6.2.1. Aansluitingen/allocatiepunten beheren
 
 classes:
-  Aangeslotene:
-    exact_mappings:
+  Aangeslotene bij aansluiting:
+    description: rol van een aangeslotene als houder van een specifieke aansluiting
+    related_mappings:
       - nbnl:aangeslotene
+      - nbnl:aansluiting
     comments:
-      - Omdat netbeheerders aangeslotenen niet altijd uniek kunnen identificeren, wordt in dit register per aansluiting een beschrijving van de aangeslotene vastgelegd. Hierdoor kan één aangeslotene in de werkelijkheid als meerdere aangeslotenen in dit register voorkomen.
+      - Omdat netbeheerders aangeslotenen niet altijd uniek kunnen identificeren, wordt in dit register informatie over de aangeslotene per aansluiting vastgelegd. Hierdoor kan één aangeslotene meerdere keren voorkomen in dit register.
       - Persoonsgegevens zijn zo veel mogelijk overeenkomstig NEN 1888.
     related_mappings:
       - nbnl:aangeslotene
@@ -65,6 +68,8 @@ classes:
       # relaties
       houder van:
         range: Aansluiting
+        comments:
+          - Een aangeslotene kan over meer dan één aansluiting beschikken. Dit register legt informatie over de aangeslotene per aansluiting vast.
         required: true
         multivalued: false
         annotations:
@@ -73,6 +78,10 @@ classes:
         comments:
           - "Validatie: afwezig bij 'huishoudelijke eindafnemer'."
         range: Maatschappelijke activiteit
+        comments:
+          - Een onderneming is een voorbeeld van een maatschappelijke activiteit. Beide worden geïdentificeerd met een KVK-nummer.
+        see_also:
+          - kvk:over-het-handelsregister/de-nummers-van-het-handelsregister/
         required: false
         multivalued: false
         annotations:
@@ -116,7 +125,7 @@ classes:
         required: true
       # relaties
       van:
-        range: Aangeslotene
+        range: Aangeslotene bij aansluiting
         required: true
         multivalued: false
         annotations:
