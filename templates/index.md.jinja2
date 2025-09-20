@@ -112,27 +112,32 @@
     {%- endif -%}
 
     {# close_mappings  #}
-    {%- set close_mappings = mappings_line('close', 'Vrijwel overeenkomstig') -%}
+    {%- set close_mappings = mappings_line(element, 'close', 'Vrijwel overeenkomstig') -%}
     {%- if close_mappings -%}
-        {%- set _ = parts.items.append(close_mappings) -%}
+        {%- set _ = parts.items.append(element, close_mappings) -%}
     {%- endif -%}
 
     {# related_mappings  #}
-    {%- set related_mappings = mappings_line('related', 'Gerelateerd') -%}
+    {%- set related_mappings = mappings_line(element, 'related', 'Gerelateerd') -%}
     {%- if related_mappings -%}
         {%- set _ = parts.items.append(related_mappings) -%}
     {%- endif -%}
 
     {# narrow_mappings  #}
-    {%- set narrow_mappings = mappings_line('narrow', 'Nauwer') -%}
+    {%- set narrow_mappings = mappings_line(element, 'narrow', 'Nauwer') -%}
     {%- if narrow_mappings -%}
         {%- set _ = parts.items.append(narrow_mappings) -%}
     {%- endif -%}
 
     {# broad_mappings  #}
-    {%- set broad_mappings = mappings_line('broad', 'Breder') -%}
+    {%- set broad_mappings = mappings_line(element, 'broad', 'Breder') -%}
     {%- if broad_mappings -%}
         {%- set _ = parts.items.append(broad_mappings) -%}
+    {%- endif -%}
+
+    {# comments #}
+    {%- if element.comments -%}
+        {%- set _ = parts.items.append(element.comments | join('<br/><br/>')) -%}
     {%- endif -%}
 
     {# see_also #}
@@ -142,11 +147,6 @@
             {%- set _ = linked.append(gen.uri_link(s)) -%}
         {%- endfor -%}
         {%- set _ = parts.items.append('Zie ook ' ~ linked | join(', ')) -%}
-    {%- endif -%}
-
-    {# comments #}
-    {%- if element.comments -%}
-        {%- set _ = parts.items.append(element.comments | join('<br/><br/>')) -%}
     {%- endif -%}
 
     {# tijdlijnen #}
