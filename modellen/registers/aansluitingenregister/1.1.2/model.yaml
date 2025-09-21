@@ -14,68 +14,30 @@ annotations:
 prefixes:
   linkml: https://w3id.org/linkml/
   nbnl: https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/
+  nen: https://www.nen.nl/
   wetten: "https://wetten.overheid.nl/jci1.3:c:"
   energiewet: https://wetten.overheid.nl/jci1.3:c:BWBR0050714&
+  mce: https://wetten.overheid.nl/jci1.3:c:BWBR0037946&
+  nce: https://wetten.overheid.nl/jci1.3:c:BWBR0037940&
   iceg: https://wetten.overheid.nl/jci1.3:c:BWBR0037934&
   tce: https://wetten.overheid.nl/jci1.3:c:BWBR0037951&
+  tcg: https://wetten.overheid.nl/jci1.3:c:BWBR0037948&
   bce: https://wetten.overheid.nl/jci1.3:c:BWBR0037938&
   bcg: https://wetten.overheid.nl/jci1.3:c:BWBR0037923&
   adamstelsel: https://www.amsterdam.nl/stelselpedia/
 default_prefix: https://netbeheernederland.nl/conceptueelinformatiemodel/aansluitingenregister/
 
 classes:
-
   Any:
     class_uri: linkml:Any
-
-  Aangeslotene:
+  Aansluiting:
     annotations:
       # conventie: bij elke `class` de naam van een NBility-bedrijfsobject
-      nbility: Klant
+      nbility: Aansluiting
       # conventie: NEN 3610 tijdlijnen als `tijdlijn_geldigheid`, `tijdlijn_registratie` en `tijdlijn_levensduur`
       tijdlijn_geldigheid: true
       tijdlijn_registratie: true
-      tijdlijn_effectuering: true
-      levensduur: true
-      levensduur_begin: moment van geboorte
-      levensduur_einde: moment van overlijden
-    # conventie: altijd óf `description` óf `exact_mappings` aanwezig
-    exact_mappings:
-      - nbnl:aangeslotene
-    comments:
-      - Aangeslotenen worden niet uniek geïdentificeerd. Daarom gaat het hier om een gegevensgroep bij een aansluiting, niet om een zelfstandige entiteit.
-    # conventie: `see_also` voor achtergrond/context/motivatie van adminsistratie
-    see_also:
-      - iceg:hoofdstuk=2&paragraaf=2.9&sub-paragraaf=2.9.2&artikel=2.9.2.1&z=2022-12-20&g=2022-12-20
-      - iceg:hoofdstuk=3&paragraaf=3.3&sub-paragraaf=3.3.1&artikel=3.3.1.1&z=2023-06-28&g=2023-06-28
-    attributes:
-      geboortedatum:
-        # conventie: description bevat altijd de definitie zonder toelichting
-        description: datum van de bevalling waarbij de aangeslotene is geboren
-      naam:
-        description: naam van een organisatie of de achternaam (zonder tussenvoegsel) van een natuurlijk persoon
-        required: true
-      tussenvoegsel:
-        description: verzameling van een of meer voorzetsels en/of lidwoorden die aan de achternaam van een aangeslotene vooraf gaat en daarmee gezamenlijk de volledige achternaam vormt
-      voorletters:
-        description: verzameling letters die wordt gevormd door de eerste letter van alle in volgorde voorkomende voornamen van een aangeslotene
-      KVK-nummer:
-        description: identificatie van de maatschappelijke activiteit van de aangeslotene in het Handelsregister
-      # relates
-      beschikker over:
-        range: Aansluiting
-        # conventie: multipliciteiten op relaties altijd expliciet
-        required: true
-        multivalued: false
-        annotations:
-          # conventie: omgekeerde multipliciteit als `inverse_cardinality` (opties: *, 0..1, 1..*, 1)
-          inverse_cardinality: 0..1
-    unique_keys:
-      # conventie: natuurlijke sleutel / business key heet altijd `identificatie`
-      identificatie:
-        unique_key_slots:
-          - beschikker over
-  Aansluiting:
+    # conventie: altijd óf `description` (= definitie) óf `exact_mappings` aanwezig
     exact_mappings:
       - nbnl:aansluiting
     comments:
@@ -87,14 +49,17 @@ classes:
       gecontracteerde transportcapaciteit:
         exact_mappings:
           - nbnl:gecontracteerde-transportcapaciteit
+        see_also:
+          - tce:hoofdstuk=3&paragraaf=3.7&artikel=3.7.4&z=2022-05-18&g=2022-05-18
+          - tcg:hoofdstuk=2&paragraaf=2.6&artikel=2.33&z=2023-05-02&g=2023-05-02
       grootte:
         description: aanduiding van het formaat van de aansluiting op basis van de gewenste aansluitcapaciteiten van de overdrachtspunten
         comments:
+          - De historische aanduiding 'artikel-1-lid-2-of-3-aansluiting' is nu afleidbaar uit de combinatie van 'grootte' en 'marktsegment'.
           # conventie: validatieregels in `comments`, beginnend met 'Validatie:'
           - "Validatie: als de gewenste aansluitcapaciteit van een van de overdrachtspunten 'groot' is of een geheel getal dan 'groot' anders 'klein'."
         range: Groot of klein
         required: true
-        equals_expression: ""
       marktsegment:
         description: aanduiding van de categorie waartoe de aansluiting behoort, te weten kleinverbruikaansluiting of grootverbruikaansluiting
         see_also:
@@ -110,15 +75,95 @@ classes:
           - tce:hoofdstuk=3&paragraaf=3.7&artikel=3.7.13.b&z=2022-05-18&g=2022-05-18
         comments:
           - Ook wel bekend als 'zuivere teruglevering'.
-        range: bool
+        range: boolean
         required: true
       weekmax:
         description: indicatie of de kWmax per week gemeten moet worden
         see_also:
           - tce:hoofdstuk=3&paragraaf=3.7&artikel=3.7.5a&z=2022-05-18&g=2022-05-18
-        range: bool
+        range: boolean
       deel van:
         range: Netgebied
+        # conventie: multipliciteiten op relaties altijd expliciet
+        comments:
+        - "Validatie: deze relatie is verplicht als een van de allocatiepunten 'in bedrijf' is."
+        required: false
+        multivalued: false
+        annotations:
+          # conventie: omgekeerde multipliciteit als `inverse_cardinality` (opties: *, 0..1, 1..*, 1)
+          inverse_cardinality: "*"
+    unique_keys:
+      # conventie: natuurlijke sleutel / business key heet altijd `identificatie`
+      identificatie:
+        unique_key_slots:
+          - EAN-code
+  Aansluitlocatie:
+    annotations:
+      nbility: Aansluiting
+      tijdlijn_geldigheid: true
+      tijdlijn_registratie: true
+    description: plek waar zich het overdrachtspunt van een aansluiting of netkoppeling bevindt
+    comments:
+      - Adresgegevens zijn zo veel mogelijk overeenkomstig NEN 5825.
+    see_also:
+      - iceg:hoofdstuk=2&paragraaf=2.1&artikel=2.1.3&z=2023-06-28&g=2023-06-28
+    attributes:
+      huisnummer:
+        description: aan een verblijfsobject, standplaats of ligplaats toegekend nummer, een antwoordnummer of een postbusnummer
+        source: nen:nen-5825-2002-nl-83617
+        required: true
+        range: integer
+      huisnummertoevoeging:
+        description: aan een verblijfsobject, standplaats of ligplaats toegekende nadere toevoeging aan een huisnummer inclusief huisletter
+        source: nen:nen-5825-2002-nl-83617
+      landcode:
+        description: identificatie van een land met twee letters conform ISO 3166-1
+        source: iso:iso-3166-country-codes.html
+        required: true
+      locatienummer:
+        description: identificatie van een aansluitlocatie
+        required: true
+      locatieomschrijving:
+        description: omschrijving van de ligging van een aansluitlocatie, eventueel ten opzichte van een nabijgelegen adres
+      postcode:
+        description: reeks tekens die in een postadres wordt opgenomen om het automatisch sorteren van de post gemakkelijker te maken
+        source: nen:nen-5825-2002-nl-83617
+        required: true
+      soort:
+        description: aanduiding van een verzameling aansluitlocaties die een gemeenschappelijk karakter hebben
+        comments: Mogelijke waarden afstemmen op de geobasisregistraties. Zie bijvoorbeeld https://docs.geostandaarden.nl/disgeo/emso/.
+      straatnaam:
+        description: naam om openbare ruimten zoals straten, lanen, wegen en stegen mee aan te duiden, of 'antwoordnummer' of 'postbus'
+        source: nen:nen-5825-2002-nl-83617
+        required: true
+      toegangsinstructie:
+        description: beschrijving van wat je moet doen om een locatie binnen te kunnen of mogen gaan
+      verdieping toegang:
+        description: aanduiding op welke verdieping de toegangsdeur van de aansluitlocatie zich bevindt
+        source: adamstelsel:bag-index/catalogus-bag/objectklasse-vbo/kenmerk-bouwlaag/
+        comments:
+          - Dit gegeven helpt bij het snel lokaliseren van storingen in hoogbouw.
+          - De begande grond geldt als `0`. Als de toegang meer dan 1,5 m onder het maaiveld ligt, wordt als verdieping `-1` aangemerkt.
+      woonplaatsnaam:
+        description: aanduiding van een gebied met bewoning zoals een stad of dorp
+        source: nen:nen-5825-2002-nl-83617
+        required: true
+      x-coördinaat:
+        description: oost-westpositie van een punt in het Rijksdriehoeksstelsel (RD)
+        range: integer
+      y-coördinaat:
+        description: noord-zuidpositie van een punt in het Rijksdriehoeksstelsel (RD)
+        range: integer
+      # relaties
+      in zelfde onroerende zaak als: 
+        range: Any
+        exactly_one_of:
+          - range: Verblijfsobject
+          - range: Standplaats
+          - range: Ligplaats
+          - range: Pand
+          - range: Grootschalig topografisch object
+          - range: Perceel
         required: false
         multivalued: false
         annotations:
@@ -126,25 +171,65 @@ classes:
     unique_keys:
       identificatie:
         unique_key_slots:
-          - EAN-code
+          - locatienummer
+  Aftakking:
+    annotations:
+      nbility: Netcomponent
+      tijdlijn_geldigheid: true
+      tijdlijn_registratie: true
+    description: splitsing van de wikkeling van een transformator
+    source: mce:bijlage=3&z=2023-04-01&g=2023-04-01
+    see_also:
+      - mce:hoofdstuk=4&paragraaf=4.3&sub-paragraaf=4.3.2&artikel=4.3.2.4&z=2022-10-25&g=2022-10-25
+    attributes:
+      in gebruik:
+        description: indicatie of de aftakking wordt gebruikt
+        range: boolean
+      nominale waarde:
+        description: hoeveelheid spanning of stroom waarvoor de aftakking is ontworpen, en die in combinatie met de waarde van de aftakking aan de andere zijde de overzetverhouding vormt
+        range: integer
+        comments:
+          - "Eenheid: volt of ampère."
+      zijde:
+        description: aanduiding aan welke kant van de transformator de aftakking zich bevindt
+        range: Transformatorzijde
+  Allocatiepunt:
     annotations:
       nbility: Aansluiting
       tijdlijn_geldigheid: true
       tijdlijn_registratie: true
-  Allocatiepunt:
     description: punt waar invoeding, onttrekking of verbruik van elektriciteit of gas wordt toegerekend aan een marktdeelnemer
-    # conventie: `source` bevat de bron waarop de definitie is gebaseerd
+    # conventie: `source` bevat de bron waarop de term of definitie is gebaseerd
     source: bce:z=2025-04-26&g=2025-04-26
     slots:
       - EAN-code
+    slot_usage:
+      EAN-code:
+        comments:
+          - "Validatie: bij primair allocatiepunt gelijk aan EAN-code aansluiting, bij secundair ongelijk."
+        see_also:
+          - nce:hoofdstuk=2&paragraaf=2.1&artikel=2.4&z=2022-11-25&g=2022-11-25
+    attributes:
+      allocatiemethode:
+        # TODO: definitie
+        range: Allocatiemethode
+        see_also:
+          - iceg:hoofdstuk=2&paragraaf=2.1&artikel=2.1.3&z=2022-05-18&g=2022-05-18
+          - nce:hoofdstuk=10&paragraaf=10.4&artikel=10.17&z=2023-06-10&g=2023-06-10
+      profielcategorie:
+        description: groep allocatiepunten waarvoor een reeks profielfracties wordt vastgesteld
+        comments:
+          - Ook bekend als 'afnamecategorie'.
+          - Voorbeelden van mogelijke waarden zijn E1A, E1B, E1C, E2A, E2B, E4A, G1A, G2A, G2C, GGV, GIN, GIS, GKV, GMN en GXX.
+        see_also:
+          - iceg:hoofdstuk=2&paragraaf=2.1&artikel=2.1.3&z=2022-05-18&g=2022-05-18
+          - bce:hoofdstuk=1&artikel=1.1&z=2022-11-25&g=2022-11-25
+          - bcg:hoofdstuk=1&artikel=1.1&z=2021-06-01&g=2021-06-01
     unique_keys:
       identificatie:
         unique_key_slots:
           - EAN-code
-    annotations:
-      nbility: Aansluiting
-      tijdlijn_geldigheid: true
-      tijdlijn_registratie: true
+
   Allocatiepunt bij aansluiting:
     description: allocatiepunt toegekend aan een aansluiting
     is_a: Allocatiepunt
@@ -208,51 +293,6 @@ classes:
       nbility: Aansluiting
       tijdlijn_geldigheid: true
       tijdlijn_registratie: true
-  Aansluitlocatie:
-    description: plek waar zich het overdrachtspunt van een aansluiting of netkoppeling bevindt
-    attributes:
-      locatienummer:
-        description: identificatie van een aansluitlocatie
-        required: true
-      toegangsinstructie:
-        description: beschrijving van wat je moet doen om een locatie binnen te kunnen of mogen gaan
-      verdieping toegang:
-        description: aanduiding op welke verdieping de toegangsdeur van de aansluitlocatie zich bevindt
-        source: adamstelsel:bag-index/catalogus-bag/objectklasse-vbo/kenmerk-bouwlaag/
-        comments:
-          - Dit gegeven helpt bij het snel lokaliseren van storingen in hoogbouw.
-          - De begande grond geldt als `0`. Als de toegang meer dan 1,5 m onder het maaiveld ligt, wordt als verdieping `-1` aangemerkt.
-    unique_keys:
-      identificatie:
-        unique_key_slots:
-          - locatienummer
-    annotations:
-      nbility: Aansluiting
-      tijdlijn_geldigheid: true
-      tijdlijn_registratie: true
-  Locatieaanduiding:
-    attributes:
-      locatieomschrijving:
-      van:
-        range: Aansluitlocatie
-        required: true
-        multivalued: false
-        annotations:
-          inverse_cardinality: 0..1
-      afgeleid van:
-        range: Nummeraanduiding
-        required: false
-        multivalued: false
-        annotations:
-          inverse_cardinality: "*"
-    unique_keys:
-      identificatie:
-        unique_key_slots:
-          - van
-    annotations:
-      nbility: Aansluiting
-      tijdlijn_geldigheid: true
-      tijdlijn_registratie: true
   Netkoppeling:
     description: recht op het gebruik van één of meer verbindingen tussen twee energienetten of tussen een energienet en een interconnector
     source: bcg:hoofdstuk=1&artikel=1.1&z=2021-06-01&g=2021-06-01
@@ -287,7 +327,25 @@ classes:
       tijdlijn_registratie: true
 
   # conventie: onderstaand patroon voor entiteiten in andere registers
+  Grootschalig topografisch object:
+    annotations:
+      external_registry: Basisregistratie Grootschalige Topografie
+  Ligplaats:
+    annotations:
+      external_registry: Basisregistratie Adressen en Gebouwen
   Nummeraanduiding:
+    annotations:
+      external_registry: Basisregistratie Adressen en Gebouwen
+  Pand:
+    annotations:
+      external_registry: Basisregistratie Adressen en Gebouwen
+  Perceel:
+    annotations:
+      external_registry: Basisregistratie Kadaster
+  Standplaats:
+    annotations:
+      external_registry: Basisregistratie Adressen en Gebouwen
+  Verblijfsobject:
     annotations:
       external_registry: Basisregistratie Adressen en Gebouwen
 
@@ -296,12 +354,24 @@ slots:
     description: unieke cijfercombinatie volgens de Europese Artikelnummer-standaard
     range: EAN-18
     required: true
+    see_also:
+      - iceg:hoofdstuk=2&paragraaf=2.1&artikel=2.1.3&z=2022-05-18&g=2022-05-18
   energiedrager:
     exact_mappings:
       - nbnl:energiedrager
     range: Energiedrager
+    see_also:
+      - iceg:hoofdstuk=2&paragraaf=2.1&artikel=2.1.3&z=2022-05-18&g=2022-05-18
 
 enums:
+  Allocatiemethode:
+    permissible_values:
+      PRF:
+        description: profielallocatie
+      SMA:
+        description: slimme-meterallocatie
+      TMT:
+        description: telemetrie
   Energiedrager:
     permissible_values:
       elektriciteit:
@@ -317,6 +387,12 @@ enums:
         meaning: nbnl:grootverbruikaansluiting
       kleinverbruikaansluiting:
         meaning: nbnl:kleinverbruikaansluiting
+  Transformatorzijde:
+    permissible_values:
+      primair:
+        description: zijde met de hoogste nominale spanning of stroom
+      secundair:
+        description: zijde met de laagste nominale spanning of stroom
 
 types:
   EAN-18:

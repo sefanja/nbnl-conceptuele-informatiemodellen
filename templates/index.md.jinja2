@@ -27,14 +27,20 @@
 
 {%- macro range(name) -%}
     {%- set base_types = {
-        'bool': 'waar of onwaar',
-        'date': 'datum',
-        'datetime': 'tijdstip',
-        'duration': 'tijdsduur',
-        'float': 'getal',
-        'int': 'geheel getal',
         'string': 'tekst',
-        'uri': 'uri' } -%}
+        'integer': 'geheel getal',
+        'boolean': 'waar of onwaar',
+        'float': 'getal',
+        'double': 'getal',
+        'decimal': 'decimaal getal',
+        'time': 'tijd van de dag',
+        'date': 'datum',
+        'datetime': 'datum en tijd',
+        'date_or_datetime': 'datum en eventueel tijd',
+        'uriorcurie': 'URI of CURIE',
+        'curie': 'CURIE',
+        'uri': 'URI',
+        'ncname': 'prefixnaam' } -%}
     {%- if name in base_types -%}
         {{ base_types[name] }}
     {%- elif name in schemaview.all_classes() -%}
@@ -66,6 +72,9 @@
         {%- endfor -%}
     {%- else -%}
         {{ range(slot.range) }}
+    {%- endif -%}
+    {%- if slot.unit.ucum_code -%}
+        &nbsp;({{ slot.unit.ucum_code }})
     {%- endif -%}
 {%- endmacro -%}
 
