@@ -328,12 +328,6 @@ classes:
         comments:
           - "Validatie: per netgebied en type is er maximaal één allocatiepunt."
         range: Type allocatiepunt bij netgebied
-      toegekend aan:
-        range: Netgebied
-        required: true
-        multivalued: false
-        annotations:
-          inverse_cardinality: 1..*
       # relaties
       toegekend aan:
         range: Netgebied
