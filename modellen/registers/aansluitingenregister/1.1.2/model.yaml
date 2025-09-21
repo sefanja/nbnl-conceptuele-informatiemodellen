@@ -41,6 +41,7 @@ classes:
       # conventie: NEN 3610 tijdlijnen als `tijdlijn_geldigheid`, `tijdlijn_registratie` en `tijdlijn_levensduur`
       tijdlijn_geldigheid: true
       tijdlijn_registratie: true
+      tijdlijn_effectuering: true
     # conventie: altijd óf `description` (= definitie) óf `exact_mappings` aanwezig
     exact_mappings:
       - nbnl:aansluiting
@@ -113,6 +114,7 @@ classes:
       nbility: Aansluiting
       tijdlijn_geldigheid: true
       tijdlijn_registratie: true
+      tijdlijn_effectuering: true
     description: plek waar zich het overdrachtspunt van een aansluiting of netkoppeling bevindt
     comments:
       - Adresgegevens zijn zo veel mogelijk overeenkomstig NEN 5825.
@@ -201,6 +203,7 @@ classes:
       nbility: Netcomponent
       tijdlijn_geldigheid: true
       tijdlijn_registratie: true
+      tijdlijn_effectuering: true
     description: splitsing van de wikkeling van een transformator
     source: mce:bijlage=3&z=2023-04-01&g=2023-04-01
     see_also:
@@ -235,6 +238,7 @@ classes:
       nbility: Aansluiting
       tijdlijn_geldigheid: true
       tijdlijn_registratie: true
+      tijdlijn_effectuering: true
     description: punt waar invoeding, onttrekking of verbruik van elektriciteit of gas wordt toegerekend aan een marktdeelnemer
     # conventie: `source` bevat de bron waarop de term of definitie is gebaseerd
     source: bce:z=2025-04-26&g=2025-04-26
@@ -340,6 +344,7 @@ classes:
       nbility: Aansluiting
       tijdlijn_geldigheid: true
       tijdlijn_registratie: true
+      tijdlijn_effectuering: true
     description: verzameling van strengen van lichtmasten waarvan de aansluitingen eventueel ongeïdentificeerde overdrachtspunten bevatten
     comments:
       - Voorheen werden zogenaame 'virtuele aansluitingen' geregistreerd (DIM). Dit register staat alleen de registratie van echte aansluitingen toe. De mooiste manier om een streng van lichtmasten te registreren, is als één aansluiting met één primair allocatiepunt en een overdrachtspunt per lichtmast. Is het aantal strengen bekend maar niet de verdeling van lichtmasten over die strengen, dan als één aansluiting/allocatiepunt/overdrachtspunt per streng, met al deze aansluitingen gegroepeerd in een groep van strengen van lichtmasten. Is het ook het aantal strengen niet bekend, dan als één aansluiting/allocatiepunt/overdrachtspunt. Al deze varianten leiden tot eenzelfde nettarief, volgens de afleidingsregels in het tarievenregister.
@@ -367,6 +372,7 @@ classes:
       nbility: Netcomponent
       tijdlijn_geldigheid: true
       tijdlijn_registratie: true
+      tijdlijn_effectuering: true
     description: elektrisch apparaat dat wordt toegepast voor het verlagen van spanning of stroom zodat deze gemeten kan worden
     see_also:
       - mce:hoofdstuk=4&paragraaf=4.3&sub-paragraaf=4.3.2&artikel=4.3.2.4&z=2022-10-25&g=2022-10-25
@@ -416,6 +422,7 @@ classes:
       nbility: Aansluiting
       tijdlijn_geldigheid: true
       tijdlijn_registratie: true
+      tijdlijn_effectuering: true
     description: aaneengesloten en samenhangend deel van een energienet van één netbeheerder, waarbinnen de processen allocatie en reconciliatie plaatsvinden
     source: bce:z=2025-04-26&g=2025-04-26
     see_also:
@@ -445,6 +452,7 @@ classes:
       nbility: Aansluiting
       tijdlijn_geldigheid: true
       tijdlijn_registratie: true
+      tijdlijn_effectuering: true
     description: recht op het gebruik van één of meer verbindingen tussen twee energienetten of tussen een energienet en een interconnector
     source: bcg:hoofdstuk=1&artikel=1.1&z=2021-06-01&g=2021-06-01
     comments:
@@ -478,6 +486,7 @@ classes:
       nbility: Aansluiting
       tijdlijn_geldigheid: true
       tijdlijn_registratie: true
+      tijdlijn_effectuering: true
     exact_mappings:
       - nbnl:overdrachtspunt
     slots:
@@ -625,6 +634,7 @@ classes:
       nbility: Netfunctie
       tijdlijn_geldigheid: true
       tijdlijn_registratie: true
+      tijdlijn_effectuering: true
     description: hulpmiddelen bij een aansluiting waarop het secundaire deel van de meetinrichting is aangesloten
     comments:
       - De naam 'primair deel meetinrichting' kan verwarrend zijn omdat het volgens de Energiewet om hulpmiddelen bij de aansluiting gaat (beheerd door de netbeheerder), niet om een deel van de meetinrichting (beheerd door de meetverantwoordelijke, ook wel het 'secundaire deel' genoemd).
@@ -718,6 +728,7 @@ classes:
       nbility: Aansluiting
       tijdlijn_geldigheid: true
       tijdlijn_registratie: true
+      tijdlijn_effectuering: true
     description: tariefregel die voor een aansluiting vastlegt welke tariefcomponent geldt en hoe vaak deze in rekening wordt gebracht
     comments:
       - De afleidingsregels staan in het tarievenregister.
