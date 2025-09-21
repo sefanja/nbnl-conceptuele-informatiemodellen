@@ -291,7 +291,7 @@ classes:
     attributes:
       type:
         description: geeft weer bij welke vorm van netverlies het allocatiepunt hoort
-        comment:
+        comments:
           - "Validatie: per netgebied en type is er maximaal één allocatiepunt."
         range: Type allocatiepunt bij netgebied
       toegekend aan:
@@ -340,6 +340,9 @@ classes:
         range: Nauwkeurigheidsklasse
       nominaal vermogen:
         description: maximaal vermogen bij continu gebruik waarbij een maximaal rendement wordt behaald
+        range: float
+        unit:
+          ucum_code: VA
       soort:
         description: aanduiding van een verzameling meettransformatoren die een gemeenschappelijk karakter hebben
         range: Soort meettransformator
