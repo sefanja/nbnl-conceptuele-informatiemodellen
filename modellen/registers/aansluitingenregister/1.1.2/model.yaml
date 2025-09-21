@@ -721,7 +721,6 @@ classes:
     description: tariefregel die voor een aansluiting vastlegt welke tariefcomponent geldt en hoe vaak deze in rekening wordt gebracht
     comments:
       - De afleidingsregels staan in het tarievenregister.
-    comments:
       - De methode in artikel 8.1.6 van de Informatiecode elektriciteit en gas houdt geen rekening met de grote variatie in het aantal overdrachtspunten zoals bij strengen van lichtmasten (artikel 3.3.3 van de Tarievencode elektriciteit). Dit register doet dat wel door niet naar het totaaltarief maar de tariefcomponenten te linken.
     attributes:
       aantal:
