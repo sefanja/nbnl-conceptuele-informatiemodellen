@@ -20,10 +20,12 @@ prefixes:
   mce: https://wetten.overheid.nl/jci1.3:c:BWBR0037946&
   nce: https://wetten.overheid.nl/jci1.3:c:BWBR0037940&
   iceg: https://wetten.overheid.nl/jci1.3:c:BWBR0037934&
+  acg: https://wetten.overheid.nl/jci1.3:c:BWBR0037931&
   tce: https://wetten.overheid.nl/jci1.3:c:BWBR0037951&
   tcg: https://wetten.overheid.nl/jci1.3:c:BWBR0037948&
   bce: https://wetten.overheid.nl/jci1.3:c:BWBR0037938&
   bcg: https://wetten.overheid.nl/jci1.3:c:BWBR0037923&
+  rakveg: https://wetten.overheid.nl/jci1.3:c:BWBR0030164&
   adamstelsel: https://www.amsterdam.nl/stelselpedia/
 default_prefix: https://netbeheernederland.nl/conceptueelinformatiemodel/aansluitingenregister/
 
@@ -143,7 +145,8 @@ classes:
         source: adamstelsel:bag-index/catalogus-bag/objectklasse-vbo/kenmerk-bouwlaag/
         comments:
           - Dit gegeven helpt bij het snel lokaliseren van storingen in hoogbouw.
-          - De begande grond geldt als `0`. Als de toegang meer dan 1,5 m onder het maaiveld ligt, wordt als verdieping `-1` aangemerkt.
+          - De begande grond geldt als 0. Als de toegang meer dan 1,5 m onder het maaiveld ligt, wordt als verdieping -1 aangemerkt.
+        range: integer
       woonplaatsnaam:
         description: aanduiding van een gebied met bewoning zoals een stad of dorp
         source: nen:nen-5825-2002-nl-83617
@@ -189,7 +192,7 @@ classes:
         description: hoeveelheid spanning of stroom waarvoor de aftakking is ontworpen, en die in combinatie met de waarde van de aftakking aan de andere zijde de overzetverhouding vormt
         range: integer
         comments:
-          - "Eenheid: volt of ampère."
+          - "Eenheid: volt (V) of ampère (A)."
       zijde:
         description: aanduiding aan welke kant van de transformator de aftakking zich bevindt
         range: Transformatorzijde
@@ -229,12 +232,54 @@ classes:
       identificatie:
         unique_key_slots:
           - EAN-code
-
   Allocatiepunt bij aansluiting:
-    description: allocatiepunt toegekend aan een aansluiting
     is_a: Allocatiepunt
+    description: allocatiepunt toegekend aan een aansluiting
     attributes:
-      bij:
+      administratieve status van meetinrichting:
+        description: geeft weer of de aangeslotene de mogelijkheid om de meter op afstand uit te lezen administratief heeft laten uitzetten
+        see_also:
+          - iceg:hoofdstuk=2&paragraaf=2.1&artikel=2.1.4&z=2022-12-20&g=2022-12-20
+        range: Aan of uit
+      blokkade:
+        description: geeft weer of het allocatiepunt en de bijbehorende aansluiting is geblokkeerd voor de automatische verwerking van mutatieprocessen als bedoeld in Hoofdstuk 4 van de Informatiecode elektriciteit en gas
+        see_also:
+          - iceg:hoofdstuk=4&z=2023-03-18&g=2023-03-18
+          - iceg:hoofdstuk=2&paragraaf=2.12&z=2023-03-18&g=2023-03-18
+          - iceg:hoofdstuk=1&paragraaf=1.1&artikel=1.1.14&z=2023-03-18&g=2023-03-18
+        range: Blokkade
+      fysieke status:
+        description: toestand van door de netbeheerder en eventuele meetverantwoordelijke beheerde onderdelen die samen energie-uitwisseling op het allocatiepunt mogelijk maken
+        comments:
+          - "Validatie: bij een bemeten kleinverbruikaansluiting zonder meter is geen overgang mogelijk naar 'in bedrijf'."
+        see_also:
+          - iceg:hoofdstuk=2&paragraaf=2.1&artikel=2.1.3&z=2022-05-18&g=2022-05-18
+        range: Fysieke status
+      maand verbruiksbepaling:
+        description: maand waarin de verbruiksbepaling plaatsvindt
+        range: integer
+        comments:
+          - Waarde in het bereik 1-12 conform ISO 8601.
+          - "Validatie: in geval van een aansluiting waarbij eenmaal per jaar het verbruik wordt bepaald."
+      reden uit bedrijf:
+        description: verklaring van het uit bedrijf zijn van één of meer onderdelen zodat energie-uitwisseling op het allocatiepunt onmogelijk is
+        see_also:
+          - rakveg:paragraaf=1&artikel=1a&z=2023-04-01&g=2023-04-01
+        range: Reden uit bedrijf
+      type:
+        description: geeft weer of het allocatiepunt primair of secundair is
+        source: bce:hoofdstuk=1&artikel=1.1&z=2022-11-25&g=2022-11-25
+        range: Type allocatiepunt bij aansluiting
+      wijze uit bedrijf:
+        description: manier waarop één of meer onderdelen uit bedrijf zijn genomen zodat energie-uitwisseling op het allocatiepunt onmogelijk is
+        range: Wijze uit bedrijf
+      wijze van bemeting:
+        description: manier waarop het allocatiepunt is bedoeld om te worden bemeten
+        see_also:
+          - iceg:hoofdstuk=2&paragraaf=2.1&artikel=2.1.3&z=2022-05-18&g=2022-05-18
+        range: Wijze van bemeting
+      # relaties
+      toegekend aan:
         range: Aansluiting
         required: true
         multivalued: false
@@ -244,12 +289,64 @@ classes:
     description: allocatiepunt toegekend aan een netgebied
     is_a: Allocatiepunt
     attributes:
-      bij:
+      type:
+        description: geeft weer bij welke vorm van netverlies het allocatiepunt hoort
+        comment:
+          - "Validatie: per netgebied en type is er maximaal één allocatiepunt."
+        range: Type allocatiepunt bij netgebied
+      toegekend aan:
         range: Netgebied
         required: true
         multivalued: false
         annotations:
           inverse_cardinality: 1..*
+  Groep van strengen van lichtmasten:
+    annotations:
+      nbility: Aansluiting
+      tijdlijn_geldigheid: true
+      tijdlijn_registratie: true
+    description: verzameling van strengen van lichtmasten waarvan de aansluitingen eventueel ongeïdentificeerde overdrachtspunten bevatten
+    see_also:
+      - tce:hoofdstuk=3&paragraaf=3.3&artikel=3.3.3&z=2022-05-18&g=2022-05-18
+    attributes:
+      totaal aantal overdrachtspunten:
+        description: som van het aantal overdrachtspunten van alle strengen in de groep, zowel de in dit register geïdentificeerde als niet-geïdentificeerde overdrachtspunten
+        comments:
+          - Gemeenten weten het aantal lichtmasten niet altijd per streng (of 'voedingspunt') op te geven.
+        range: integer
+  Meettransformator:
+    annotations:
+      nbility: Netcomponent
+      tijdlijn_geldigheid: true
+      tijdlijn_registratie: true
+    description: elektrisch apparaat dat wordt toegepast voor het verlagen van spanning of stroom zodat deze gemeten kan worden
+    see_also:
+      - mce:hoofdstuk=4&paragraaf=4.3&sub-paragraaf=4.3.2&artikel=4.3.2.4&z=2022-10-25&g=2022-10-25
+    attributes:
+      fabrikant:
+        description: bedrijf dat industrieel goederen vervaardigt
+      meetbereik bovengrens:
+        description: maximale belasting waarbij de meettransformator de maximaal toelaatbare meetfout behorend bij de nauwkeurigheidsklasse niet overschrijdt
+        range: float
+        unit:
+          ucum_code: VA
+      meetbereik ondergrens:
+        description: minimale belasting waarbij de meettransformator de maximaal toelaatbare meetfout behorend bij de nauwkeurigheidsklasse niet overschrijdt
+        range: float
+        unit:
+          ucum_code: VA
+      nauwkeurigheidsklasse:
+        description: gestandaardiseerde cijfercode waarmee men de maximaal toelaatbare meetfout van meetapparatuur definieert
+        range: Nauwkeurigheidsklasse
+      nominaal vermogen:
+        description: maximaal vermogen bij continu gebruik waarbij een maximaal rendement wordt behaald
+      soort:
+        description: aanduiding van een verzameling meettransformatoren die een gemeenschappelijk karakter hebben
+        range: Soort meettransformator
+      serienummer:
+        description: code die door de fabrikant aan een exemplaar uit een reeks producten wordt gegeven
+      typeaanduiding:
+        description: naam die door een fabrikant aan een reeks producten met vergelijkbare eigenschappen wordt gegeven
   Netgebied:
     description: aaneengesloten en samenhangend deel van een energienet van één netbeheerder, waarbinnen de processen allocatie en reconciliatie plaatsvinden
     source: bce:z=2025-04-26&g=2025-04-26
@@ -364,6 +461,10 @@ slots:
       - iceg:hoofdstuk=2&paragraaf=2.1&artikel=2.1.3&z=2022-05-18&g=2022-05-18
 
 enums:
+  Aan of uit:
+    permissible_values:
+      aan:
+      uit:
   Allocatiemethode:
     permissible_values:
       PRF:
@@ -372,11 +473,30 @@ enums:
         description: slimme-meterallocatie
       TMT:
         description: telemetrie
+  Blokkade:
+    permissible_values:
+      aangeslotene:
+        description: de aangeslotene heeft om de blokkade verzocht
+        see_also:
+          - iceg:hoofdstuk=2&paragraaf=2.12&artikel=2.12.1&z=2023-03-18&g=2023-03-18
+      geen:
+        description: er is geen blokkade
+      leveringszekerheid:
+        description: er is een blokkade vanwege het Besluit leveringszekerheid Elektriciteitswet 1998 of het Besluit leveringszekerheid Gaswet
+      tijdelijk opgeheven:
+        description: de door aangeslotene verzochte blokkade is door een daartoe gemandateerde leverancier tijdelijk opgeheven
+        see_also:
+          - iceg:hoofdstuk=2&paragraaf=2.12&artikel=2.12.3&z=2023-03-18&g=2023-03-18
   Energiedrager:
     permissible_values:
       elektriciteit:
       gas:
       waterstof:
+  Fysieke status:
+    permissible_values:
+      in aanleg:
+      in bedrijf:
+      uit bedrijf:
   Groot of klein:
     permissible_values:
       groot:
@@ -387,15 +507,73 @@ enums:
         meaning: nbnl:grootverbruikaansluiting
       kleinverbruikaansluiting:
         meaning: nbnl:kleinverbruikaansluiting
+  Nauwkeurigheidsklasse:
+    permissible_values:
+      onbekend:
+      0,1:
+      0,2S:
+      0,2:
+      0,3:
+      0,5S:
+      0,5:
+      "1":
+      "2":
+      "3":
+      "5":
+  Reden uit bedrijf:
+    permissible_values:
+      fraude:
+      leegstand:
+      klantverzoek:
+      anders:
+      veiligheid:
+      wanbetaling:
+  Soort meettransformator:
+    permissible_values:
+      spanningstransformator:
+      stroomtransformator:
   Transformatorzijde:
     permissible_values:
       primair:
         description: zijde met de hoogste nominale spanning of stroom
       secundair:
         description: zijde met de laagste nominale spanning of stroom
+  Type allocatiepunt bij aansluiting:
+    permissible_values:
+      PAP:
+        description: primair allocatiepunt
+      SAP:
+        description: secundair allocatiepunt
+  Type allocatiepunt bij netgebied:
+    permissible_values:
+      NVB:
+        description: netverlies door transportonafhankelijk netverbruik
+      TVB:
+        description: netverlies door transportverbruik
+      OVB:
+        description: netverlies door onbetaald verbruik
+      NVL:
+        description: netverlies elektriciteit
+      GMN:
+        description: netverlies gas
+        see_also:
+          - acg:hoofdstuk=4&paragraaf=4.3&artikel=4.3.1.12&z=2023-03-18&g=2023-03-18
+  Wijze uit bedrijf:
+    permissible_values:
+      binnen:
+      buiten:
+  Wijze van bemeting:
+    permissible_values:
+      onbemeten:
+      jaarlijks:
+      maandelijks:
+      telemetrie:
+      niet continu:
+      anders bemeten:
+      onbekend:
 
 types:
   EAN-18:
     description: Europees artikelnummer van achttien cijfers
     pattern: "^[0-9]{18}$"
-    base: str
+    base: string
