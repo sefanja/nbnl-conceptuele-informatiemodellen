@@ -3,7 +3,7 @@ name: aangeslotenenregister
 title: Aangeslotenenregister
 description: Het aangeslotenenregister bevat informatie over (natuurlijke en niet-natuurlijke) personen die de beschikking hebben gekregen over een elektriciteits- of gasaansluiting van een Nederlandse netbeheerder.
 comments:
-  - De entiteiten in dit register hebben een tijdlijn registratie en effectuering. De tijdlijn effectuering is gelijk aan de tijdlijn registratie met een naar beneden afgerond tijdstip; voor elektriciteit naar 0:00 en voor gas naar 6:00 (zie artikel 2.1.8 van de Informatiecode elektriciteit en gas, artikel 2.1.8).
+  - De entiteiten in dit register hebben een tijdlijn registratie en effectuering. De tijdlijn effectuering is gelijk aan de tijdlijn registratie met een naar beneden afgerond tijdstip; voor elektriciteit naar 0:00 en voor gas naar 6:00 (zie artikel 2.1.8 van de Informatiecode elektriciteit en gas).
 version: 1.0.0-draft
 prefixes:
   nbnl: https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/
