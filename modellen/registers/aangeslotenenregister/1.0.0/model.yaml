@@ -2,6 +2,8 @@ id: https://netbeheernederland.nl/conceptueelinformatiemodel/aangeslotenenregist
 name: aangeslotenenregister
 title: Aangeslotenenregister
 description: Het aangeslotenenregister bevat informatie over (natuurlijke en niet-natuurlijke) personen die de beschikking hebben gekregen over een elektriciteits- of gasaansluiting van een Nederlandse netbeheerder.
+comments:
+  - De tijdlijn effectuering is gelijk aan de tijdlijn registratie met een naar beneden afgerond tijdstip; voor elektriciteit naar 0:00 en voor gas naar 6:00 (zie artikel 2.1.8 van de Informatiecode elektriciteit en gas).
 version: 1.0.0-draft
 prefixes:
   nbnl: https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/
@@ -19,8 +21,8 @@ classes:
   Aangeslotene:
     annotations:
       nbility: Klant
-      tijdlijn_geldigheid: true
       tijdlijn_registratie: true
+      tijdlijn_effectuering: true
     description: hoedanigheid van een (natuurlijk of niet-natuurlijk) persoon als houder van een specifieke aansluiting
     related_mappings:
       - nbnl:aangeslotene
@@ -89,8 +91,8 @@ classes:
   Correspondentieadres:
     annotations:
       nbility: Klant
-      tijdlijn_geldigheid: true
       tijdlijn_registratie: true
+      tijdlijn_effectuering: true
     description: postadres waar een aangeslotene zijn correspondentie wil ontvangen anders dan het aansluitadres
     comments:
       - Adresgegevens zijn zo veel mogelijk overeenkomstig NEN 5825.
