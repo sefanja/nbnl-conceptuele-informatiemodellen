@@ -19,6 +19,7 @@ classes:
   Aangeslotene:
     annotations:
       nbility: Klant
+      tijdlijn_geldigheid: true
       tijdlijn_registratie: true
     description: roluitoefening waarbij een (natuurlijk of niet-natuurlijk) persoon optreedt als houder van een specifieke aansluiting
     related_mappings:
@@ -35,9 +36,6 @@ classes:
         source: nen:nen-1888-2002-nl-62341
         comments:
           - "Validatie: leeg bij 'onderneming of overige zakelijke eindafnemer'."
-        range: date
-      inhuizingsdatum:
-        description: datum waarop de roluitoefening als houder van de aansluiting aanvangt
         range: date
       naam:
         description: statutaire naam van de niet-natuurlijke persoon of achternaam zonder tussenvoegsel van de natuurlijke persoon
@@ -64,9 +62,6 @@ classes:
         comments:
           - "Validatie: leeg bij 'onderneming of overige zakelijke eindafnemer'."
           - NEN 1888 onderscheidt voorletters-n van voorletters-1. Bijvoorbeeld Theo Adriaan wordt afgekort als Th.Adr. (voorletters-n) en als TA (voorletters-1, zonder puntjes). Dit register hanteert voorletters-1.
-      uithuizingsdatum:
-        description: laatste dag waarop de roluitoefening als houder van de aansluiting van kracht is
-        range: date
       # relaties
       houder van:
         range: Aansluiting
@@ -91,10 +86,10 @@ classes:
       primary_key:
         unique_key_slots:
         - houder van
-        - inhuizingsdatum
   Correspondentieadres:
     annotations:
       nbility: Klant
+      tijdlijn_geldigheid: true
       tijdlijn_registratie: true
     description: postadres waar een aangeslotene zijn correspondentie wil ontvangen anders dan het aansluitadres
     comments:
