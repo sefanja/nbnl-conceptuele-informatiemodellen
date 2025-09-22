@@ -64,11 +64,10 @@ classes:
           inverse_cardinality: 0..1
       rol van:
         comments:
-          - Een onderneming is een voorbeeld van een maatschappelijke activiteit. Beide worden geïdentificeerd met een KVK-nummer.
           - "Validatie: afwezig bij huishoudelijk eindafnemer."
         see_also:
           - kvk:over-het-handelsregister/de-nummers-van-het-handelsregister/
-        range: Maatschappelijke activiteit
+        range: Onderneming of maatschappelijke activiteit
         required: false
         multivalued: false
         annotations:
@@ -118,7 +117,7 @@ classes:
   Aansluiting:
     annotations:
       external_registry: Aansluitingenregister
-  Maatschappelijke activiteit:
+  Onderneming of maatschappelijke activiteit:
     annotations:
       external_registry: Handelsregister
 
