@@ -75,8 +75,10 @@ Sommige gegevens veranderen in de tijd. Denk aan een verzwaring van de aansluiti
 
 - `⏲ tijdlijn geldigheid`
 - `⏲ tijdlijn registratie`
+- `⏲ tijdlijn effectuering`
+- `⏲ levensduur`
 
-Deze geven aan in welke periode een feit geldig was in de werkelijkheid (`tijdlijn geldigheid`) en wanneer deze bekend was in het systeem (`tijdlijn registratie`).
+Deze geven aan in welke periode een feit geldig was in de werkelijkheid (`tijdlijn geldigheid`), wanneer deze bekend was in het systeem (`tijdlijn registratie`) en wanneer deze van kracht was voor de energiemarkt (`tijdlijn effectuering`). De `levensduur` geeft het moment van ontstaan en vergaan van een object aan.
 
 ## Kleuren
 

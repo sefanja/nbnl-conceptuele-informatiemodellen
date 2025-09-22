@@ -16,12 +16,11 @@ annotations:
   nbility: C.6.2.1. Aansluitingen/allocatiepunten beheren
 
 classes:
-  Aangeslotene bij aansluiting:
+  Aangeslotene:
     annotations:
       nbility: Klant
-      tijdlijn_geldigheid: true
       tijdlijn_registratie: true
-    description: rol van een aangeslotene als houder van een specifieke aansluiting
+    description: roluitoefening waarbij een (natuurlijk of niet-natuurlijk) persoon optreedt als houder van een specifieke aansluiting
     related_mappings:
       - nbnl:aangeslotene
     comments:
@@ -36,6 +35,9 @@ classes:
         source: nen:nen-1888-2002-nl-62341
         comments:
           - "Validatie: leeg bij 'onderneming of overige zakelijke eindafnemer'."
+        range: date
+      inhuizingsdatum:
+        description: datum waarop de roluitoefening als houder van de aansluiting aanvangt
         range: date
       naam:
         description: statutaire naam van de niet-natuurlijke persoon of achternaam zonder tussenvoegsel van de natuurlijke persoon
@@ -62,6 +64,9 @@ classes:
         comments:
           - "Validatie: leeg bij 'onderneming of overige zakelijke eindafnemer'."
           - NEN 1888 onderscheidt voorletters-n van voorletters-1. Bijvoorbeeld Theo Adriaan wordt afgekort als Th.Adr. (voorletters-n) en als TA (voorletters-1, zonder puntjes). Dit register hanteert voorletters-1.
+      uithuizingsdatum:
+        description: laatste dag waarop de roluitoefening als houder van de aansluiting van kracht is
+        range: date
       # relaties
       houder van:
         range: Aansluiting
@@ -74,7 +79,7 @@ classes:
       rol van:
         comments:
           - Een onderneming is een voorbeeld van een maatschappelijke activiteit. Beide worden geïdentificeerd met een KVK-nummer.
-          - "Validatie: afwezig bij 'huishoudelijke eindafnemer'."
+          - "Validatie: afwezig bij huishoudelijk eindafnemer."
         see_also:
           - kvk:over-het-handelsregister/de-nummers-van-het-handelsregister/
         range: Maatschappelijke activiteit
@@ -85,11 +90,11 @@ classes:
     unique_keys:
       primary_key:
         unique_key_slots:
-        - rol van
+        - houder van
+        - inhuizingsdatum
   Correspondentieadres:
     annotations:
       nbility: Klant
-      tijdlijn_geldigheid: true
       tijdlijn_registratie: true
     description: postadres waar een aangeslotene zijn correspondentie wil ontvangen anders dan het aansluitadres
     comments:
@@ -99,7 +104,7 @@ classes:
         description: aan een verblijfsobject, standplaats of ligplaats toegekend nummer, een antwoordnummer of een postbusnummer
         source: nen:nen-5825-2002-nl-83617
         required: true
-        range: int
+        range: integer
       huisnummertoevoeging:
         description: aan een verblijfsobject, standplaats of ligplaats toegekende nadere toevoeging aan een huisnummer inclusief huisletter
         source: nen:nen-5825-2002-nl-83617
@@ -121,7 +126,7 @@ classes:
         required: true
       # relaties
       van:
-        range: Aangeslotene bij aansluiting
+        range: Aangeslotene
         required: true
         multivalued: false
         annotations:
@@ -140,7 +145,7 @@ classes:
 enums:
   Type aangeslotene:
     permissible_values:
-      huishoudelijke eindafnemer:
+      huishoudelijk eindafnemer:
         description: eindafnemer die elektriciteit of gas koopt of wil kopen voor eigen huishoudelijk gebruik
         source: energiewet:z=2025-02-22&g=2025-02-22
       onderneming of overige zakelijke eindafnemer:
