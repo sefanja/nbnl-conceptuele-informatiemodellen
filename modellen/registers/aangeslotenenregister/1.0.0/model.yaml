@@ -21,7 +21,7 @@ classes:
       nbility: Klant
       tijdlijn_geldigheid: true
       tijdlijn_registratie: true
-    description: roluitoefening waarbij een (natuurlijk of niet-natuurlijk) persoon optreedt als houder van een specifieke aansluiting
+    description: hoedanigheid van een (natuurlijk of niet-natuurlijk) persoon als houder van een specifieke aansluiting
     related_mappings:
       - nbnl:aangeslotene
     comments:
