@@ -7,10 +7,6 @@ comments:
 version: 1.0.0-draft
 prefixes:
   nbnl: https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/
-  wiki: https://nl.wikipedia.org/wiki/
-  nen: https://www.nen.nl/
-  iso: https://www.iso.org/
-  wetten: "https://wetten.overheid.nl/jci1.3:c:"
   energiewet: https://wetten.overheid.nl/jci1.3:c:BWBR0050714&
   kvk: https://www.kvk.nl/
 default_prefix: https://netbeheernederland.nl/conceptueelinformatiemodel/aangeslotenenregister/
@@ -21,7 +17,6 @@ classes:
   Aangeslotene:
     annotations:
       nbility: Klant
-      tijdlijn_geldigheid: true
       tijdlijn_registratie: true
       tijdlijn_effectuering: true
     exact_mappings:
@@ -32,10 +27,8 @@ classes:
     attributes:
       e-mailadres:
         description: uniek adres voor digitaal, elektronisch postverkeer
-        source: wiki:E-mail
       geboortedatum:
         description: datum van geboorte van een persoon
-        source: nen:nen-1888-2002-nl-62341
         comments:
           - "Validatie: leeg bij 'onderneming of overige zakelijke eindafnemer'."
         range: date
@@ -44,23 +37,19 @@ classes:
         required: true
       roepnaam:
         description: naam waarmee iemand wil worden aangesproken
-        source: wiki:Voornaam#Roepnaam
         comments:
           - "Validatie: leeg bij 'onderneming of overige zakelijke eindafnemer'."
       telefoonnummer:
         description: uniek nummer dat toegekend wordt om een aansluiting op het publieke telefoonnet te identificeren, bestaande uit het plusteken, een landnummer, een netnummer en een abonneenummer
-        source: wiki:Telefoonnummer
       type:
         description: categorie waartoe de aangeslotene behoort
         range: Type aangeslotene
       voorvoegsel:
         description: verzameling van een of meer voorzetsels en/of lidwoorden die aan het significante deel van de achternaam vooraf gaat en daarmee gezamelijk de achternaam vormt
-        source: nen:nen-1888-2002-nl-62341
         comments:
           - "Validatie: leeg bij 'onderneming of overige zakelijke eindafnemer'."
       voorletters:
         description: verzameling letters die wordt gevormd door de eerste letter van alle in volgorde voorkomende voornamen
-        source: nen:nen-1888-2002-nl-62341
         comments:
           - "Validatie: leeg bij 'onderneming of overige zakelijke eindafnemer'."
           - NEN 1888 onderscheidt voorletters-n van voorletters-1. Bijvoorbeeld Theo Adriaan wordt afgekort als Th.Adr. (voorletters-n) en als TA (voorletters-1, zonder puntjes). Dit register hanteert voorletters-1.
@@ -91,7 +80,6 @@ classes:
   Correspondentieadres:
     annotations:
       nbility: Klant
-      tijdlijn_geldigheid: true
       tijdlijn_registratie: true
       tijdlijn_effectuering: true
     description: postadres waar een aangeslotene zijn correspondentie wil ontvangen anders dan het aansluitadres
@@ -100,27 +88,21 @@ classes:
     attributes:
       huisnummer:
         description: aan een verblijfsobject, standplaats of ligplaats toegekend nummer, een antwoordnummer of een postbusnummer
-        source: nen:nen-5825-2002-nl-83617
         required: true
         range: integer
       huisnummertoevoeging:
         description: aan een verblijfsobject, standplaats of ligplaats toegekende nadere toevoeging aan een huisnummer inclusief huisletter
-        source: nen:nen-5825-2002-nl-83617
       landcode:
         description: identificatie van een land met twee letters conform ISO 3166-1
-        source: iso:iso-3166-country-codes.html
         required: true
       postcode:
         description: reeks tekens die in een postadres wordt opgenomen om het automatisch sorteren van de post gemakkelijker te maken
-        source: nen:nen-5825-2002-nl-83617
         required: true
       straatnaam:
         description: naam om openbare ruimten zoals straten, lanen, wegen en stegen mee aan te duiden, of 'antwoordnummer' of 'postbus'
-        source: nen:nen-5825-2002-nl-83617
         required: true
       woonplaatsnaam:
         description: aanduiding van een gebied met bewoning zoals een stad of dorp
-        source: nen:nen-5825-2002-nl-83617
         required: true
       # relaties
       van:
