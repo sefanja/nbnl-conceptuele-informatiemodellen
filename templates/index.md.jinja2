@@ -22,7 +22,7 @@
 {%- endmacro -%}
 
 {%- macro anchor(name) -%}
-    <span id="{{ id_safe(name) }}">{{name}}</span>
+    <span id="{{ id_safe(name) }}">{{name|e}}</span>
 {%- endmacro -%}
 
 {%- macro range(name) -%}
