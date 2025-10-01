@@ -254,7 +254,6 @@ classes:
     attributes:
       nominaal schijnbaar vermogen:
         description: maximale totale vermogen dat de transformator onder normale bedrijfsomstandigheden kan verwerken zonder overbelasting
-        description: hoogste spanningsniveau van de regelschakelaar
         range: decimal
         unit:
           ucum_code: MVA
