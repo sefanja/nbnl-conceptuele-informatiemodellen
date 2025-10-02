@@ -159,6 +159,7 @@ classes:
       totale vermogen opwekkingseenheden:
         description: som van de vermogens van alle bij de elektriciteitsproductie-eenheid behorende opwekkingseenheden
         comments:
+          - Alhoewel artikel 13.1 van de Netcode elektriciteit het totale vermogen van de elektriciteitsproductie-installatie noemt, gaat dit register uit van het totale vermogen per elektriciteitsprodcutie-eenheid.
           - ⚠ Bij type A staat kW op het formulier, bij type B, C en D, MW. Is het oké om in het register enkel MW (of enkel kW) te hanteren?
         range: decimal
         unit:
@@ -204,6 +205,8 @@ classes:
     annotations:
       nbility: Installatie
     description: verzameling elektronische apparaten die de invoerspanning van een bepaalde spanning naar een andere spanning kunnen omvormen of elektrische energie in energie van een andere frequentie
+    comments:
+      - De ACM beschouwt een groep zonnepanelen achter één omvormer, samen met die omvormer als een elektriciteitsproductie-eenheid (ACM/18/033360). Aanmeldformulieren van netbeheerders staan echter meer omvormers per eenheid toe.
     slots:
       - fabrikant
       - typeaanduiding
@@ -219,6 +222,8 @@ classes:
     annotations:
       nbility: Installatie
     description: verzameling apparaten die elektrische energie opwekken
+    comments:
+      - Een zonnepaneel is een voorbeeld van een opwekkingseenheid.
     slots:
       - fabrikant
     attributes:
@@ -319,7 +324,8 @@ classes:
     annotations:
       nbility: Installatie
     description: configuratie van transformatoren bedoeld voor de gezamenlijke werking rondom een bepaald overdrachtspunt
-
+    comments:
+      - Alhoewel artikel 13.1 van de Netcode elektriciteit vraagt om de transformatorgegevens van de gehele installatie, gaat dit register uit van de transformatorgegevens bij het overdrachtspunt waarachter de installatie-eenheid zich bevindt.
     attributes:
       sterpuntsbehandeling:
         description: manier waarop de sterpunt (punt waarop de gemeenschappelijke nuldraad van de drie fasen wordt aangesloten) van de transformator wordt behandeld om aardfouten te beheersen
