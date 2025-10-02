@@ -427,7 +427,7 @@ enums:
   Type elektriciteitsinstallatie-eenheid:
     permissible_values:
       A:
-        description: overdrachtspunt beneden 110 kV en maximumcapaciteit minimaal 0,8 kW
+        description: overdrachtspunt beneden 110 kV en maximumcapaciteit minimaal 0,8 kW en beneden 1 MW
       B:
         description: overdrachtspunt beneden 110 kV en maximumcapaciteit minimaal 1 MW en beneden 50 MW
       C:
