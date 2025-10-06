@@ -226,6 +226,7 @@ classes:
       - Een zonnepaneel is een voorbeeld van een opwekkingseenheid.
     slots:
       - fabrikant
+      - typeaanduiding
     attributes:
       aantal opwekkingseenheden:
         description: hoeveelheid opwekkingseenheden in de groep
