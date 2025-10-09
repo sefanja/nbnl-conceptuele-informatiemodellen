@@ -164,6 +164,11 @@ classes:
         required: true
       x-coördinaat:
         description: oost-westpositie van een punt in het Rijksdriehoeksstelsel (RD)
+        # conventie voor 'range' bij getallen:
+        # string: niet-rekenkundige nummers (codes)
+        # integer: telbare dingen (aantallen)
+        # float: fysiek meetbare, continue waarden (afstand, vermogen)
+        # decimal: door mensen exact afgesproken waarden (geld, contractuele percentages)
         range: float
         unit:
           ucum_code: m
