@@ -5,7 +5,6 @@ description: Register met vastgestelde standaarden, richtlijnen en definities vo
 comments:
   - Dit register kan eventueel nog worden uitgebreid met meetcomponentconfiguratiebeleid met betrekking tot bijvoorbeeld firmwareversies en mobiele-netwerktechnologieën.
 version: 1.0.0-draft
-default_range: str
 prefixes:
   linkml: https://w3id.org/linkml/
   meetcomponentenregister: https://netbeheernederland.nl/conceptueelinformatiemodel/meetcomponentenregister/
@@ -64,18 +63,18 @@ classes:
         multivalued: true
       luchtdrukgecorrigeerd:
         description: aanduiding of de metingen door de meter worden gecorrigeerd voor luchtdruk
-        range: bool
+        range: boolean
         required: true
       metercode:
         description: unieke code die een type energiehoeveelheidsmeter aanduidt op basis van metrologische eigenschappen en fabrikant
         required: true
       op afstand uitleesbaar:
         description: kenmerk dat weergeeft of de meter voldoet aan het Besluit op afstand uitleesbare meetinrichtingen
-        range: bool
+        range: boolean
         required: true
       temperatuurgecorrigeerd:
         description: aanduiding of de metingen door de meter worden gecorrigeerd voor temperatuur
-        range: bool
+        range: boolean
         required: true
     unique_keys:
       identificatie:
@@ -91,7 +90,7 @@ classes:
     attributes:
       aantal posities voor de komma:
         description: maximaal aantal posities in het decimale talstelsel dat het telwerk kan bevatten
-        range: int
+        range: integer
       energierichting:
         exact_mappings:
           - nbnl:energierichting

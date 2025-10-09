@@ -5,11 +5,11 @@ title: Aansluitingenregister
 # Versienummer in pad op GitHub heeft gewoon de waarde van de beoogde versie, zonder '-draft'.
 version: 1.1.2
 description: Het aansluitingenregister bevat alle elektriciteits- en gasaansluitingen in Nederland.
-source: iceg:hoofdstuk=2&paragraaf=2.1&z=2025-01-01&g=2025-01-01
 comments:
   - Het aansluitingenregister wordt gezamenlijk beheerd door de netbeheerders en bevat zowel fysieke als administratieve gegevens over aansluitingen. Het register is essentieel voor de werking van de energiemarkt omdat het de basis vormt voor processen zoals leverancierswisselingen, verhuizingen en facturatie.
   - De verplichting tot het bijhouden van het aansluitingenregister is vastgelegd in de Informatiecode elektriciteit en gas, vastgesteld door de Autoriteit Consument en Markt (ACM).
 see_also:
+  - iceg:hoofdstuk=2&paragraaf=2.1&z=2025-01-01&g=2025-01-01
   - https://youtu.be/z7eVPSKf8l8
 annotations:
   nbility: C.6.2.1. Aansluitingen/allocatiepunten beheren
@@ -38,7 +38,7 @@ classes:
     annotations:
       # conventie: bij elke `class` de naam van een NBility-bedrijfsobject
       nbility: Aansluiting
-      # conventie: NEN 3610 tijdlijnen als `tijdlijn_geldigheid`, `tijdlijn_registratie` en `tijdlijn_levensduur`
+      # conventie: NEN 3610 tijdlijnen als `tijdlijn_geldigheid`, `tijdlijn_registratie` en `levensduur`
       tijdlijn_geldigheid: true
       tijdlijn_registratie: true
       tijdlijn_effectuering: true
@@ -164,12 +164,12 @@ classes:
         required: true
       x-coördinaat:
         description: oost-westpositie van een punt in het Rijksdriehoeksstelsel (RD)
-        range: integer
+        range: float
         unit:
           ucum_code: m
       y-coördinaat:
         description: noord-zuidpositie van een punt in het Rijksdriehoeksstelsel (RD)
-        range: integer
+        range: float
         unit:
           ucum_code: m
       # relaties
@@ -214,7 +214,7 @@ classes:
         range: boolean
       nominale waarde:
         description: hoeveelheid spanning of stroom waarvoor de aftakking is ontworpen, en die in combinatie met de waarde van de aftakking aan de andere zijde de overzetverhouding vormt
-        range: integer
+        range: float
         comments:
           - "Eenheid: volt (V) of ampère (A)."
       zijde:
@@ -398,11 +398,11 @@ classes:
         range: float
         unit:
           ucum_code: V.A
-      soort:
-        description: aanduiding van een verzameling meettransformatoren die een gemeenschappelijk karakter hebben
-        range: Soort meettransformator
       serienummer:
         description: code die door de fabrikant aan een exemplaar uit een reeks producten wordt gegeven
+      soort schakeling:
+        description: aanduiding van een verzameling schakelingen die een gemeenschappelijk karakter hebben
+        range: Soort schakeling
       typeaanduiding:
         description: naam die door een fabrikant aan een reeks producten met vergelijkbare eigenschappen wordt gegeven
       # relaties
@@ -508,7 +508,7 @@ classes:
         range: Any
         any_of:
           - range: Niet-numerieke aansluitcapaciteit
-          - range: integer
+          - range: float
       aansluitspanning of leveringsdruk:
         description: nominale spanning of druk op het overdrachtspunt
         comments:
@@ -715,7 +715,7 @@ classes:
     attributes:
       overbelastbaarheid:
         description: maximale continue belasting van de meettransformator die geen schade veroorzaakt, uitgedrukt als factor van de nominale belasting - 100%
-        range: integer
+        range: float
         unit:
           ucum_code: "%"
       overstroomfactor:
@@ -931,10 +931,6 @@ enums:
       anders:
       veiligheid:
       wanbetaling:
-  Soort meettransformator:
-    permissible_values:
-      spanningstransformator:
-      stroomtransformator:
   Soort meetzekering:
     permissible_values:
       onbekend:
@@ -944,6 +940,14 @@ enums:
       glaszekering:
       buiszekering:
       anders:
+  Soort schakeling:
+    permissible_values:
+      onbekend:
+      drieleider:
+      vierleider:
+      YY secundair geaard:
+      Yyd:
+      dzY:
   Transformatorzijde:
     permissible_values:
       primair:

@@ -29,7 +29,7 @@ classes:
         range: Onregelmatigheid
         required: true
       waarde:
-        range: decimal
+        range: float
         required: true
       eenheid:
         description: maat waarin een grootheid numeriek kan worden uitgedrukt
@@ -38,7 +38,7 @@ classes:
       afschakeltijd:
         description: tijd om iets buiten werking te stellen
         required: true
-        range: decimal
+        range: float
         unit:
           ucum_code: ms
       #relaties
@@ -92,7 +92,7 @@ classes:
         description: som van de vermogens van alle bij de elektriciteitinstallatie-eenheid behorende omvormers
         comments:
           - ⚠ Bij type A staat kW op het formulier, bij type B, C en D, MW. Is het oké om in het register enkel MW (of enkel kW) te hanteren?
-        range: decimal
+        range: float
         unit:
           ucum_code: MW
       kortsluitbijdrage:
@@ -116,7 +116,7 @@ classes:
     attributes:
       maximaal bruikbare hoeveelheid energie:
         description: hoeveelheid elektrische energie die maximaal in een elektriciteitsopslageenheid kan worden geïnjecteerd en daaruit kan worden onttrokken voor het energienet
-        range: decimal
+        range: float
         unit:
           ucum_code: kWh
         required: true
@@ -124,7 +124,7 @@ classes:
         description: maximaal continu werkzame vermogen dat een elektriciteitsopslageenheid kan verbruiken, als gespecificeerd in de aansluitovereenkomst of overeengekomen tussen de netbeheerder en de eigenaar van de elektriciteitsopslaginstallatie
         broad_mappings:
           - nbnl:maximumcapaciteit
-        range: decimal
+        range: float
         unit:
           ucum_code: kW
         required: true
@@ -132,7 +132,7 @@ classes:
         description: maximaal continu werkzame vermogen dat een elektriciteitsopslageenheid kan produceren, verminderd met de vraag die uitsluitend verband houdt met het bedrijf van die elektriciteitsopslageenheid zelf en die niet voor het energienet beschikbaar is, als gespecificeerd in de aansluitovereenkomst of overeengekomen tussen de netbeheerder en de eigenaar van de elektriciteitsopslaginstallatie
         broad_mappings:
           - nbnl:maximumcapaciteit
-        range: decimal
+        range: float
         unit:
           ucum_code: kW
         required: true
@@ -148,7 +148,7 @@ classes:
       maximumcapaciteit:
         exact_mappings:
           - nbnl:maximumcapaciteit
-        range: decimal
+        range: float
         required: true
       primaire energiebron:
         description: stof, object of natuurlijke plaats waaruit de meeste energie wordt gehaald
@@ -161,9 +161,19 @@ classes:
         comments:
           - Alhoewel artikel 13.1 van de Netcode elektriciteit het totale vermogen van de elektriciteitsproductie-installatie noemt, gaat dit register uit van het totale vermogen per elektriciteitsprodcutie-eenheid.
           - ⚠ Bij type A staat kW op het formulier, bij type B, C en D, MW. Is het oké om in het register enkel MW (of enkel kW) te hanteren?
-        range: decimal
+        range: float
         unit:
           ucum_code: MW
+      x-coördinaat:
+        description: oost-westpositie van een punt in het Rijksdriehoeksstelsel (RD)
+        range: float
+        unit:
+          ucum_code: m
+      y-coördinaat:
+        description: noord-zuidpositie van een punt in het Rijksdriehoeksstelsel (RD)
+        range: float
+        unit:
+          ucum_code: m
   GCvO-installatie:
     annotations:
       nbility: Installatie
@@ -221,9 +231,7 @@ classes:
   Groep van opwekkingseenheden:
     annotations:
       nbility: Installatie
-    description: verzameling apparaten die elektrische energie opwekken
-    comments:
-      - Een zonnepaneel is een voorbeeld van een opwekkingseenheid.
+    description: verzameling apparaten binnen één elektriciteitsproductie-eenheid die elektrische energie opwekken en identieke kenmerken delen
     slots:
       - fabrikant
       - typeaanduiding
@@ -238,14 +246,14 @@ classes:
         required: true
       nominaal vermogen per opwekkingseenheid:
         description: door de fabrikant aangegeven maximale vermogen bij continu gebruik waarbij een maximaal rendement wordt behaald
-        range: decimal
+        range: float
         unit:
           ucum_code: MVA
       subtransiënte reactantie:
         description: kortstondige reactantie direct na een plotselinge storing zoals een kortsluiting, uitgedrukt in het per-unit systeem
       nominale arbeidsfactor:
         description: verhouding tussen het werkelijke vermogen en het schijnbare vermogen onder nominale bedrijfsomstandigheden
-        range: decimal
+        range: float
       #relaties
       deel van:
         range: Elektriciteitsproductie-eenheid
@@ -253,6 +261,42 @@ classes:
         multivalued: false
         annotations:
           inverse_cardinality: "*"
+  Groep van windturbines:
+    is_a: Groep van opwekkingseenheden
+    description: verzameling van één of meer windturbines binnen één elektriciteitsproductie-eenheid die identieke kenmerken delen
+    attributes:
+      ashoogte:
+        description: verticale afstand in meters tot het middelpunt van de as waarop de wieken draaien
+        range: float
+        unit:
+          ucum_code: m
+      hoogtereferentie:
+        description: nulpunt van waaraf de ashoogte is gemeten
+        range: Hoogtereferentie
+      massatraagheidsmoment:
+        description: maat voor de weerstand van de draaiende onderdelen tegen een verandering in hun rotatiesnelheid
+        comments:
+          - Traagheid (inertia) helpt het energienet te stabiliseren.
+          - Dit betreft de fysieke vorm van traagheid, ter onderscheiding van de synthetische variant die door omvormers wordt geleverd.
+        range: float
+        unit:
+          ucum_code: kg.m2
+  Groep van zonnepanelen:
+    is_a: Groep van opwekkingseenheden
+    description: verzameling van één of meer zonnepanelen binnen één elektriciteitsproductie-eenheid die identieke kenmerken delen
+    attributes:
+      azimut:
+        description: horizontale hoek, gemeten met de klok mee vanaf het geografische noorden
+        comments:
+          - Bij een oost-westopstelling zijn er minimaal twee groepen, elk met een eigen azimut.
+        range: integer
+        unit:
+          ucum_code: deg
+      hellingshoek:
+        description: hoek ten opzichte van het horizontale vlak
+        range: integer
+        unit:
+          ucum_code: deg
   Soort transformator:
     annotations:
       nbility: Installatie
@@ -260,37 +304,37 @@ classes:
     attributes:
       nominaal schijnbaar vermogen:
         description: maximale totale vermogen dat de transformator onder normale bedrijfsomstandigheden kan verwerken zonder overbelasting
-        range: decimal
+        range: float
         unit:
           ucum_code: MVA
         required: true
       nominale spanning primair:
         description: standaardspanning waarvoor de transformator is ontworpen om optimaal te functioneren aan de primaire zijde
-        range: decimal
+        range: float
         unit:
           ucum_code: kV
         required: true
       nominale spanning secundair:
         description: standaardspanning waarvoor de transformator is ontworpen om optimaal te functioneren aan de secundaire zijde
-        range: decimal
+        range: float
         unit:
           ucum_code: kV
         required: true
       nominale kortsluitspanning:
         description: spanning die nodig is om de volledige nominale stroom door de transformator te laten vloeien bij een kortsluiting op de uitgang, wanneer er geen belasting is
-        range: integer
+        range: float
         unit:
           ucum_code: "%"
         required: true
       nominale koper- of kortsluitverliezen:
         description: warmteverliezen die optreden in de wikkelingen van de transformator wanneer deze onder nominale belasting werkt
-        range: decimal
+        range: float
         unit:
           ucum_code: kW
         required: true
       nominale ijzer- of nullastverliezen:
         description: verliezen in de transformator die optreden wanneer deze onder nominale spanning werkt, maar zonder belasting
-        range: decimal
+        range: float
         unit:
           ucum_code: kW
         required: true
@@ -301,17 +345,17 @@ classes:
         required: true
       hoogste trap:
         description: hoogste spanningsniveau van de regelschakelaar
-        range: decimal
+        range: float
         unit:
           ucum_code: kV
       laagste trap:
         description: laagste spanningsniveau van de regelschakelaar
-        range: decimal
+        range: float
         unit:
           ucum_code: kV
       stapgrootte:
         description: spanningsverschil tussen opeenvolgende standen van de regelschakelaar
-        range: decimal
+        range: float
         unit:
           ucum_code: kV
       #relaties
@@ -395,6 +439,12 @@ enums:
       combinatie:
       energienet:
       installatie:
+  Hoogtereferentie:
+    permissible_values:
+      maaiveld:
+        descriptipon: aardoppervlak inclusief bestrating en aardwerken zoals een talud of dijk, maar zonder vegetatie en bouwwerken zoals huizen en viaducten
+      NAP:
+        description: Normaal Amsterdams Pijl
   Onregelmatigheid:
     permissible_values:
       U<:
