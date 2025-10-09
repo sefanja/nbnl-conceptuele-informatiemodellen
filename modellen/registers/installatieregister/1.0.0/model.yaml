@@ -442,7 +442,7 @@ enums:
   Hoogtereferentie:
     permissible_values:
       maaiveld:
-        descriptipon: aardoppervlak inclusief bestrating en aardwerken zoals een talud of dijk, maar zonder vegetatie en bouwwerken zoals huizen en viaducten
+        description: aardoppervlak inclusief bestrating en aardwerken zoals een talud of dijk, maar zonder vegetatie en bouwwerken zoals huizen en viaducten
       NAP:
         description: Normaal Amsterdams Pijl
   Onregelmatigheid:
