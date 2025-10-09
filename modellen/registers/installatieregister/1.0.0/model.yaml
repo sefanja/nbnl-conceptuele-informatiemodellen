@@ -289,12 +289,12 @@ classes:
         description: horizontale hoek, gemeten met de klok mee vanaf het geografische noorden
         comments:
           - Bij een oost-westopstelling zijn er minimaal twee groepen, elk met een eigen azimut.
-        range: integer
+        range: float
         unit:
           ucum_code: deg
       hellingshoek:
         description: hoek ten opzichte van het horizontale vlak
-        range: integer
+        range: float
         unit:
           ucum_code: deg
   Soort transformator:
