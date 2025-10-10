@@ -288,7 +288,7 @@ classes:
       azimut:
         description: horizontale hoek, gemeten met de klok mee vanaf het geografische noorden
         comments:
-          - Alleen van toepassing als de azimut niet variabel is.
+          - "Validatie: leeg als de azimut variabel is."
           - Bij een oost-westopstelling zijn er minimaal twee groepen, elk met een eigen azimut.
         range: float
         unit:
@@ -296,14 +296,14 @@ classes:
       hellingshoek:
         description: hoek ten opzichte van het horizontale vlak
         comments:
-          - Alleen van toepassing als de hellingshoek niet variabel is.
+          - "Validatie: leeg als de hellingshoek variabel is."
         range: float
         unit:
           ucum_code: deg
       variabele azimut:
         description: geeft aan of de oriëntatie (azimut) van de panelen gedurende de dag verandert
         range: boolean
-      variable hellingshoek:
+      variabele hellingshoek:
         description: geeft aan of de hellingshoek van de panelen gedurende de dag of het seizoen verandert
         range: boolean
   Soort transformator:
