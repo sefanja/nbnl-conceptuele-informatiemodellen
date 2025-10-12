@@ -212,9 +212,6 @@ Deze website is in opbouw. Pagina's kunnen onvolledige of onjuiste informatie be
 </details>
 {% endif %}
 
-<script async src="https://talk.hyvor.com/embed/embed.js" type="module"></script>
-{{ '<hyvor-talk-comments website-id="14304" page-id="' ~ schema.name ~ '-' ~ schema.version ~ '"></hyvor-talk-comments>' }}
-
 {% for class in gen.all_class_objects() | sort(attribute=sort_by) %}
 {% if class.name != 'Any' and not class.annotations.external_registry %}
 
@@ -311,3 +308,9 @@ Specialisatie van {{link(schemaview.get_class(class.is_a).name)}}
 {% endif -%}
 
 {% endfor %}
+
+# Reacties
+{{ '{: .no_toc }' }}
+
+<script async src="https://talk.hyvor.com/embed/embed.js" type="module"></script>
+{{ '<hyvor-talk-comments website-id="14304" page-id="' ~ schema.name ~ '-' ~ schema.version ~ '"></hyvor-talk-comments>' }}
