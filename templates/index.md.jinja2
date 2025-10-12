@@ -92,13 +92,6 @@
 {% macro omschrijving(element) -%}
     {%- set parts = namespace(items=[]) -%}
 
-    {# NBility #}
-    {%- for a in element.annotations -%}
-        {%- if a == 'nbility' -%}
-            {%- set _ = parts.items.append('NBility: [' ~ element.annotations[a].value ~ '](https://nbility-model.github.io/NBility-business-capabilities-Archi/?view=id-8becf2d90261476faa9d53240e6cf2c8)') -%}
-        {%- endif -%}
-    {%- endfor -%}
-
     {# description #}
     {%- if element.description -%}
         {# source #}
@@ -175,6 +168,13 @@
         {%- set _ = parts.items.append('Tijdlijnen: ' ~ tijdlijn_annotaties|join(', ')) -%}
     {%- endif -%}
 
+    {# NBility #}
+    {%- for a in element.annotations -%}
+        {%- if a == 'nbility' -%}
+            {%- set _ = parts.items.append('NBility: [' ~ element.annotations[a].value ~ '](https://nbility-model.github.io/NBility-business-capabilities-Archi/?view=id-8becf2d90261476faa9d53240e6cf2c8)') -%}
+        {%- endif -%}
+    {%- endfor -%}
+
     {{ parts.items | join('<br/><br/>') }}
 {%- endmacro -%}
 
@@ -182,6 +182,9 @@
 title: "v{{ schema.version }}"
 parent: "{% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% endif %}"
 ---
+
+<script async src="https://talk.hyvor.com/embed/embed.js" type="module"></script>
+{{ '<hyvor-talk-comments website-id="14304" page-id="' ~ schame.name ~ '-' ~ schame.version ~ '"></hyvor-talk-comments>' }}
 
 {: .warning }
 Deze website is in opbouw. Pagina's kunnen onvolledige of onjuiste informatie bevatten.
