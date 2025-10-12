@@ -183,9 +183,6 @@ title: "v{{ schema.version }}"
 parent: "{% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% endif %}"
 ---
 
-<script async src="https://talk.hyvor.com/embed/embed.js" type="module"></script>
-{{ '<hyvor-talk-comments website-id="14304" page-id="' ~ schema.name ~ '-' ~ schema.version ~ '"></hyvor-talk-comments>' }}
-
 {: .warning }
 Deze website is in opbouw. Pagina's kunnen onvolledige of onjuiste informatie bevatten.
 
@@ -214,6 +211,9 @@ Deze website is in opbouw. Pagina's kunnen onvolledige of onjuiste informatie be
 <a href="https://sefanja.github.io/nbnl-conceptuele-informatiemodellen/wegwijs.html">Wegwijs in de modellen</a>
 </details>
 {% endif %}
+
+<script async src="https://talk.hyvor.com/embed/embed.js" type="module"></script>
+{{ '<hyvor-talk-comments website-id="14304" page-id="' ~ schema.name ~ '-' ~ schema.version ~ '"></hyvor-talk-comments>' }}
 
 {% for class in gen.all_class_objects() | sort(attribute=sort_by) %}
 {% if class.name != 'Any' and not class.annotations.external_registry %}
