@@ -1,7 +1,7 @@
 {%- macro key_symbol(class, slot) -%}
     {%- for key in class.unique_keys -%}
         {%- if slot.name in class.unique_keys[key].unique_key_slots -%}
-            <span title="Maakt deel uit van de identificatie">⚿</span>&nbsp;
+            <span title="Maakt deel uit van de identificatie">🔑</span>&nbsp;
         {%- endif -%}
     {%- endfor -%}
 {%- endmacro -%}
@@ -85,7 +85,11 @@
         {%- for m in mappings -%}
             {%- set _ = linked.append(gen.uri_link(m)) -%}
         {%- endfor -%}
-        {{- label ~ ': ' ~ linked | join(', ') -}}
+        {%- if type == 'exact' -%}
+            {{- '_' ~ linked | join(', ') ~ '_' -}}
+        {%- else -%}
+            {{- label ~ ': ' ~ linked | join(', ') -}}
+        {%- endif -%}
     {%- endif -%}
 {%- endmacro -%}
 
@@ -140,6 +144,11 @@
     {# comments #}
     {%- if element.comments -%}
         {%- set _ = parts.items.append(element.comments | join('<br/><br/>')) -%}
+    {%- endif -%}
+
+    {# specialization #}
+    {%- if element.is_a -%}
+        {%- set _ = parts.items.append('Specialisatie van ' ~ link(schemaview.get_class(element.is_a).name)) -%}
     {%- endif -%}
 
     {# see_also #}
@@ -217,10 +226,6 @@ Deze website is in opbouw. Pagina's kunnen onvolledige of onjuiste informatie be
 
 ## {{class.name}}
 
-{% if class.is_a %}
-Specialisatie van {{link(schemaview.get_class(class.is_a).name)}}
-{% endif %}
-
 {{omschrijving(class)}}
 
 {% set properties = [] %}
@@ -254,7 +259,7 @@ Specialisatie van {{link(schemaview.get_class(class.is_a).name)}}
 | Eigenschap | Waardespecificatie | Omschrijving |
 | :---  | :--- | :--- |
 {% for slot in properties -%}
-| {{key_symbol(class, slot)}}{{slot.name}} {{is_unique_key_slot}} | {{compute_range(slot)}}<br/>_{{gen.cardinality(slot)}}_ | {{omschrijving(slot)}} |
+| {{key_symbol(class, slot)}}{{slot.name}} {{is_unique_key_slot}} | {{compute_range(slot)}} \[{{gen.cardinality(slot)}}\] | {{omschrijving(slot)}} |
 {% endfor %}
 {% endif %}
 
@@ -265,7 +270,7 @@ Specialisatie van {{link(schemaview.get_class(class.is_a).name)}}
 | {{class.name}} is ... | Omschrijving |
 | :---  | :--- |
 {% for slot in relationships -%}
-| {{key_symbol(class, slot)}}{{slot.name}} {{compute_range(slot)}}<br/>_{% if slot.annotations.inverse_cardinality %}{{slot.annotations.inverse_cardinality.value }}{% endif %} → {{ gen.cardinality(slot) }}_ | {{omschrijving(slot)}} |
+| {{key_symbol(class, slot)}}{{slot.name}} {{compute_range(slot)}} \[{% if slot.annotations.inverse_cardinality %}{{slot.annotations.inverse_cardinality.value }}{% endif %} → {{ gen.cardinality(slot) }}\] | {{omschrijving(slot)}} |
 {% endfor %}
 {% endif %}
 
