@@ -186,7 +186,7 @@ parent: "{% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% en
 {: .warning }
 Deze website is in opbouw. Pagina's kunnen onvolledige of onjuiste informatie bevatten.
 
-# {% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% endif %}
+# {{ schema.title }}
 {{ '{: .no_toc }' }}
 
 {{ omschrijving(schema) }}
@@ -272,12 +272,9 @@ Specialisatie van {{link(schemaview.get_class(class.is_a).name)}}
 {% endif %}
 {% endfor %}
 
-# Waardesoorten en waardelijsten
-{{ '{: .no_toc }' }}
-
 {% for t in gen.all_type_objects() | sort(attribute=sort_by) -%}
 {% if loop.first %}
-### Waardesoorten
+## Waardesoorten
 {{ '{: .no_toc }' }}
 
 | Waardesoort | Omschrijving | Gebaseerd op | Patroon |
@@ -288,11 +285,11 @@ Specialisatie van {{link(schemaview.get_class(class.is_a).name)}}
 
 {% for e in gen.all_enum_objects() | sort(attribute=sort_by) %}
 {% if loop.first %}
-### Waardelijsten
+## Waardelijsten
 {{ '{: .no_toc }' }}
 {% endif %}
 
-#### {{anchor(e.name)}}
+### {{anchor(e.name)}}
 {{ '{: .no_toc }' }}
 
 {{omschrijving(e)}}
@@ -309,7 +306,7 @@ Specialisatie van {{link(schemaview.get_class(class.is_a).name)}}
 
 {% endfor %}
 
-# Reacties
+## Reacties
 {{ '{: .no_toc }' }}
 
 <script src="https://giscus.app/client.js"

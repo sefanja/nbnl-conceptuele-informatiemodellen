@@ -238,7 +238,7 @@ classes:
     attributes:
       aantal opwekkingseenheden:
         description: hoeveelheid opwekkingseenheden in de groep
-        range: int
+        range: integer
         required: true
       soort koppeling:
         description: manier waarop de opwekkingseenheden in de groep zijn gekoppeld met de rest van de installatie
