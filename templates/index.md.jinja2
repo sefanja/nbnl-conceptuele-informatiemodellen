@@ -21,8 +21,14 @@
     [{{ name }}](#{{ id_safe(name) }})
 {%- endmacro -%}
 
-{%- macro anchor(name) -%}
-    <span id="{{ id_safe(name) }}">{{name|e}}</span>
+{%- macro anchor(element) -%}
+    {%- if (element.class_uri) -%}
+        <span id="{{ element.class_uri }}">{{element.name|e}}</span>
+    {%- elif (element.slot_uri) -%}
+        <span id="{{ element.slot_uri }}">{{element.name|e}}</span>
+    {%- else -%}
+        <span id="{{ id_safe(element.name) }}">{{element.name|e}}</span>
+    {%- endif -%}
 {%- endmacro -%}
 
 {%- macro range(name) -%}
@@ -46,7 +52,11 @@
     {%- elif name in schemaview.all_classes() -%}
         {%- set class = schemaview.get_class(name) -%}
         {%- if class.annotations.external_registry -%}
-            {{ name }} ({{class.annotations.external_registry.value}})
+            {%- if class.class_uri -%}
+                gen.uri_link(class.class_uri)
+            {%- else -%}
+                {{name}} ({{class.annotations.external_registry.value}})
+            {%- endif -%}
         {%- else -%}
             {{ link(name) }}
         {%- endif -%}
@@ -282,7 +292,7 @@ parent: "{% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% en
 | Waardesoort | Omschrijving | Gebaseerd op | Patroon |
 | :--- | :--- | :--- | :--- |
 {% endif -%}
-| {{anchor(t.name)}} | {{omschrijving(t)}} | {% if t.typeof %}{{link(t.typeof)}}{% else %}{{range(t.base)}}{% endif %} | {% if t.pattern %}`{{t.pattern}}`{% endif %} |
+| {{anchor(t)}} | {{omschrijving(t)}} | {% if t.typeof %}{{link(t.typeof)}}{% else %}{{range(t.base)}}{% endif %} | {% if t.pattern %}`{{t.pattern}}`{% endif %} |
 {% endfor %}
 
 {% for e in gen.all_enum_objects() | sort(attribute=sort_by) %}
@@ -291,7 +301,7 @@ parent: "{% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% en
 {{ '{: .no_toc }' }}
 {% endif %}
 
-### {{anchor(e.name)}}
+### {{anchor(e)}}
 {{ '{: .no_toc }' }}
 
 {{omschrijving(e)}}
@@ -300,7 +310,7 @@ parent: "{% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% en
 | :--- | :--- |
 {% if e.permissible_values -%}
 {% for pv in e.permissible_values.values() | sort(attribute='text') -%}
-| {{anchor(pv.text)}} | {{omschrijving(pv)}} |
+| {{pv.text}} | {{omschrijving(pv)}} |
 {% endfor -%}
 {% else -%}
 | {{e.name}} | _dynamisch_ |  |
