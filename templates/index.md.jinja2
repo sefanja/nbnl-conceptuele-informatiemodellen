@@ -18,7 +18,7 @@
 {%- endmacro -%}
 
 {%- macro link(name) -%}
-    [{{ name }}](#{{ id_safe(name) }})
+    [{{name}}](#{{ id_safe(name) }})
 {%- endmacro -%}
 
 {%- macro anchor(element) -%}
@@ -53,15 +53,15 @@
         {%- set class = schemaview.get_class(name) -%}
         {%- if class.annotations.external_registry -%}
             {%- if class.class_uri -%}
-                {{gen.uri_link(class.class_uri)}}
+                [{{class.name}}]({{gen.uri(class.class_uri)}}) ({{class.annotations.external_registry.value}})
             {%- else -%}
                 {{name}} ({{class.annotations.external_registry.value}})
             {%- endif -%}
         {%- else -%}
-            {{ link(name) }}
+            {{link(name)}}
         {%- endif -%}
     {%- else -%}
-        {{ link(name) }}
+        {{link(name)}}
     {%- endif -%}
 {%- endmacro -%}
 

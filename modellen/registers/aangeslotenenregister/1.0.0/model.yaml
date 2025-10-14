@@ -17,7 +17,7 @@ annotations:
 
 classes:
   Aangeslotene:
-    class_uri: aangslotene
+    class_uri: Aangeslotene
     annotations:
       nbility: Klant
       tijdlijn_registratie: true
@@ -29,44 +29,44 @@ classes:
       - Persoonsgegevens zijn zo veel mogelijk overeenkomstig NEN 1888.
     attributes:
       e-mailadres:
-        slot_uri: aangeslotene.e-mailadres
+        slot_uri: Aangeslotene.e-mailadres
         description: uniek adres voor digitaal, elektronisch postverkeer
       geboortedatum:
-        slot_uri: aangeslotene.geboortedatum
+        slot_uri: Aangeslotene.geboortedatum
         description: datum van geboorte van een persoon
         comments:
           - "Validatie: leeg bij 'onderneming of overige zakelijke eindafnemer'."
         range: date
       naam:
-        slot_uri: aangeslotene.naam
+        slot_uri: Aangeslotene.naam
         description: statutaire naam van de niet-natuurlijke persoon of achternaam zonder tussenvoegsel van de natuurlijke persoon
         required: true
       roepnaam:
-        slot_uri: aangeslotene.roepnaam
+        slot_uri: Aangeslotene.roepnaam
         description: naam waarmee iemand wil worden aangesproken
         comments:
           - "Validatie: leeg bij 'onderneming of overige zakelijke eindafnemer'."
       telefoonnummer:
-        slot_uri: aangeslotene.telefoonnummer
+        slot_uri: Aangeslotene.telefoonnummer
         description: uniek nummer dat toegekend wordt om een aansluiting op het publieke telefoonnet te identificeren, bestaande uit het plusteken, een landnummer, een netnummer en een abonneenummer
       type:
-        slot_uri: aangeslotene.type
+        slot_uri: Aangeslotene.type
         description: categorie waartoe de aangeslotene behoort
         range: Type aangeslotene
       voorvoegsel:
-        slot_uri: aangeslotene.voorvoegsel
+        slot_uri: Aangeslotene.voorvoegsel
         description: verzameling van een of meer voorzetsels en/of lidwoorden die aan het significante deel van de achternaam vooraf gaat en daarmee gezamelijk de achternaam vormt
         comments:
           - "Validatie: leeg bij 'onderneming of overige zakelijke eindafnemer'."
       voorletters:
-        slot_uri: aangeslotene.voorletters
+        slot_uri: Aangeslotene.voorletters
         description: verzameling letters die wordt gevormd door de eerste letter van alle in volgorde voorkomende voornamen
         comments:
           - "Validatie: leeg bij 'onderneming of overige zakelijke eindafnemer'."
           - NEN 1888 onderscheidt voorletters-n van voorletters-1. Bijvoorbeeld Theo Adriaan wordt afgekort als Th.Adr. (voorletters-n) en als TA (voorletters-1, zonder puntjes). Dit register hanteert voorletters-1.
       # relaties
       houder van:
-        slot_uri: aangeslotene.houder-van
+        slot_uri: Aangeslotene.houder-van
         range: Aansluiting
         comments:
           - Een aangeslotene kan over meer dan één aansluiting beschikken. Dit register legt informatie over de aangeslotene per aansluiting vast.
@@ -75,7 +75,7 @@ classes:
         annotations:
           inverse_cardinality: 0..1
       rol van:
-        slot_uri: aangeslotene.rol-van
+        slot_uri: Aangeslotene.rol-van
         comments:
           - "Validatie: afwezig bij huishoudelijk eindafnemer."
         see_also:
@@ -90,7 +90,7 @@ classes:
         unique_key_slots:
         - houder van
   Correspondentieadres:
-    class_uri: correspondentieadres
+    class_uri: Correspondentieadres
     annotations:
       nbility: Klant
       tijdlijn_registratie: true
@@ -100,32 +100,32 @@ classes:
       - Adresgegevens zijn zo veel mogelijk overeenkomstig NEN 5825.
     attributes:
       huisnummer:
-        slot_uri: correspondentieadres.huisnummer
+        slot_uri: Correspondentieadres.huisnummer
         description: aan een verblijfsobject, standplaats of ligplaats toegekend nummer, een antwoordnummer of een postbusnummer
         required: true
         range: integer
       huisnummertoevoeging:
-        slot_uri: correspondentieadres.huisnummertoevoeging
+        slot_uri: Correspondentieadres.huisnummertoevoeging
         description: aan een verblijfsobject, standplaats of ligplaats toegekende nadere toevoeging aan een huisnummer inclusief huisletter
       landcode:
-        slot_uri: correspondentieadres.landcode
+        slot_uri: Correspondentieadres.landcode
         description: identificatie van een land met twee letters conform ISO 3166-1
         required: true
       postcode:
-        slot_uri: correspondentieadres.postcode
+        slot_uri: Correspondentieadres.postcode
         description: reeks tekens die in een postadres wordt opgenomen om het automatisch sorteren van de post gemakkelijker te maken
         required: true
       straatnaam:
-        slot_uri: correspondentieadres.straatnaam
+        slot_uri: Correspondentieadres.straatnaam
         description: naam om openbare ruimten zoals straten, lanen, wegen en stegen mee aan te duiden, of 'antwoordnummer' of 'postbus'
         required: true
       woonplaatsnaam:
-        slot_uri: correspondentieadres.woonplaatsnaam
+        slot_uri: Correspondentieadres.woonplaatsnaam
         description: aanduiding van een gebied met bewoning zoals een stad of dorp
         required: true
       # relaties
       van:
-        slot_uri: correspondentieadres.van
+        slot_uri: Correspondentieadres.van
         range: Aangeslotene
         required: true
         multivalued: false
@@ -137,7 +137,7 @@ classes:
         - van
   # extern
   Aansluiting:
-    class_uri: aansluitingenregister:aansluiting
+    class_uri: aansluitingenregister:Aansluiting
     annotations:
       external_registry: Aansluitingenregister
   Onderneming of maatschappelijke activiteit:
