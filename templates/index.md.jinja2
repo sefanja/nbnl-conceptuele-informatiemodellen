@@ -53,7 +53,7 @@
         {%- set class = schemaview.get_class(name) -%}
         {%- if class.annotations.external_registry -%}
             {%- if class.class_uri -%}
-                gen.uri_link(class.class_uri)
+                {{gen.uri_link(class.class_uri)}}
             {%- else -%}
                 {{name}} ({{class.annotations.external_registry.value}})
             {%- endif -%}
@@ -266,7 +266,7 @@ parent: "{% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% en
 | Eigenschap | Waardespecificatie | Omschrijving |
 | :---  | :--- | :--- |
 {% for slot in properties -%}
-| {{key_symbol(class, slot)}}{{slot.name}} {{is_unique_key_slot}} | {{compute_range(slot)}} \[{{gen.cardinality(slot)}}\] | {{omschrijving(slot)}} |
+| {{key_symbol(class, slot)}}{{anchor(slot)}} {{is_unique_key_slot}} | {{compute_range(slot)}} \[{{gen.cardinality(slot)}}\] | {{omschrijving(slot)}} |
 {% endfor %}
 {% endif %}
 
@@ -277,7 +277,7 @@ parent: "{% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% en
 | {{class.name}} is ... | Omschrijving |
 | :---  | :--- |
 {% for slot in relationships -%}
-| {{key_symbol(class, slot)}}{{slot.name}} {{compute_range(slot)}} \[{% if slot.annotations.inverse_cardinality %}{{slot.annotations.inverse_cardinality.value }}{% endif %} → {{ gen.cardinality(slot) }}\] | {{omschrijving(slot)}} |
+| {{key_symbol(class, slot)}}{{anchor(slot)}} {{compute_range(slot)}} \[{% if slot.annotations.inverse_cardinality %}{{slot.annotations.inverse_cardinality.value }}{% endif %} → {{ gen.cardinality(slot) }}\] | {{omschrijving(slot)}} |
 {% endfor %}
 {% endif %}
 
