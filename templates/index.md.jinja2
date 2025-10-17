@@ -28,7 +28,7 @@
     {%- set element = schemaview.get_element(name) -%}
     {%- if element.class_uri -%}
         {%- if element.annotations.external_registry -%}
-            {{gen.uri_link(element)}}
+            [{{element.name}}]({{gen.uri(element)}})
         {%- else -%}
             [{{name}}](#{{element.class_uri|replace('self:', '')}})
         {%- endif -%}
