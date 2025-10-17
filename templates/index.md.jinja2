@@ -13,7 +13,8 @@
 {%- endmacro -%}
 
 {%- macro id_safe(v) -%}
-{%- set allowed = 'abcdefghijklmnopqrstuvwxyz0123456789-' -%}
+    {%- set allowed = 'abcdefghijklmnopqrstuvwxyz0123456789-' -%}
+    local:
     {%- for c in v|lower -%}
         {%- if c in allowed -%}
             {{c}}
@@ -24,11 +25,24 @@
 {%- endmacro -%}
 
 {%- macro link(name) -%}
-    [{{name}}](#{{id_safe(name)}})
+    {%- set element = schemaview.get_element(name) -%}
+    {%- if element.class_uri -%}
+        {%- if element.annotations.external_registry -%}
+            {{gen.uri_link(element)}}
+        {%- else -%}
+            [{{name}}](#{{element.class_uri|replace('self:', '')}})
+        {%- endif -%}
+    {%- else -%}
+        [{{name}}](#{{id_safe(name)}})
+    {%- endif -%}
 {%- endmacro -%}
 
-{%- macro anchor(name) -%}
-    <span id="{{id_safe(name)}}"><span>
+{%- macro anchor(element) -%}
+    {%- if element.class_uri -%}
+        <span id="{{element.class_uri|replace('this:', '')}}"><span>
+    {%- else -%}
+        <span id="{{id_safe(name)}}"><span>
+    {%- endif -%}
 {%- endmacro -%}
 
 {%- macro range(name) -%}
@@ -52,9 +66,9 @@
     {%- elif name in schemaview.all_classes() -%}
         {%- set class = schemaview.get_class(name) -%}
         {%- if class.annotations.external_registry -%}
-            {{class.name}} ({{class.annotations.external_registry.value}})
+            {{name}} ({{class.annotations.external_registry.value}})
         {%- else -%}
-            {{link(class.name)}}
+            {{link(name)}}
         {%- endif -%}
     {%- else -%}
         {{link(name)}}
@@ -220,6 +234,7 @@ parent: "{{schema.title}}"
 {% for class in gen.all_class_objects() | sort(attribute=sort_by) %}
 {% if class.name != 'Any' and not class.annotations.external_registry %}
 
+{{anchor(class)}}
 ## {{class.name}}
 
 {{omschrijving(class)}}
@@ -255,7 +270,7 @@ parent: "{{schema.title}}"
 | :---  | :--- | :--- |
 | Eigenschap | Waardespecificatie | Omschrijving
 {% for slot in properties -%}
-| {{anchor(slot)}}{{key_symbol(class, slot)}}{{privacy_symbol(slot)}}{{slot.name}} | {{compute_range(slot)}} \[{{gen.cardinality(slot)}}\] | {{omschrijving(slot)}} |
+| {{key_symbol(class, slot)}}{{privacy_symbol(slot)}}{{slot.name}} | {{compute_range(slot)}} \[{{gen.cardinality(slot)}}\] | {{omschrijving(slot)}} |
 {% endfor %}
 {% endif %}
 
@@ -266,7 +281,7 @@ parent: "{{schema.title}}"
 | {{class.name}} is ... | Omschrijving
 | :---  | :--- |
 {% for slot in relationships -%}
-| {{anchor(slot)}}{{key_symbol(class, slot)}}{{slot.name}} {{compute_range(slot)}} \[{% if slot.annotations.inverse_cardinality %}{{slot.annotations.inverse_cardinality.value}}{% endif %} → {{gen.cardinality(slot)}}\] | {{omschrijving(slot)}} |
+| {{key_symbol(class, slot)}}{{slot.name}} {{compute_range(slot)}} \[{% if slot.annotations.inverse_cardinality %}{{slot.annotations.inverse_cardinality.value}}{% endif %} → {{gen.cardinality(slot)}}\] | {{omschrijving(slot)}} |
 {% endfor %}
 {% endif %}
 
@@ -290,7 +305,7 @@ parent: "{{schema.title}}"
 {{ '{: .no_toc }' }}
 {% endif %}
 
-{{anchor(e.name)}}
+{{anchor(e)}}
 ### {{e.name}}
 {{ '{: .no_toc }' }}
 
