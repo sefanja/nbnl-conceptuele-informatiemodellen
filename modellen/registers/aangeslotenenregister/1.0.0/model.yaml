@@ -6,10 +6,12 @@ comments:
   - De entiteiten in dit register hebben een tijdlijn registratie en effectuering. De tijdlijn effectuering is gelijk aan de tijdlijn registratie met een naar beneden afgerond tijdstip; voor elektriciteit naar 0:00 en voor gas naar 6:00 (zie artikel 2.1.8 van de Informatiecode elektriciteit en gas).
 version: 1.0.0-draft
 prefixes:
+  linkml: https://w3id.org/linkml/
+  begrip: https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/
   this: https://modellen.netbeheernederland.nl/aangeslotenenregister#
   aansluitingenregister: https://modellen.netbeheernederland.nl/aansluitingenregister#
-  begrip: https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/
   energiewet: https://wetten.overheid.nl/jci1.3:c:BWBR0050714&
+  hr: http://opendata.stelselcatalogus.nl/hr/id/begrip/
   kvk: https://www.kvk.nl/
 annotations:
   nbility: C.6.2.1. Aansluitingen/allocatiepunten beheren
@@ -123,6 +125,7 @@ classes:
     annotations:
       external_registry: Aansluitingenregister
   Onderneming of maatschappelijke activiteit:
+    class_uri: hr:maatschappelijke_activiteit
     annotations:
       external_registry: Handelsregister
 
