@@ -88,6 +88,27 @@ classes:
         source: celex:32016R0631
         range: Type elektriciteitsinstallatie-eenheid
         required: true
+      maximumcapaciteit voor afname:
+        description: maximaal continu werkzame vermogen dat een elektricitsinstallatie-eenheid kan verbruiken, als gespecificeerd in de aansluitovereenkomst of overeengekomen tussen de netbeheerder en de eigenaar van de installatie
+        comments:
+          - "Validatieregel: verplicht bij opslageenheid en laadeenheid. Verplicht leeg bij productie-eenheid."
+        broad_mappings:
+          - nbnl:maximumcapaciteit
+        range: float
+        unit:
+          ucum_code: kW
+      maximumcapaciteit voor invoeding:
+        description: maximaal continu werkzame vermogen dat een elektriciteitsinstallatie-eenheid kan produceren, verminderd met de vraag die uitsluitend verband houdt met het bedrijf van die eenheid zelf en die niet voor het energienet beschikbaar is, als gespecificeerd in de aansluitovereenkomst of overeengekomen tussen de netbeheerder en de eigenaar van de installatie
+        comments:
+          - "Validatieregel: verplicht bij productie-eenheid en opslageenheid."
+        broad_mappings:
+          - nbnl:maximumcapaciteit
+        range: float
+        unit:
+          ucum_code: kW
+      typeaanduiding:
+        description: naam die door een fabrikant aan een reeks producten met vergelijkbare eigenschappen wordt gegeven
+        required: true
       totale vermogen omvormers:
         description: som van de vermogens van alle bij de elektriciteitinstallatie-eenheid behorende omvormers
         comments:
@@ -108,6 +129,9 @@ classes:
       identificatie:
         unique_key_slots:
           - EAN-code
+  Elektriciteitslaadeenheid:
+    is_a: Elektriciteitsinstallatie-eenheid
+    description: ⚠ Het is nog niet duidelijk hoe laadpunten gegroepeerd moeten worden in laadeenheden. Dit heet namelijk direct effect op het type (A, B, C, D) en daarmee de aansluitvoorwaarden die gelden voor de aangeslotene. Niet elk laadplein bestaat uit laadpalen, denk aan bogen, muren, etc.
   Elektriciteitsopslageenheid:
     is_a: Elektriciteitsinstallatie-eenheid
     description: eenheid die actief vermogen vanuit het net kan afnemen en in het net kan injecteren door omzetting van elektrische energie in een vorm van energie die kan worden opgeslagen, de opslag van die energie en de daaropvolgende omzetting van die energie in elektrische energie
@@ -120,22 +144,6 @@ classes:
         unit:
           ucum_code: kWh
         required: true
-      maximumcapaciteit voor afname:
-        description: maximaal continu werkzame vermogen dat een elektriciteitsopslageenheid kan verbruiken, als gespecificeerd in de aansluitovereenkomst of overeengekomen tussen de netbeheerder en de eigenaar van de elektriciteitsopslaginstallatie
-        broad_mappings:
-          - nbnl:maximumcapaciteit
-        range: float
-        unit:
-          ucum_code: kW
-        required: true
-      maximumcapaciteit voor invoeding:
-        description: maximaal continu werkzame vermogen dat een elektriciteitsopslageenheid kan produceren, verminderd met de vraag die uitsluitend verband houdt met het bedrijf van die elektriciteitsopslageenheid zelf en die niet voor het energienet beschikbaar is, als gespecificeerd in de aansluitovereenkomst of overeengekomen tussen de netbeheerder en de eigenaar van de elektriciteitsopslaginstallatie
-        broad_mappings:
-          - nbnl:maximumcapaciteit
-        range: float
-        unit:
-          ucum_code: kW
-        required: true
       energieherkomst:
         description: aanduiding die aangeeft of de opgeslagen energie afkomstig is uit het energienet, die installatie of beide
         range: Energieherkomst
@@ -145,11 +153,6 @@ classes:
     exact_mappings:
       - nbnl:elektriciteitsproductie-eenheid
     attributes:
-      maximumcapaciteit:
-        exact_mappings:
-          - nbnl:maximumcapaciteit
-        range: float
-        required: true
       primaire energiebron:
         description: stof, object of natuurlijke plaats waaruit de meeste energie wordt gehaald
         see_also:
@@ -414,9 +417,6 @@ slots:
     required: true
   fabrikant:
     description: bedrijf dat industrieel goederen vervaardigt
-    required: true
-  typeaanduiding:
-    description: naam die door een fabrikant aan een reeks producten met vergelijkbare eigenschappen wordt gegeven
     required: true
 
 enums:
