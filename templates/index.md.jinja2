@@ -30,7 +30,7 @@
         {%- if element.annotations.external_registry -%}
             [{{element.name}}]({{gen.uri(element)}}) ({{element.annotations.external_registry.value}})
         {%- else -%}
-            [{{name}}](#{{element.class_uri|replace('self:', '')}})
+            [{{name}}](#{{element.class_uri|replace(schema.default_prefix ~ ':', '')}})
         {%- endif -%}
     {%- else -%}
         [{{name}}](#{{id_safe(name)}})
@@ -39,7 +39,7 @@
 
 {%- macro anchor(element) -%}
     {%- if element.class_uri -%}
-        <span id="{{element.class_uri|replace('this:', '')}}"><span>
+        <span id="{{element.class_uri|replace(schema.default_prefix ~ ':', '')}}"><span>
     {%- else -%}
         <span id="{{id_safe(element.name)}}"><span>
     {%- endif -%}

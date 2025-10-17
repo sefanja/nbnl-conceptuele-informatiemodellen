@@ -9,17 +9,20 @@ annotations:
   nbility: C.6.2.2. Installaties achter aansluitingen beheren
 prefixes:
   linkml: https://w3id.org/linkml/
-  nbnl: https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/
+  begrip: https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/
+  this: https://modellen.netbeheernederland.nl/installatieregister#
+  aansluitingenregister: https://modellen.netbeheernederland.nl/aansluitingenregister#
   celex: "https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:"
   nce: https://wetten.overheid.nl/jci1.3:c:BWBR0037940&
   iceg: https://wetten.overheid.nl/jci1.3:c:BWBR0037934&
   rgcvo: https://wetten.overheid.nl/jci1.3:c:BWBR0035971&
   bce: https://wetten.overheid.nl/jci1.3:c:BWBR0037938&
   rakveg: https://wetten.overheid.nl/jci1.3:c:BWBR0030164&
-default_prefix: https://netbeheernederland.nl/conceptueelinformatiemodel/installatieregister/
+default_prefix: this
 
 classes:
   Beveiligingsinstelling:
+    class_uri: this:Beveiligingsinstelling
     annotations:
       nbility: Installatie
     description: manier waarop wordt beschermd tegen storingen
@@ -54,6 +57,7 @@ classes:
           - bij
           - onregelmatigheid
   Conformiteitscertificaat:
+    class_uri: this:Conformiteitscertificaat
     annotations:
       nbility: Installatie
     description: door een erkende certificerende instantie verstrekt document voor apparatuur die wordt gebruikt door een elektriciteitsproductie-eenheid, verbruikseenheid, distributiesysteem, verbruikersinstallatie of HVDC-systeem
@@ -67,6 +71,7 @@ classes:
           - fabrikant
           - typeaanduiding
   Elektriciteitsinstallatie-eenheid:
+    class_uri: this:Elektriciteitsinstallatie-eenheid
     annotations:
       nbility: Installatie
       levensduur: true
@@ -75,7 +80,7 @@ classes:
     description: ondeelbaar geheel van elektrisch materieel en leidingen die samen elektrische energie kunnen verbruiken, opwekken of opslaan
     source: celex:32016R0631
     broad_mappings:
-      - nbnl:installatie
+      - begrip:installatie
     slots:
       - EAN-code
     slot_usage:
@@ -93,7 +98,7 @@ classes:
         comments:
           - "Validatieregel: verplicht bij opslageenheid en laadeenheid. Verplicht leeg bij productie-eenheid."
         broad_mappings:
-          - nbnl:maximumcapaciteit
+          - begrip:maximumcapaciteit
         range: float
         unit:
           ucum_code: kW
@@ -102,7 +107,7 @@ classes:
         comments:
           - "Validatieregel: verplicht bij productie-eenheid en opslageenheid."
         broad_mappings:
-          - nbnl:maximumcapaciteit
+          - begrip:maximumcapaciteit
         range: float
         unit:
           ucum_code: kW
@@ -130,15 +135,17 @@ classes:
         unique_key_slots:
           - EAN-code
   Elektriciteitslaadeenheid:
+    class_uri: this:Elektriciteitslaadeenheid
     is_a: Elektriciteitsinstallatie-eenheid
-    description: ⚠ Het is nog niet duidelijk hoe laadpunten gegroepeerd moeten worden in laadeenheden. Dit heet namelijk direct effect op het type (A, B, C, D) en daarmee de aansluitvoorwaarden die gelden voor de aangeslotene. Niet elk laadplein bestaat uit laadpalen, denk aan bogen, muren, etc.
+    description: ⚠ Het is nog niet duidelijk hoe laadpunten gegroepeerd moeten worden in laadeenheden. Dit heet namelijk direct effect op het type (A, B, C, D) en daarmee de aansluitvoorwaarden en verplichtingen die gelden voor de aangeslotene. Niet elke laadlocatie bestaat uit laadpalen, denk aan bogen, muren, etc.
     broad_mappings:
-      - nbnl:laadinstallatie
+      - begrip:laadinstallatie
   Elektriciteitsopslageenheid:
+    class_uri: this:Elektriciteitsopslageenheid
     is_a: Elektriciteitsinstallatie-eenheid
     description: eenheid die actief vermogen vanuit het net kan afnemen en in het net kan injecteren door omzetting van elektrische energie in een vorm van energie die kan worden opgeslagen, de opslag van die energie en de daaropvolgende omzetting van die energie in elektrische energie
     source: bge:z=2025-05-08&g=2025-05-08
-    broad_mappings: nbnl:opslaginstallatie
+    broad_mappings: begrip:opslaginstallatie
     attributes:
       maximaal bruikbare hoeveelheid energie:
         description: hoeveelheid elektrische energie die maximaal in een elektriciteitsopslageenheid kan worden geïnjecteerd en daaruit kan worden onttrokken voor het energienet
@@ -151,9 +158,10 @@ classes:
         range: Energieherkomst
         required: true
   Elektriciteitsproductie-eenheid:
+    class_uri: this:Elektriciteitsproductie-eenheid
     is_a: Elektriciteitsinstallatie-eenheid
     exact_mappings:
-      - nbnl:elektriciteitsproductie-eenheid
+      - begrip:elektriciteitsproductie-eenheid
     attributes:
       primaire energiebron:
         description: stof, object of natuurlijke plaats waaruit de meeste energie wordt gehaald
@@ -180,6 +188,7 @@ classes:
         unit:
           ucum_code: m
   GCvO-installatie:
+    class_uri: this:GCvO-installatie
     annotations:
       nbility: Installatie
       levensduur: true
@@ -194,7 +203,7 @@ classes:
     attributes:
       energiedrager:
         exact_mappings:
-          nbnl:energiedrager
+          begrip:energiedrager
         range: Energiedrager
         required: true
       hoogrenderende warmtekrachtkoppeling:
@@ -217,6 +226,7 @@ classes:
         unique_key_slots:
           - EAN-code
   Groep van omvormers:
+    class_uri: this:Groep-van-omvormers
     annotations:
       nbility: Installatie
     description: verzameling elektronische apparaten die de invoerspanning van een bepaalde spanning naar een andere spanning kunnen omvormen of elektrische energie in energie van een andere frequentie
@@ -234,6 +244,7 @@ classes:
         annotations:
           inverse_cardinality: "*"
   Groep van opwekkingseenheden:
+    class_uri: this:Groep-van-opwekkingseenheden
     annotations:
       nbility: Installatie
     description: verzameling apparaten binnen één elektriciteitsproductie-eenheid die elektrische energie opwekken en identieke kenmerken delen
@@ -267,6 +278,7 @@ classes:
         annotations:
           inverse_cardinality: "*"
   Groep van windturbines:
+    class_uri: this:Groep-van-windturbines
     is_a: Groep van opwekkingseenheden
     description: verzameling van één of meer windturbines binnen één elektriciteitsproductie-eenheid die identieke kenmerken delen
     attributes:
@@ -287,6 +299,7 @@ classes:
         unit:
           ucum_code: kg.m2
   Groep van zonnepanelen:
+    class_uri: this:Groep-van-zonnepanelen
     is_a: Groep van opwekkingseenheden
     description: verzameling van één of meer zonnepanelen binnen één elektriciteitsproductie-eenheid die identieke kenmerken delen
     attributes:
@@ -312,6 +325,7 @@ classes:
         description: geeft aan of de hellingshoek van de panelen gedurende de dag of het seizoen verandert
         range: boolean
   Soort transformator:
+    class_uri: this:Soort-transformator
     annotations:
       nbility: Installatie
     description: verzameling transformatoren die een gemeenschappelijk karakter hebben
@@ -380,6 +394,7 @@ classes:
         annotations:
           inverse_cardinality: "*"
   Transformatoropstelling:
+    class_uri: this:Transformatoropstelling
     annotations:
       nbility: Installatie
     description: configuratie van transformatoren bedoeld voor de gezamenlijke werking rondom een bepaald overdrachtspunt
@@ -406,9 +421,11 @@ classes:
           - bij
   #extern:
   Allocatiepunt bij aansluiting:
+    class_uri: aansluitingenregister:Allocatiepunt-bij-aansluiting
     annotations:
       external_registry: Aansluitingenregister
   Overdrachtspunt:
+    class_uri: aansluitingenregister:Overdrachtspunt
     annotations:
       external_registry: Aansluitingenregister
 

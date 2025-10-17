@@ -1,4 +1,4 @@
-id: https://netbeheernederland.nl/conceptueelinformatiemodel/meetcomponentenregister
+id: https://modellen.netbeheernederland.nl/meetcomponentenregister
 name: meetcomponentenregister
 title: Meetcomponentenregister
 description: Register met gegevens over meters en meetgateways die worden beheerd door Nederlandse netbeheerders.
@@ -10,12 +10,17 @@ comments:
 version: 1.0.0-draft
 prefixes:
   linkml: https://w3id.org/linkml/
-  nbnl: https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/
+  begrip: https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/
+  this: https://modellen.netbeheernederland.nl/meetcomponentenregister#
+  aansluitingenregister: https://modellen.netbeheernederland.nl/aansluitingenregister#
+  installatieregister: https://modellen.netbeheernederland.nl/installatieregister#
+  marktpartijenregister: https://modellen.netbeheernederland.nl/marktpartijenregister#
+  meetcomponentstandaardenregister: https://modellen.netbeheernederland.nl/meetcomponentstandaardenregister#
   nbnlpub: https://www.netbeheernederland.nl/publicatie/
   wetten: "https://wetten.overheid.nl/jci1.3:c:"
   energiewet: https://wetten.overheid.nl/jci1.3:c:BWBR0050714&
   iceg: https://wetten.overheid.nl/jci1.3:c:BWBR0037934&
-default_prefix: https://netbeheernederland.nl/conceptueelinformatiemodel/meetcomponentenregister/
+default_prefix: this
 annotations:
   nbility: C.3.1.9. Netcomponent in levenscyclusbeheer opnemen
 
@@ -23,6 +28,7 @@ classes:
   Any:
     class_uri: linkml:Any
   Gatewayadapter:
+    class_uri: this:Gatewayadapter
     description: apparaat bedoeld om een meetgateway te voorzien van voeding en gebruikersinterface
     annotations:
       nbility: Netcomponent
@@ -43,6 +49,7 @@ classes:
         unique_key_slots:
         - identificatie
   Meetcomponent:
+    class_uri: this:Meetcomponent
     description: apparaat dat energie-uitwisseling meet of deze meting op afstand uitleesbaar maakt
     annotations:
       nbility: Netcomponent
@@ -63,13 +70,6 @@ classes:
       generatie:
         description: classificatie op basis van technische mogelijkheden
         range: integer
-      # TODO: verplaatsen naar ander register:
-      # hostnaam:
-      #   description: tekstuele aanduiding van een apparaat, bedoeld voor identificatie binnen computernetwerken
-      # IMEI:
-      #   description: unieke identificatiecode van een mobiel apparaat volgens de 3GPP-standaard voor apparaatidentificatie
-      # simkaartnummer:
-      #   description: unieke identificatiecode van de simfunctionaliteit volgens de 3GPP-standaarden voor ICCID of EID
       lokaal communicatieprofiel:
         description: wijze van gegevensuitwisseling tussen meetcomponenten binnen dezelfde locatie
         range: Lokaal communicatieprofiel
@@ -99,6 +99,7 @@ classes:
         annotations:
           inverse_cardinality: "*"
   Meetgateway:
+    class_uri: this:Meetgateway
     description: apparaat bedoeld om meters op afstand uitleesbaar te maken, zonder zelf energie-uitwisseling te meten
     is_a: Meetcomponent
     attributes:
@@ -117,6 +118,7 @@ classes:
         unique_key_slots:
         - gatewaynummer
   Meter:
+    class_uri: this:Meter
     description: apparaat bedoeld om energie-uitwisseling te meten ten behoeve van de verrekening
     source: energiewet:z=2025-02-22&g=2025-02-22
     is_a: Meetcomponent
@@ -189,6 +191,7 @@ classes:
         unique_key_slots:
         - meternummer
   Telwerk met cijferaanduiding:
+    class_uri: this:Telwerk-met-cijferaanduiding
     annotations:
       nbility: Netcomponent
     description: onderdeel van een meter dat een hoeveelheid energie registreert, met een aanduiding die niet rechtstreeks verwijst naar de betekenis of functie van het telwerk
@@ -217,27 +220,33 @@ classes:
         unique_key_slots:
         - aanduiding
         - deel van
-
   # extern:
   Aansluiting:
+    class_uri: aansluitingenregister:Aansluiting
     annotations:
       external_registry: Aansluitingenregister
   Allocatiepunt bij aansluiting:
+    class_uri: aansluitingenregister:Allocatiepunt-bij-aansluiting
     annotations:
       external_registry: Aansluitingenregister
   Gatewaycodering:
+    class_uri: meetcomponentstandaardenregister:Gatewaycodering
     annotations:
       external_registry: Meetcomponentstandaardenregister
   GCvO-installatie:
+    class_uri: installatieregister:GCvO-installatie
     annotations:
       external_registry: Installatieregister
   Marktpartijregistratie:
+    class_uri: marktpartijenregister:Marktpartijregistratie
     annotations:
       external_registry: Marktpartijenregister
   Metercodering:
+    class_uri: meetcomponentstandaardenregister:Metercodering
     annotations:
       external_registry: Meetcomponentstandaardenregister
   Telwerkdefinitie:
+    class_uri: meetcomponentstandaardenregister:Telwerkdefinitie
     annotations:
       external_registry: Meetcomponentstandaardenregister
 

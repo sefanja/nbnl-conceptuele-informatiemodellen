@@ -13,6 +13,7 @@ prefixes:
   energiewet: https://wetten.overheid.nl/jci1.3:c:BWBR0050714&
   hr: http://opendata.stelselcatalogus.nl/hr/id/begrip/
   kvk: https://www.kvk.nl/
+default_prefix: this
 annotations:
   nbility: C.6.2.1. Aansluitingen/allocatiepunten beheren
 
