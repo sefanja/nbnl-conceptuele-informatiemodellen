@@ -13,8 +13,8 @@
 {%- endmacro -%}
 
 {%- macro id_safe(v) -%}
-{%- set allowed = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_:.' -%}
-    {%- for c in v -%}
+{%- set allowed = 'abcdefghijklmnopqrstuvwxyz0123456789-' -%}
+    {%- for c in v|lower -%}
         {%- if c in allowed -%}
             {{c}}
         {%- else -%}
@@ -187,7 +187,7 @@
         {%- for s in element.see_also -%}
             {%- set _ = linked.append(gen.uri_link(s)) -%}
         {%- endfor -%}
-        {%- set _ = parts.items.append('<details>\n<summary>Zie ook</summary>\n* ' ~ linked | join('\n* ') ~ '\n</details>') -%}
+        {%- set _ = parts.items.append('<details><summary>Zie ook</summary>\n* ' ~ linked | join('\n* ') ~ '\n</details>') -%}
     {%- endif -%}
 
     {{parts.items | join('<br/><br/>')}}
@@ -290,8 +290,8 @@ parent: "{{schema.title}}"
 {{ '{: .no_toc }' }}
 {% endif %}
 
-{{anchor(e)}}
-### {{e}}
+{{anchor(e.name)}}
+### {{e.name}}
 {{ '{: .no_toc }' }}
 
 {{omschrijving(e)}}
