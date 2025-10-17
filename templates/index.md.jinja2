@@ -53,7 +53,7 @@
     {%- elif name in schemaview.all_classes() -%}
         {%- set class = schemaview.get_class(name) -%}
         {%- if class.annotations.external_registry -%}
-            class.name ({{class.annotations.external_registry.value}})
+            {{class.name}} ({{class.annotations.external_registry.value}})
         {%- else -%}
             {{link(class.name)}}
         {%- endif -%}
@@ -253,10 +253,11 @@ parent: "{{schema.title}}"
 {% if properties %}
 ### Eigenschappen
 {{ '{: .no_toc }' }}
+
 | :---  | :--- | :--- |
 | Eigenschap | Waardespecificatie | Omschrijving
 {% for slot in properties -%}
-| {{anchor(slot)}}{{key_symbol(class, slot)}}{{privacy_symbol(slot)}}{{slot.name}} | {{compute_range(slot)}} \[{{gen.cardinality(slot)}}\] | {{omschrijving(slot)}}
+| {{anchor(slot)}}{{key_symbol(class, slot)}}{{privacy_symbol(slot)}}{{slot.name}} | {{compute_range(slot)}} \[{{gen.cardinality(slot)}}\] | {{omschrijving(slot)}} |
 {% endfor %}
 {% endif %}
 
@@ -267,7 +268,7 @@ parent: "{{schema.title}}"
 | {{class.name}} is ... | Omschrijving
 | :---  | :--- |
 {% for slot in relationships -%}
-| {{anchor(slot)}}{{key_symbol(class, slot)}}{{slot.name}} {{compute_range(slot)}} \[{% if slot.annotations.inverse_cardinality %}{{slot.annotations.inverse_cardinality.value}}{% endif %} → {{gen.cardinality(slot)}}\] | {{omschrijving(slot)}}
+| {{anchor(slot)}}{{key_symbol(class, slot)}}{{slot.name}} {{compute_range(slot)}} \[{% if slot.annotations.inverse_cardinality %}{{slot.annotations.inverse_cardinality.value}}{% endif %} → {{gen.cardinality(slot)}}\] | {{omschrijving(slot)}} |
 {% endfor %}
 {% endif %}
 
@@ -282,7 +283,7 @@ parent: "{{schema.title}}"
 | Waardesoort | Omschrijving | Gebaseerd op | Patroon |
 | :--- | :--- | :--- | :--- |
 {% endif -%}
-| {{anchor(t)}}{{t.name}} | {{omschrijving(t)}} | {% if t.typeof %}{{link(t.typeof)}}{% else %}{{range(t.base)}}{% endif %} | {% if t.pattern %}`{{t.pattern}}`{% endif %}
+| {{anchor(t)}}{{t.name}} | {{omschrijving(t)}} | {% if t.typeof %}{{link(t.typeof)}}{% else %}{{range(t.base)}}{% endif %} | {% if t.pattern %}`{{t.pattern}}`{% endif %} |
 {% endfor %}
 
 {% for e in gen.all_enum_objects() | sort(attribute=sort_by) %}
@@ -301,10 +302,10 @@ parent: "{{schema.title}}"
 | :--- | :--- |
 {% if e.permissible_values -%}
 {% for pv in e.permissible_values.values() | sort(attribute='text') -%}
-| {{pv.text}} | {{omschrijving(pv)}}
+| {{pv.text}} | {{omschrijving(pv)}} |
 {% endfor -%}
 {% else -%}
-| {{e.name}} | _dynamisch_
+| {{e.name}} | _dynamisch_ |
 {% endif -%}
 
 {% endfor %}
