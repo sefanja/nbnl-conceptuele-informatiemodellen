@@ -418,6 +418,9 @@ slots:
   fabrikant:
     description: bedrijf dat industrieel goederen vervaardigt
     required: true
+  typeaanduiding:
+    description: naam die door een fabrikant aan een reeks producten met vergelijkbare eigenschappen wordt gegeven
+    required: true
 
 enums:
   Eenheid onregelmatigheid:
