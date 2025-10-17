@@ -187,7 +187,7 @@
         {%- for s in element.see_also -%}
             {%- set _ = linked.append(gen.uri_link(s)) -%}
         {%- endfor -%}
-        {%- set _ = parts.items.append('<details><summary>Zie ook</summary>'|safe ~'\n* ' ~ linked | join('\n* ') ~ '\n' ~ '</details>|safe') -%}
+        {%- set _ = parts.items.append('Zie ook: ' ~ linked | join(', ')) -%}
     {%- endif -%}
 
     {{parts.items | join('<br/><br/>')}}
