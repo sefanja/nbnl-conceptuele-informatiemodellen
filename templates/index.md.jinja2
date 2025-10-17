@@ -1,10 +1,15 @@
-{%- macro uri_link(element) -%}
+{%- macro link(element) -%}
     {%- if element is string -%}
         [{{element}}]({{schemaview.expand_curie(element)}})
-    {%- elif element.name -%}
-        [{{element.name}}]({{gen.uri(element)}})
+    {%- elif element.class_uri -%}
+        {%- if element.annotations.external_registry -%}
+            [{{element.name}}]({{gen.uri(element)}}) ({{element.annotations.external_registry.value}})
+        {%- else -%}
+            [{{name}}](#{{element.class_uri|replace(schema.default_prefix ~ ':', '')}})
+        {%- endif -%}
     {%- else -%}
-        [{{gen.uri(element, false)}}]({{gen.uri(element)}})
+        {#- [{{element.name|default(gen.uri(element, false))}}]({{gen.uri(element)}}) -#}
+        [{{element.name}}]
     {%- endif -%}
 {%- endmacro -%}
 
@@ -23,7 +28,7 @@
 {%- endmacro -%}
 
 {%- macro id_safe(v) -%}
-    {%- set allowed = 'abcdefghijklmnopqrstuvwxyz0123456789-' -%}
+    {%- set allowed = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_:.' -%}
     local: {#- prefix moet botsingen met URI-gebaseerde HTML-ankers voorkomen -#}
     {%- for c in v|lower -%}
         {%- if c in allowed -%}
@@ -32,19 +37,6 @@
             -
         {%- endif -%}
     {%- endfor -%}
-{%- endmacro -%}
-
-{%- macro link(name) -%}
-    {%- set element = schemaview.get_element(name) -%}
-    {%- if element.class_uri -%}
-        {%- if element.annotations.external_registry -%}
-            [{{element.name}}]({{gen.uri(element)}}) ({{element.annotations.external_registry.value}})
-        {%- else -%}
-            [{{name}}](#{{element.class_uri|replace(schema.default_prefix ~ ':', '')}})
-        {%- endif -%}
-    {%- else -%}
-        [{{name}}](#{{id_safe(name)}})
-    {%- endif -%}
 {%- endmacro -%}
 
 {%- macro anchor(element) -%}
@@ -74,7 +66,7 @@
     {%- if name in base_types -%}
         {{base_types[name]}}
     {%- else -%}
-        {{link(name)}}
+        {{link(schemaview.get_element(name))}}
     {%- endif -%}
 {%- endmacro -%}
 
@@ -106,7 +98,7 @@
     {%- if mappings -%}
         {%- set linked = [] -%}
         {%- for m in mappings -%}
-            {%- set _ = linked.append(uri_link(m)) -%}
+            {%- set _ = linked.append(link(m)) -%}
         {%- endfor -%}
         {%- if type == 'exact' -%}
             {{- '_' ~ linked | join(', ') ~ '_' -}}
@@ -123,7 +115,7 @@
     {%- if element.description -%}
         {# source #}
         {%- if element.source -%}
-            {%- set _ = parts.items.append('_' ~ element.description ~ '_' ~ ' (zie ' ~ uri_link(element.source) ~ ')') -%}
+            {%- set _ = parts.items.append('_' ~ element.description ~ '_' ~ ' (zie ' ~ link(element.source) ~ ')') -%}
         {%- else -%}
             {%- set _ = parts.items.append('_' ~ element.description ~ '_') -%}
         {%- endif -%}
@@ -131,7 +123,7 @@
 
     {# meaning #}
     {%- if element.meaning -%}
-        {%- set _ = parts.items.append('_' ~ uri_link(element.meaning) ~ '_') -%}
+        {%- set _ = parts.items.append('_' ~ link(element.meaning) ~ '_') -%}
     {%- endif -%}
 
     {# exact_mappings #}
@@ -166,7 +158,7 @@
 
     {# specialization #}
     {%- if element.is_a -%}
-        {%- set _ = parts.items.append('Specialisatie van ' ~ uri_link(schemaview.get_class(element.is_a))) -%}
+        {%- set _ = parts.items.append('Specialisatie van ' ~ link(schemaview.get_element(element.is_a))) -%}
     {%- endif -%}
 
     {# comments #}
@@ -202,7 +194,7 @@
     {%- if element.see_also -%}
         {%- set linked = [] -%}
         {%- for s in element.see_also -%}
-            {%- set _ = linked.append(uri_link(s)) -%}
+            {%- set _ = linked.append(link(s)) -%}
         {%- endfor -%}
         {%- set _ = parts.items.append('Zie ook: ' ~ linked | join(', ')) -%}
     {%- endif -%}
@@ -299,7 +291,7 @@ parent: "{{schema.title}}"
 | Waardesoort | Omschrijving | Gebaseerd op | Patroon |
 | :--- | :--- | :--- | :--- |
 {% endif -%}
-| {{anchor(t)}}{{t.name}} | {{omschrijving(t)}} | {% if t.typeof %}{{link(t.typeof)}}{% else %}{{range(t.base)}}{% endif %} | {% if t.pattern %}`{{t.pattern}}`{% endif %} |
+| {{anchor(t)}}{{t.name}} | {{omschrijving(t)}} | {% if t.typeof %}{{link(schemaview.get_element(t.typeof))}}{% else %}{{range(t.base)}}{% endif %} | {% if t.pattern %}`{{t.pattern}}`{% endif %} |
 {% endfor %}
 
 {% for e in gen.all_enum_objects() | sort(attribute=sort_by) %}
