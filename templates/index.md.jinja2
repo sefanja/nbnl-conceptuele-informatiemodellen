@@ -14,7 +14,7 @@
 
 {%- macro id_safe(v) -%}
     {%- set allowed = 'abcdefghijklmnopqrstuvwxyz0123456789-' -%}
-    local:
+    local: {#- prefix moet botsingen met URI-gebaseerde HTML-ankers voorkomen -#}
     {%- for c in v|lower -%}
         {%- if c in allowed -%}
             {{c}}
@@ -28,7 +28,7 @@
     {%- set element = schemaview.get_element(name) -%}
     {%- if element.class_uri -%}
         {%- if element.annotations.external_registry -%}
-            [{{element.name}}]({{gen.uri(element)}})
+            [{{element.name}}]({{gen.uri(element)}}) ({{class.annotations.external_registry.value}})
         {%- else -%}
             [{{name}}](#{{element.class_uri|replace('self:', '')}})
         {%- endif -%}
@@ -63,13 +63,6 @@
         'ncname': 'prefixnaam' } -%}
     {%- if name in base_types -%}
         {{base_types[name]}}
-    {%- elif name in schemaview.all_classes() -%}
-        {%- set class = schemaview.get_class(name) -%}
-        {%- if class.annotations.external_registry -%}
-            {{gen.uri_link(class)}} ({{class.annotations.external_registry.value}})
-        {%- else -%}
-            {{link(name)}}
-        {%- endif -%}
     {%- else -%}
         {{link(name)}}
     {%- endif -%}
