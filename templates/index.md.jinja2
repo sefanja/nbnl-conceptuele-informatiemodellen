@@ -1,3 +1,13 @@
+{%- macro uri_link(element) -%}
+    {%- if element is string -%}
+        [{{element}}]({{schemaview.expand_curie(element)}})
+    {%- elif element.name -%}
+        [{{element.name}}]({{gen.uri(element)}})
+    {%- else -%}
+        [{{gen.uri(element, false)}}]({{gen.uri(element)}})
+    {%- endif -%}
+{%- endmacro -%}
+
 {%- macro key_symbol(class, slot) -%}
     {%- for key in class.unique_keys -%}
         {%- if slot.name in class.unique_keys[key].unique_key_slots -%}
@@ -96,7 +106,7 @@
     {%- if mappings -%}
         {%- set linked = [] -%}
         {%- for m in mappings -%}
-            {%- set _ = linked.append(gen.uri_link(m)) -%}
+            {%- set _ = linked.append(uri_link(m)) -%}
         {%- endfor -%}
         {%- if type == 'exact' -%}
             {{- '_' ~ linked | join(', ') ~ '_' -}}
@@ -113,7 +123,7 @@
     {%- if element.description -%}
         {# source #}
         {%- if element.source -%}
-            {%- set _ = parts.items.append('_' ~ element.description ~ '_' ~ ' (zie ' ~ gen.uri_link(element.source) ~ ')') -%}
+            {%- set _ = parts.items.append('_' ~ element.description ~ '_' ~ ' (zie ' ~ uri_link(element.source) ~ ')') -%}
         {%- else -%}
             {%- set _ = parts.items.append('_' ~ element.description ~ '_') -%}
         {%- endif -%}
@@ -121,7 +131,7 @@
 
     {# meaning #}
     {%- if element.meaning -%}
-        {%- set _ = parts.items.append('_' ~ gen.uri_link(element.meaning) ~ '_') -%}
+        {%- set _ = parts.items.append('_' ~ uri_link(element.meaning) ~ '_') -%}
     {%- endif -%}
 
     {# exact_mappings #}
@@ -156,7 +166,7 @@
 
     {# specialization #}
     {%- if element.is_a -%}
-        {%- set _ = parts.items.append('Specialisatie van ' ~ gen.uri_link(schemaview.get_class(element.is_a))) -%}
+        {%- set _ = parts.items.append('Specialisatie van ' ~ uri_link(schemaview.get_class(element.is_a))) -%}
     {%- endif -%}
 
     {# comments #}
@@ -192,7 +202,7 @@
     {%- if element.see_also -%}
         {%- set linked = [] -%}
         {%- for s in element.see_also -%}
-            {%- set _ = linked.append(gen.uri_link(s)) -%}
+            {%- set _ = linked.append(uri_link(s)) -%}
         {%- endfor -%}
         {%- set _ = parts.items.append('Zie ook: ' ~ linked | join(', ')) -%}
     {%- endif -%}
