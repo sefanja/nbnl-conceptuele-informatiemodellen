@@ -5,7 +5,7 @@
         {%- if element.annotations.external_registry -%}
             [{{element.name}}]({{gen.uri(element)}}) ({{element.annotations.external_registry.value}})
         {%- else -%}
-            [{{name}}](#{{element.class_uri|replace(schema.default_prefix ~ ':', '')}})
+            [{{element.name}}](#{{element.class_uri|replace(schema.default_prefix ~ ':', '')}})
         {%- endif -%}
     {%- else -%}
         {#- [{{element.name|default(gen.uri(element, false))}}]({{gen.uri(element)}}) -#}
