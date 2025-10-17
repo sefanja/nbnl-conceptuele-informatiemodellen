@@ -6,29 +6,30 @@
     {%- endfor -%}
 {%- endmacro -%}
 
-{%- macro id_safe(v) -%}
-{%- set allowed = 'abcdefghijklmnopqrstuvwxyz0123456789-' -%}
-{%- for c in v|lower -%}
-    {%- if c in allowed -%}
-        {{ c }}
-    {%- elif c == ' ' -%}
-    -
+{%- macro privacy_symbol(slot) -%}
+    {%- if slot.annotations.personal_data -%}
+        <span title="Persoonsgegeven">👤</span>&nbsp;
+        pass:[<span title="Persoonsgegeven">👤</span>&nbsp;]
     {%- endif -%}
-{%- endfor -%}
+{%- endmacro -%}
+
+{%- macro id_safe(v) -%}
+{%- set allowed = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_:.' -%}
+    {%- for c in v -%}
+        {%- if c in allowed -%}
+            {{c}}
+        {%- else -%}
+            -
+        {%- endif -%}
+    {%- endfor -%}
 {%- endmacro -%}
 
 {%- macro link(name) -%}
-    [{{name}}](#{{ id_safe(name) }})
+    [{{name}}](#{{id_safe(name)}})
 {%- endmacro -%}
 
 {%- macro anchor(element) -%}
-    {%- if (element.class_uri) -%}
-        <span id="{{ element.class_uri }}">{{element.name|e}}</span>
-    {%- elif (element.slot_uri) -%}
-        <span id="{{ element.slot_uri }}">{{element.name|e}}</span>
-    {%- else -%}
-        <span id="{{ id_safe(element.name) }}">{{element.name|e}}</span>
-    {%- endif -%}
+    <span id="{{id_safe(name)}}"><span>
 {%- endmacro -%}
 
 {%- macro range(name) -%}
@@ -48,17 +49,13 @@
         'uri': 'URI',
         'ncname': 'prefixnaam' } -%}
     {%- if name in base_types -%}
-        {{ base_types[name] }}
+        {{base_types[name]}}
     {%- elif name in schemaview.all_classes() -%}
         {%- set class = schemaview.get_class(name) -%}
         {%- if class.annotations.external_registry -%}
-            {%- if class.class_uri -%}
-                [{{name}}]({{gen.uri(class)}}) ({{class.annotations.external_registry.value}})
-            {%- else -%}
-                {{name}} ({{class.annotations.external_registry.value}})
-            {%- endif -%}
+            class.name ({{class.annotations.external_registry.value}})
         {%- else -%}
-            {{link(name)}}
+            {{link(class.name)}}
         {%- endif -%}
     {%- else -%}
         {{link(name)}}
@@ -72,19 +69,19 @@
                 {%- if not loop.first -%}
                     &nbsp;
                 {%- endif -%}
-                óf {{ range(subslot_range) }}
+                óf {{range(subslot_range)}}
             {%- else -%}
-                {{ range(subslot_range) }}
+                {{range(subslot_range)}}
                 {%- if not loop.last -%}
                     &nbsp;en/of&nbsp;
                 {%- endif -%}
             {%- endif -%}
         {%- endfor -%}
     {%- else -%}
-        {{ range(slot.range) }}
+        {{range(slot.range)}}
     {%- endif -%}
     {%- if slot.unit.ucum_code -%}
-        &nbsp;({{ slot.unit.ucum_code }})
+        &nbsp;({{slot.unit.ucum_code}})
     {%- endif -%}
 {%- endmacro -%}
 
@@ -121,34 +118,39 @@
         {%- set _ = parts.items.append('_' ~ gen.uri_link(element.meaning) ~ '_') -%}
     {%- endif -%}
 
-    {# exact_mappings  #}
+    {# exact_mappings #}
     {%- set exact_mappings = mappings_line(element, 'exact', 'Exact overeenkomstig') -%}
     {%- if exact_mappings -%}
         {%- set _ = parts.items.append(exact_mappings) -%}
     {%- endif -%}
 
-    {# close_mappings  #}
+    {# close_mappings #}
     {%- set close_mappings = mappings_line(element, 'close', 'Vrijwel overeenkomstig') -%}
     {%- if close_mappings -%}
         {%- set _ = parts.items.append(element, close_mappings) -%}
     {%- endif -%}
 
-    {# related_mappings  #}
+    {# related_mappings #}
     {%- set related_mappings = mappings_line(element, 'related', 'Gerelateerd') -%}
     {%- if related_mappings -%}
         {%- set _ = parts.items.append(related_mappings) -%}
     {%- endif -%}
 
-    {# narrow_mappings  #}
+    {# narrow_mappings #}
     {%- set narrow_mappings = mappings_line(element, 'narrow', 'Nauwer') -%}
     {%- if narrow_mappings -%}
         {%- set _ = parts.items.append(narrow_mappings) -%}
     {%- endif -%}
 
-    {# broad_mappings  #}
+    {# broad_mappings #}
     {%- set broad_mappings = mappings_line(element, 'broad', 'Breder') -%}
     {%- if broad_mappings -%}
         {%- set _ = parts.items.append(broad_mappings) -%}
+    {%- endif -%}
+
+    {# specialization #}
+    {%- if element.is_a -%}
+        {%- set _ = parts.items.append('Specialisatie van ' ~ gen.uri_link(schemaview.get_class(element.is_a))) -%}
     {%- endif -%}
 
     {# comments #}
@@ -156,25 +158,11 @@
         {%- set _ = parts.items.append(element.comments | join('<br/><br/>')) -%}
     {%- endif -%}
 
-    {# specialization #}
-    {%- if element.is_a -%}
-        {%- set _ = parts.items.append('Specialisatie van ' ~ link(schemaview.get_class(element.is_a).name)) -%}
-    {%- endif -%}
-
-    {# see_also #}
-    {%- if element.see_also -%}
-        {%- set linked = [] -%}
-        {%- for s in element.see_also -%}
-            {%- set _ = linked.append(gen.uri_link(s)) -%}
-        {%- endfor -%}
-        {%- set _ = parts.items.append('Zie ook ' ~ linked | join(', ')) -%}
-    {%- endif -%}
-
     {# tijdlijnen #}
     {%- set tijdlijn_annotaties = [] -%}
     {%- for a in element.annotations -%}
         {%- if a.startswith('tijdlijn_') and element.annotations[a].value|string|lower == "true" -%}
-            {%- set _ = tijdlijn_annotaties.append(a.replace('tijdlijn_', '')) -%}
+            {%- set _ = tijdlijn_annotaties.append(a|replace('tijdlijn_', '')) -%}
         {%- elif a == 'levensduur' and element.annotations[a].value|string|lower == "true" -%}
             {%- if element.annotations.levensduur_begin and element.annotations.levensduur_einde -%}
                 {%- set _ = tijdlijn_annotaties.append(a ~ ' (' ~ element.annotations.levensduur_begin.value ~ ', ' ~ element.annotations.levensduur_einde.value ~ ')') -%}
@@ -194,18 +182,27 @@
         {%- endif -%}
     {%- endfor -%}
 
-    {{ parts.items | join('<br/><br/>') }}
+    {# see_also #}
+    {%- if element.see_also -%}
+        {%- set linked = [] -%}
+        {%- for s in element.see_also -%}
+            {%- set _ = linked.append(gen.uri_link(s)) -%}
+        {%- endfor -%}
+        {%- set _ = parts.items.append('<details><summary>Zie ook</summary><br/>* ' ~ linked | join('<br/>* ') ~ '</details>') -%}
+    {%- endif -%}
+
+    {{parts.items | join('<br/><br/>')}}
 {%- endmacro -%}
 
 ---
-title: "v{{ schema.version }}"
-parent: "{% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% endif %}"
+title: "v{{schema.version}}"
+parent: "{{schema.title}}"
 ---
 
-# {{ schema.title }}
+# {{schema.title}}
 {{ '{: .no_toc }' }}
 
-{{ omschrijving(schema) }}
+{{omschrijving(schema)}}
 
 ## Inhoud
 {{ '{: .no_toc .text-delta }' }}
@@ -214,59 +211,52 @@ parent: "{% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% en
 
 ---
 
-{% if include_top_level_diagram %}
-{# Diagramgeneratoren werken niet goed, dus uitgezet #}
-{# ```{{ gen.mermaid_directive() }}
-{{ gen.mermaid_diagram() }}
-``` #}
-{% else %}
 ![Diagram](model.drawio.svg)
 
 <details>
 <summary>Legenda</summary>
 <a href="https://sefanja.github.io/nbnl-conceptuele-informatiemodellen/wegwijs.html">Wegwijs in de modellen</a>
 </details>
-{% endif %}
 
 {% for class in gen.all_class_objects() | sort(attribute=sort_by) %}
 {% if class.name != 'Any' and not class.annotations.external_registry %}
 
+{{anchor(class)}}
 ## {{class.name}}
 
 {{omschrijving(class)}}
 
 {% set properties = [] %}
 {% set relationships = [] %}
-{% for slot in gen.get_direct_slots(class) | sort(attribute=sort_by) %}
-    {% set effective_ranges = [] %}
-    {% set sub_expressions = (slot.any_of or []) + (slot.all_of or []) + (slot.exactly_one_of or []) %}
-    {% if sub_expressions %}
-        {% for sub in sub_expressions %}
-            {% for r in schemaview.slot_range_as_union(sub) %}
-                {% if r not in effective_ranges %}
-                    {% set _ = effective_ranges.append(r) %}
-                {% endif %}
-            {% endfor %}
-        {% endfor %}
-    {% else %}
-        {% set effective_ranges = schemaview.slot_range_as_union(slot) %}
-    {% endif %}
-    {% set some_are_classes = effective_ranges | select('in', schemaview.all_classes()) | list | length > 0 %}
-    {% if some_are_classes %}
-        {% set _ = relationships.append(slot) %}
-    {% else %}
-        {% set _ = properties.append(slot) %}
-    {% endif %}
-{% endfor %}
+{% for slot in gen.get_direct_slots(class) | sort(attribute=sort_by) -%}
+    {%- set effective_ranges = [] -%}
+    {%- set sub_expressions = (slot.any_of or []) + (slot.all_of or []) + (slot.exactly_one_of or []) -%}
+    {%- if sub_expressions -%}
+        {%- for sub in sub_expressions -%}
+            {%- for r in schemaview.slot_range_as_union(sub) -%}
+                {%- if r not in effective_ranges -%}
+                    {%- set _ = effective_ranges.append(r) -%}
+                {%- endif -%}
+            {%- endfor -%}
+        {%- endfor -%}
+    {%- else -%}
+        {%- set effective_ranges = schemaview.slot_range_as_union(slot) -%}
+    {%- endif -%}
+    {%- set some_are_classes = effective_ranges | select('in', schemaview.all_classes()) | list | length > 0 -%}
+    {%- if some_are_classes -%}
+        {%- set _ = relationships.append(slot) -%}
+    {%- else -%}
+        {%- set _ = properties.append(slot) -%}
+    {%- endif -%}
+{%- endfor %}
 
 {% if properties %}
 ### Eigenschappen
 {{ '{: .no_toc }' }}
-
-| Eigenschap | Waardespecificatie | Omschrijving |
 | :---  | :--- | :--- |
+| Eigenschap | Waardespecificatie | Omschrijving
 {% for slot in properties -%}
-| {{key_symbol(class, slot)}}{{anchor(slot)}} {{is_unique_key_slot}} | {{compute_range(slot)}} \[{{gen.cardinality(slot)}}\] | {{omschrijving(slot)}} |
+| {{anchor(slot)}}{{key_symbol(class, slot)}}{{privacy_symbol(slot)}}{{slot.name}} | {{compute_range(slot)}} \[{{gen.cardinality(slot)}}\] | {{omschrijving(slot)}}
 {% endfor %}
 {% endif %}
 
@@ -274,10 +264,10 @@ parent: "{% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% en
 ### Relaties
 {{ '{: .no_toc }' }}
 
-| {{class.name}} is ... | Omschrijving |
+| {{class.name}} is ... | Omschrijving
 | :---  | :--- |
 {% for slot in relationships -%}
-| {{key_symbol(class, slot)}}{{anchor(slot)}} {{compute_range(slot)}} \[{% if slot.annotations.inverse_cardinality %}{{slot.annotations.inverse_cardinality.value }}{% endif %} → {{ gen.cardinality(slot) }}\] | {{omschrijving(slot)}} |
+| {{anchor(slot)}}{{key_symbol(class, slot)}}{{slot.name}} {{compute_range(slot)}} \[{% if slot.annotations.inverse_cardinality %}{{slot.annotations.inverse_cardinality.value}}{% endif %} → {{gen.cardinality(slot)}}\] | {{omschrijving(slot)}}
 {% endfor %}
 {% endif %}
 
@@ -292,7 +282,7 @@ parent: "{% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% en
 | Waardesoort | Omschrijving | Gebaseerd op | Patroon |
 | :--- | :--- | :--- | :--- |
 {% endif -%}
-| {{anchor(t)}} | {{omschrijving(t)}} | {% if t.typeof %}{{link(t.typeof)}}{% else %}{{range(t.base)}}{% endif %} | {% if t.pattern %}`{{t.pattern}}`{% endif %} |
+| {{anchor(t)}}{{t.name}} | {{omschrijving(t)}} | {% if t.typeof %}{{link(t.typeof)}}{% else %}{{range(t.base)}}{% endif %} | {% if t.pattern %}`{{t.pattern}}`{% endif %}
 {% endfor %}
 
 {% for e in gen.all_enum_objects() | sort(attribute=sort_by) %}
@@ -301,7 +291,8 @@ parent: "{% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% en
 {{ '{: .no_toc }' }}
 {% endif %}
 
-### {{anchor(e)}}
+{{anchor(e)}}
+### {{e}}
 {{ '{: .no_toc }' }}
 
 {{omschrijving(e)}}
@@ -310,10 +301,10 @@ parent: "{% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% en
 | :--- | :--- |
 {% if e.permissible_values -%}
 {% for pv in e.permissible_values.values() | sort(attribute='text') -%}
-| {{pv.text}} | {{omschrijving(pv)}} |
+| {{pv.text}} | {{omschrijving(pv)}}
 {% endfor -%}
 {% else -%}
-| {{e.name}} | _dynamisch_ |  |
+| {{e.name}} | _dynamisch_
 {% endif -%}
 
 {% endfor %}

@@ -132,6 +132,8 @@ classes:
   Elektriciteitslaadeenheid:
     is_a: Elektriciteitsinstallatie-eenheid
     description: ⚠ Het is nog niet duidelijk hoe laadpunten gegroepeerd moeten worden in laadeenheden. Dit heet namelijk direct effect op het type (A, B, C, D) en daarmee de aansluitvoorwaarden die gelden voor de aangeslotene. Niet elk laadplein bestaat uit laadpalen, denk aan bogen, muren, etc.
+    broad_mappings:
+      - nbnl:laadinstallatie
   Elektriciteitsopslageenheid:
     is_a: Elektriciteitsinstallatie-eenheid
     description: eenheid die actief vermogen vanuit het net kan afnemen en in het net kan injecteren door omzetting van elektrische energie in een vorm van energie die kan worden opgeslagen, de opslag van die energie en de daaropvolgende omzetting van die energie in elektrische energie
