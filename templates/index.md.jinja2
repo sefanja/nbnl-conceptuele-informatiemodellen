@@ -72,7 +72,7 @@
     {%- if name in base_types -%}
         {{base_types[name]}}
     {%- else -%}
-        {{link(schemaview.get_element(name))}}
+        {{link(name, true)}}
     {%- endif -%}
 {%- endmacro -%}
 
@@ -164,7 +164,7 @@
 
     {# specialization #}
     {%- if element.is_a -%}
-        {%- set _ = parts.items.append('Specialisatie van ' ~ link(schemaview.get_element(element.is_a))) -%}
+        {%- set _ = parts.items.append('Specialisatie van ' ~ link(element.is_a, true)) -%}
     {%- endif -%}
 
     {# comments #}
@@ -297,7 +297,7 @@ parent: "{{schema.title}}"
 | Waardesoort | Omschrijving | Gebaseerd op | Patroon |
 | :--- | :--- | :--- | :--- |
 {% endif -%}
-| {{anchor(t)}}{{t.name}} | {{omschrijving(t)}} | {% if t.typeof %}{{link(schemaview.get_element(t.typeof))}}{% else %}{{range(t.base)}}{% endif %} | {% if t.pattern %}`{{t.pattern}}`{% endif %} |
+| {{anchor(t)}}{{t.name}} | {{omschrijving(t)}} | {% if t.typeof %}{{link(t.typeof, true)}}{% else %}{{range(t.base)}}{% endif %} | {% if t.pattern %}`{{t.pattern}}`{% endif %} |
 {% endfor %}
 
 {% for e in gen.all_enum_objects() | sort(attribute=sort_by) %}
