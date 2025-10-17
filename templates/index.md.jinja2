@@ -41,7 +41,7 @@
     {%- if element.class_uri -%}
         <span id="{{element.class_uri|replace('this:', '')}}"><span>
     {%- else -%}
-        <span id="{{id_safe(name)}}"><span>
+        <span id="{{id_safe(element.name)}}"><span>
     {%- endif -%}
 {%- endmacro -%}
 
