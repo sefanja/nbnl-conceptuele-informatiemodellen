@@ -137,7 +137,7 @@ classes:
   Elektriciteitslaadeenheid:
     class_uri: this:Elektriciteitslaadeenheid
     is_a: Elektriciteitsinstallatie-eenheid
-    description: ⚠ Het is nog niet duidelijk hoe laadpunten gegroepeerd moeten worden in laadeenheden. Dit heet namelijk direct effect op het type (A, B, C, D) en daarmee de aansluitvoorwaarden en verplichtingen die gelden voor de aangeslotene. Niet elke laadlocatie bestaat uit laadpalen, denk aan bogen, muren, etc.
+    description: ⚠ Het is nog niet duidelijk hoe laadpunten gegroepeerd moeten worden in laadeenheden. Dit heeft namelijk direct effect op het type (A, B, C, D) en daarmee de aansluitvoorwaarden en verplichtingen die gelden voor de aangeslotene. Niet elke laadlocatie bestaat uit laadpalen, denk aan bogen, muren, etc.
     broad_mappings:
       - begrip:laadinstallatie
   Elektriciteitsopslageenheid:
@@ -432,7 +432,6 @@ classes:
 slots:
   EAN-code:
     description: unieke cijfercombinatie volgens de Europese Artikelnummer-standaard
-    range: EAN-18
     required: true
   fabrikant:
     description: bedrijf dat industrieel goederen vervaardigt
