@@ -1,15 +1,21 @@
-{%- macro link(element) -%}
-    {%- if element is string -%}
-        [{{element}}]({{schemaview.expand_curie(element)}})
-    {%- elif element.class_uri -%}
-        {%- if element.annotations.external_registry -%}
-            [{{element.name}}]({{gen.uri(element)}}) ({{element.annotations.external_registry.value}})
-        {%- else -%}
-            [{{element.name}}](#{{element.class_uri|replace(schema.default_prefix ~ ':', '')}})
-        {%- endif -%}
+{%- macro link(value, as_element=false) -%}
+    {%- if value is string -%}
+        [{{value}}]({{schemaview.expand_curie(value)}})
     {%- else -%}
-        {#- [{{element.name|default(gen.uri(element, false))}}]({{gen.uri(element)}}) -#}
-        [{{element.name}}]({{gen.uri(element)}})
+        {%- set element = schemaview.get_element(value) -%}
+        {%- if element -%}
+            {%- if element.class_uri -%}
+                {%- if element.annotations.external_registry -%}
+                    [{{element.name}}]({{gen.uri(element)}}) ({{element.annotations.external_registry.value}})
+                {%- else -%}
+                    [{{element.name}}](#{{element.class_uri|replace(schema.default_prefix ~ ':', '')}})
+                {%- endif -%}
+            {%- else -%}
+                [{{element.name}}]({{gen.uri(element)}})
+            {%- endif -%}
+        {%- else -%}
+            [{{name}}](#{{id_safe(name)}})
+        {%- endif -%}
     {%- endif -%}
 {%- endmacro -%}
 
