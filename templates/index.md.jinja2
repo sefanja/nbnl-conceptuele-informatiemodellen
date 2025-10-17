@@ -9,7 +9,6 @@
 {%- macro privacy_symbol(slot) -%}
     {%- if slot.annotations.personal_data -%}
         <span title="Persoonsgegeven">👤</span>&nbsp;
-        pass:[<span title="Persoonsgegeven">👤</span>&nbsp;]
     {%- endif -%}
 {%- endmacro -%}
 
@@ -28,7 +27,7 @@
     [{{name}}](#{{id_safe(name)}})
 {%- endmacro -%}
 
-{%- macro anchor(element) -%}
+{%- macro anchor(name) -%}
     <span id="{{id_safe(name)}}"><span>
 {%- endmacro -%}
 
@@ -188,7 +187,7 @@
         {%- for s in element.see_also -%}
             {%- set _ = linked.append(gen.uri_link(s)) -%}
         {%- endfor -%}
-        {%- set _ = parts.items.append('<details><summary>Zie ook</summary><br/>* ' ~ linked | join('<br/>* ') ~ '</details>') -%}
+        {%- set _ = parts.items.append('<details>\n<summary>Zie ook</summary>\n* ' ~ linked | join('\n* ') ~ '\n</details>') -%}
     {%- endif -%}
 
     {{parts.items | join('<br/><br/>')}}
@@ -221,7 +220,6 @@ parent: "{{schema.title}}"
 {% for class in gen.all_class_objects() | sort(attribute=sort_by) %}
 {% if class.name != 'Any' and not class.annotations.external_registry %}
 
-{{anchor(class)}}
 ## {{class.name}}
 
 {{omschrijving(class)}}
