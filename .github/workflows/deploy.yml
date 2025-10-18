@@ -34,40 +34,25 @@ jobs:
 
       - name: Create docs per model version
         run: |
-          for category in modellen/*; do
-            if [ -d "$category" ]; then
-              for model in "$category"/*; do
-                if [ -d "$model" ]; then
-                  modelname=$(basename "$model")
-                  categoryname=$(basename "$category")
-                  for version in "$model"/*; do
-                    if [ -d "$version" ]; then
-                      versionid=$(basename "$version")
-                      echo "Processing $categoryname/$modelname version $versionid"
+          for model in modellen/*; do
+            if [ -d "$model" ]; then
+              modelname=$(basename "$model")
+              for version in "$model"/*; do
+                if [ -d "$version" ]; then
+                  versionid=$(basename "$version")
+                  echo "Processing $modelname version $versionid"
 
-                      outdir=docs/_modellen/$categoryname/$modelname/$versionid
-                      mkdir -p "$outdir"
+                  outdir=docs/_modellen/$modelname/$versionid
+                  mkdir -p "$outdir"
 
-                      if [ -f "$version/model.drawio.svg" ]; then
-                        # Gebruik bijbehorende SVG
-                        cp "$version/model.drawio.svg" "$outdir/"
-                        gen-doc \
-                          --template-directory templates \
-                          -d "$outdir" \
-                          "$version/model.yaml"
-                        else
-                        # Genereer diagram
-                        gen-doc \
-                          --template-directory templates \
-                          -d "$outdir" \
-                          --include-top-level-diagram \
-                          "$version/model.yaml"
-                      fi
+                  cp "$version/model.drawio.svg" "$outdir/"
+                  gen-doc \
+                    --template-directory templates \
+                    -d "$outdir" \
+                    "$version/model.yaml"
 
-                      # Remove all .md files except index.md
-                      find "$outdir" -type f -name "*.md" ! -name "index.md" -delete
-                    fi
-                  done
+                  # Remove all .md files except index.md
+                  find "$outdir" -type f -name "*.md" ! -name "index.md" -delete
                 fi
               done
             fi
