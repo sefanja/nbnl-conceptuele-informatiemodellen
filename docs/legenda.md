@@ -1,12 +1,9 @@
 ---
-title: Wegwijs in de modellen
-nav_order: 2
+title: Legenda
+nav_order: 3
 ---
 
-{: .warning }
-Deze website is in opbouw. Pagina's kunnen onvolledige of onjuiste informatie bevatten.
-
-# Wegwijs in de modellen
+# Legenda
 {: .no_toc }
 
 ## Inhoud
