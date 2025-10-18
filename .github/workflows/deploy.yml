@@ -58,10 +58,6 @@ jobs:
             fi
           done
 
-      - name: Copy .md files with directory structure
-        run: |
-          rsync -av --include='*/' --include='*.md' --exclude='*' modellen/ docs/_modellen
-        
       - name: Create model landing pages
         run: python scripts/generate_model_landing_pages.py
 

@@ -34,7 +34,7 @@ for model_dir in sorted(os.listdir(BASE_INPUT_MODELS)):
         model_name, _ = get_model_metadata(yaml_path)
         break  # één versie is genoeg voor de naam
 
-    # Genereer docs/_modellen/<categorie>/<modelnaam>/index.md
+    # Genereer docs/_modellen/<modelnaam>/index.md
     model_output_dir = os.path.join(BASE_OUTPUT_MODELS, model_dir)
     os.makedirs(model_output_dir, exist_ok=True)
 
@@ -42,6 +42,5 @@ for model_dir in sorted(os.listdir(BASE_INPUT_MODELS)):
     with open(model_index_path, "w", encoding="utf-8") as f:
         f.write("---\n")
         f.write(f'title: "{model_name}"\n')
-        f.write(f'parent: "{BASE_INPUT_MODELS.capitalize()}"\n')
         f.write("---\n\n")
         f.write(f"# {model_name}\n")
