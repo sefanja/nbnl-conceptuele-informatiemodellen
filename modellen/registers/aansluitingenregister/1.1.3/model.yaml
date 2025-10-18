@@ -47,16 +47,15 @@ classes:
   Aansluiting:
     # conventie: altijd expliciet class_uri. Toegestane karakters vanwege hergebruik als HTML-ankers zijn A-Z, a-z, 0-9, -, _, . en :. Hoofdletters behouden. Spaties vervangen door -.
     class_uri: this:Aansluiting
+    # conventie: altijd óf `description` (= definitie) óf `exact_mappings` aanwezig
+    # conventie: elke class (die niet slechts een gegevensgroep vertegenwoordigt) verwijst naar een NBNL-begrip, en daarmee indirect naar NBility voor eigenaarschap van definitie en data
+    exact_mappings:
+      - begrip:aansluiting
     annotations:
-      # conventie: bij elke `class` de naam van een NBility-bedrijfsobject
-      nbility: Aansluiting
       # conventie: NEN 3610 tijdlijnen als `tijdlijn_geldigheid`, `tijdlijn_registratie` en `levensduur`
       tijdlijn_geldigheid: true
       tijdlijn_registratie: true
       tijdlijn_effectuering: true
-    # conventie: altijd óf `description` (= definitie) óf `exact_mappings` aanwezig
-    exact_mappings:
-      - begrip:aansluiting
     comments:
       - Een koppeling met een gesloten distributiesysteem wordt in dit register beschouwd als aansluiting als de beheerder geen gebruik maakt van het elektronische berichtenverkeer ten behoeve van het faciliteren van derdentoegang (zie artikel 2.4, vierde lid van de Netcode elektriciteit).
     slots:
@@ -130,12 +129,12 @@ classes:
           - EAN-code
   Aansluitlocatie:
     class_uri: this:Aansluitlocatie
+    exact_mappings:
+      - begrip:aansluitlocatie
     annotations:
-      nbility: Aansluiting
       tijdlijn_geldigheid: true
       tijdlijn_registratie: true
       tijdlijn_effectuering: true
-    description: plek waar zich het overdrachtspunt bevindt
     comments:
       - Adresgegevens zijn zo veel mogelijk overeenkomstig NEN 5825.
     see_also:
@@ -143,6 +142,7 @@ classes:
     attributes:
       huisnummer:
         description: aan een verblijfsobject, standplaats of ligplaats toegekend nummer, een antwoordnummer of een postbusnummer
+        # conventie: `source` bevat de bron waarop de term of definitie is gebaseerd
         source: nen:nen-5825-2002-nl-83617
         required: true
         range: integer
@@ -241,8 +241,9 @@ classes:
           - locatienummer
   Aftakking:
     class_uri: this:Aftakking
+    broad_mappings:
+      - begrip:netcomponent
     annotations:
-      nbility: Netcomponent
       tijdlijn_geldigheid: true
       tijdlijn_registratie: true
       tijdlijn_effectuering: true
@@ -277,14 +278,12 @@ classes:
           - nominale waarde
   Allocatiepunt:
     class_uri: this:Allocatiepunt
+    exact_mappings:
+      - begrip:allocatiepunt
     annotations:
-      nbility: Aansluiting
       tijdlijn_geldigheid: true
       tijdlijn_registratie: true
       tijdlijn_effectuering: true
-    description: punt waar invoeding, onttrekking of verbruik van elektriciteit of gas wordt toegerekend aan een marktdeelnemer
-    # conventie: `source` bevat de bron waarop de term of definitie is gebaseerd
-    source: bce:z=2025-04-26&g=2025-04-26
     slots:
       - EAN-code
     slot_usage:
@@ -402,8 +401,9 @@ classes:
           inverse_cardinality: "1..*"
   Groep van strengen van lichtmasten:
     class_uri: this:Groep-van-strengen-van-lichtmasten
+    broad_mappings:
+      - begrip:aansluitlocatie
     annotations:
-      nbility: Aansluiting
       tijdlijn_geldigheid: true
       tijdlijn_registratie: true
       tijdlijn_effectuering: true
@@ -431,8 +431,9 @@ classes:
           - in rekening te brengen bij
   Meettransformator:
     class_uri: this:Meettransformator
+    broad_mappings:
+      - begrip:netcomponent
     annotations:
-      nbility: Netcomponent
       tijdlijn_geldigheid: true
       tijdlijn_registratie: true
       tijdlijn_effectuering: true
@@ -482,13 +483,12 @@ classes:
           - serienummer
   Netgebied:
     class_uri: this:Netgebied
+    exact_mappings:
+      - begrip:netgebied
     annotations:
-      nbility: Aansluiting
       tijdlijn_geldigheid: true
       tijdlijn_registratie: true
       tijdlijn_effectuering: true
-    description: aaneengesloten en samenhangend deel van een energienet van één netbeheerder, waarbinnen de processen allocatie en reconciliatie plaatsvinden
-    source: bce:z=2025-04-26&g=2025-04-26
     see_also:
       - iceg:hoofdstuk=2&paragraaf=2.1&artikel=2.1.3&z=2022-05-18&g=2022-05-18
     slots:
@@ -513,8 +513,9 @@ classes:
           - EAN-code
   Netkoppeling:
     class_uri: this:Netkoppeling
+    broad_mappings:
+      - begrip:aansluiting
     annotations:
-      nbility: Aansluiting
       tijdlijn_geldigheid: true
       tijdlijn_registratie: true
       tijdlijn_effectuering: true
@@ -549,7 +550,6 @@ classes:
   Overdrachtspunt:
     class_uri: this:Overdrachtspunt
     annotations:
-      nbility: Aansluiting
       tijdlijn_geldigheid: true
       tijdlijn_registratie: true
       tijdlijn_effectuering: true
@@ -702,8 +702,9 @@ classes:
           ucum_code: "[in_i]"
   Primair deel meetinrichting:
     class_uri: this:Primair-deel-meetinrichting
+    broad_mappings:
+      - begrip:netcomponent
     annotations:
-      nbility: Netfunctie
       tijdlijn_geldigheid: true
       tijdlijn_registratie: true
       tijdlijn_effectuering: true
@@ -738,8 +739,9 @@ classes:
           - identificatie
   Primaire meetkabel:
     class_uri: this:Primaire-meetkabel
+    broad_mappings:
+      - begrip:netcomponent
     annotations:
-      nbility: Netcomponent
       tijdlijn_geldigheid: true
       tijdlijn_registratie: true
     description: kabel tussen meettransformator en aansluitklemmen
@@ -800,8 +802,9 @@ classes:
         range: float
   Tarieftoepassing:
     class_uri: this:Tarieftoepassing
+    broad_mappings:
+      - begrip:aansluiting
     annotations:
-      nbility: Aansluiting
       tijdlijn_geldigheid: true
       tijdlijn_registratie: true
       tijdlijn_effectuering: true
