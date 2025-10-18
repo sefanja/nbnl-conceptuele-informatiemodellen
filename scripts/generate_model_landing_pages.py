@@ -13,53 +13,35 @@ def get_model_metadata(yaml_path):
     version = data.get("version", os.path.basename(os.path.dirname(yaml_path)))
     return name, version
 
-# Itereer over categorieën (zoals 'registers', 'datadiensten')
-for category_dir in sorted(os.listdir(BASE_INPUT_MODELS)):
-    category_path = os.path.join(BASE_INPUT_MODELS, category_dir)
-    if not os.path.isdir(category_path):
+# Itereer over modellen
+for model_dir in sorted(os.listdir(BASE_INPUT_MODELS)):
+    model_path = os.path.join(BASE_INPUT_MODELS, model_dir)
+    if not os.path.isdir(model_path):
         continue
 
-    category_output_dir = os.path.join(BASE_OUTPUT_MODELS, category_dir)
-    os.makedirs(category_output_dir, exist_ok=True)
+    model_name = model_dir  # fallback
+    for version in sorted(os.listdir(model_path), reverse=True):
+        yaml_path = os.path.join(model_path, version, "model.yaml")
+        gen_md_path = os.path.join(BASE_OUTPUT_MODELS, model_dir, version, "index.md")
 
-    # Genereer docs/_modellen/<categorie>/index.md
-    category_index_path = os.path.join(category_output_dir, "index.md")
-    if not os.path.exists(category_index_path):
-        with open(category_index_path, "w", encoding="utf-8") as f:
-            f.write("---\n")
-            f.write(f'title: "{category_dir.capitalize()}"\n')
-            f.write("---\n\n")
-            f.write(f"# {category_dir.capitalize()}\n")
-
-    # Itereer over modellen binnen de categorie
-    for model_dir in sorted(os.listdir(category_path)):
-        model_path = os.path.join(category_path, model_dir)
-        if not os.path.isdir(model_path):
+        if not os.path.exists(yaml_path):
+            print(f"Missing YAML: {yaml_path}")
+            continue
+        if not os.path.exists(gen_md_path):
+            print(f"Missing index.md: {gen_md_path}")
             continue
 
-        model_name = model_dir  # fallback
-        for version in sorted(os.listdir(model_path), reverse=True):
-            yaml_path = os.path.join(model_path, version, "model.yaml")
-            gen_md_path = os.path.join(BASE_OUTPUT_MODELS, category_dir, model_dir, version, "index.md")
+        model_name, _ = get_model_metadata(yaml_path)
+        break  # één versie is genoeg voor de naam
 
-            if not os.path.exists(yaml_path):
-                print(f"Missing YAML: {yaml_path}")
-                continue
-            if not os.path.exists(gen_md_path):
-                print(f"Missing index.md: {gen_md_path}")
-                continue
+    # Genereer docs/_modellen/<categorie>/<modelnaam>/index.md
+    model_output_dir = os.path.join(BASE_OUTPUT_MODELS, model_dir)
+    os.makedirs(model_output_dir, exist_ok=True)
 
-            model_name, _ = get_model_metadata(yaml_path)
-            break  # één versie is genoeg voor de naam
-
-        # Genereer docs/_modellen/<categorie>/<modelnaam>/index.md
-        model_output_dir = os.path.join(BASE_OUTPUT_MODELS, category_dir, model_dir)
-        os.makedirs(model_output_dir, exist_ok=True)
-
-        model_index_path = os.path.join(model_output_dir, "index.md")
-        with open(model_index_path, "w", encoding="utf-8") as f:
-            f.write("---\n")
-            f.write(f'title: "{model_name}"\n')
-            f.write(f'parent: "{category_dir.capitalize()}"\n')
-            f.write("---\n\n")
-            f.write(f"# {model_name}\n")
+    model_index_path = os.path.join(model_output_dir, "index.md")
+    with open(model_index_path, "w", encoding="utf-8") as f:
+        f.write("---\n")
+        f.write(f'title: "{model_name}"\n')
+        f.write(f'parent: "{BASE_INPUT_MODELS.capitalize()}"\n')
+        f.write("---\n\n")
+        f.write(f"# {model_name}\n")
