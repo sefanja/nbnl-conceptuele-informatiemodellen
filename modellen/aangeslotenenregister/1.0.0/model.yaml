@@ -83,7 +83,7 @@ classes:
   Correspondentieadres:
     class_uri: Correspondentieadres
     broad_mappings:
-      - begrip:klant
+      - begrip:aangeslotene
     annotations:
       tijdlijn_registratie: true
       tijdlijn_effectuering: true

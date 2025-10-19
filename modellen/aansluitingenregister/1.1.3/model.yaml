@@ -48,7 +48,7 @@ classes:
     # conventie: altijd expliciet class_uri. Toegestane karakters vanwege hergebruik als HTML-ankers zijn A-Z, a-z, 0-9, -, _, . en :. Hoofdletters behouden. Spaties vervangen door -.
     class_uri: this:Aansluiting
     # conventie: altijd óf `description` (= definitie) óf `exact_mappings` aanwezig
-    # conventie: elke class (die niet slechts een gegevensgroep vertegenwoordigt) verwijst naar een NBNL-begrip, en daarmee indirect naar NBility voor eigenaarschap van definitie en data
+    # conventie: elke class verwijst naar een NBNL-begrip, en daarmee indirect naar een NBility-bedrijfsobject voor eigenaarschap van definitie en data
     exact_mappings:
       - begrip:aansluiting
     annotations:
