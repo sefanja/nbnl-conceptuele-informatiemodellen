@@ -149,7 +149,7 @@ classes:
     class_uri: this:Elektriciteitsopslageenheid
     is_a: Elektriciteitsinstallatie-eenheid
     exact_mappings:
-      - begrip:elektriciteitsopslageenhed
+      - begrip:elektriciteitsopslageenheid
     attributes:
       maximaal bruikbare hoeveelheid energie:
         description: hoeveelheid elektrische energie die maximaal in een elektriciteitsopslageenheid kan worden geïnjecteerd en daaruit kan worden onttrokken voor het energienet
