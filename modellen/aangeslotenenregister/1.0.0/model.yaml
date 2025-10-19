@@ -20,12 +20,11 @@ annotations:
 classes:
   Aangeslotene:
     class_uri: Aangeslotene
-    annotations:
-      nbility: Klant
-      tijdlijn_registratie: true
-      tijdlijn_effectuering: true
     exact_mappings:
       - begrip:aangeslotene
+    annotations:
+      tijdlijn_registratie: true
+      tijdlijn_effectuering: true
     comments:
       - Omdat netbeheerders aangeslotenen niet altijd uniek kunnen identificeren, wordt in dit register informatie over de aangeslotene per aansluiting vastgelegd. Hierdoor kan één aangeslotene meerdere keren voorkomen in dit register.
       - Persoonsgegevens zijn zo veel mogelijk overeenkomstig NEN 1888.
@@ -83,8 +82,9 @@ classes:
         - houder van
   Correspondentieadres:
     class_uri: Correspondentieadres
+    broad_mappings:
+      - begrip:klant
     annotations:
-      nbility: Klant
       tijdlijn_registratie: true
       tijdlijn_effectuering: true
     description: postadres waar een aangeslotene zijn correspondentie wil ontvangen anders dan het aansluitadres

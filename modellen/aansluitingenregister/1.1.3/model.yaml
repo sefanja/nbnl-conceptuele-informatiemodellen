@@ -73,13 +73,13 @@ classes:
         see_also:
           - tce:hoofdstuk=3&paragraaf=3.7&artikel=3.7.4&z=2022-05-18&g=2022-05-18
           - tcg:hoofdstuk=2&paragraaf=2.6&artikel=2.33&z=2023-05-02&g=2023-05-02
-      grootte:
+      technische grootte:
         description: aanduiding van het formaat van de aansluiting op basis van de gewenste aansluitcapaciteiten van de overdrachtspunten
         comments:
           - De historische aanduiding 'artikel-1-lid-2-of-3-aansluiting' is nu afleidbaar uit de combinatie van 'grootte' en 'marktsegment'.
           # conventie: validatieregels in `comments`, beginnend met 'Validatie:'
           - "Validatie: als de gewenste aansluitcapaciteit van een van de overdrachtspunten 'groot' is of een geheel getal dan 'groot' anders 'klein'."
-        range: Groot of klein
+        range: Technische grootte
         required: true
       marktsegment:
         description: aanduiding van de categorie waartoe de aansluiting behoort, te weten kleinverbruikaansluiting of grootverbruikaansluiting
@@ -565,7 +565,8 @@ classes:
           - nce:hoofdstuk=2&paragraaf=2.1&artikel=2.4&z=2022-11-25&g=2022-11-25
     attributes:
       aansluitcapaciteit:
-        description: transportvermogen van het overdrachtspunt zoals door een aangeslotene is aangevraagd en waarvoor het aansluittarief wordt betaald
+        exact_mappings:
+          - begrip:aansluitcapaciteit
         comments:
           - "Bij een klein overdrachtspunt voor elektriciteit aangeduid als het aantal fasen vermenigvuldigd met de nominale waarde van de overstroombeveiliging per fase. Bijvoorbeeld 3x25 (eenheid: A) of klein (indien onbekend)."
           - "Bij een klein overdrachtspunt voor gas aangeduid met de code G4, G6, G10, G16, G25 of klein (indien onbekend)."
@@ -987,10 +988,12 @@ enums:
     permissible_values:
       in aanleg:
       in bedrijf:
-  Groot of klein:
+  Technische grootte:
     permissible_values:
-      groot:
-      klein:
+      grote aansluiting:
+        meaning: begrip:grote-aansluiting
+      kleine aansluiting:
+        meaning: begrip:kleine-aansluiting
   Marktsegment:
     permissible_values:
       grootverbruikaansluiting:

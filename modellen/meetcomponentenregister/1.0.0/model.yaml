@@ -30,8 +30,8 @@ classes:
   Gatewayadapter:
     class_uri: this:Gatewayadapter
     description: apparaat bedoeld om een meetgateway te voorzien van voeding en gebruikersinterface
-    annotations:
-      nbility: Netcomponent
+    broad_mappings:
+      - begrip:netcomponent
     attributes:
       identificatie:
         description: unieke aanduiding waarmee een instantie van een object binnen een gegeven context ondubbelzinnig herkenbaar is
@@ -51,8 +51,9 @@ classes:
   Meetcomponent:
     class_uri: this:Meetcomponent
     description: apparaat dat energie-uitwisseling meet of deze meting op afstand uitleesbaar maakt
+    broad_mappings:
+      - begrip:netcomponent
     annotations:
-      nbility: Netcomponent
       tijdlijn_geldigheid: true
       tijdlijn_registratie: true
     attributes:
@@ -119,9 +120,9 @@ classes:
         - gatewaynummer
   Meter:
     class_uri: this:Meter
-    description: apparaat bedoeld om energie-uitwisseling te meten ten behoeve van de verrekening
-    source: energiewet:z=2025-02-22&g=2025-02-22
     is_a: Meetcomponent
+    exact_mappings:
+      - begrip:meter
     comments:
       - Dit register ondersteunt geen controlemeters. Een controlemeter is een meter die naast een andere meter is geplaatst om daarvan de meterstanden op nauwkeurigheid te conroleren, vaak op verzoek van de aangeslotene.
     see_also:
@@ -192,8 +193,8 @@ classes:
         - meternummer
   Telwerk met cijferaanduiding:
     class_uri: this:Telwerk-met-cijferaanduiding
-    annotations:
-      nbility: Netcomponent
+    broad_mappings:
+      - begrippen:telwerk
     description: onderdeel van een meter dat een hoeveelheid energie registreert, met een aanduiding die niet rechtstreeks verwijst naar de betekenis of functie van het telwerk
     comments:
       - Niet van toepassing op meters die telwerken aanduiden met OBIS-codes.

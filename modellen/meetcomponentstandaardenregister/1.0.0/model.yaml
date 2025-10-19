@@ -20,9 +20,9 @@ annotations:
 classes:
   Gatewaycodering:
     class_uri: this:Gatewaycodering
+    broad_mappings:
+      - begrip:technische-bedrijfsstandaard
     description: categorisering van meetgateways met gelijke functionele en technische kenmerken, afkomstig van dezelfde fabrikant
-    annotations:
-      nbility: Technische bedrijfsstandaard
     slots:
       - fabrikant
     attributes:
@@ -40,10 +40,10 @@ classes:
           - gatewaycode
   Metercodering:
     class_uri: this:Metercodering
+    broad_mappings:
+      - begrip:technische-bedrijfsstandaard
     description: categorisering van energiehoeveelheidsmeters met dezelfde (metrologische) kenmerken en van dezelfde fabrikant
     source: nbnlpub:reglement-meterparkbeheer-v62
-    annotations:
-      nbility: Technische bedrijfsstandaard
     see_also:
       - iceg:hoofdstuk=2&paragraaf=2.1&artikel=2.1.4&z=2025-01-01&g=2025-01-01
     slots:
@@ -84,9 +84,9 @@ classes:
           - metercode
   Telwerkdefinitie:
     class_uri: this:Telwerkdefinitie
+    broad_mappings:
+      - begrip:technische-bedrijfsstandaard
     description: beschrijving van een cumulatieve energiehoeveelheidsmeting ten behoeve van verrekening
-    annotations:
-      nbility: Technische bedrijfsstandaard
     see_also:
       - iceg:hoofdstuk=2&paragraaf=2.1&artikel=2.1.4&z=2025-01-01&g=2025-01-01
       - bce:z=2025-05-08&g=2025-05-08

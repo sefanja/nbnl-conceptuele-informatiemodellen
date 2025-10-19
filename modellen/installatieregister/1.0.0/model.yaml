@@ -23,8 +23,10 @@ default_prefix: this
 classes:
   Beveiligingsinstelling:
     class_uri: this:Beveiligingsinstelling
+    broad_mappings:
+      - begrip:installatie
     annotations:
-      nbility: Installatie
+      tijdlijn_registratie: true
     description: manier waarop wordt beschermd tegen storingen
     attributes:
       onregelmatigheid:
@@ -58,8 +60,10 @@ classes:
           - onregelmatigheid
   Conformiteitscertificaat:
     class_uri: this:Conformiteitscertificaat
+    broad_mappings:
+      - begrip:installatie
     annotations:
-      nbility: Installatie
+      tijdlijn_registratie: true
     description: door een erkende certificerende instantie verstrekt document voor apparatuur die wordt gebruikt door een elektriciteitsproductie-eenheid, verbruikseenheid, distributiesysteem, verbruikersinstallatie of HVDC-systeem
     source: celex:32016R0631
     slots:
@@ -72,15 +76,15 @@ classes:
           - typeaanduiding
   Elektriciteitsinstallatie-eenheid:
     class_uri: this:Elektriciteitsinstallatie-eenheid
+    broad_mappings:
+      - begrip:installatie
     annotations:
-      nbility: Installatie
+      tijdlijn_registratie: true
       levensduur: true
       levensduur_begin: moment van inbedrijfname
       levensduur_einde: moment van uitbedrijfname
-    description: ondeelbaar geheel van elektrisch materieel en leidingen die samen elektrische energie kunnen verbruiken, opwekken of opslaan
+    description: ondeelbaar geheel van elektrisch materieel en leidingen die samen elektrische energie kunnen verbruiken, opwekken, opslaan, laden of ontladen
     source: celex:32016R0631
-    broad_mappings:
-      - begrip:installatie
     slots:
       - EAN-code
     slot_usage:
@@ -137,15 +141,15 @@ classes:
   Elektriciteitslaadeenheid:
     class_uri: this:Elektriciteitslaadeenheid
     is_a: Elektriciteitsinstallatie-eenheid
-    description: ⚠ Het is nog niet duidelijk hoe laadpunten gegroepeerd moeten worden in laadeenheden. Dit heeft namelijk direct effect op het type (A, B, C, D) en daarmee de aansluitvoorwaarden en verplichtingen die gelden voor de aangeslotene. Niet elke laadlocatie bestaat uit laadpalen, denk aan bogen, muren, etc.
-    broad_mappings:
-      - begrip:laadinstallatie
+    exact_mappings:
+      - begrip:elektriciteitslaadeenheid
+    comments:
+      - ⚠ Het is nog niet duidelijk hoe laadpunten gegroepeerd moeten worden in laadeenheden. Dit heeft namelijk direct effect op het type (A, B, C, D) en daarmee de aansluitvoorwaarden en verplichtingen die gelden voor de aangeslotene. Niet elke laadlocatie bestaat uit laadpalen, denk aan bogen, muren, etc.
   Elektriciteitsopslageenheid:
     class_uri: this:Elektriciteitsopslageenheid
     is_a: Elektriciteitsinstallatie-eenheid
-    description: eenheid die actief vermogen vanuit het net kan afnemen en in het net kan injecteren door omzetting van elektrische energie in een vorm van energie die kan worden opgeslagen, de opslag van die energie en de daaropvolgende omzetting van die energie in elektrische energie
-    source: bge:z=2025-05-08&g=2025-05-08
-    broad_mappings: begrip:opslaginstallatie
+    exact_mappings:
+      - begrip:elektriciteitsopslageenhed
     attributes:
       maximaal bruikbare hoeveelheid energie:
         description: hoeveelheid elektrische energie die maximaal in een elektriciteitsopslageenheid kan worden geïnjecteerd en daaruit kan worden onttrokken voor het energienet
@@ -189,8 +193,10 @@ classes:
           ucum_code: m
   GCvO-installatie:
     class_uri: this:GCvO-installatie
+    broad_mappings:
+      - begrip:installatie
     annotations:
-      nbility: Installatie
+      tijdlijn_registratie: true
       levensduur: true
       levensduur_begin: moment van inbedrijfname
       levensduur_einde: moment van uitbedrijfname
@@ -227,8 +233,10 @@ classes:
           - EAN-code
   Groep van omvormers:
     class_uri: this:Groep-van-omvormers
+    broad_mappings:
+      - begrip:installatie
     annotations:
-      nbility: Installatie
+      tijdlijn_registratie: true
     description: verzameling elektronische apparaten die de invoerspanning van een bepaalde spanning naar een andere spanning kunnen omvormen of elektrische energie in energie van een andere frequentie
     comments:
       - De ACM beschouwt een groep zonnepanelen achter één omvormer, samen met die omvormer als een elektriciteitsproductie-eenheid (ACM/18/033360). Aanmeldformulieren van netbeheerders staan echter meer omvormers per eenheid toe.
@@ -245,8 +253,10 @@ classes:
           inverse_cardinality: "*"
   Groep van opwekkingseenheden:
     class_uri: this:Groep-van-opwekkingseenheden
+    broad_mappings:
+      - begrip:installatie
     annotations:
-      nbility: Installatie
+      tijdlijn_registratie: true
     description: verzameling apparaten binnen één elektriciteitsproductie-eenheid die elektrische energie opwekken en identieke kenmerken delen
     slots:
       - fabrikant
@@ -326,8 +336,10 @@ classes:
         range: boolean
   Soort transformator:
     class_uri: this:Soort-transformator
+    broad_mappings:
+      - begrip:installatie
     annotations:
-      nbility: Installatie
+      tijdlijn_registratie: true
     description: verzameling transformatoren die een gemeenschappelijk karakter hebben
     attributes:
       nominaal schijnbaar vermogen:
@@ -395,8 +407,10 @@ classes:
           inverse_cardinality: "*"
   Transformatoropstelling:
     class_uri: this:Transformatoropstelling
+    broad_mappings:
+      - begrip:installatie
     annotations:
-      nbility: Installatie
+      tijdlijn_registratie: true
     description: configuratie van transformatoren bedoeld voor de gezamenlijke werking rondom een bepaald overdrachtspunt
     comments:
       - Alhoewel artikel 13.1 van de Netcode elektriciteit vraagt om de transformatorgegevens van de gehele installatie, gaat dit register uit van de transformatorgegevens bij het overdrachtspunt waarachter de installatie-eenheid zich bevindt.

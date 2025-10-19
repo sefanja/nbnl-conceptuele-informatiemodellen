@@ -3,7 +3,7 @@ title: Stelselplaat
 nav_order: 2
 ---
 
-# Registers
+# Stelselplaat
 
 Een register bevat gegevens over een bepaalde verzameling dingen in de werkelijkheid. Grijsgekleurde registers worden extern beheerd en behoren veelal tot het [Stelsel van basisregistraties](https://www.digitaleoverheid.nl/overzicht-van-alle-onderwerpen/stelsel-van-basisregistraties/).
 
