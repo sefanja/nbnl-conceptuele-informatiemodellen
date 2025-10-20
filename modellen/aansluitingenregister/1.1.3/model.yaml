@@ -101,7 +101,7 @@ classes:
       unieke EAN-code bij MLOEA:
         description: EAN-code die ongelijk is aan die van een allocatiepunt
         comments:
-          - MLOEA staat voor meerdere leveranciers op een aansluiting. Het is een configuratie waarbij een aansluiting meer dan één allocatiepunt heeft. Omdat de aansluiting en het primaire allocatiepunt (PAP) dezelfde EAN-code delen, helpt de unieke EAN-code expliciet te maken dat het om de aansluiting gaat. Deze EAN-code staak ook wel bekend als virtueel allocatiepunt (VAP) of overdrachtspunt MLOEA (OPM), terwijl het geen allocatiepunt of overdrachtspunt betreft. Als in het berichtenverkeer tussen netbeheerder en meetverantwoordelijke voortaan expliciet wordt gemaakt welk entiteittype men bedoeld, is deze unieke EAN-code niet meer nodig.
+          - MLOEA staat voor meerdere leveranciers op een aansluiting. Het is een configuratie waarbij een aansluiting meer dan één allocatiepunt heeft. Omdat de aansluiting en het primaire allocatiepunt (PAP) dezelfde EAN-code delen, helpt de unieke EAN-code expliciet te maken dat het om de aansluiting gaat. Deze EAN-code staat ook wel bekend als virtueel allocatiepunt (VAP) of overdrachtspunt MLOEA (OPM), terwijl het geen allocatiepunt of overdrachtspunt betreft. Als in het berichtenverkeer tussen netbeheerder en meetverantwoordelijke voortaan expliciet wordt gemaakt welk entiteittype men bedoeld (aansluiting of allocatiepunt), is de unieke EAN-code niet meer nodig.
       weekmax:
         description: geeft aan of de kWmax per week gemeten moet worden
         see_also:
