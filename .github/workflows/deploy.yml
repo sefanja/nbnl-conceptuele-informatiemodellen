@@ -45,11 +45,11 @@ jobs:
                   outdir=docs/_modellen/$modelname/$versionid
                   mkdir -p "$outdir"
 
-                  cp "$version/model.drawio.svg" "$outdir/"
+                  cp "$version/$model.drawio.svg" "$outdir/"
                   gen-doc \
                     --template-directory templates \
                     -d "$outdir" \
-                    "$version/model.yaml"
+                    "$version/$model.linkml.yml"
 
                   # Remove all .md files except index.md
                   find "$outdir" -type f -name "*.md" ! -name "index.md" -delete

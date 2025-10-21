@@ -21,7 +21,7 @@ for model_dir in sorted(os.listdir(BASE_INPUT_MODELS)):
 
     model_name = model_dir  # fallback
     for version in sorted(os.listdir(model_path), reverse=True):
-        yaml_path = os.path.join(model_path, version, "model.yaml")
+        yaml_path = os.path.join(model_path, version, f'{model_name}.linkml.yml')
         gen_md_path = os.path.join(BASE_OUTPUT_MODELS, model_dir, version, "index.md")
 
         if not os.path.exists(yaml_path):
