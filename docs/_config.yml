@@ -1,6 +1,7 @@
 title: NBNL Conceptuele Informatiemodellen
 theme: just-the-docs
 baseurl: /nbnl-conceptuele-informatiemodellen
+permalink: /:title/
 
 collections:
   modellen:
