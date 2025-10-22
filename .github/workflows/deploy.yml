@@ -53,9 +53,6 @@ jobs:
 
                   # Remove all .md files except index.md
                   find "$outdir" -type f -name "*.md" ! -name "index.md" -delete
-
-                  # Rnemame and move one level up to avoid 'index' in URL
-                  mv "$outdir/index.md" "$outdir/../$versionid.md"
                 fi
               done
             fi
