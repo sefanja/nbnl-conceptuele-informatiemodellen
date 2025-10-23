@@ -8,7 +8,7 @@ collections:
 
 just_the_docs:
   collections:
-    modellen:
+    domeinmodellen:
       name: Domeinmodellen
 
 enable_copy_code_button: true
