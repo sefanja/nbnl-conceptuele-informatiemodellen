@@ -1,4 +1,4 @@
-id: https://modellen.netbeheernederland.nl/aansluitingenregister
+id: https://modellen.netbeheernederland.nl/conceptueel-aansluitingenregister/v1
 name: aansluitingenregister
 title: Aansluitingenregister
 # conventie: versienummer eindigt op '-draft' zolang het model niet klaar is
@@ -18,9 +18,9 @@ prefixes:
   begrip: https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/
   # conventie: gebruik 'this' als lokale prefix, voor de dingen die door dit LinkML-bestand gedefinieerd worden
   # conventie: 'this' niet als default_prefix zodat we zelf full control houden over URI's
-  this: https://modellen.netbeheernederland.nl/aansluitingenregister#
-  marktpartijenregister: https://modellen.netbeheernederland.nl/marktpartijenregister#
-  tarievenregister: https://modellen.netbeheernederland.nl/tarievenregister#
+  this: https://modellen.netbeheernederland.nl/aansluitingenregister/1#
+  marktpartijenregister: https://sefanja.github.io/nbnl-conceptuele-informatiemodellen/domeinmodellen/marktpartijenregister/1#
+  tarievenregister: https://sefanja.github.io/nbnl-conceptuele-informatiemodellen/domeinmodellen/tarievenregister/1.0/#
   nen: https://www.nen.nl/
   wetten: "https://wetten.overheid.nl/jci1.3:c:"
   energiewet: https://wetten.overheid.nl/jci1.3:c:BWBR0050714&

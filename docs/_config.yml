@@ -1,4 +1,4 @@
-title: NBNL Conceptuele Informatiemodellen
+title: NBNL Informatiemodellen
 theme: just-the-docs
 baseurl: /nbnl-conceptuele-informatiemodellen
 
@@ -9,7 +9,7 @@ collections:
 just_the_docs:
   collections:
     modellen:
-      name: Modellen
+      name: Domeinmodellen
 
 enable_copy_code_button: true
 

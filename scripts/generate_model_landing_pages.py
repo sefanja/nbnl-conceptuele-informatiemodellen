@@ -1,8 +1,8 @@
 import os
 import yaml
 
-BASE_INPUT_MODELS = "modellen"
-BASE_OUTPUT_MODELS = os.path.join("docs", "_modellen")
+BASE_INPUT_MODELS = "domeinmodellen"
+BASE_OUTPUT_MODELS = os.path.join("docs", "_domeinmodellen")
 
 os.makedirs(BASE_OUTPUT_MODELS, exist_ok=True)
 

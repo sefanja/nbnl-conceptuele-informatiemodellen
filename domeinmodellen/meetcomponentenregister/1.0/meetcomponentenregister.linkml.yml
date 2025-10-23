@@ -1,4 +1,4 @@
-id: https://modellen.netbeheernederland.nl/meetcomponentenregister
+id: https://modellen.netbeheernederland.nl/meetcomponentenregister/1
 name: meetcomponentenregister
 title: Meetcomponentenregister
 description: Register met gegevens over meters en meetgateways die worden beheerd door Nederlandse netbeheerders.
@@ -10,11 +10,11 @@ version: 1.0-draft
 prefixes:
   linkml: https://w3id.org/linkml/
   begrip: https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/
-  this: https://modellen.netbeheernederland.nl/meetcomponentenregister#
-  aansluitingenregister: https://modellen.netbeheernederland.nl/aansluitingenregister#
-  installatieregister: https://modellen.netbeheernederland.nl/installatieregister#
-  marktpartijenregister: https://modellen.netbeheernederland.nl/marktpartijenregister#
-  meetcomponentstandaardenregister: https://modellen.netbeheernederland.nl/meetcomponentstandaardenregister#
+  this: https://sefanja.github.io/nbnl-conceptuele-informatiemodellen/domeinmodellen/meetcomponentenregister/1.0/#
+  aansluitingenregister: https://sefanja.github.io/nbnl-conceptuele-informatiemodellen/domeinmodellen/aansluitingenregister/1.2/#
+  installatieregister: https://sefanja.github.io/nbnl-conceptuele-informatiemodellen/domeinmodellen/installatieregister/1.0/#
+  marktpartijenregister: https://sefanja.github.io/nbnl-conceptuele-informatiemodellen/domeinmodellen/marktpartijenregister/1.6/#
+  meetcomponentstandaardenregister: https://sefanja.github.io/nbnl-conceptuele-informatiemodellen/domeinmodellen/meetcomponentstandaardenregister/1.0/#
   nbnlpub: https://www.netbeheernederland.nl/publicatie/
   wetten: "https://wetten.overheid.nl/jci1.3:c:"
   energiewet: https://wetten.overheid.nl/jci1.3:c:BWBR0050714&
