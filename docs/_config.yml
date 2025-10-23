@@ -3,13 +3,17 @@ theme: just-the-docs
 baseurl: /nbnl-conceptuele-informatiemodellen
 
 collections:
-  modellen:
+  domeinmodellen:
     output: true
 
 just_the_docs:
   collections:
     domeinmodellen:
       name: Domeinmodellen
+
+aux_links:
+  Begrippenkader:
+    - https://begrippen.netbeheernederland.nl
 
 enable_copy_code_button: true
 
