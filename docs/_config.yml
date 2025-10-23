@@ -11,9 +11,9 @@ just_the_docs:
     domeinmodellen:
       name: Domeinmodellen
 
-aux_links:
-  Begrippenkader:
-    - https://begrippen.netbeheernederland.nl
+nav_external_links:
+  - title: Begrippenkader
+    url: https://begrippen.netbeheernederland.nl
 
 enable_copy_code_button: true
 
