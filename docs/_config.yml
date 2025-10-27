@@ -3,13 +3,13 @@ theme: just-the-docs
 baseurl: /nbnl-conceptuele-informatiemodellen
 
 collections:
-  domeinmodellen:
+  modellen:
     output: true
 
 just_the_docs:
   collections:
-    domeinmodellen:
-      name: Domeinmodellen
+    modellen:
+      name: Conceptuele modellen
 
 nav_external_links:
   - title: Begrippenkader
