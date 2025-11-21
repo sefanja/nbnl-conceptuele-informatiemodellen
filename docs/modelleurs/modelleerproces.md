@@ -3,17 +3,18 @@ title: Proces
 parent: Voor modelleurs
 ---
 
-{: .warning }
-Deze website is in opbouw. Pagina's kunnen onvolledige of onjuiste informatie bevatten.
-
 # Modelleren en reviewproces
+
 Werkwijze en kwaliteitsborging in het modelleerteam. WRSPM.
 
 ## Rollen
-- Wie modelleert, wie reviewt?
+
+Wie modelleert, wie reviewt?
 
 ## Reviewcriteria
-- Wanneer is iets 'klaar'?
+
+Wanneer is iets 'klaar'?
 
 ## Overleg en besluitvorming
-- Synchroon/asynchroon overleg
+
+Synchroon/asynchroon overleg

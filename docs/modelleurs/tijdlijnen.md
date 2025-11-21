@@ -21,7 +21,7 @@ De markering gebeurt als volgt:
 
 Deze markeringen maken de temporele semantiek van een entiteit expliciet, al in de conceptuele fase. Dat helpt om consistentie te waarborgen in latere uitwerkingen, bijvoorbeeld versiemodellering in het gegevensmodel:
 
-![Tijdlijnen in een gegevensmodel](tijdlijnen.drawio.svg)
+![Tijdlijnen in een gegevensmodel]({{ site.baseurl }}/assets/images/tijdlijnen.drawio.svg)
 
 ## Tijdlijn geldigheid
 

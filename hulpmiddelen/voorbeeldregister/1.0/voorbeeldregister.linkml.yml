@@ -105,7 +105,7 @@ classes:
         unit:
           ucum_code: m # ucum_codes voor eenheden
       # relaties zijn attributes met als range een class:
-      voor de specificatie van: # vast patroon voor relatienamen, zie https://tdan.com/uml-as-a-data-modeling-notation-part-1/8457 of https://tdan.com/data-model-quality-where-good-data-begins/5286
+      voor de specificatie van: # vast patroon voor relatienamen, zie https://tdan.com/relationships-are-not-verbs-part-one/26996
         range: Aansluiting
         required: false # multipliciteiten op relaties altijd expliciet
         multivalued: false # dus deze ook altijd opnemen
