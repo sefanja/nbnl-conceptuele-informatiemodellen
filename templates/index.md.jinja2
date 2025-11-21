@@ -123,11 +123,6 @@
         {%- endif -%}
     {%- endif -%}
 
-    {# meaning #}
-    {%- if element.meaning -%}
-        {%- set _ = parts.items.append('_' ~ link(element.meaning) ~ '_') -%}
-    {%- endif -%}
-
     {# exact_mappings #}
     {%- set exact_mappings = mappings_line(element, 'exact', 'Exact overeenkomstig') -%}
     {%- if exact_mappings -%}
@@ -184,13 +179,6 @@
     {%- if tijdlijn_annotaties -%}
         {%- set _ = parts.items.append('Tijdlijnen: ' ~ tijdlijn_annotaties|join(', ')) -%}
     {%- endif -%}
-
-    {# NBility #}
-    {%- for a in element.annotations -%}
-        {%- if a == 'nbility' -%}
-            {%- set _ = parts.items.append('NBility: [' ~ element.annotations[a].value ~ '](https://nbility-model.github.io/NBility-business-capabilities-Archi/?view=id-8becf2d90261476faa9d53240e6cf2c8)') -%}
-        {%- endif -%}
-    {%- endfor -%}
 
     {# see_also #}
     {%- if element.see_also -%}

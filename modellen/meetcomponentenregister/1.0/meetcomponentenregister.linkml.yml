@@ -20,8 +20,6 @@ prefixes:
   energiewet: https://wetten.overheid.nl/jci1.3:c:BWBR0050714&
   iceg: https://wetten.overheid.nl/jci1.3:c:BWBR0037934&
 default_prefix: this
-annotations:
-  nbility: C.3.1.9. Netcomponent in levenscyclusbeheer opnemen
 
 classes:
   Any:

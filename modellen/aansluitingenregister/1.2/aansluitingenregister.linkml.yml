@@ -11,8 +11,6 @@ comments:
 see_also:
   - youtube:z7eVPSKf8l8
   - iceg:hoofdstuk=2&paragraaf=2.1&z=2025-01-01&g=2025-01-01
-annotations:
-  nbility: C.6.2.1. Aansluitingen/allocatiepunten beheren
 prefixes:
   linkml: https://w3id.org/linkml/
   begrip: https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/
@@ -949,11 +947,13 @@ enums:
   Energierichting:
     permissible_values:
       afname:
-        meaning:  begrip:afname
+        exact_mappings:
+          - begrip:afname
       combinatie:
         description: afname en invoeding
       invoeding:
-        meaning: begrip:invoeding
+        exact_mappings:
+          - begrip:invoeding
   Flensdrukklasse:
     permissible_values:
       onbekend:
@@ -995,15 +995,19 @@ enums:
   Technische grootte:
     permissible_values:
       grote aansluiting:
-        meaning: begrip:grote-aansluiting
+        exact_mappings:
+          - begrip:grote-aansluiting
       kleine aansluiting:
-        meaning: begrip:kleine-aansluiting
+        exact_mappings:
+          - begrip:kleine-aansluiting
   Marktsegment:
     permissible_values:
       grootverbruikaansluiting:
-        meaning: begrip:grootverbruikaansluiting
+        exact_mappings:
+          - begrip:grootverbruikaansluiting
       kleinverbruikaansluiting:
-        meaning: begrip:kleinverbruikaansluiting
+        exact_mappings:
+          - begrip:kleinverbruikaansluiting
   Nauwkeurigheidsklasse:
     permissible_values:
       onbekend:

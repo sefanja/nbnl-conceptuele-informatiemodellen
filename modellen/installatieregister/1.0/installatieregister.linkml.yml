@@ -5,8 +5,6 @@ version: 1.0-draft
 description: Het installatieregister bevat informatie over installatie-eenheden achter aansluitingen op het energienet, voor zover deze door of namens aangeslotenen zijn aangemeld bij de netbeheerder.
 see_also:
   - nce:hoofdstuk=13&paragraaf=13.1&z=2025-09-01&g=2025-09-01
-annotations:
-  nbility: C.6.2.2. Installaties achter aansluitingen beheren
 prefixes:
   linkml: https://w3id.org/linkml/
   begrip: https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/
