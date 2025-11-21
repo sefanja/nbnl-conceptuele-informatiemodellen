@@ -16,7 +16,7 @@ prefixes:
   iceg: https://wetten.overheid.nl/jci1.3:c:BWBR0037934& # gebruik Juriconnect bij verwijzing naar regelgeving
 default_prefix: this
 
-# Overal kun je de volgende elementen invoegen:
+# Overal kun je de volgende elementen gebruiken:
 # - mappings (exact_mappings, etc.): voor mappings op begrippen
 # - description: een definitie
 # - source: bron waarop de definitie is gebaseerd
@@ -60,7 +60,6 @@ classes:
       levensduur_einde: moment van vergaan
     slots: # gebruik dit alleen wanneer je eigenschappen in meerdere klassen hergebruikt
       - EAN-code
-      - energiedrager
     slot_usage: # hiermee kun je het slot aanpassen voor deze klasse
       EAN-code:
         annotations:
@@ -118,6 +117,10 @@ classes:
         exactly_one_of: # bij een en/of-boog gebruiken we any_of
           - range: Modelleur
           - range: Bezoeker
+        required: true
+        multivalued: true
+        annotations:
+          inverse_cardinality: "*" # de omgekeerde multipliciteit (opties: "*", 0..1, 1..*, 1)
     unique_keys:
       identificatie: # de sleutel heet altijd identificatie
         unique_key_slots:
@@ -149,8 +152,6 @@ slots: # eigenschappen voor gebruik in meer dan 1 klasse
 # waardelijsten:
 enums:
   Energierichting: # gebruik de natuurlijke schrijfwijze, eerste woord met een hoofdletter
-    exact_mappings:
-      -begrip:energierichting
     permissible_values:
       afname:
         exact_mappings:
