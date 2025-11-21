@@ -191,10 +191,8 @@
         {%- for s in element.see_also -%}
             {%- set _ = linked.append(link(s)) -%}
         {%- endfor -%}
-        {%- set summary_content = '<summary>Zie ook</summary>\n{: .text-delta }' -%}
-        {%- set list_content = '- ' ~ (linked | join('\n- ')) -%}
-        {%- set details_block = '<details markdown="block">\n\n' ~ summary_content ~ '\n\n' ~ list_content ~ '\n\n</details>' -%}
-        {%- set _ = parts.items.append(details_block) -%}
+        {%- set html_string = '<details markdown="block"><summary>Zie ook</summary>{: .text-delta }<ul><li>' ~ (linked | join('</li><li>')) ~ '</li></ul></details>' -%}
+        {%- set _ = parts.items.append(html_string | safe) -%}
     {%- endif -%}
 
     {{parts.items | join('<br/><br/>')}}
