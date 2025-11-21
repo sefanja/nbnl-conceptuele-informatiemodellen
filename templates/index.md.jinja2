@@ -123,6 +123,11 @@
         {%- endif -%}
     {%- endif -%}
 
+    {# meaning #}
+    {%- if element.meaning -%}
+        {%- set _ = parts.items.append('_' ~ link(element.meaning) ~ '_') -%}
+    {%- endif -%}
+
     {# exact_mappings #}
     {%- set exact_mappings = mappings_line(element, 'exact', 'Exact overeenkomstig') -%}
     {%- if exact_mappings -%}

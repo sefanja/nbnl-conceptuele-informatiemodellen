@@ -154,10 +154,8 @@ enums:
   Energierichting: # gebruik de natuurlijke schrijfwijze, eerste woord met een hoofdletter
     permissible_values:
       afname:
-        exact_mappings:
-          - begrip:afname
+        meaning: begrip:afname # hier gebruiken we meaning omdat exact_mappings hier niet lijkt te werken
       combinatie:
         description: afname en invoeding
       invoeding:
-        exact_mappings:
-          - begrip:invoeding
+        meaning: begrip:invoeding

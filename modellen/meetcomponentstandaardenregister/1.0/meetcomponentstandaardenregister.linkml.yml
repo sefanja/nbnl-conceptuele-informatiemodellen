@@ -126,11 +126,9 @@ enums:
   Energierichting:
     permissible_values:
       afname:
-        exact_mappings:
-          - begrip:afnmame
+        meaning: begrip:afnmame
       invoeding:
-        exact_mappings:
-          - begrip:invoeding
+        meaning: begrip:invoeding
   G-waarde:
     permissible_values:
       G2:

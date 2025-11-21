@@ -947,13 +947,11 @@ enums:
   Energierichting:
     permissible_values:
       afname:
-        exact_mappings:
-          - begrip:afname
+        meaning: begrip:afname
       combinatie:
         description: afname en invoeding
       invoeding:
-        exact_mappings:
-          - begrip:invoeding
+        meaning: begrip:invoeding
   Flensdrukklasse:
     permissible_values:
       onbekend:
@@ -995,19 +993,15 @@ enums:
   Technische grootte:
     permissible_values:
       grote aansluiting:
-        exact_mappings:
-          - begrip:grote-aansluiting
+        meaning: begrip:grote-aansluiting
       kleine aansluiting:
-        exact_mappings:
-          - begrip:kleine-aansluiting
+        meaning: begrip:kleine-aansluiting
   Marktsegment:
     permissible_values:
       grootverbruikaansluiting:
-        exact_mappings:
-          - begrip:grootverbruikaansluiting
+        meaning: begrip:grootverbruikaansluiting
       kleinverbruikaansluiting:
-        exact_mappings:
-          - begrip:kleinverbruikaansluiting
+        meaning: begrip:kleinverbruikaansluiting
   Nauwkeurigheidsklasse:
     permissible_values:
       onbekend:
