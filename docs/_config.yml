@@ -11,10 +11,6 @@ just_the_docs:
     modellen:
       name: Modellen
 
-nav_external_links:
-  - title: Begrippenkader
-    url: https://begrippen.netbeheernederland.nl
-
 include:
   - "**/*.svg"
 
@@ -23,3 +19,5 @@ defaults:
       path: ""
     values:
       layout: default
+
+color_scheme: nbnl
