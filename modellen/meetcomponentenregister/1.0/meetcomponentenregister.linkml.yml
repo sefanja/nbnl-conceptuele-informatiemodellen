@@ -10,11 +10,11 @@ version: 1.0-draft
 prefixes:
   linkml: https://w3id.org/linkml/
   begrip: https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/
-  this: https://sefanja.github.io/nbnl-conceptuele-informatiemodellen/domeinmodellen/meetcomponentenregister/1.0/#
-  aansluitingenregister: https://sefanja.github.io/nbnl-conceptuele-informatiemodellen/domeinmodellen/aansluitingenregister/1.2/#
-  installatieregister: https://sefanja.github.io/nbnl-conceptuele-informatiemodellen/domeinmodellen/installatieregister/1.0/#
-  marktpartijenregister: https://sefanja.github.io/nbnl-conceptuele-informatiemodellen/domeinmodellen/marktpartijenregister/1.6/#
-  meetcomponentstandaardenregister: https://sefanja.github.io/nbnl-conceptuele-informatiemodellen/domeinmodellen/meetcomponentstandaardenregister/1.0/#
+  this: https://sefanja.github.io/nbnl-conceptuele-informatiemodellen/modellen/meetcomponentenregister#
+  aansluitingenregister: https://sefanja.github.io/nbnl-conceptuele-informatiemodellen/modellen/aansluitingenregister#
+  installatieregister: https://sefanja.github.io/nbnl-conceptuele-informatiemodellen/modellen/installatieregister#
+  marktpartijenregister: https://sefanja.github.io/nbnl-conceptuele-informatiemodellen/modellen/marktpartijenregister#
+  meetcomponentstandaardenregister: https://sefanja.github.io/nbnl-conceptuele-informatiemodellen/modellen/meetcomponentstandaardenregister#
   nbnlpub: https://www.netbeheernederland.nl/publicatie/
   wetten: "https://wetten.overheid.nl/jci1.3:c:"
   energiewet: https://wetten.overheid.nl/jci1.3:c:BWBR0050714&

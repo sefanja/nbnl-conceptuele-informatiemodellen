@@ -17,8 +17,8 @@ prefixes:
   # conventie: gebruik 'this' als lokale prefix, voor de dingen die door dit LinkML-bestand gedefinieerd worden
   # conventie: 'this' niet als default_prefix zodat we zelf full control houden over URI's
   this: https://modellen.netbeheernederland.nl/aansluitingenregister/1#
-  marktpartijenregister: https://sefanja.github.io/nbnl-conceptuele-informatiemodellen/domeinmodellen/marktpartijenregister/1#
-  tarievenregister: https://sefanja.github.io/nbnl-conceptuele-informatiemodellen/domeinmodellen/tarievenregister/1.0/#
+  marktpartijenregister: https://sefanja.github.io/nbnl-conceptuele-informatiemodellen/modellen/marktpartijenregister#
+  tarievenregister: https://sefanja.github.io/nbnl-conceptuele-informatiemodellen/modellen/tarievenregister#
   nen: https://www.nen.nl/
   wetten: "https://wetten.overheid.nl/jci1.3:c:"
   energiewet: https://wetten.overheid.nl/jci1.3:c:BWBR0050714&

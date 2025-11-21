@@ -8,8 +8,8 @@ see_also:
 prefixes:
   linkml: https://w3id.org/linkml/
   begrip: https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/
-  this: https://sefanja.github.io/nbnl-conceptuele-informatiemodellen/domeinmodellen/installatieregister/1.0/#
-  aansluitingenregister: https://sefanja.github.io/nbnl-conceptuele-informatiemodellen/domeinmodellen/aansluitingenregister/1.2/#
+  this: https://sefanja.github.io/nbnl-conceptuele-informatiemodellen/modellen/installatieregister#
+  aansluitingenregister: https://sefanja.github.io/nbnl-conceptuele-informatiemodellen/modellen/aansluitingenregister#
   celex: "https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:"
   nce: https://wetten.overheid.nl/jci1.3:c:BWBR0037940&
   iceg: https://wetten.overheid.nl/jci1.3:c:BWBR0037934&

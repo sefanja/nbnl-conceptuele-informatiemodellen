@@ -44,3 +44,4 @@ for model_dir in sorted(os.listdir(BASE_INPUT_MODELS)):
         f.write(f'title: "{model_name}"\n')
         f.write("---\n\n")
         f.write(f"# {model_name}\n")
+        f.write(f"<script>window.location.href = window.location.protocol + '//' + window.location.host + window.location.pathname + '/{version}' + window.location.hash</script>")

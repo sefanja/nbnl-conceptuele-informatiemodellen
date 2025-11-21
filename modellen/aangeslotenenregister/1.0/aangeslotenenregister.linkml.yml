@@ -8,8 +8,8 @@ version: 1.0-draft
 prefixes:
   linkml: https://w3id.org/linkml/
   begrip: https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/
-  this: https://sefanja.github.io/nbnl-conceptuele-informatiemodellen/domeinmodellen/aangeslotenenregister/1.0/#
-  aansluitingenregister: https://sefanja.github.io/nbnl-conceptuele-informatiemodellen/domeinmodellen/aansluitingenregister/1.2#
+  this: https://sefanja.github.io/nbnl-conceptuele-informatiemodellen/modellen/aangeslotenenregister#
+  aansluitingenregister: https://sefanja.github.io/nbnl-conceptuele-informatiemodellen/modellen/aansluitingenregister#
   energiewet: https://wetten.overheid.nl/jci1.3:c:BWBR0050714&
   hr: http://opendata.stelselcatalogus.nl/hr/id/begrip/
   kvk: https://www.kvk.nl/
