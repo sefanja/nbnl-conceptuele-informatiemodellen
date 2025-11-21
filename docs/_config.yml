@@ -9,13 +9,11 @@ collections:
 just_the_docs:
   collections:
     modellen:
-      name: Conceptuele modellen
+      name: Modellen
 
 nav_external_links:
   - title: Begrippenkader
     url: https://begrippen.netbeheernederland.nl
-
-enable_copy_code_button: true
 
 include:
   - "**/*.svg"
@@ -25,11 +23,3 @@ defaults:
       path: ""
     values:
       layout: default
-
-mermaid:
-  version: "11.6.0"
-
-callouts:
-  warning:
-    title: Warning
-    color: red

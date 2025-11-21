@@ -3,9 +3,6 @@ title: Tijdlijnen
 parent: Voor modelleurs
 ---
 
-{: .warning }
-Deze website is in opbouw. Pagina's kunnen onvolledige of onjuiste informatie bevatten.
-
 # Tijdlijnen in conceptuele modellen
 
 Een conceptueel informatiemodel beschrijft de toestand van de wereld op abstract niveau: welke objecttypen er zijn, met welke eigenschappen en relaties. Het model representeert de wereld zoals die bedoeld of waargenomen wordt, maar bevat geen informatie over veranderingen in de tijd, versies of individuele voorkomens.

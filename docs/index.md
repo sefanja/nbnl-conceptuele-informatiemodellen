@@ -3,9 +3,9 @@ title: Startpagina
 nav_order: 1
 ---
 
-# Het datafundament voor de Nederlandse energiesector
+# Data voor de Nederlandse energiesector
 
-Een efficiënte en betrouwbare energiemarkt is cruciaal voor Nederland. Om deze markt optimaal te faciliteren, hebben netbeheerders de wettelijke taak om kerngegevens over het energienet te registreren en te delen. Dit vraagt om een eenduidige en gestandaardiseerde aanpak, zodat alle partijen – van overheid tot marktpartij – met dezelfde informatie werken.
+Een efficiënte en betrouwbare energiemarkt is cruciaal voor Nederland. Om deze markt optimaal te faciliteren, hebben netbeheerders de wettelijke taak om kerngegevens over het energienet te registreren en te delen. Dit vraagt om een eenduidige en gestandaardiseerde aanpak, zodat alle partijen met dezelfde informatie werken.
 
 Deze website is het centrale punt voor de informatiemodellen van de Nederlandse netbeheerders. Hier leggen we de basis vast voor een gedeeld, eenduidig begrip van het energienet. Deze modellen vormen het fundament waarop systemen worden gebouwd, analyses worden uitgevoerd en beleid wordt gevormd.
 
