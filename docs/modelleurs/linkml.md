@@ -4,9 +4,6 @@ parent: Voor modelleurs
 nav_order: 3
 ---
 
-{: .warning }
-Deze website is in opbouw. Pagina's kunnen onvolledige of onjuiste informatie bevatten.
-
 # Modelleren in LinkML
 
 [LinkML](https://linkml.io/) (Linked Modeling Language) is een gestructureerde taal om informatiemodellen op te stellen in YAML-formaat. Het lijkt qua vorm op JSON Schema, maar is gericht op semantische duidelijkheid, herbruikbaarheid en documentatie van concepten.

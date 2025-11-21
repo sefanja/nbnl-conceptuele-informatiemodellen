@@ -1,4 +1,4 @@
-title: NBNL Informatiemodellen
+title: Stelsel van energieregisters
 theme: just-the-docs
 baseurl: /nbnl-conceptuele-informatiemodellen
 
@@ -9,7 +9,7 @@ collections:
 just_the_docs:
   collections:
     modellen:
-      name: Modellen
+      name: Registers
 
 defaults:
   - scope:

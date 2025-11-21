@@ -1,22 +1,23 @@
 ---
-title: Naamgevingsconventies
+title: Naamgeving
 parent: Voor modelleurs
 ---
 
-# Naamgevingsconventies
+# Naamgeving
 
 Over het algemeen geldt: we gebruiken de Nederlandse spellingsregels en vermijden Engels taalgebruik. Dus geen PascalCase of snake_case, maar gewoon spaties, leestekens en bijzondere karakters.
 
-## Relatienamen
 
-Voor relatienamen gebruiken we het patroon zoals beschreven door David Hay in zijn artikel [Relationships Are Not Verbs](https://tdan.com/relationships-are-not-verbs-part-one/26996).
+In het marktdomein zijn we energiedrageragnostisch (`elektriciteit`, `gas` zijn variabelen). Waar mogelijk zijn we netvlakagnostisch (`middenspanning`, `laagspanning` zijn variabelen).
 
-## Entiteitsnamen
+## Entiteiten
 
 Het eerste woord krijgt een hoofdletter. Entiteiten worden aangeduid in het enkelvoud en moeten een bruikbare meervoudsvorm hebben volgens het woordenboek. Dus geen `Suiker`, maar wel `Suikerklontje`.
 
-## Principes
+## Eigenschappen
 
-In het marktdomein zijn we energiedrageragnostisch (`elektriciteit`, `gas` zijn variabelen).
+Eigenschappen beginnen met een kleine letter (tenzij de spellingsregels anders voorschrijven).
 
-Waar mogelijk zijn we netvlakagnostisch (`middenspanning`, `laagspanning` zijn variabelen).
+## Relaties
+
+Voor relatienamen gebruiken we het patroon zoals beschreven door David Hay in zijn artikel [Relationships Are Not Verbs](https://tdan.com/relationships-are-not-verbs-part-one/26996).
