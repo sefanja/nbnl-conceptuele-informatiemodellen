@@ -11,10 +11,6 @@ just_the_docs:
     modellen:
       name: Modellen
 
-include:
-  - "**/*.svg"
-  - "**/*.scss"
-
 defaults:
   - scope:
       path: ""
