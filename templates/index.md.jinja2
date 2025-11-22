@@ -230,6 +230,8 @@ parent: "{{schema.title}}"
 
 ![Diagram]({{schema.name}}.drawio.svg)
 
+---
+
 {% for class in gen.all_class_objects() | sort(attribute=sort_by) %}
 {% if class.name != 'Any' and not class.annotations.external_registry %}
 
