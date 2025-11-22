@@ -133,7 +133,7 @@ enums:
     permissible_values:
       huishoudelijk eindafnemer:
         description: eindafnemer die elektriciteit of gas koopt of wil kopen voor eigen huishoudelijk gebruik
-        source: energiewet:z=2025-02-22&g=2025-02-22
+        source: energiewet:g=2025-02-22
       onderneming of overige zakelijke eindafnemer:
         description:  eindafnemer die elektriciteit of gas koopt of wil kopen anders dan voor eigen huishoudelijk gebruik
-        source: energiewet:z=2025-02-22&g=2025-02-22
+        source: energiewet:g=2025-02-22

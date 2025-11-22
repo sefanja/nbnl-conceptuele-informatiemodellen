@@ -4,7 +4,7 @@ title: Installatieregister
 version: 1.0-draft
 description: Het installatieregister bevat informatie over installatie-eenheden achter aansluitingen op het energienet, voor zover deze door of namens aangeslotenen zijn aangemeld bij de netbeheerder.
 see_also:
-  - nce:hoofdstuk=13&paragraaf=13.1&z=2025-09-01&g=2025-09-01
+  - nce:hoofdstuk=13&paragraaf=13.1&g=2025-09-01
 prefixes:
   linkml: https://w3id.org/linkml/
   begrip: https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/
@@ -88,7 +88,7 @@ classes:
     slot_usage:
       EAN-code:
         see_also:
-          - nce:hoofdstuk=2&paragraaf=2.1&artikel=2.4&z=2024-07-05&g=2024-07-05
+          - nce:hoofdstuk=2&paragraaf=2.1&artikel=2.4&g=2024-07-05
     attributes:
       type:
         description: classificatie op basis van maximumcapaciteit en spanning op het overdrachtspunt
@@ -168,7 +168,7 @@ classes:
       primaire energiebron:
         description: stof, object of natuurlijke plaats waaruit de meeste energie wordt gehaald
         see_also:
-          - iceg:hoofdstuk=2&paragraaf=2.1&artikel=2.1.5&z=2025-01-01&g=2025-01-01
+          - iceg:hoofdstuk=2&paragraaf=2.1&artikel=2.1.5&g=2025-01-01
         range: Energiebron
         required: true
       totale vermogen opwekkingseenheden:
@@ -199,9 +199,9 @@ classes:
       levensduur_begin: moment van inbedrijfname
       levensduur_einde: moment van uitbedrijfname
     description: productie-installatie of een op grond van de criteria uit artikel 24 van de Regeling garanties van oorsprong en certificaten van oorsprong afgebakend deel daarvan, die of dat op grond van artikel 16, eerste lid, onderdeel h, van de Elektriciteitswet 1998, of artikel 10, vijfde lid, onderdeel c, van de Gaswet, wordt aangemerkt als een installatie voor de productie van energie als bedoeld in artikel 73, eerste lid van de Elektriciteitswet 1998, of artikel 66i, eerste lid van de Gaswet
-    source: bge:z=2025-05-08&g=2025-05-08
+    source: bgeg=2025-05-08
     see_also:
-      - rgcvo:z=2025-04-01&g=2025-04-01
+      - rgcvo:g=2025-04-01
     slots:
       - EAN-code
     attributes:
@@ -451,7 +451,7 @@ enums:
       Hz:
   Energiebron:
     see_also:
-      - bge:z=2025-05-08&g=2025-05-08
+      - bge:g=2025-05-08
     permissible_values:
       zon:
       wind:

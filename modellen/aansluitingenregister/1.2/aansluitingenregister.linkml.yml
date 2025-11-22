@@ -10,7 +10,7 @@ comments:
   - De verplichting tot het bijhouden van het aansluitingenregister is vastgelegd in de Informatiecode elektriciteit en gas, vastgesteld door de Autoriteit Consument en Markt (ACM).
 see_also:
   - youtube:z7eVPSKf8l8
-  - iceg:hoofdstuk=2&paragraaf=2.1&z=2025-01-01&g=2025-01-01
+  - iceg:hoofdstuk=2&paragraaf=2.1&g=2025-01-01
 prefixes:
   linkml: https://w3id.org/linkml/
   begrip: https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/
@@ -69,8 +69,8 @@ classes:
         exact_mappings:
           - begrip:gecontracteerde-transportcapaciteit
         see_also:
-          - tce:hoofdstuk=3&paragraaf=3.7&artikel=3.7.4&z=2022-05-18&g=2022-05-18
-          - tcg:hoofdstuk=2&paragraaf=2.6&artikel=2.33&z=2023-05-02&g=2023-05-02
+          - tce:hoofdstuk=3&paragraaf=3.7&artikel=3.7.4&g=2022-05-18
+          - tcg:hoofdstuk=2&paragraaf=2.6&artikel=2.33&g=2023-05-02
       technische grootte:
         description: aanduiding van het formaat van de aansluiting op basis van de gewenste aansluitcapaciteiten van de overdrachtspunten
         comments:
@@ -82,8 +82,8 @@ classes:
       marktsegment:
         description: aanduiding van de categorie waartoe de aansluiting behoort, te weten kleinverbruikaansluiting of grootverbruikaansluiting
         see_also:
-          - iceg:hoofdstuk=2&paragraaf=2.1&artikel=2.1.3&z=2022-05-18&g=2022-05-18
-          - bce:hoofdstuk=1&artikel=1.1&z=2022-11-25&g=2022-11-25
+          - iceg:hoofdstuk=2&paragraaf=2.1&artikel=2.1.3&g=2022-05-18
+          - bce:hoofdstuk=1&artikel=1.1&g=2022-11-25
         comments:
           - Een aansluiting met een kleine capaciteit kan onder voorwaarden worden beschouwd als grootverbruikaansluiting, bijvoorbeeld als het een aansluiting betreft op een gesloten distributiesysteem of een aansluiting zoals bedoeld in artikel 1, lid 2 of 3 van de Elektriciteitswet 1998.
         range: Marktsegment
@@ -91,7 +91,7 @@ classes:
       uitsluitend elektriciteitsproductie-eenheden:
         description: geeft aan of achter een aansluiting zich uitsluitend elektriciteitsproductie-eenheden bevinden en geen ander verbruik dan het eigen verbruik van de desbetreffende elektriciteitsproductie-eenheden
         see_also:
-          - tce:hoofdstuk=3&paragraaf=3.7&artikel=3.7.13.b&z=2022-05-18&g=2022-05-18
+          - tce:hoofdstuk=3&paragraaf=3.7&artikel=3.7.13.b&g=2022-05-18
         comments:
           - Ook wel bekend als 'zuivere teruglevering'.
         range: boolean
@@ -103,7 +103,7 @@ classes:
       weekmax:
         description: geeft aan of de kWmax per week gemeten moet worden
         see_also:
-          - tce:hoofdstuk=3&paragraaf=3.7&artikel=3.7.5a&z=2022-05-18&g=2022-05-18
+          - tce:hoofdstuk=3&paragraaf=3.7&artikel=3.7.5a&g=2022-05-18
         range: boolean
       # relaties
       beheerd door:
@@ -140,7 +140,7 @@ classes:
     comments:
       - Adresgegevens zijn zo veel mogelijk overeenkomstig NEN 5825.
     see_also:
-      - iceg:hoofdstuk=2&paragraaf=2.1&artikel=2.1.3&z=2023-06-28&g=2023-06-28
+      - iceg:hoofdstuk=2&paragraaf=2.1&artikel=2.1.3&g=2023-06-28
     attributes:
       huisnummer:
         description: aan een verblijfsobject, standplaats of ligplaats toegekend nummer, een antwoordnummer of een postbusnummer
@@ -250,9 +250,9 @@ classes:
       tijdlijn_registratie: true
       tijdlijn_effectuering: true
     description: splitsing van de wikkeling van een transformator
-    source: mce:bijlage=3&z=2023-04-01&g=2023-04-01
+    source: mce:bijlage=3&g=2023-04-01
     see_also:
-      - mce:hoofdstuk=4&paragraaf=4.3&sub-paragraaf=4.3.2&artikel=4.3.2.4&z=2022-10-25&g=2022-10-25
+      - mce:hoofdstuk=4&paragraaf=4.3&sub-paragraaf=4.3.2&artikel=4.3.2.4&g=2022-10-25
     attributes:
       in gebruik:
         description: geeft aan of de aftakking wordt gebruikt
@@ -293,7 +293,7 @@ classes:
         comments:
           - "Validatie: bij primair allocatiepunt gelijk aan EAN-code aansluiting, bij secundair ongelijk."
         see_also:
-          - nce:hoofdstuk=2&paragraaf=2.1&artikel=2.4&z=2022-11-25&g=2022-11-25
+          - nce:hoofdstuk=2&paragraaf=2.1&artikel=2.4&g=2022-11-25
         annotations:
           personal_data: true
     attributes:
@@ -301,17 +301,17 @@ classes:
         # TODO: definitie
         range: Allocatiemethode
         see_also:
-          - iceg:hoofdstuk=2&paragraaf=2.1&artikel=2.1.3&z=2022-05-18&g=2022-05-18
-          - nce:hoofdstuk=10&paragraaf=10.4&artikel=10.17&z=2023-06-10&g=2023-06-10
+          - iceg:hoofdstuk=2&paragraaf=2.1&artikel=2.1.3&g=2022-05-18
+          - nce:hoofdstuk=10&paragraaf=10.4&artikel=10.17&g=2023-06-10
       profielcategorie:
         description: groep allocatiepunten waarvoor een reeks profielfracties wordt vastgesteld
         comments:
           - Ook bekend als 'afnamecategorie'.
           - Voorbeelden van mogelijke waarden zijn E1A, E1B, E1C, E2A, E2B, E4A, G1A, G2A, G2C, GGV, GIN, GIS, GKV, GMN en GXX.
         see_also:
-          - iceg:hoofdstuk=2&paragraaf=2.1&artikel=2.1.3&z=2022-05-18&g=2022-05-18
-          - bce:hoofdstuk=1&artikel=1.1&z=2022-11-25&g=2022-11-25
-          - bcg:hoofdstuk=1&artikel=1.1&z=2021-06-01&g=2021-06-01
+          - iceg:hoofdstuk=2&paragraaf=2.1&artikel=2.1.3&g=2022-05-18
+          - bce:hoofdstuk=1&artikel=1.1&g=2022-11-25
+          - bcg:hoofdstuk=1&artikel=1.1&g=2021-06-01
         annotations:
           personal_data: true
     unique_keys:
@@ -326,16 +326,16 @@ classes:
       administratieve status van meetinrichting:
         description: geeft weer of de aangeslotene de mogelijkheid om de meter op afstand uit te lezen administratief heeft laten uitzetten
         see_also:
-          - iceg:hoofdstuk=2&paragraaf=2.1&artikel=2.1.4&z=2022-12-20&g=2022-12-20
+          - iceg:hoofdstuk=2&paragraaf=2.1&artikel=2.1.4&g=2022-12-20
         range: Aan of uit
         annotations:
           personal_data: true
       blokkade:
         description: geeft weer of het allocatiepunt en de bijbehorende aansluiting is geblokkeerd voor de automatische verwerking van mutatieprocessen als bedoeld in Hoofdstuk 4 van de Informatiecode elektriciteit en gas
         see_also:
-          - iceg:hoofdstuk=4&z=2023-03-18&g=2023-03-18
-          - iceg:hoofdstuk=2&paragraaf=2.12&z=2023-03-18&g=2023-03-18
-          - iceg:hoofdstuk=1&paragraaf=1.1&artikel=1.1.14&z=2023-03-18&g=2023-03-18
+          - iceg:hoofdstuk=4&g=2023-03-18
+          - iceg:hoofdstuk=2&paragraaf=2.12&g=2023-03-18
+          - iceg:hoofdstuk=1&paragraaf=1.1&artikel=1.1.14&g=2023-03-18
         range: Blokkade
         annotations:
           personal_data: true
@@ -344,7 +344,7 @@ classes:
         comments:
           - "Validatie: bij een bemeten kleinverbruikaansluiting zonder meter is geen overgang mogelijk naar 'in bedrijf'."
         see_also:
-          - iceg:hoofdstuk=2&paragraaf=2.1&artikel=2.1.3&z=2022-05-18&g=2022-05-18
+          - iceg:hoofdstuk=2&paragraaf=2.1&artikel=2.1.3&g=2022-05-18
         range: Fysieke status allocatiepunt
         annotations:
           personal_data: true
@@ -357,13 +357,13 @@ classes:
       reden uit bedrijf:
         description: verklaring van het uit bedrijf zijn van één of meer onderdelen zodat energie-uitwisseling op het allocatiepunt onmogelijk is
         see_also:
-          - rakveg:paragraaf=1&artikel=1a&z=2023-04-01&g=2023-04-01
+          - rakveg:paragraaf=1&artikel=1a&g=2023-04-01
         range: Reden uit bedrijf
         annotations:
           personal_data: true
       type:
         description: geeft weer of het allocatiepunt primair of secundair is
-        source: bce:hoofdstuk=1&artikel=1.1&z=2022-11-25&g=2022-11-25
+        source: bce:hoofdstuk=1&artikel=1.1&g=2022-11-25
         range: Type allocatiepunt bij aansluiting
       wijze uit bedrijf:
         description: manier waarop één of meer onderdelen uit bedrijf zijn genomen zodat energie-uitwisseling op het allocatiepunt onmogelijk is
@@ -373,7 +373,7 @@ classes:
       wijze van bemeting:
         description: manier waarop het allocatiepunt is bedoeld om te worden bemeten
         see_also:
-          - iceg:hoofdstuk=2&paragraaf=2.1&artikel=2.1.3&z=2022-05-18&g=2022-05-18
+          - iceg:hoofdstuk=2&paragraaf=2.1&artikel=2.1.3&g=2022-05-18
         range: Wijze van bemeting
         annotations:
           personal_data: true
@@ -413,7 +413,7 @@ classes:
     comments:
       - Voorheen werden zogenaame 'virtuele aansluitingen' geregistreerd (DIM). Dit register staat alleen de registratie van echte aansluitingen toe. De mooiste manier om een streng van lichtmasten te registreren, is als één aansluiting met één primair allocatiepunt en een overdrachtspunt per lichtmast. Is het aantal strengen bekend maar niet de verdeling van lichtmasten over die strengen, dan als één aansluiting/allocatiepunt/overdrachtspunt per streng, met al deze aansluitingen gegroepeerd in een groep van strengen van lichtmasten. Is het ook het aantal strengen niet bekend, dan als één aansluiting/allocatiepunt/overdrachtspunt. Al deze varianten leiden tot eenzelfde nettarief, volgens de afleidingsregels in het tarievenregister.
     see_also:
-      - tce:hoofdstuk=3&paragraaf=3.3&artikel=3.3.3&z=2022-05-18&g=2022-05-18
+      - tce:hoofdstuk=3&paragraaf=3.3&artikel=3.3.3&g=2022-05-18
     attributes:
       totaal aantal overdrachtspunten:
         description: som van het aantal overdrachtspunten van alle strengen in de groep, zowel de in dit register geïdentificeerde als niet-geïdentificeerde overdrachtspunten
@@ -441,7 +441,7 @@ classes:
       tijdlijn_effectuering: true
     description: elektrisch apparaat dat wordt toegepast voor het verlagen van spanning of stroom zodat deze gemeten kan worden
     see_also:
-      - mce:hoofdstuk=4&paragraaf=4.3&sub-paragraaf=4.3.2&artikel=4.3.2.4&z=2022-10-25&g=2022-10-25
+      - mce:hoofdstuk=4&paragraaf=4.3&sub-paragraaf=4.3.2&artikel=4.3.2.4&g=2022-10-25
     attributes:
       fabrikant:
         description: bedrijf dat industrieel goederen vervaardigt
@@ -492,7 +492,7 @@ classes:
       tijdlijn_registratie: true
       tijdlijn_effectuering: true
     see_also:
-      - iceg:hoofdstuk=2&paragraaf=2.1&artikel=2.1.3&z=2022-05-18&g=2022-05-18
+      - iceg:hoofdstuk=2&paragraaf=2.1&artikel=2.1.3&g=2022-05-18
     slots:
       - EAN-code
     attributes:
@@ -522,7 +522,7 @@ classes:
       tijdlijn_registratie: true
       tijdlijn_effectuering: true
     description: recht op het gebruik van één of meer verbindingen tussen twee energienetten of tussen een energienet en een interconnector
-    source: bcg:hoofdstuk=1&artikel=1.1&z=2021-06-01&g=2021-06-01
+    source: bcg:hoofdstuk=1&artikel=1.1&g=2021-06-01
     comments:
       - "Een koppeling met een gesloten distributiesysteem wordt in dit register beschouwd als netkoppeling als de beheerder gebruik maakt van het elektronische berichtenverkeer ten behoeve van het faciliteren van derdentoegang (zie artikel 2.4, vierde lid van de Netcode elektriciteit)."
     slots:
@@ -564,7 +564,7 @@ classes:
         comments:
           - Voor een goede informatiehuishouding is het essentieel dat de identificatie van een fysiek object niet verandert zolang dat fysieke object bestaat. De EAN-code van een overdrachtspunt mag dus nooit wijzigen, in tegenstelling tot de EAN-code van een aansluiting of allocatiepunt.
         see_also:
-          - nce:hoofdstuk=2&paragraaf=2.1&artikel=2.4&z=2022-11-25&g=2022-11-25
+          - nce:hoofdstuk=2&paragraaf=2.1&artikel=2.4&g=2022-11-25
     attributes:
       aansluitcapaciteit:
         exact_mappings:
@@ -585,9 +585,9 @@ classes:
         comments:
           - "Eenheid: volt (V) of bar."
         see_also:
-          - nce:hoofdstuk=13&paragraaf=13.1&artikel=13.1&z=2023-06-10&g=2023-06-10
-          - iceg:hoofdstuk=2&paragraaf=2.11&artikel=2.11.4&z=2023-06-28&g=2023-06-28
-          - iceg:hoofdstuk=2&paragraaf=2.11&artikel=2.11.5&z=2023-06-28&g=2023-06-28
+          - nce:hoofdstuk=13&paragraaf=13.1&artikel=13.1&g=2023-06-10
+          - iceg:hoofdstuk=2&paragraaf=2.11&artikel=2.11.4&g=2023-06-28
+          - iceg:hoofdstuk=2&paragraaf=2.11&artikel=2.11.5&g=2023-06-28
         range: float
       energierichting:
         description: richting waarin energie kan stromen over het overdrachtspunt
@@ -597,21 +597,21 @@ classes:
           - "Voor elektriciteit geldt over het algemeen: combinatie. Voor gas geldt over het algemeen: indien profielcategorie GIS of GIN dan invoeding anders afname."
           - "De betekenis van het historische 'leveringsrichting' was net iets anders: de richting waarin de energie niet mogelijk maar daadwerkelijk stroomt. Energieleveranciers wisten dan wat ze konden verwachten. Dat gegeven is echter afleidbaar uit het energie-uitwisselingsregister en eventueel installatieregister."
         see_also:
-          - iceg:hoofdstuk=2&paragraaf=2.1&artikel=2.1.3&z=2023-04-01&g=2023-04-01
+          - iceg:hoofdstuk=2&paragraaf=2.1&artikel=2.1.3&g=2023-04-01
         range: Energierichting
       leveringsdruk gegarandeerd:
         description: geeft aan of door een aangeslotene een vaste druk is aangevraagd op het overdrachtspunt
         comments:
           - Bij een vaste druk bevat de aansluitverbinding een drukregelaar.
         see_also:
-          - iceg:hoofdstuk=2&paragraaf=2.11&artikel=2.11.5&z=2023-06-28&g=2023-06-28
+          - iceg:hoofdstuk=2&paragraaf=2.11&artikel=2.11.5&g=2023-06-28
         range: boolean
       waarde hoofdzekering:
         description: maximale stroomsterkte die de algemene veiligheid op de aansluitverbinding toelaat.
         comments:
           - In geval van een door de netbeheerder geplaatste LS-hoofdzekering.
         see_also:
-          - iceg:hoofdstuk=2&paragraaf=2.11&artikel=2.11.4&z=2023-06-28&g=2023-06-28
+          - iceg:hoofdstuk=2&paragraaf=2.11&artikel=2.11.4&g=2023-06-28
         range: float
         unit:
           ucum_code: A
@@ -640,28 +640,28 @@ classes:
     class_uri: this:Primair-deel-elektriciteitsmeetinrichting
     is_a: Primair deel meetinrichting
     description: eventueel aanwezige spannings- en stroommeettransformatoren met inbegrip van de aansluitklemmen waarop het secundaire deel van de meetinrichting is aangesloten
-    source: bce:hoofdstuk=1&artikel=1.1&z=2022-11-25&g=2022-11-25
+    source: bce:hoofdstuk=1&artikel=1.1&g=2022-11-25
     attributes:
       aantal meetkabels:
         description: totale hoeveelheid kabels waaruit de primaire bekabeling van de meetcircuits bestaan, waarbij een kabel een samenstel is van een of meer geïsoleerde elektrische leidingen met een gezamenlijke mantel
         range: integer
       trafocorrectiefactor:
         description: factor waarmee vermenigvuldigd moet worden om de meetwaarde te corrigeren voor energieverlies in de MS/LS-transformator, indien deze zich bevindt tussen het overdrachtspunt en het meetpunt
-        source: mce:hoofdstuk=4&paragraaf=4.3&sub-paragraaf=4.3.1&artikel=4.3.1.3&z=2022-10-25&g=2022-10-25
+        source: mce:hoofdstuk=4&paragraaf=4.3&sub-paragraaf=4.3.1&artikel=4.3.1.3&g=2022-10-25
         range: float
       soort meetzekering:
         description: aanduiding van een verzameling meetzekeringen die een gemeenschappelijk karakter hebben
-        source: mce:hoofdstuk=4&paragraaf=4.3&sub-paragraaf=4.3.2&artikel=4.3.2.4&z=2022-10-25&g=2022-10-25
+        source: mce:hoofdstuk=4&paragraaf=4.3&sub-paragraaf=4.3.2&artikel=4.3.2.4&g=2022-10-25
         comments:
           -  In afwijking van de Meetcode elektriciteit spreken we niet van 'smeltveiligheid' om ook zekeringen die niet smelten in te sluiten.
         range: Soort meetzekering
       toegang vereist:
         description: geeft weer of essentiële onderdelen van de meetinrichting zijn geplaatst in een aan de netbeheerder ter beschikking staande ruimte die niet vrij toegankelijk is voor de meetverantwoordelijke
-        source: mce:hoofdstuk=4&paragraaf=4.3&sub-paragraaf=4.3.1&artikel=4.3.1.1&z=2023-04-01&g=2023-04-01
+        source: mce:hoofdstuk=4&paragraaf=4.3&sub-paragraaf=4.3.1&artikel=4.3.1.1&g=2023-04-01
         range: boolean
       waarde meetzekering:
         description: waarde van de meetzekering in de spanningsmeetcircuits
-        source: mce:hoofdstuk=4&paragraaf=4.3&sub-paragraaf=4.3.2&artikel=4.3.2.4&z=2022-10-25&g=2022-10-25
+        source: mce:hoofdstuk=4&paragraaf=4.3&sub-paragraaf=4.3.2&artikel=4.3.2.4&g=2022-10-25
         comments:
           -  In afwijking van de Meetcode elektriciteit spreken we niet van 'smeltveiligheid' om ook zekeringen die niet smelten in te sluiten.
         range: float
@@ -673,7 +673,7 @@ classes:
     is_a: Primair deel meetinrichting
     description: hulpmiddelen bij een gasaansluiting waarop het secundaire deel van de meetinrichting is aangesloten
     see_also:
-      - iceg:hoofdstuk=2&paragraaf=2.11&artikel=2.11.5&z=2023-06-28&g=2023-06-28
+      - iceg:hoofdstuk=2&paragraaf=2.11&artikel=2.11.5&g=2023-06-28
     attributes:
       flensafstand:
         description: afstand tussen de flenzen waartussen het secundaire gedeelte van de meetinrichting kan worden geplaatst
@@ -720,13 +720,13 @@ classes:
         comments:
           - Indien van toepassing, gelijk aan de aanduiding van het veld of de meetstraat.
         see_also:
-          - mce:hoofdstuk=4&paragraaf=4.3&sub-paragraaf=4.3.2&artikel=4.3.2.8&z=2023-04-01&g=2023-04-01
-          - iceg:hoofdstuk=2&paragraaf=2.11&artikel=2.11.5&z=2023-06-28&g=2023-06-28
+          - mce:hoofdstuk=4&paragraaf=4.3&sub-paragraaf=4.3.2&artikel=4.3.2.8&g=2023-04-01
+          - iceg:hoofdstuk=2&paragraaf=2.11&artikel=2.11.5&g=2023-06-28
       fysieke status:
         description: aanduiding van de toestand met betrekking tot het daadwerkelijk aanwezig zijn van het primair gedeelte van de meetinrichting
         see_also:
-          - iceg:hoofdstuk=2&paragraaf=2.11&artikel=2.11.4&z=2023-06-28&g=2023-06-28
-          - iceg:hoofdstuk=2&paragraaf=2.11&artikel=2.11.5&z=2023-06-28&g=2023-06-28
+          - iceg:hoofdstuk=2&paragraaf=2.11&artikel=2.11.4&g=2023-06-28
+          - iceg:hoofdstuk=2&paragraaf=2.11&artikel=2.11.5&g=2023-06-28
         range: Fysieke status primair deel meetinrichting
       # relaties
       bij:
@@ -748,7 +748,7 @@ classes:
       tijdlijn_geldigheid: true
       tijdlijn_registratie: true
     description: kabel tussen meettransformator en aansluitklemmen
-    source: iceg:hoofdstuk=2&paragraaf=2.11&artikel=2.11.4&z=2023-06-28&g=2023-06-28
+    source: iceg:hoofdstuk=2&paragraaf=2.11&artikel=2.11.4&g=2023-06-28
     attributes:
       aantal aders:
         description: hoeveelheid elektrisch geleidende draden
@@ -778,7 +778,7 @@ classes:
     class_uri: this:Spanningsmeettransformator
     is_a: Meettransformator
     description: elektrisch apparaat dat wordt toegepast voor het verlagen van spanning zodat deze gemeten kan worden
-    source: mce:hoofdstuk=4&paragraaf=4.3&sub-paragraaf=4.3.2&artikel=4.3.2.4&z=2023-04-01&g=2023-04-01
+    source: mce:hoofdstuk=4&paragraaf=4.3&sub-paragraaf=4.3.2&artikel=4.3.2.4&g=2023-04-01
     attributes:
       thermisch grensvermogen:
         description: maximaal complex vermogen dat de transformator permanent kan leveren zonder de in de normen vastgelegde temperatuurlimieten te overschrijden
@@ -791,7 +791,7 @@ classes:
     class_uri: this:Stroommeettransformator
     is_a: Meettransformator
     description: elektrisch apparaat dat wordt toegepast voor het verlagen van stroom zodat deze gemeten kan worden
-    source: mce:hoofdstuk=4&paragraaf=4.3&sub-paragraaf=4.3.2&artikel=4.3.2.4&z=2023-04-01&g=2023-04-01
+    source: mce:hoofdstuk=4&paragraaf=4.3&sub-paragraaf=4.3.2&artikel=4.3.2.4&g=2023-04-01
     attributes:
       overbelastbaarheid:
         description: maximale continue belasting van de meettransformator die geen schade veroorzaakt, uitgedrukt als factor van de nominale belasting - 100%
@@ -883,13 +883,13 @@ slots:
     description: unieke cijfercombinatie volgens de Europese Artikelnummer-standaard
     required: true
     see_also:
-      - iceg:hoofdstuk=2&paragraaf=2.1&artikel=2.1.3&z=2022-05-18&g=2022-05-18
+      - iceg:hoofdstuk=2&paragraaf=2.1&artikel=2.1.3&g=2022-05-18
   energiedrager:
     exact_mappings:
       - begrip:energiedrager
     range: Energiedrager
     see_also:
-      - iceg:hoofdstuk=2&paragraaf=2.1&artikel=2.1.3&z=2022-05-18&g=2022-05-18
+      - iceg:hoofdstuk=2&paragraaf=2.1&artikel=2.1.3&g=2022-05-18
 
 enums:
   Aan of uit:
@@ -930,7 +930,7 @@ enums:
       aangeslotene:
         description: de aangeslotene heeft om de blokkade verzocht
         see_also:
-          - iceg:hoofdstuk=2&paragraaf=2.12&artikel=2.12.1&z=2023-03-18&g=2023-03-18
+          - iceg:hoofdstuk=2&paragraaf=2.12&artikel=2.12.1&g=2023-03-18
       geen:
         description: er is geen blokkade
       leveringszekerheid:
@@ -938,7 +938,7 @@ enums:
       tijdelijk opgeheven:
         description: de door aangeslotene verzochte blokkade is door een daartoe gemandateerde leverancier tijdelijk opgeheven
         see_also:
-          - iceg:hoofdstuk=2&paragraaf=2.12&artikel=2.12.3&z=2023-03-18&g=2023-03-18
+          - iceg:hoofdstuk=2&paragraaf=2.12&artikel=2.12.3&g=2023-03-18
   Energiedrager:
     permissible_values:
       elektriciteit:
@@ -1065,7 +1065,7 @@ enums:
       GMN:
         description: netverlies gas
         see_also:
-          - acg:hoofdstuk=4&paragraaf=4.3&artikel=4.3.1.12&z=2023-03-18&g=2023-03-18
+          - acg:hoofdstuk=4&paragraaf=4.3&artikel=4.3.1.12&g=2023-03-18
   Wijze uit bedrijf:
     permissible_values:
       binnen:

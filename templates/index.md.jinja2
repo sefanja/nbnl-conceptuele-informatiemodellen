@@ -271,7 +271,7 @@ parent: "{{schema.title}}"
 | :--- | :--- |
 | Eigenschap | Omschrijving
 {% for slot in properties -%}
-| {{key_symbol(class, slot)}}{{privacy_symbol(slot)}}<span class="fw-500">{{slot.name}}</span><br/><span class="fw-300">{{compute_range(slot)}} [{{gen.cardinality(slot)}}]</span> | {{omschrijving(slot)}} |
+| <span class="fw-500">{{slot.name}}</span><br/><span class="fw-300">{{key_symbol(class, slot)}}{{privacy_symbol(slot)}}{{compute_range(slot)}} [{{gen.cardinality(slot)}}]</span> | {{omschrijving(slot)}} |
 {% endfor %}
 {% endif %}
 
@@ -282,7 +282,7 @@ parent: "{{schema.title}}"
 | {{class.name}} is ... | Omschrijving
 | :---  | :--- |
 {% for slot in relationships -%}
-| {{key_symbol(class, slot)}}{{slot.name}} {{compute_range(slot)}} [{% if slot.annotations.inverse_cardinality %}{{slot.annotations.inverse_cardinality.value}}{% endif %} → {{gen.cardinality(slot)}}] | {{omschrijving(slot)}} |
+| {{key_symbol(class, slot)}}{{privacy_symbol(slot)}}{{slot.name}} {{compute_range(slot)}} [{% if slot.annotations.inverse_cardinality %}{{slot.annotations.inverse_cardinality.value}}{% endif %} → {{gen.cardinality(slot)}}] | {{omschrijving(slot)}} |
 {% endfor %}
 {% endif %}
 

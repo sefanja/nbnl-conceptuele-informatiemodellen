@@ -43,7 +43,7 @@ classes:
     description: categorisering van energiehoeveelheidsmeters met dezelfde (metrologische) kenmerken en van dezelfde fabrikant
     source: nbnlpub:reglement-meterparkbeheer-v62
     see_also:
-      - iceg:hoofdstuk=2&paragraaf=2.1&artikel=2.1.4&z=2025-01-01&g=2025-01-01
+      - iceg:hoofdstuk=2&paragraaf=2.1&artikel=2.1.4&g=2025-01-01
     slots:
       - fabrikant
     attributes:
@@ -86,8 +86,8 @@ classes:
       - begrip:technische-bedrijfsstandaard
     description: beschrijving van een cumulatieve energiehoeveelheidsmeting ten behoeve van verrekening
     see_also:
-      - iceg:hoofdstuk=2&paragraaf=2.1&artikel=2.1.4&z=2025-01-01&g=2025-01-01
-      - bce:z=2025-05-08&g=2025-05-08
+      - iceg:hoofdstuk=2&paragraaf=2.1&artikel=2.1.4&g=2025-01-01
+      - bce:g=2025-05-08
     attributes:
       aantal posities voor de komma:
         description: maximaal aantal posities in het decimale talstelsel dat het telwerk kan bevatten

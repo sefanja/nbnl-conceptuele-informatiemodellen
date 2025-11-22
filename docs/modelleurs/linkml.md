@@ -15,10 +15,3 @@ Wij gebruiken LinkML om onze conceptuele informatiemodellen expliciet, formeel e
 - consistent documentatie genereren
 
 Voor modelleurs betekent dit: we leggen het wat en waarom van het model vast, niet het hoe van de implementatie. LinkML dwingt ons om keuzes expliciet te maken en ondersteunt samenwerking in een versiebeheeromgeving zoals GitHub.
-
-## Versies
-
-Versioneringspatroon `major`.`minor`:
-
-- `major`: verhoog bij wijzigingen waardoor bestaande data niet eenduidig naar het nieuwe model kan worden gemigreerd, zoals een nieuwe verplichte eigenschap zonder duidelijke standaardwaarde.
-- `minor`: verhoog bij alle andere wijzigingen met impact op de data.

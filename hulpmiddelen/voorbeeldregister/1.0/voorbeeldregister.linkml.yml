@@ -147,7 +147,7 @@ slots: # eigenschappen voor gebruik in meer dan 1 klasse
     description: unieke cijfercombinatie volgens de Europese Artikelnummer-standaard
     required: true
     see_also:
-      - iceg:hoofdstuk=2&paragraaf=2.1&artikel=2.1.3&z=2022-05-18&g=2022-05-18
+      - iceg:hoofdstuk=2&paragraaf=2.1&artikel=2.1.3&g=2022-05-18 # laat zichdatum (z=...) weg voor en kortere link
 
 # waardelijsten:
 enums:
