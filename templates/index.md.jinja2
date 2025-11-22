@@ -195,7 +195,7 @@
         {%- set _ = parts.items.append(details_block | safe) -%}
     {%- endif -%}
 
-    {{parts.items | join('<br/><br/>')}}
+    {{parts.items | join('<br/><br/>') | safe}}
 {%- endmacro -%}
 
 ---
