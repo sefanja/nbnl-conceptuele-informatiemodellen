@@ -21,6 +21,8 @@ color_scheme: nbnl
 logo: "/assets/images/logo.svg"
 fav_icon: "/assets/images/favicon.png"
 
+search_enabled: false
+
 callouts:
   warning:
     title: Verhuisd
