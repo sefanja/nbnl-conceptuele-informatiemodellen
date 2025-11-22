@@ -31,7 +31,7 @@
 
 {%- macro id_safe(v) -%}
     {%- set allowed = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_:.' -%}
-    local: {#- prefix moet botsingen met URI-gebaseerde HTML-ankers voorkomen --#}
+    local: {#- prefix moet botsingen met URI-gebaseerde HTML-ankers voorkomen -#}
     {%- for c in v|lower -%}
         {%- if c in allowed -%}
             {{c}}
@@ -113,9 +113,9 @@
 {% macro omschrijving(element) -%}
     {%- set parts = namespace(items=[]) -%}
 
-    {#- description -#}
+    {# description #}
     {%- if element.description -%}
-        {#- source -#}
+        {# source #}
         {%- if element.source -%}
             {%- set _ = parts.items.append('_' ~ element.description ~ '_' ~ ' (zie ' ~ link(element.source) ~ ')') -%}
         {%- else -%}
@@ -123,52 +123,52 @@
         {%- endif -%}
     {%- endif -%}
 
-    {#- meaning -#}
+    {# meaning #}
     {%- if element.meaning -%}
         {%- set _ = parts.items.append('_' ~ link(element.meaning) ~ '_') -%}
     {%- endif -%}
 
-    {#- exact_mappings -#}
+    {# exact_mappings #}
     {%- set exact_mappings = mappings_line(element, 'exact', 'Exact overeenkomstig') -%}
     {%- if exact_mappings -%}
         {%- set _ = parts.items.append(exact_mappings) -%}
     {%- endif -%}
 
-    {#- close_mappings -#}
+    {# close_mappings #}
     {%- set close_mappings = mappings_line(element, 'close', 'Vrijwel overeenkomstig') -%}
     {%- if close_mappings -%}
         {%- set _ = parts.items.append(close_mappings) -%}
     {%- endif -%}
 
-    {#- related_mappings -#}
+    {# related_mappings #}
     {%- set related_mappings = mappings_line(element, 'related', 'Gerelateerd') -%}
     {%- if related_mappings -%}
         {%- set _ = parts.items.append(related_mappings) -%}
     {%- endif -%}
 
-    {#- narrow_mappings -#}
+    {# narrow_mappings #}
     {%- set narrow_mappings = mappings_line(element, 'narrow', 'Nauwer') -%}
     {%- if narrow_mappings -%}
         {%- set _ = parts.items.append(narrow_mappings) -%}
     {%- endif -%}
 
-    {#- broad_mappings -#}
+    {# broad_mappings #}
     {%- set broad_mappings = mappings_line(element, 'broad', 'Breder') -%}
     {%- if broad_mappings -%}
         {%- set _ = parts.items.append(broad_mappings) -%}
     {%- endif -%}
 
-    {#- specialization -#}
+    {# specialization #}
     {%- if element.is_a -%}
         {%- set _ = parts.items.append('Specialisatie van ' ~ link(element.is_a, true)) -%}
     {%- endif -%}
 
-    {#- comments -#}
+    {# comments #}
     {%- if element.comments -%}
         {%- set _ = parts.items.append(element.comments | join('<br/><br/>')) -%}
     {%- endif -%}
 
-    {#- tijdlijnen -#}
+    {# tijdlijnen #}
     {%- set tijdlijn_annotaties = [] -%}
     {%- for a in element.annotations -%}
         {%- if a.startswith('tijdlijn_') and element.annotations[a].value|string|lower == "true" -%}
@@ -189,11 +189,12 @@
 
     {#- see also -#}
     {%- if element.see_also -%}
-        <details markdown="block"><summary class="text-delta">Zie ook</summary><ul>
-        {%- for s in element.see_also -%}
-            <li>{{link(s)}}</li>
-        {%- endfor -%}
-        </ul></details>
+<details markdown="block">
+<summary class="text-delta">Zie ook</summary>
+{%- for s in element.see_also %}
+- {{link(s)}}
+{% endfor -%}
+</details>
     {%- endif -%}
 {%- endmacro -%}
 
