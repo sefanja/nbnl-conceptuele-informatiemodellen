@@ -271,7 +271,7 @@ parent: "{{schema.title}}"
 | :--- | :--- |
 | Eigenschap | Omschrijving
 {% for slot in properties -%}
-| {{key_symbol(class, slot)}}{{privacy_symbol(slot)}}[{{slot.name}}]{: .fw-500 } [{{compute_range(slot)}} [{{gen.cardinality(slot)}}]]{: .fw-300} | {{omschrijving(slot)}} |
+| {{key_symbol(class, slot)}}{{privacy_symbol(slot)}}<span class="fw-500">{{slot.name}}</span><br/><span class="fw-300">{{compute_range(slot)}} [{{gen.cardinality(slot)}}]</span> | {{omschrijving(slot)}} |
 {% endfor %}
 {% endif %}
 
