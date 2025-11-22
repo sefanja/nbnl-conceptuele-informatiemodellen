@@ -186,17 +186,15 @@
     {%- endif -%}
 
     {{parts.items | join('<br/><br/>')}}
-{%- endmacro -%}
 
-{%- macro zie_ook(element) -%}
-{%- if element.see_also -%}
-<details markdown="block">
-<summary style="text-delta">Zie ook</summary>
-{% for s in element.see_also %}
-- {{link(s)}}
-{% endfor %}
-</details>
-{% endif -%}
+    {% if element.see_also %}
+    <details markdown="block">
+    <summary style="text-delta">Zie ook</summary>
+    {% for s in element.see_also %}
+    - {{link(s)}}
+    {% endfor %}
+    </details>
+    {% endif %}
 {%- endmacro -%}
 
 ---
@@ -208,7 +206,6 @@ parent: "{{schema.title}}"
 {{ '{: .no_toc }' }}
 
 {{omschrijving(schema)}}
-{{zie_ook(schema)}}
 
 ## Inhoud
 {{ '{: .no_toc .text-delta }' }}
