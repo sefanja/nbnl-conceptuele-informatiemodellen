@@ -189,9 +189,9 @@
     {%- if element.see_also -%}
         {%- set list_items = [] -%}
         {%- for s in element.see_also -%}
-            {%- set _ = list_items.append('- ' ~ link(s)) -%}
+            {%- set _ = list_items.append(link(s)) -%}
         {%- endfor -%}
-        {%- set details_block = '<details><summary style="text-delta">Zie ook</summary><ul><li>' ~ (list_items | join('</li><li>')) ~ '</li></ul></details>' -%}
+        {%- set details_block = '<details><summary style="text-delta">Zie ook</summary><ul><li>test</li></ul></details>' -%}
         {%- set _ = parts.items.append(details_block) -%}
     {%- endif -%}
 
