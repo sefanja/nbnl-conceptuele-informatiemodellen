@@ -188,6 +188,17 @@
     {{parts.items | join('<br/><br/>')}}
 {%- endmacro -%}
 
+{%- macro zie_ook(element) -%}
+{%- if element.see_also -%}
+<details markdown="block">
+<summary style="text-delta">Zie ook</summary>
+{% for s in element.see_also %}
+- {{link(s)}}
+{% endfor %}
+</details>
+{% endif -%}
+{%- endmacro -%}
+
 ---
 title: "v{{schema.version}}"
 parent: "{{schema.title}}"
@@ -197,16 +208,7 @@ parent: "{{schema.title}}"
 {{ '{: .no_toc }' }}
 
 {{omschrijving(schema)}}
-
-{# see_also #}
-{% if schema.see_also %}
-<details markdown="block">
-<summary style="text-delta">Zie ook</summary>
-{% for s in schema.see_also %}
-- {{link(s)}}
-{% endfor %}
-</details>
-{%- endif -%}
+{{zie_ook(schema)}}
 
 ## Inhoud
 {{ '{: .no_toc .text-delta }' }}
