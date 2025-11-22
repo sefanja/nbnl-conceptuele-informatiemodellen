@@ -187,13 +187,14 @@
 
     {{parts.items | join('<br/><br/>')}}
 
+    {# see also #}
     {% if element.see_also %}
-    <details markdown="block">
-    <summary style="text-delta">Zie ook</summary>
-    {% for s in element.see_also %}
-    - {{link(s)}}
-    {% endfor %}
-    </details>
+<details markdown="block">
+<summary style="text-delta">Zie ook</summary>
+{% for s in element.see_also %}
+- {{link(s)}}
+{% endfor %}
+</details>
     {% endif %}
 {%- endmacro -%}
 
