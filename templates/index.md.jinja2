@@ -137,7 +137,7 @@
     {# close_mappings #}
     {%- set close_mappings = mappings_line(element, 'close', 'Vrijwel overeenkomstig') -%}
     {%- if close_mappings -%}
-        {%- set _ = parts.items.append(close_mappings) -%}
+        {%- set _ = parts.items.append(element, close_mappings) -%}
     {%- endif -%}
 
     {# related_mappings #}
@@ -185,17 +185,17 @@
         {%- set _ = parts.items.append('Tijdlijnen: ' ~ tijdlijn_annotaties|join(', ')) -%}
     {%- endif -%}
 
-    {{parts.items | join('<br/><br/>')}}
-
-    {#- see also -#}
+    {# see_also #}
     {%- if element.see_also -%}
-<details markdown="block">
-<summary class="text-delta">Zie ook</summary>
-{%- for s in element.see_also %}
-- {{link(s)}}
-{% endfor -%}
-</details>
+        {%- set list_items = [] -%}
+        {%- for s in element.see_also -%}
+            {%- set _ = list_items.append('<li>' ~ link(s) ~ '</li>') -%}
+        {%- endfor -%}
+        {%- set details_block = '<details><summary class="text-delta">Zie ook</summary><ul>' ~ (list_items | join('')) ~ '</ul></details>' -%}
+        {%- set _ = parts.items.append(details_block) -%}
     {%- endif -%}
+
+    {{parts.items | join('<br/><br/>')}}
 {%- endmacro -%}
 
 ---
