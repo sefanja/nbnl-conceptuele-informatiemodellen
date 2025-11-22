@@ -15,6 +15,17 @@
     {%- endif -%}
 {%- endmacro -%}
 
+{% macro md_to_html(md_string) -%}
+    {%- if md_string.startswith('[') and '](' in md_string and md_string.endswith(')') -%}
+        {%- set parts = md_string.split('](', 1) -%}
+        {%- set label = parts[0][1:] -%}
+        {%- set url = parts[1][:-1] -%}        
+        <a href="{{ url }}">{{ label }}</a>
+    {%- else -%}
+        {{ md_string }}
+    {%- endif -%}
+{%- endmacro %}
+
 {%- macro key_symbol(class, slot) -%}
     {%- for key in class.unique_keys -%}
         {%- if slot.name in class.unique_keys[key].unique_key_slots -%}
@@ -187,12 +198,11 @@
 
     {# see_also #}
     {%- if element.see_also -%}
-        {%- set links_list = [] -%}
+        {%- set list_items = [] -%}
         {%- for s in element.see_also -%}
-            {%- set _ = links_list.append('&bull; ' ~ link(s)) -%}
+            {%- set _ = list_items.append('<li>' ~ md_to_html(link(s)) ~ '</li>') -%}
         {%- endfor -%}
-        {%- set content_string = links_list | join('<br/>') -%}
-        {%- set details_block = '<details markdown="span"><summary class="text-delta">Zie ook</summary>' ~ content_string ~ '</details>' -%}
+        {%- set details_block = '{::nomarkdown}<details><summary class="text-delta">Zie ook</summary><ul>' ~ (list_items | join('')) ~ '</ul></details>{:/}' -%}
         {%- set _ = parts.items.append(details_block) -%}
     {%- endif -%}
 
