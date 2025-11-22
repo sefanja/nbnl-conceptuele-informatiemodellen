@@ -191,7 +191,7 @@
         {%- for s in element.see_also -%}
             {%- set _ = list_items.append('<li>' ~ link(s) ~ '</li>') -%}
         {%- endfor -%}
-        {%- set details_block = '<details><ul>' ~ (list_items | join('')) ~ '</ul></details>' -%}
+        {%- set details_block = '{::nomarkdown}<details><summary class="text-delta">Zie ook</summary><ul>' ~ (list_items | join('')) ~ '</ul></details>{:/}' -%}
         {%- set _ = parts.items.append(details_block | safe) -%}
     {%- endif -%}
 
