@@ -189,12 +189,11 @@
 
     {#- see also -#}
     {%- if element.see_also -%}
-<details markdown="block">
-<summary class="text-delta">Zie ook</summary>
-{%- for s in element.see_also %}
-- {{link(s)}}
-{% endfor -%}
-</details>
+        <details><summary class="text-delta">Zie ook</summary><ul>
+        {%- for s in element.see_also -%}
+            <li>{{link(s)}}</li>
+        {%- endfor -%}
+        </ul></details>
     {%- endif -%}
 {%- endmacro -%}
 
