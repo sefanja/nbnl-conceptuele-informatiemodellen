@@ -34,7 +34,7 @@ jobs:
 
       - name: Create docs per model version
         run: |
-          for model in modellen/*; do
+          for model in registers/*; do
             if [ -d "$model" ]; then
               modelname=$(basename "$model")
               for version in "$model"/*; do
@@ -42,7 +42,7 @@ jobs:
                   versionid=$(basename "$version")
                   echo "Processing $modelname version $versionid"
 
-                  outdir=docs/_modellen/$modelname/$versionid
+                  outdir=docs/_registers/$modelname/$versionid
                   mkdir -p "$outdir"
 
                   cp "$version/$modelname.drawio.svg" "$outdir/"

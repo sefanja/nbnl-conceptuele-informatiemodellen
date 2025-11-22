@@ -3,12 +3,12 @@ theme: just-the-docs
 baseurl: /nbnl-conceptuele-informatiemodellen
 
 collections:
-  modellen:
+  registers:
     output: true
 
 just_the_docs:
   collections:
-    modellen:
+    registers:
       name: Registers
 
 defaults:
