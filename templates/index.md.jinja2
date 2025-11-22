@@ -185,18 +185,22 @@
         {%- set _ = parts.items.append('Tijdlijnen: ' ~ tijdlijn_annotaties|join(', ')) -%}
     {%- endif -%}
 
-    {{parts.items | join('<br/><br/>')}}
-
     {# see_also #}
     {%- if element.see_also -%}
-        {%- set details_block %}
-<details markdown="block"><summary style="text-delta">Zie ook</summary>
+        {%- set details_block -%}
+<details markdown="block">
+<summary style="text-delta">Zie ook</summary>
+
 {% for s in element.see_also %}
-- {{link(s)}}</li>
+- {{link(s)}}
 {% endfor %}
+
 </details>
-        {% endset -%}
+        {%- endset -%}
+        {%- set _ = parts.items.append(details_block) -%}
     {%- endif -%}
+
+    {{parts.items | join('<br/><br/>')}}
 {%- endmacro -%}
 
 ---
