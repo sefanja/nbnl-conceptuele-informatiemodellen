@@ -185,16 +185,7 @@
         {%- set _ = parts.items.append('Tijdlijnen: ' ~ tijdlijn_annotaties|join(', ')) -%}
     {%- endif -%}
 
-    {# see_also #}
-    {%- if element.see_also -%}
-        {%- set list_items = [] -%}
-        {%- for s in element.see_also -%}
-            {%- set _ = list_items.append(link(s)) -%}
-        {%- endfor -%}
-        {%- set _ = parts.items.append('<details><summary style="text-delta">Zie ook</summary><ul><li>test</li></ul></details>' | safe) -%}
-    {%- endif -%}
-
-    {{parts.items | join('<br/><br/>') | safe}}
+    {{parts.items | join('<br/><br/>')}}
 {%- endmacro -%}
 
 ---
@@ -205,7 +196,22 @@ parent: "{{schema.title}}"
 # {{schema.title}}
 {{ '{: .no_toc }' }}
 
-{{omschrijving(schema) | safe}}
+{{omschrijving(schema)}}
+
+{# see_also #}
+{% if element.see_also %}
+<details markdown="block">
+    <summary>
+        Zie ook
+    </summary>
+    {: .text-delta }
+
+    {% for s in element.see_also %}
+    - {{link(s)}}
+    {% endfor %}
+
+</details>
+{%- endif -%}
 
 ## Inhoud
 {{ '{: .no_toc .text-delta }' }}
