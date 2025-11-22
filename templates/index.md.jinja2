@@ -1,3 +1,5 @@
+{%- set newline = '<hr style="height:1em;margin:0;visibility:hidden"/>' -%}
+
 {%- macro link(name, local=false) -%}
     {%- if local -%}
         {%- set element = schemaview.get_element(name) -%}
@@ -176,7 +178,7 @@
 
     {# comments #}
     {%- if element.comments -%}
-        {%- set _ = parts.items.append(element.comments | join('</p><p>')) -%}
+        {%- set _ = parts.items.append(element.comments | join(newline)) -%}
     {%- endif -%}
 
     {# tijdlijnen #}
@@ -206,7 +208,7 @@
         {%- set _ = parts.items.append(details_block) -%}
     {%- endif -%}
 
-    <p>{{parts.items | join('</p><p>')}}</p>
+    {{parts.items | join(newline)}}
 {%- endmacro -%}
 
 ---
