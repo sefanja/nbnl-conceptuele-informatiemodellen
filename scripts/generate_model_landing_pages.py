@@ -2,7 +2,7 @@ import os
 import yaml
 
 BASE_INPUT_MODELS = "registers"
-BASE_OUTPUT_MODELS = os.path.join("docs", "registers")
+BASE_OUTPUT_MODELS = os.path.join("docs", "_registers")
 
 os.makedirs(BASE_OUTPUT_MODELS, exist_ok=True)
 
@@ -34,7 +34,7 @@ for model_dir in sorted(os.listdir(BASE_INPUT_MODELS)):
         model_name, _ = get_model_metadata(yaml_path)
         break  # één versie is genoeg voor de naam
 
-    # Genereer docs/registers/<modelnaam>/index.md
+    # Genereer docs/_registers/<modelnaam>/index.md
     model_output_dir = os.path.join(BASE_OUTPUT_MODELS, model_dir)
     os.makedirs(model_output_dir, exist_ok=True)
 
