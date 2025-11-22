@@ -23,5 +23,5 @@ fav_icon: "/assets/images/favicon.png"
 
 callouts:
   warning:
-    title: Verplaatst
+    title: Verhuisd
     color: red
