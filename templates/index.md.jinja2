@@ -137,7 +137,7 @@
     {# close_mappings #}
     {%- set close_mappings = mappings_line(element, 'close', 'Vrijwel overeenkomstig') -%}
     {%- if close_mappings -%}
-        {%- set _ = parts.items.append(element, close_mappings) -%}
+        {%- set _ = parts.items.append(close_mappings) -%}
     {%- endif -%}
 
     {# related_mappings #}
@@ -187,16 +187,11 @@
 
     {# see_also #}
     {%- if element.see_also -%}
-        {%- set details_block -%}
-<details markdown="block">
-<summary style="text-delta">Zie ook</summary>
-
-{% for s in element.see_also %}
-- {{link(s)}}
-{% endfor %}
-
-</details>
-        {%- endset -%}
+        {%- set list_items = [] -%}
+        {%- for s in element.see_also -%}
+            {%- set _ = list_items.append('- ' ~ link(s)) -%}
+        {%- endfor -%}
+        {%- set details_block = '<details markdown="block">\n<summary style="text-delta">Zie ook</summary>\n\n' ~ (list_items | join('\n')) ~ '\n\n</details>' -%}
         {%- set _ = parts.items.append(details_block) -%}
     {%- endif -%}
 
