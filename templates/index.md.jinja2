@@ -20,7 +20,7 @@
         {%- set parts = md_string.split('](', 1) -%}
         {%- set label = parts[0][1:] -%}
         {%- set url = parts[1][:-1] -%}        
-        <a href="{{ url }}">{{ label }}</a>
+        <a href="{{ url }}">{{ label | e }}</a>
     {%- else -%}
         {{ md_string }}
     {%- endif -%}
