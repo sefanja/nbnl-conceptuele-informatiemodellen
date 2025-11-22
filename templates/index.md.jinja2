@@ -189,9 +189,7 @@
     {%- if element.see_also -%}
         {%- set details_block -%}
 <details markdown="block">
-  <summary style="text-delta">
-    Zie ook
-  </summary>
+<summary style="text-delta">Zie ook</summary>
 {% for s in element.see_also %}
 - {{link(s)}}</li>
 {% endfor %}
