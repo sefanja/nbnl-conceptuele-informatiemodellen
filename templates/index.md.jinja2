@@ -178,7 +178,7 @@
 
     {# comments #}
     {%- if element.comments -%}
-        {%- set _ = parts.items.append(element.comments | join(newline)) -%}
+        {%- set _ = parts.items.append(element.comments | join(newline | safe)) -%}
     {%- endif -%}
 
     {# tijdlijnen #}
@@ -208,7 +208,7 @@
         {%- set _ = parts.items.append(details_block) -%}
     {%- endif -%}
 
-    {{parts.items | join(newline)}}
+    {{parts.items | join(newline | safe)}}
 {%- endmacro -%}
 
 ---
