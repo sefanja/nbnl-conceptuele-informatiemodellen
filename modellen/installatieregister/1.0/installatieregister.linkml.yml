@@ -313,6 +313,7 @@ classes:
     attributes:
       azimut:
         description: horizontale hoek, gemeten met de klok mee vanaf het geografische noorden
+        comments:
           - Bij een oost-westopstelling zijn er minimaal twee groepen, elk met een eigen azimut.
         range: float
         unit:

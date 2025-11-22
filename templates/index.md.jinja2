@@ -268,10 +268,10 @@ parent: "{{schema.title}}"
 ### Eigenschappen
 {{ '{: .no_toc }' }}
 
-| :---  | :--- | :--- |
-| Eigenschap | Waardespecificatie | Omschrijving
+| :--- | :--- |
+| Eigenschap | Omschrijving
 {% for slot in properties -%}
-| {{key_symbol(class, slot)}}{{privacy_symbol(slot)}}{{slot.name}} | {{compute_range(slot)}} [{{gen.cardinality(slot)}}] | {{omschrijving(slot)}} |
+| {{key_symbol(class, slot)}}{{privacy_symbol(slot)}}{{slot.name}} {: .fw-500 } {{compute_range(slot)}} [{{gen.cardinality(slot)}}] {: .fw-300} | {{omschrijving(slot)}} |
 {% endfor %}
 {% endif %}
 
