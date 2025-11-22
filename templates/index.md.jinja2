@@ -201,15 +201,10 @@ parent: "{{schema.title}}"
 {# see_also #}
 {% if schema.see_also %}
 <details markdown="block">
-    <summary>
-        Zie ook
-    </summary>
-    {: .text-delta }
-
-    {% for s in schema.see_also %}
-    - {{link(s)}}
-    {% endfor %}
-
+<summary style="text-delta">Zie ook</summary>
+{% for s in schema.see_also %}
+- {{link(s)}}
+{% endfor %}
 </details>
 {%- endif -%}
 
