@@ -187,15 +187,16 @@
 
     {# see_also #}
     {%- if element.see_also -%}
-        {%- set list_items = [] -%}
+        {%- set links_list = [] -%}
         {%- for s in element.see_also -%}
-            {%- set _ = list_items.append('<li>' ~ link(s) ~ '</li>') -%}
+            {%- set _ = links_list.append('&bull; ' ~ link(s)) -%}
         {%- endfor -%}
-        {%- set details_block = '{::nomarkdown}<details><summary class="text-delta">Zie ook</summary><ul>' ~ (list_items | join('')) ~ '</ul></details>{:/}' -%}
-        {%- set _ = parts.items.append(details_block | safe) -%}
+        {%- set content_string = links_list | join('<br/>') -%}
+        {%- set details_block = '<details markdown="span"><summary class="text-delta">Zie ook</summary>' ~ content_string ~ '</details>' -%}
+        {%- set _ = parts.items.append(details_block) -%}
     {%- endif -%}
 
-    {{parts.items | join('<br/><br/>') | safe}}
+    {{parts.items | join('<br/><br/>')}}
 {%- endmacro -%}
 
 ---
