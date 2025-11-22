@@ -1,6 +1,6 @@
 ---
 title: Tijdlijnen
-parent: Voor modelleurs
+parent: Modelleurs
 ---
 
 # Tijdlijnen

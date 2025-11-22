@@ -1,12 +1,11 @@
 ---
 title: Naamgeving
-parent: Voor modelleurs
+parent: Modelleurs
 ---
 
 # Naamgeving
 
 Over het algemeen geldt: we gebruiken de Nederlandse spellingsregels en vermijden Engels taalgebruik. Dus geen PascalCase of snake_case, maar gewoon spaties, leestekens en bijzondere karakters.
-
 
 In het marktdomein zijn we energiedrageragnostisch (`elektriciteit`, `gas` zijn variabelen). Waar mogelijk zijn we netvlakagnostisch (`middenspanning`, `laagspanning` zijn variabelen).
 

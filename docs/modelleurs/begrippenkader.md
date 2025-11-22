@@ -1,6 +1,6 @@
 ---
 title: Begrippenkader
-parent: Voor modelleurs
+parent: Modelleurs
 ---
 
 # Begrippenkader

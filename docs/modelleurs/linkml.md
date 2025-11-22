@@ -1,6 +1,6 @@
 ---
 title: LinkML
-parent: Voor modelleurs
+parent: Modelleurs
 nav_order: 3
 ---
 

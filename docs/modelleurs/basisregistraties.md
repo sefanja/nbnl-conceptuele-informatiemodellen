@@ -1,6 +1,6 @@
 ---
 title: Basisregistraties
-parent: Voor modelleurs
+parent: Modelleurs
 ---
 
 # Basisregistraties

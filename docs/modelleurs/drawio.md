@@ -1,18 +1,12 @@
 ---
 title: Draw.io
-parent: Voor modelleurs
+parent: Modelleurs
 nav_order: 2
 ---
 
 # Modelleren in draw.io
-{: .no_toc }
 
 Voor het tekenen van conceptuele informatiemodellen gebruiken we [draw.io](https://www.drawio.com/). Deze tool is gekozen omdat ze vrij beschikbaar is, makkelijk in gebruik, en goed samenwerkt met versiebeheer via GitHub. Draw.io ondersteunt de notatiestijl die wij hanteren voor conceptuele informatiemodellen: entiteit-relatienotatie in Barker-stijl.
-
-## Inhoud
-{: .no_toc .text-delta }
-1. TOC
-{:toc}
 
 ## Notatiestijl
 
@@ -22,7 +16,7 @@ Voor de notatie van onze diagrammen gebruiken we, net als [Salesforce](https://a
 
 De links in bovenstaande paragraaf leggen de notatiestijl gedetailleerd uit. Het diagram hieronder toont welke stijlkeuzen we hebben gemaakt in draw.io.
 
-![Aansluitingenregister]({{ site.baseurl }}/modellen/aansluitingenregister/1.2/aansluitingenregister.drawio.svg)
+![Aansluitingenregister]({{ site.baseurl }}/registers/aansluitingenregister/1.2/aansluitingenregister.drawio.svg)
 
 Enkele elementen lichten we eruit. Voor bijna elk punt is het achterliggende principe: visuele rust en duidelijkheid!
 

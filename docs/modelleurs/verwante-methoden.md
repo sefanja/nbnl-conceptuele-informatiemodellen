@@ -1,21 +1,15 @@
 ---
 title: Verwante methoden
-parent: Voor modelleurs
+parent: Modelleurs
 ---
 
 # Verwante methoden
-{: .no_toc }
 
 Conceptueel informatiemodelleren richt zich op het gestructureerd beschrijven van betekenisvolle objecten, relaties en regels uit de werkelijkheid. Deze modellen vormen geen blauwdruk van de data zelf, maar van de concepten waarover informatie wordt (of kan worden) vastgelegd.
 
 Toch zijn er vragen die conceptuele modellen vaak niet volledig beantwoorden: Waarom zijn bepaalde concepten relevant? Welke regels bepalen geldigheid of consistentie? Wie is waarvoor verantwoordelijk? Voor zulke vragen bestaan er aanvullende methoden, formeel of semi-formeel van aard. Conceptueel informatiemodelleren wordt sterker als het wordt ondersteund door methoden die doelen, regels of verantwoordelijkheden expliciteren. KAOS en i\* maken doelen en afhankelijkheden zichtbaar, Ampersand borgt consistentie via regels, ontologieën bieden semantische precisie, en BPMN/DMN verbinden informatie aan proces en besluitvorming. Afhankelijk van je modelleervraag kan het zinvol zijn een van deze methoden nader te verkennen.
 
 Deze methoden vormen geen vervanging van informatiemodellering, maar bieden aanvullende perspectieven.
-
-## Inhoud
-{: .no_toc .text-delta }
-1. TOC
-{:toc}
 
 ## KAOS
 

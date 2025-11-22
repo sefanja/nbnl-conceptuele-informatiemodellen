@@ -1,6 +1,6 @@
 ---
 title: Aan de slag
-parent: Voor modelleurs
+parent: Modelleurs
 nav_order: 1
 ---
 
@@ -20,7 +20,7 @@ De gemakkelijkste manier is om de repository remote te openen:
 
 ## Modellen maken en bewerken
 
-Je kunt nu bestaande modellen bewerken, zowel de LinkML- als de drawio-bestanden, gewoon door erop te klikken. Om een nieuw model te maken, kopieer je `/hulpmiddelen/voorbeeldregister/` naar `/modellen/`. In de bestanden vind je voorbeelden om snel aan de slag te gaan.
+Je kunt nu bestaande modellen bewerken, zowel de LinkML- als de drawio-bestanden, gewoon door erop te klikken. Om een nieuw model te maken, kopieer je `/hulpmiddelen/voorbeeldregister/` naar `/registers/`. In de bestanden vind je voorbeelden om snel aan de slag te gaan.
 
 Om je wijzigingen op te slaan, klik je links op `Source Control` om deze te 'committen'. Als je ze daarna 'synct', staan je wijzigingen binnen een paar minuten online.
 

@@ -1,6 +1,6 @@
 ---
 title: Wet- en regelgeving
-parent: Voor modelleurs
+parent: Modelleurs
 ---
 
 # Wet- en regelgeving
@@ -14,3 +14,5 @@ Een informatiemodel dat daarbij aansluit, sluit automatisch ook aan op het taalg
 Een goed vertrekpunt is het overzicht van actuele wet- en regelgeving op de site van de ACM: [Wetten en regels voor de energiemarkt](https://www.acm.nl/nl/energie/wetten-en-regels-voor-de-energiemarkt).
 
 Soms helpt om de wetteksten systematisch te analyseren: [Wetsanalyse met het juridisch analyseschema](https://regels.overheid.nl/standaarden/wetsanalyse).
+
+We verwijzen met [Juriconnect](https://www.juriconnect.nl/home.asp).

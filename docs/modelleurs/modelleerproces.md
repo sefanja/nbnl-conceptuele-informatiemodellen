@@ -1,6 +1,6 @@
 ---
 title: Proces
-parent: Voor modelleurs
+parent: Modelleurs
 ---
 
 # Modelleren en reviewproces

@@ -17,13 +17,13 @@ De conceptuele informatiemodellen op deze website gebruiken eenvoudige diagramme
 
 Een **entiteit** is iets uit de werkelijkheid waarover we informatie vastleggen, bijvoorbeeld een aansluiting, een meter of een klant. In het diagram zie je entiteiten als **rechthoeken** met een naam erin.
 
-![Entiteit]({{ site.baseurl }}/assets/images/wegwijs1.drawio.svg)
+![Entiteit]({{ site.baseurl }}/assets/images/legenda1.drawio.svg)
 
 ## Eigenschappen
 
 Elke entiteit heeft eigenschappen: kenmerken die beschrijven wat iets is of hoe het zich gedraagt. Die staan in het model onder de entiteitsnaam. Voorbeeld: een `Aansluiting` heeft een `EAN-code` en een `energiedrager` (elektriciteit, gas of waterstof).
 
-![Eigenschappen]({{ site.baseurl }}/assets/images/wegwijs2.drawio.svg)
+![Eigenschappen]({{ site.baseurl }}/assets/images/legenda2.drawio.svg)
 
 Elke eigenschap begint met een symbool:
 
@@ -41,7 +41,7 @@ Een eigenschap die eindigt met `[n]` kan meerdere waarden bevatten.
 
 Entiteiten hangen vaak met elkaar samen. Zo liggen `Aansluitingen` in een `Netgebied`. Dat zie je als een lijn tussen twee entiteiten, met een naam erbij.
 
-![Relaties]({{ site.baseurl }}/assets/images/wegwijs3.drawio.svg)
+![Relaties]({{ site.baseurl }}/assets/images/legenda3.drawio.svg)
 
 De positie van het label laat de richting van de relatie zien: een `Aansluiting` is `deel van` een `Netgebied`.
 
@@ -58,13 +58,13 @@ De kraaienpootnotatie gebruikt symbolen om aan te geven hoeveel elementen aan el
 
 Een boog met daarop het woord `OF` geeft aan dat óf de ene óf de andere relatie geldt, maar nooit beide. Zo is een `Overdrachtspunt` óf deel van een `Aansluiting` óf deel van een `Netkoppeling` maar nooit deel van beide.
 
-![OF-bogen]({{ site.baseurl }}/assets/images/wegwijs4.drawio.svg)
+![OF-bogen]({{ site.baseurl }}/assets/images/legenda4.drawio.svg)
 
 ## Overerving
 
 Een entiteit die wordt omsloten door een andere entiteit is daarvan een specialisatie en overerft daarom alle eigenschappen en relaties. `Spanningsmeettransformator` en `Stroommeettransformator` zijn beide voorbeelden van `Meettransformator` en overerven daarom beide de eigenschappen `serienummer` en `fabrikant`. Maar de eigenschappen `thermisch grensvermogen` en `overstroomfactor` zijn dan weer uniek per type meettransformator.
 
-![Overerving]({{ site.baseurl }}/assets/images/wegwijs5.drawio.svg)
+![Overerving]({{ site.baseurl }}/assets/images/legenda5.drawio.svg)
 
 ## Tijdsaspecten
 
@@ -83,4 +83,4 @@ Elke entiteit heeft een kleur die de relatie naar [NBility](https://nbility-mode
 
 Zo behoort de `Aangeslotene` bij **Klant**, de `Aansluiting` en het `Overdrachtspunt` bij **Aansluiting** (binnen de **Energiemarkt**) en het `Primair deel meetinrichting` bij **Netcomponent** (binnen het **Energienet**).
 
-![Kleuren]({{ site.baseurl }}/assets/images/wegwijs6.drawio.svg)
+![Kleuren]({{ site.baseurl }}/assets/images/legenda6.drawio.svg)
