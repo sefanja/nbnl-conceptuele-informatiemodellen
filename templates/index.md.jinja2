@@ -36,7 +36,7 @@
 
 {%- macro privacy_symbol(slot) -%}
     {%- if slot.annotations.personal_data -%}
-        <span title="Persoonsgegeven">👤</span>&nbsp;
+        &nbsp;<span title="Persoonsgegeven">👤</span>
     {%- endif -%}
 {%- endmacro -%}
 
@@ -176,7 +176,7 @@
 
     {# comments #}
     {%- if element.comments -%}
-        {%- set _ = parts.items.append(element.comments | join('<br/><br/>')) -%}
+        {%- set _ = parts.items.append(element.comments | join('</p><p>')) -%}
     {%- endif -%}
 
     {# tijdlijnen #}
@@ -202,11 +202,11 @@
         {%- for s in element.see_also -%}
             {%- set _ = list_items.append('<li>' ~ md_to_html(link(s)) ~ '</li>') -%}
         {%- endfor -%}
-        {%- set details_block = '{::nomarkdown}<details><summary class="text-delta">Zie ook</summary><ul>' ~ (list_items | join('')) ~ '</ul></details>{:/}' -%}
+        {%- set details_block = '{::nomarkdown}<details><summary class="text-delta">Zie ook</summary><ol>' ~ (list_items | join('')) ~ '</ol></details>{:/}' -%}
         {%- set _ = parts.items.append(details_block) -%}
     {%- endif -%}
 
-    {{parts.items | join('<br/><br/>')}}
+    <p>{{parts.items | join('</p><p>')}}</p>
 {%- endmacro -%}
 
 ---
@@ -221,7 +221,7 @@ parent: "{{schema.title}}"
 
 ---
 
-## Inhoud
+## Entiteiten
 {{ '{: .no_toc .text-delta }' }}
 1. TOC
 {{ '{:toc}' }}
@@ -269,9 +269,9 @@ parent: "{{schema.title}}"
 {{ '{: .no_toc }' }}
 
 | :--- | :--- |
-| Eigenschap | Omschrijving
+| Eigenschap | Omschrijving |
 {% for slot in properties -%}
-| <span class="fw-500">{{slot.name}}</span><br/><span class="fw-300">{{key_symbol(class, slot)}}{{privacy_symbol(slot)}}{{compute_range(slot)}} [{{gen.cardinality(slot)}}]</span> | {{omschrijving(slot)}} |
+| <span class="fw-500">{{slot.name}}</span><br/><span class="fw-300">{{key_symbol(class, slot)}}{{compute_range(slot)}} [{{gen.cardinality(slot)}}]{{privacy_symbol(slot)}}</span> | {{omschrijving(slot)}} |
 {% endfor %}
 {% endif %}
 
@@ -279,10 +279,10 @@ parent: "{{schema.title}}"
 ### Relaties
 {{ '{: .no_toc }' }}
 
-| {{class.name}} is ... | Omschrijving
+| {{class.name}} is ... | Omschrijving |
 | :---  | :--- |
 {% for slot in relationships -%}
-| {{key_symbol(class, slot)}}{{privacy_symbol(slot)}}{{slot.name}} {{compute_range(slot)}} [{% if slot.annotations.inverse_cardinality %}{{slot.annotations.inverse_cardinality.value}}{% endif %} → {{gen.cardinality(slot)}}] | {{omschrijving(slot)}} |
+| {{key_symbol(class, slot)}}{{slot.name}} {{compute_range(slot)}} [{% if slot.annotations.inverse_cardinality %}{{slot.annotations.inverse_cardinality.value}}{% endif %} → {{gen.cardinality(slot)}}]{{privacy_symbol(slot)}} | {{omschrijving(slot)}} |
 {% endfor %}
 {% endif %}
 

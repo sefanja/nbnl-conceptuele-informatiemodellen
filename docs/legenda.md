@@ -28,10 +28,10 @@ Elke entiteit heeft eigenschappen: kenmerken die beschrijven wat iets is of hoe 
 Elke eigenschap begint met een symbool:
 
 - `#` identificerend
-- `●` essentieel (verplicht)
-- `○` accidentieel (optioneel)
+- `●` altijd bekend
+- `○` niet altijd bekend
 
-Hieruit kun je aflezen dat aansluitingen van elkaar worden onderscheiden middels hun `EAN-code`; dat een aansluiting zonder `energiedrager` geen aansluiting is; terwijl een aansluiting zonder `weekmax` nog steeds een aansluiting kan zijn (deze eigenschap komt alleen voor bij grote elektriciteitsaansluitingen).
+Hieruit kun je aflezen dat aansluitingen van elkaar worden onderscheiden middels hun `EAN-code`; dat een aansluiting zonder `energiedrager` geen aansluiting is; terwijl een aansluiting zonder `weekmax` nog steeds een aansluiting kan zijn (want deze eigenschap komt alleen voor bij grote elektriciteitsaansluitingen).
 
 Als een eigenschap begint met `/` dan is deze afleidbaar uit een ander gegeven in het model. In dit geval is de `grootte` van de aansluiting afleidbaar uit de `aansluitcapaciteit` van het gerelateerde `Overdrachtspunt` (niet afgebeeld).
 
