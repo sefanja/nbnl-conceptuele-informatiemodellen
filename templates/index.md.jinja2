@@ -187,15 +187,14 @@
 
     {# see_also #}
     {%- if element.see_also -%}
-        {%- set details_block -%}
-<details markdown="block">
-  <summary>
-    Zie ook
-  </summary>
-  {: .text-delta }
-{% for s in element.see_also %}
-- {{link(s)}}
-{% endfor %}
+        {%- set details_block | safe -%}
+<details>
+    <summary style="text-delta">Zie ook</summary>
+    <ul>
+    {% for s in element.see_also %}
+        <li>{{link(s)}}</li>
+    {% endfor %}
+    </ul>
 </details>
         {%- endset -%}
         {%- set _ = parts.items.append(details_block) -%}
