@@ -192,7 +192,7 @@
             {% for s in element.see_also %}<li>{{link(s)}}</li>{% endfor %}
             </ul></details>
         {%- endset -%}
-        {%- set _ = parts.items.append(details_block | safe) -%}
+        {%- set _ = parts.items.append(details_block) -%}
     {%- endif -%}
 
     {{parts.items | join('<br/><br/>')}}
