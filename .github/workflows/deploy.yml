@@ -32,34 +32,34 @@ jobs:
       - name: Install Python dependencies
         run: pip install --cache-dir ~/.cache/pip -r requirements.txt
 
-      - name: Create docs per model version
-        run: |
-          for model in registers/*; do
-            if [ -d "$model" ]; then
-              modelname=$(basename "$model")
-              for version in "$model"/*; do
-                if [ -d "$version" ]; then
-                  versionid=$(basename "$version")
-                  echo "Processing $modelname version $versionid"
+      # - name: Create docs per model version
+      #   run: |
+      #     for model in registers/*; do
+      #       if [ -d "$model" ]; then
+      #         modelname=$(basename "$model")
+      #         for version in "$model"/*; do
+      #           if [ -d "$version" ]; then
+      #             versionid=$(basename "$version")
+      #             echo "Processing $modelname version $versionid"
 
-                  outdir=docs/_registers/$modelname/$versionid
-                  mkdir -p "$outdir"
+      #             outdir=docs/_registers/$modelname/$versionid
+      #             mkdir -p "$outdir"
 
-                  cp "$version/$modelname.drawio.svg" "$outdir/"
-                  gen-doc \
-                    --template-directory templates \
-                    -d "$outdir" \
-                    "$version/$modelname.linkml.yml"
+      #             cp "$version/$modelname.drawio.svg" "$outdir/"
+      #             gen-doc \
+      #               --template-directory templates \
+      #               -d "$outdir" \
+      #               "$version/$modelname.linkml.yml"
 
-                  # Remove all .md files except index.md
-                  find "$outdir" -type f -name "*.md" ! -name "index.md" -delete
-                fi
-              done
-            fi
-          done
+      #             # Remove all .md files except index.md
+      #             find "$outdir" -type f -name "*.md" ! -name "index.md" -delete
+      #           fi
+      #         done
+      #       fi
+      #     done
 
-      - name: Create model landing pages
-        run: python scripts/generate_model_landing_pages.py
+      # - name: Create model landing pages
+      #   run: python scripts/generate_model_landing_pages.py
 
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
